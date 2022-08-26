@@ -18,7 +18,9 @@ jobs:
       - name: ⎔ Setup node
         uses: actions/setup-node@v3
         with:
+          always-auth: true
           node-version: 18
+          registry-url: "https://registry.npmjs.org"
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
         with:
