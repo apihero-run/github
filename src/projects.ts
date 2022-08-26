@@ -1,5 +1,4 @@
 import {
-  Link,
   Project,
   ProjectCard,
   ProjectCollaboratorPermission,
@@ -55,7 +54,7 @@ export const createForAuthenticatedUser: ApiHeroEndpoint<
 export const listForOrg: ApiHeroEndpoint<
   { org: string; perPage?: number; page?: number; state?: "open" | "closed" | "all" },
   Array<Project>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "projects/list-for-org",
   clientId: "github",
@@ -182,7 +181,7 @@ export const update: ApiHeroEndpoint<
 export const listForUser: ApiHeroEndpoint<
   { username: string; perPage?: number; page?: number; state?: "open" | "closed" | "all" },
   Array<Project>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "projects/list-for-user",
   clientId: "github",
@@ -250,7 +249,7 @@ export const updateColumn: ApiHeroEndpoint<
 export const listColumns: ApiHeroEndpoint<
   { projectId: number; perPage?: number; page?: number },
   Array<ProjectColumn>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "projects/list-columns",
   clientId: "github",
@@ -303,7 +302,7 @@ export const listForRepo: ApiHeroEndpoint<
     state?: "open" | "closed" | "all";
   },
   Array<Project>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "projects/list-for-repo",
   clientId: "github",
@@ -416,7 +415,7 @@ export const listCards: ApiHeroEndpoint<
     archivedState?: "all" | "archived" | "not_archived";
   },
   Array<ProjectCard>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "projects/list-cards",
   clientId: "github",
@@ -511,7 +510,7 @@ export const listCollaborators: ApiHeroEndpoint<
     affiliation?: "outside" | "direct" | "all";
   },
   Array<SimpleUser>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "projects/list-collaborators",
   clientId: "github",

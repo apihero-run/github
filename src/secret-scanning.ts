@@ -1,6 +1,5 @@
 import {
   AlertNumber,
-  Link,
   OrganizationSecretScanningAlert,
   SecretScanningAlert,
   SecretScanningAlertResolution,
@@ -46,7 +45,7 @@ export const listAlertsForOrg: ApiHeroEndpoint<
     before?: string;
   },
   Array<OrganizationSecretScanningAlert>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "secret-scanning/list-alerts-for-org",
   clientId: "github",
@@ -128,7 +127,7 @@ export const listAlertsForEnterprise: ApiHeroEndpoint<
     sort?: "created" | "updated";
   },
   Array<OrganizationSecretScanningAlert>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "secret-scanning/list-alerts-for-enterprise",
   clientId: "github",
@@ -205,7 +204,7 @@ export const updateAlert: ApiHeroEndpoint<
 export const listLocationsForAlert: ApiHeroEndpoint<
   { repo: string; alertNumber: AlertNumber; owner: string; perPage?: number; page?: number },
   Array<SecretScanningLocation>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "secret-scanning/list-locations-for-alert",
   clientId: "github",

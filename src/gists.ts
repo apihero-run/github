@@ -1,4 +1,4 @@
-import { BaseGist, GistComment, GistCommit, GistSimple, Link, ApiHeroEndpoint } from "./@types";
+import { BaseGist, GistComment, GistCommit, GistSimple, ApiHeroEndpoint } from "./@types";
 
 /** 
 * @see https://docs.github.com/rest/reference/gists#list-gists-for-the-authenticated-user
@@ -13,7 +13,7 @@ import { BaseGist, GistComment, GistCommit, GistSimple, Link, ApiHeroEndpoint } 
 export const list: ApiHeroEndpoint<
   { perPage?: number; since?: string; page?: number },
   Array<BaseGist>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "gists/list",
   clientId: "github",
@@ -83,7 +83,7 @@ export const create: ApiHeroEndpoint<
 export const listPublic: ApiHeroEndpoint<
   { perPage?: number; since?: string; page?: number },
   Array<BaseGist>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "gists/list-public",
   clientId: "github",
@@ -102,7 +102,7 @@ export const listPublic: ApiHeroEndpoint<
 export const listStarred: ApiHeroEndpoint<
   { perPage?: number; since?: string; page?: number },
   Array<BaseGist>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "gists/list-starred",
   clientId: "github",
@@ -234,7 +234,7 @@ export const unstar: ApiHeroEndpoint<{ gistId: string }, void> = {
 export const listForks: ApiHeroEndpoint<
   { gistId: string; perPage?: number; page?: number },
   Array<GistSimple>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "gists/list-forks",
   clientId: "github",
@@ -280,7 +280,7 @@ export const getRevision: ApiHeroEndpoint<{ gistId: string; sha: string }, GistS
 export const listForUser: ApiHeroEndpoint<
   { username: string; perPage?: number; since?: string; page?: number },
   Array<BaseGist>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "gists/list-for-user",
   clientId: "github",
@@ -316,7 +316,7 @@ export const listCommits: ApiHeroEndpoint<
 export const listComments: ApiHeroEndpoint<
   { gistId: string; perPage?: number; page?: number },
   Array<GistComment>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "gists/list-comments",
   clientId: "github",

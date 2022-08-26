@@ -1,7 +1,6 @@
 import {
   Event,
   Feed,
-  Link,
   MinimalRepository,
   Repository,
   RepositorySubscription,
@@ -68,7 +67,7 @@ export const listPublicEvents: ApiHeroEndpoint<
 export const listReposStarredByAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; direction?: "asc" | "desc"; sort?: "created" | "updated"; page?: number },
   Array<Repository>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "activity/list-repos-starred-by-authenticated-user",
   clientId: "github",
@@ -97,7 +96,7 @@ export const listNotificationsForAuthenticatedUser: ApiHeroEndpoint<
     page?: number;
   },
   Array<Thread>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "activity/list-notifications-for-authenticated-user",
   clientId: "github",
@@ -161,7 +160,7 @@ export const listPublicOrgEvents: ApiHeroEndpoint<
 export const listWatchedReposForAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<MinimalRepository>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "activity/list-watched-repos-for-authenticated-user",
   clientId: "github",
@@ -208,7 +207,7 @@ export const listReposStarredByUser: ApiHeroEndpoint<
     page?: number;
   },
   Array<StarredRepository> | Array<Repository>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "activity/list-repos-starred-by-user",
   clientId: "github",
@@ -327,7 +326,7 @@ export const listPublicEventsForUser: ApiHeroEndpoint<
 export const listReposWatchedByUser: ApiHeroEndpoint<
   { username: string; perPage?: number; page?: number },
   Array<MinimalRepository>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "activity/list-repos-watched-by-user",
   clientId: "github",
@@ -349,7 +348,7 @@ export const listReposWatchedByUser: ApiHeroEndpoint<
 export const listStargazersForRepo: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number },
   Array<SimpleUser> | Array<Stargazer>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "activity/list-stargazers-for-repo",
   clientId: "github",
@@ -369,7 +368,7 @@ export const listStargazersForRepo: ApiHeroEndpoint<
 export const listWatchersForRepo: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number },
   Array<SimpleUser>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "activity/list-watchers-for-repo",
   clientId: "github",
@@ -505,7 +504,7 @@ export const listRepoNotificationsForAuthenticatedUser: ApiHeroEndpoint<
     page?: number;
   },
   Array<Thread>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "activity/list-repo-notifications-for-authenticated-user",
   clientId: "github",

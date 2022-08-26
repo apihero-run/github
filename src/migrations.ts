@@ -1,6 +1,5 @@
 import {
   Import,
-  Link,
   Migration,
   MinimalRepository,
   PorterAuthor,
@@ -20,7 +19,7 @@ import {
 export const listForAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<Migration>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "migrations/list-for-authenticated-user",
   clientId: "github",
@@ -130,7 +129,7 @@ export const startForAuthenticatedUser: ApiHeroEndpoint<
 export const listForOrg: ApiHeroEndpoint<
   { org: string; perPage?: number; page?: number; exclude?: Array<"repositories"> },
   Array<Migration>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "migrations/list-for-org",
   clientId: "github",
@@ -546,7 +545,7 @@ export const getLargeFiles: ApiHeroEndpoint<
 export const listReposForAuthenticatedUser: ApiHeroEndpoint<
   { migrationId: number; perPage?: number; page?: number },
   Array<MinimalRepository>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "migrations/list-repos-for-authenticated-user",
   clientId: "github",
@@ -627,7 +626,7 @@ export const mapCommitAuthor: ApiHeroEndpoint<
 export const listReposForOrg: ApiHeroEndpoint<
   { org: string; migrationId: number; perPage?: number; page?: number },
   Array<MinimalRepository>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "migrations/list-repos-for-org",
   clientId: "github",

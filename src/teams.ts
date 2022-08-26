@@ -2,7 +2,6 @@ import {
   ExternalGroup,
   ExternalGroups,
   GroupMapping,
-  Link,
   MinimalRepository,
   OrganizationInvitation,
   SimpleUser,
@@ -28,7 +27,7 @@ import {
 export const listForAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<TeamFull>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-for-authenticated-user",
   clientId: "github",
@@ -133,7 +132,7 @@ export const updateLegacy: ApiHeroEndpoint<
 export const list: ApiHeroEndpoint<
   { org: string; perPage?: number; page?: number },
   Array<Team>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list",
   clientId: "github",
@@ -216,7 +215,7 @@ Default for child team: `closed`
 export const listReposLegacy: ApiHeroEndpoint<
   { teamId: number; perPage?: number; page?: number },
   Array<MinimalRepository>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-repos-legacy",
   clientId: "github",
@@ -236,7 +235,7 @@ export const listReposLegacy: ApiHeroEndpoint<
 export const listChildLegacy: ApiHeroEndpoint<
   { teamId: number; perPage?: number; page?: number },
   Array<Team>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-child-legacy",
   clientId: "github",
@@ -259,7 +258,7 @@ export const listChildLegacy: ApiHeroEndpoint<
 export const listMembersLegacy: ApiHeroEndpoint<
   { teamId: number; perPage?: number; page?: number; role?: "member" | "maintainer" | "all" },
   Array<SimpleUser>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-members-legacy",
   clientId: "github",
@@ -281,7 +280,7 @@ export const listMembersLegacy: ApiHeroEndpoint<
 export const listProjectsLegacy: ApiHeroEndpoint<
   { teamId: number; perPage?: number; page?: number },
   Array<TeamProject>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-projects-legacy",
   clientId: "github",
@@ -347,7 +346,7 @@ export const listIdpGroupsForOrg: ApiHeroEndpoint<
 export const listDiscussionsLegacy: ApiHeroEndpoint<
   { teamId: number; perPage?: number; direction?: "asc" | "desc"; page?: number },
   Array<TeamDiscussion>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-discussions-legacy",
   clientId: "github",
@@ -408,7 +407,7 @@ export const createDiscussionLegacy: ApiHeroEndpoint<
 export const listPendingInvitationsLegacy: ApiHeroEndpoint<
   { teamId: number; perPage?: number; page?: number },
   Array<OrganizationInvitation>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-pending-invitations-legacy",
   clientId: "github",
@@ -517,7 +516,7 @@ export const updateInOrg: ApiHeroEndpoint<
 export const listReposInOrg: ApiHeroEndpoint<
   { org: string; teamSlug: string; perPage?: number; page?: number },
   Array<MinimalRepository>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-repos-in-org",
   clientId: "github",
@@ -539,7 +538,7 @@ export const listReposInOrg: ApiHeroEndpoint<
 export const listChildInOrg: ApiHeroEndpoint<
   { org: string; teamSlug: string; perPage?: number; page?: number },
   Array<Team>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-child-in-org",
   clientId: "github",
@@ -654,7 +653,7 @@ export const listMembersInOrg: ApiHeroEndpoint<
     role?: "member" | "maintainer" | "all";
   },
   Array<SimpleUser>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-members-in-org",
   clientId: "github",
@@ -753,7 +752,7 @@ export const removeRepoLegacy: ApiHeroEndpoint<
 export const listProjectsInOrg: ApiHeroEndpoint<
   { org: string; teamSlug: string; perPage?: number; page?: number },
   Array<TeamProject>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-projects-in-org",
   clientId: "github",
@@ -938,7 +937,7 @@ export const listDiscussionsInOrg: ApiHeroEndpoint<
     pinned?: string;
   },
   Array<TeamDiscussion>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-discussions-in-org",
   clientId: "github",
@@ -1000,7 +999,7 @@ export const createDiscussionInOrg: ApiHeroEndpoint<
 export const listPendingInvitationsInOrg: ApiHeroEndpoint<
   { org: string; teamSlug: string; perPage?: number; page?: number },
   Array<OrganizationInvitation>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-pending-invitations-in-org",
   clientId: "github",
@@ -1566,7 +1565,7 @@ export const listDiscussionCommentsLegacy: ApiHeroEndpoint<
     page?: number;
   },
   Array<TeamDiscussionComment>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-discussion-comments-legacy",
   clientId: "github",
@@ -1703,7 +1702,7 @@ export const listDiscussionCommentsInOrg: ApiHeroEndpoint<
     page?: number;
   },
   Array<TeamDiscussionComment>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "teams/list-discussion-comments-in-org",
   clientId: "github",

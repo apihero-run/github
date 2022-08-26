@@ -4,7 +4,6 @@ import {
   AuditLogEvent,
   AuthenticationToken,
   EnabledOrganizations,
-  Link,
   OrganizationSimple,
   Runner,
   RunnerApplication,
@@ -249,7 +248,7 @@ export const listSelfHostedRunnersForEnterprise: ApiHeroEndpoint<
     runners?: Array<Runner>;
     total_count?: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "enterprise-admin/list-self-hosted-runners-for-enterprise",
   clientId: "github",
@@ -1158,7 +1157,7 @@ export const listSelfHostedRunnersInGroupForEnterprise: ApiHeroEndpoint<
     runners: Array<Runner>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "enterprise-admin/list-self-hosted-runners-in-group-for-enterprise",
   clientId: "github",

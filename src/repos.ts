@@ -35,7 +35,6 @@ import {
   HookDeliveryItem,
   Integration,
   Language,
-  Link,
   MergedUpstream,
   MinimalRepository,
   Page,
@@ -310,7 +309,7 @@ export const listForOrg: ApiHeroEndpoint<
     direction?: "asc" | "desc";
   },
   Array<MinimalRepository>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-for-org",
   clientId: "github",
@@ -644,7 +643,7 @@ export const listForUser: ApiHeroEndpoint<
     sort?: "created" | "updated" | "pushed" | "full_name";
   },
   Array<MinimalRepository>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-for-user",
   clientId: "github",
@@ -689,7 +688,7 @@ export const disableLfsForRepo: ApiHeroEndpoint<{ repo: string; owner: string },
 export const listDeployKeys: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number },
   Array<DeployKey>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-deploy-keys",
   clientId: "github",
@@ -747,7 +746,7 @@ Deploy keys with write access can perform the same actions as an organization me
 export const listTags: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number },
   Array<Tag>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-tags",
   clientId: "github",
@@ -773,7 +772,7 @@ export const listForks: ApiHeroEndpoint<
     sort?: "newest" | "oldest" | "stargazers" | "watchers";
   },
   Array<MinimalRepository>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-forks",
   clientId: "github",
@@ -825,7 +824,7 @@ export const createFork: ApiHeroEndpoint<
 export const listWebhooks: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number },
   Array<Hook>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-webhooks",
   clientId: "github",
@@ -1029,7 +1028,7 @@ export const deletePagesSite: ApiHeroEndpoint<{ repo: string; owner: string }, v
 export const listTeams: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number },
   Array<Team>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-teams",
   clientId: "github",
@@ -1145,7 +1144,7 @@ export const replaceAllTopics: ApiHeroEndpoint<
 export const listInvitationsForAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<RepositoryInvitation>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-invitations-for-authenticated-user",
   clientId: "github",
@@ -1207,7 +1206,7 @@ export const listCommits: ApiHeroEndpoint<
     path?: string;
   },
   Array<Commit>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-commits",
   clientId: "github",
@@ -1227,7 +1226,7 @@ export const listCommits: ApiHeroEndpoint<
 export const listBranches: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number; _protected?: boolean },
   Array<ShortBranch>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-branches",
   clientId: "github",
@@ -1249,7 +1248,7 @@ export const listBranches: ApiHeroEndpoint<
 export const listCommitCommentsForRepo: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number },
   Array<CommitComment>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-commit-comments-for-repo",
   clientId: "github",
@@ -1271,7 +1270,7 @@ export const listCommitCommentsForRepo: ApiHeroEndpoint<
 export const listReleases: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number },
   Array<Release>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-releases",
   clientId: "github",
@@ -1505,7 +1504,7 @@ export const listDeployments: ApiHeroEndpoint<
     task?: string;
   },
   Array<Deployment>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-deployments",
   clientId: "github",
@@ -1634,7 +1633,7 @@ export const createDeployment: ApiHeroEndpoint<
 export const listInvitations: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number },
   Array<RepositoryInvitation>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-invitations",
   clientId: "github",
@@ -1657,7 +1656,7 @@ export const listInvitations: ApiHeroEndpoint<
 export const listContributors: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number; anon?: string },
   Array<Contributor>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-contributors",
   clientId: "github",
@@ -1706,7 +1705,7 @@ export const getAllEnvironments: ApiHeroEndpoint<
 export const listPagesBuilds: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number },
   Array<PageBuild>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-pages-builds",
   clientId: "github",
@@ -1799,7 +1798,7 @@ export const listCollaborators: ApiHeroEndpoint<
     affiliation?: "outside" | "direct" | "all";
   },
   Array<Collaborator>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-collaborators",
   clientId: "github",
@@ -3014,7 +3013,7 @@ export const getTopPaths: ApiHeroEndpoint<
 export const listCommitStatusesForRef: ApiHeroEndpoint<
   { repo: string; ref: string; owner: string; perPage?: number; page?: number },
   Array<Status>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-commit-statuses-for-ref",
   clientId: "github",
@@ -3389,7 +3388,7 @@ export const getTopReferrers: ApiHeroEndpoint<
 export const listPullRequestsAssociatedWithCommit: ApiHeroEndpoint<
   { repo: string; commitSha: string; owner: string; perPage?: number; page?: number },
   Array<PullRequestSimple>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-pull-requests-associated-with-commit",
   clientId: "github",
@@ -3851,7 +3850,7 @@ export const deleteBranchProtection: ApiHeroEndpoint<
 export const listReleaseAssets: ApiHeroEndpoint<
   { repo: string; releaseId: number; owner: string; perPage?: number; page?: number },
   Array<ReleaseAsset>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-release-assets",
   clientId: "github",
@@ -3909,7 +3908,7 @@ export const uploadReleaseAsset: ApiHeroEndpoint<
 export const listCommentsForCommit: ApiHeroEndpoint<
   { repo: string; commitSha: string; owner: string; perPage?: number; page?: number },
   Array<CommitComment>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-comments-for-commit",
   clientId: "github",
@@ -4094,7 +4093,7 @@ export const deleteTagProtection: ApiHeroEndpoint<
 export const listDeploymentStatuses: ApiHeroEndpoint<
   { repo: string; deploymentId: number; owner: string; perPage?: number; page?: number },
   Array<DeploymentStatus>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "repos/list-deployment-statuses",
   clientId: "github",

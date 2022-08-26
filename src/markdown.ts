@@ -1,4 +1,4 @@
-import { ContentType, XCommonMarkerVersion, ApiHeroEndpoint } from "./@types";
+import { ApiHeroEndpoint } from "./@types";
 
 /** 
 * @see https://docs.github.com/rest/reference/markdown#render-a-markdown-document
@@ -29,11 +29,7 @@ export const render: ApiHeroEndpoint<
     };
   },
   string,
-  {
-    "Content-Type": ContentType;
-    "Content-Length": string;
-    "X-CommonMarker-Version": XCommonMarkerVersion;
-  }
+  { "Content-Type": string; "Content-Length": string; "X-CommonMarker-Version": string }
 > = {
   id: "markdown/render",
   clientId: "github",
@@ -49,7 +45,7 @@ export const render: ApiHeroEndpoint<
 export const renderRaw: ApiHeroEndpoint<
   { raw?: string },
   string,
-  { "X-CommonMarker-Version": XCommonMarkerVersion }
+  { "X-CommonMarker-Version": string }
 > = {
   id: "markdown/render-raw",
   clientId: "github",

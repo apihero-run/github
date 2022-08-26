@@ -16,7 +16,6 @@ import {
   CodeScanningRef,
   CodeScanningSarifsReceipt,
   CodeScanningSarifsStatus,
-  Link,
   ApiHeroEndpoint,
 } from "./@types";
 
@@ -55,7 +54,7 @@ export const listAlertsForOrg: ApiHeroEndpoint<
     after?: string;
   },
   Array<CodeScanningOrganizationAlertItems>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "code-scanning/list-alerts-for-org",
   clientId: "github",
@@ -248,7 +247,7 @@ export const listAlertsForEnterprise: ApiHeroEndpoint<
     state?: "open" | "closed" | "dismissed" | "fixed";
   },
   Array<CodeScanningOrganizationAlertItems>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "code-scanning/list-alerts-for-enterprise",
   clientId: "github",

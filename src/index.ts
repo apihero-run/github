@@ -33,7 +33,6 @@ import * as interactions from "./interactions";
 import * as issues from "./issues";
 import * as licenses from "./licenses";
 import * as markdown from "./markdown";
-import * as mergeQueue from "./merge-queue";
 import * as meta from "./meta";
 
 export {
@@ -72,7 +71,6 @@ export {
   issues,
   licenses,
   markdown,
-  mergeQueue,
   meta,
 };
 

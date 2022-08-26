@@ -4,7 +4,6 @@ import {
   IssueEvent,
   IssueEventForIssue,
   Label,
-  Link,
   Milestone,
   SimpleUser,
   TimelineIssueEvents,
@@ -54,7 +53,7 @@ export const list: ApiHeroEndpoint<
     collab?: boolean;
   },
   Array<Issue>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list",
   clientId: "github",
@@ -92,7 +91,7 @@ export const listForAuthenticatedUser: ApiHeroEndpoint<
     page?: number;
   },
   Array<Issue>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list-for-authenticated-user",
   clientId: "github",
@@ -132,7 +131,7 @@ export const listForOrg: ApiHeroEndpoint<
     filter?: "assigned" | "created" | "mentioned" | "subscribed" | "repos" | "all";
   },
   Array<Issue>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list-for-org",
   clientId: "github",
@@ -180,7 +179,7 @@ export const listForRepo: ApiHeroEndpoint<
     assignee?: string;
   },
   Array<Issue>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list-for-repo",
   clientId: "github",
@@ -257,7 +256,7 @@ export const create: ApiHeroEndpoint<
 export const listLabelsForRepo: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number },
   Array<Label>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list-labels-for-repo",
   clientId: "github",
@@ -313,7 +312,7 @@ export const createLabel: ApiHeroEndpoint<
 export const listAssignees: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number },
   Array<SimpleUser>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list-assignees",
   clientId: "github",
@@ -343,7 +342,7 @@ export const listMilestones: ApiHeroEndpoint<
     direction?: "asc" | "desc";
   },
   Array<Milestone>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list-milestones",
   clientId: "github",
@@ -403,7 +402,7 @@ export const createMilestone: ApiHeroEndpoint<
 export const listEventsForRepo: ApiHeroEndpoint<
   { repo: string; owner: string; perPage?: number; page?: number },
   Array<IssueEvent>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list-events-for-repo",
   clientId: "github",
@@ -499,7 +498,7 @@ export const listCommentsForRepo: ApiHeroEndpoint<
     direction?: "asc" | "desc";
   },
   Array<IssueComment>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list-comments-for-repo",
   clientId: "github",
@@ -758,7 +757,7 @@ export const updateComment: ApiHeroEndpoint<
 export const listEvents: ApiHeroEndpoint<
   { repo: string; issueNumber: number; owner: string; perPage?: number; page?: number },
   Array<IssueEventForIssue>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list-events",
   clientId: "github",
@@ -778,7 +777,7 @@ export const listEvents: ApiHeroEndpoint<
 export const listLabelsOnIssue: ApiHeroEndpoint<
   { repo: string; issueNumber: number; owner: string; perPage?: number; page?: number },
   Array<Label>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list-labels-on-issue",
   clientId: "github",
@@ -971,7 +970,7 @@ export const listComments: ApiHeroEndpoint<
     page?: number;
   },
   Array<IssueComment>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list-comments",
   clientId: "github",
@@ -1020,7 +1019,7 @@ export const createComment: ApiHeroEndpoint<
 export const listEventsForTimeline: ApiHeroEndpoint<
   { repo: string; issueNumber: number; owner: string; perPage?: number; page?: number },
   Array<TimelineIssueEvents>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list-events-for-timeline",
   clientId: "github",
@@ -1115,7 +1114,7 @@ export const removeLabel: ApiHeroEndpoint<
 export const listLabelsForMilestone: ApiHeroEndpoint<
   { repo: string; milestoneNumber: number; owner: string; perPage?: number; page?: number },
   Array<Label>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "issues/list-labels-for-milestone",
   clientId: "github",

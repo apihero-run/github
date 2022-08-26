@@ -1,4 +1,4 @@
-import { DependencyGraphDiff, Link, Snapshot, ApiHeroEndpoint } from "./@types";
+import { DependencyGraphDiff, Snapshot, ApiHeroEndpoint } from "./@types";
 
 /** 
 * @see https://docs.github.com/rest/reference/dependency-graph#create-a-snapshot-of-dependencies-for-a-repository
@@ -51,7 +51,7 @@ export const createRepositorySnapshot: ApiHeroEndpoint<
 export const diffRange: ApiHeroEndpoint<
   { repo: string; basehead: string; owner: string; name?: string },
   DependencyGraphDiff,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "dependency-graph/diff-range",
   clientId: "github",

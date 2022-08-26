@@ -1,13 +1,4 @@
-import {
-  Blob,
-  GitCommit,
-  GitRef,
-  GitTag,
-  GitTree,
-  Link,
-  ShortBlob,
-  ApiHeroEndpoint,
-} from "./@types";
+import { Blob, GitCommit, GitRef, GitTag, GitTree, ShortBlob, ApiHeroEndpoint } from "./@types";
 
 /** 
 * @see https://docs.github.com/rest/reference/git#create-a-reference
@@ -510,7 +501,7 @@ export const getTree: ApiHeroEndpoint<
 export const listMatchingRefs: ApiHeroEndpoint<
   { repo: string; ref: string; owner: string; perPage?: number; page?: number },
   Array<GitRef>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "git/list-matching-refs",
   clientId: "github",

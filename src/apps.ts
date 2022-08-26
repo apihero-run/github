@@ -6,7 +6,6 @@ import {
   Installation,
   InstallationToken,
   Integration,
-  Link,
   MarketplaceListingPlan,
   MarketplacePurchase,
   Repository,
@@ -102,7 +101,7 @@ export const getBySlug: ApiHeroEndpoint<{ appSlug: string }, Integration> = {
 export const listInstallations: ApiHeroEndpoint<
   { perPage?: number; outdated?: string; since?: string; page?: number },
   Array<Installation>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "apps/list-installations",
   clientId: "github",
@@ -145,7 +144,7 @@ export const listInstallationsForAuthenticatedUser: ApiHeroEndpoint<
     total_count: number;
     installations: Array<Installation>;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "apps/list-installations-for-authenticated-user",
   clientId: "github",
@@ -209,7 +208,7 @@ export const listReposAccessibleToInstallation: ApiHeroEndpoint<
      */
     repository_selection?: string;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "apps/list-repos-accessible-to-installation",
   clientId: "github",
@@ -229,7 +228,7 @@ export const listReposAccessibleToInstallation: ApiHeroEndpoint<
 export const listPlans: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<MarketplaceListingPlan>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "apps/list-plans",
   clientId: "github",
@@ -247,7 +246,7 @@ export const listPlans: ApiHeroEndpoint<
 export const listSubscriptionsForAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<UserMarketplacePurchase>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "apps/list-subscriptions-for-authenticated-user",
   clientId: "github",
@@ -415,7 +414,7 @@ export const getWebhookDelivery: ApiHeroEndpoint<{ deliveryId: number }, HookDel
 export const listPlansStubbed: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<MarketplaceListingPlan>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "apps/list-plans-stubbed",
   clientId: "github",
@@ -449,7 +448,7 @@ export const getRepoInstallation: ApiHeroEndpoint<{ repo: string; owner: string 
 export const listSubscriptionsForAuthenticatedUserStubbed: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<UserMarketplacePurchase>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "apps/list-subscriptions-for-authenticated-user-stubbed",
   clientId: "github",
@@ -601,7 +600,7 @@ export const listAccountsForPlan: ApiHeroEndpoint<
     direction?: "asc" | "desc";
   },
   Array<MarketplacePurchase>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "apps/list-accounts-for-plan",
   clientId: "github",
@@ -717,7 +716,7 @@ export const listInstallationReposForAuthenticatedUser: ApiHeroEndpoint<
     repositories: Array<Repository>;
     repository_selection?: string;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "apps/list-installation-repos-for-authenticated-user",
   clientId: "github",
@@ -746,7 +745,7 @@ export const listAccountsForPlanStubbed: ApiHeroEndpoint<
     direction?: "asc" | "desc";
   },
   Array<MarketplacePurchase>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "apps/list-accounts-for-plan-stubbed",
   clientId: "github",

@@ -1,4 +1,4 @@
-import { Link, Reaction, ApiHeroEndpoint } from "./@types";
+import { Reaction, ApiHeroEndpoint } from "./@types";
 
 /** 
 * @see https://docs.github.com/rest/reference/reactions#list-reactions-for-a-commit-comment
@@ -23,7 +23,7 @@ export const listForCommitComment: ApiHeroEndpoint<
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
   },
   Array<Reaction>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "reactions/list-for-commit-comment",
   clientId: "github",
@@ -80,7 +80,7 @@ export const listForIssue: ApiHeroEndpoint<
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
   },
   Array<Reaction>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "reactions/list-for-issue",
   clientId: "github",
@@ -137,7 +137,7 @@ export const listForRelease: ApiHeroEndpoint<
     content?: "+1" | "laugh" | "heart" | "hooray" | "rocket" | "eyes";
   },
   Array<Reaction>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "reactions/list-for-release",
   clientId: "github",
@@ -195,7 +195,7 @@ export const listForTeamDiscussionLegacy: ApiHeroEndpoint<
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
   },
   Array<Reaction>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "reactions/list-for-team-discussion-legacy",
   clientId: "github",
@@ -253,7 +253,7 @@ export const listForPullRequestReviewComment: ApiHeroEndpoint<
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
   },
   Array<Reaction>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "reactions/list-for-pull-request-review-comment",
   clientId: "github",
@@ -310,7 +310,7 @@ export const listForIssueComment: ApiHeroEndpoint<
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
   },
   Array<Reaction>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "reactions/list-for-issue-comment",
   clientId: "github",
@@ -432,7 +432,7 @@ export const listForTeamDiscussionInOrg: ApiHeroEndpoint<
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
   },
   Array<Reaction>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "reactions/list-for-team-discussion-in-org",
   clientId: "github",
@@ -536,7 +536,7 @@ export const listForTeamDiscussionCommentLegacy: ApiHeroEndpoint<
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
   },
   Array<Reaction>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "reactions/list-for-team-discussion-comment-legacy",
   clientId: "github",
@@ -621,7 +621,7 @@ export const listForTeamDiscussionCommentInOrg: ApiHeroEndpoint<
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
   },
   Array<Reaction>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "reactions/list-for-team-discussion-comment-in-org",
   clientId: "github",

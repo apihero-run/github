@@ -1,10 +1,4 @@
-import {
-  RateLimitOverview,
-  XRateLimitLimit,
-  XRateLimitRemaining,
-  XRateLimitReset,
-  ApiHeroEndpoint,
-} from "./@types";
+import { RateLimitOverview, ApiHeroEndpoint } from "./@types";
 
 /** 
 * @see https://docs.github.com/rest/reference/rate-limit#get-rate-limit-status-for-the-authenticated-user
@@ -18,11 +12,7 @@ import {
 export const getRateLimit: ApiHeroEndpoint<
   void,
   RateLimitOverview,
-  {
-    "X-RateLimit-Limit": XRateLimitLimit;
-    "X-RateLimit-Reset": XRateLimitReset;
-    "X-RateLimit-Remaining": XRateLimitRemaining;
-  }
+  { "X-RateLimit-Limit": number; "X-RateLimit-Reset": number; "X-RateLimit-Remaining": number }
 > = {
   id: "rate-limit/get",
   clientId: "github",

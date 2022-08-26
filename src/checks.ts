@@ -3,7 +3,6 @@ import {
   CheckRun,
   CheckSuite,
   CheckSuitePreference,
-  Link,
   ApiHeroEndpoint,
 } from "./@types";
 
@@ -289,7 +288,7 @@ export const listForRef: ApiHeroEndpoint<
     check_runs: Array<CheckRun>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "checks/list-for-ref",
   clientId: "github",
@@ -524,7 +523,7 @@ export const listSuitesForRef: ApiHeroEndpoint<
     total_count: number;
     check_suites: Array<CheckSuite>;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "checks/list-suites-for-ref",
   clientId: "github",
@@ -585,7 +584,7 @@ export const rerequestRun: ApiHeroEndpoint<
 export const listAnnotations: ApiHeroEndpoint<
   { repo: string; checkRunId: number; owner: string; perPage?: number; page?: number },
   Array<CheckAnnotation>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "checks/list-annotations",
   clientId: "github",
@@ -643,7 +642,7 @@ export const listForSuite: ApiHeroEndpoint<
     check_runs: Array<CheckRun>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "checks/list-for-suite",
   clientId: "github",

@@ -1,3 +1,5 @@
+import { ApiHeroEndpoint } from "./@types";
+
 /** 
 * @see https://docs.github.com/rest/reference/emojis#get-emojis
 

@@ -20,7 +20,6 @@ import {
   EnabledRepositories,
   EnvironmentApprovals,
   Job,
-  Link,
   MinimalRepository,
   OptOutOidcCustomSub,
   OrganizationActionsSecret,
@@ -56,7 +55,7 @@ export const listSelfHostedRunnersForOrg: ApiHeroEndpoint<
     runners: Array<Runner>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/list-self-hosted-runners-for-org",
   clientId: "github",
@@ -78,7 +77,7 @@ export const listOrgSecrets: ApiHeroEndpoint<
     secrets: Array<OrganizationActionsSecret>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/list-org-secrets",
   clientId: "github",
@@ -97,7 +96,7 @@ export const listOrgSecrets: ApiHeroEndpoint<
 export const getActionsCacheUsageForOrg: ApiHeroEndpoint<
   { org: string },
   ActionsCacheUsageOrgEnterprise,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/get-actions-cache-usage-for-org",
   clientId: "github",
@@ -288,7 +287,7 @@ export const listWorkflowRunsForRepo: ApiHeroEndpoint<
     total_count: number;
     workflow_runs: Array<WorkflowRun>;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/list-workflow-runs-for-repo",
   clientId: "github",
@@ -323,7 +322,7 @@ export const getActionsCacheList: ApiHeroEndpoint<
     key?: string;
   },
   ActionsCacheList,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/get-actions-cache-list",
   clientId: "github",
@@ -387,7 +386,7 @@ export const listSelfHostedRunnersForRepo: ApiHeroEndpoint<
     runners: Array<Runner>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/list-self-hosted-runners-for-repo",
   clientId: "github",
@@ -410,7 +409,7 @@ export const listRepoSecrets: ApiHeroEndpoint<
     secrets: Array<ActionsSecret>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/list-repo-secrets",
   clientId: "github",
@@ -482,7 +481,7 @@ export const listArtifactsForRepo: ApiHeroEndpoint<
     artifacts: Array<Artifact>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/list-artifacts-for-repo",
   clientId: "github",
@@ -505,7 +504,7 @@ export const listRepoWorkflows: ApiHeroEndpoint<
     workflows: Array<Workflow>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/list-repo-workflows",
   clientId: "github",
@@ -907,7 +906,7 @@ export const setSelectedRepositoriesEnabledGithubActionsOrganization: ApiHeroEnd
 export const getActionsCacheUsageForEnterprise: ApiHeroEndpoint<
   { enterprise: string },
   ActionsCacheUsageOrgEnterprise,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/get-actions-cache-usage-for-enterprise",
   clientId: "github",
@@ -931,7 +930,7 @@ export const getActionsCacheUsageByRepoForOrg: ApiHeroEndpoint<
     total_count: number;
     repository_cache_usages: Array<ActionsCacheUsageByRepository>;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/get-actions-cache-usage-by-repo-for-org",
   clientId: "github",
@@ -1236,7 +1235,7 @@ export const listJobsForWorkflowRun: ApiHeroEndpoint<
     jobs: Array<Job>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/list-jobs-for-workflow-run",
   clientId: "github",
@@ -1896,7 +1895,7 @@ export const listWorkflowRunArtifacts: ApiHeroEndpoint<
     artifacts: Array<Artifact>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/list-workflow-run-artifacts",
   clientId: "github",
@@ -2247,7 +2246,7 @@ export const listWorkflowRuns: ApiHeroEndpoint<
     total_count: number;
     workflow_runs: Array<WorkflowRun>;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/list-workflow-runs",
   clientId: "github",
@@ -2292,7 +2291,7 @@ export const listSelfHostedRunnersInGroupForOrg: ApiHeroEndpoint<
     runners: Array<Runner>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/list-self-hosted-runners-in-group-for-org",
   clientId: "github",
@@ -2692,7 +2691,7 @@ export const listEnvironmentSecrets: ApiHeroEndpoint<
     secrets: Array<ActionsSecret>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/list-environment-secrets",
   clientId: "github",
@@ -2829,7 +2828,7 @@ export const listJobsForWorkflowRunAttempt: ApiHeroEndpoint<
     jobs: Array<Job>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "actions/list-jobs-for-workflow-run-attempt",
   clientId: "github",

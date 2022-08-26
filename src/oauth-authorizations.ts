@@ -1,4 +1,4 @@
-import { ApplicationGrant, Authorization, Link, ApiHeroEndpoint } from "./@types";
+import { ApplicationGrant, Authorization, ApiHeroEndpoint } from "./@types";
 
 /** 
 * @see https://docs.github.com/rest/reference/oauth-authorizations#list-your-authorizations
@@ -14,7 +14,7 @@ import { ApplicationGrant, Authorization, Link, ApiHeroEndpoint } from "./@types
 export const listAuthorizations: ApiHeroEndpoint<
   { perPage?: number; clientId?: string; page?: number },
   Array<Authorization>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "oauth-authorizations/list-authorizations",
   clientId: "github",
@@ -104,7 +104,7 @@ export const createAuthorization: ApiHeroEndpoint<
 export const listGrants: ApiHeroEndpoint<
   { clientId?: string; perPage?: number; page?: number },
   Array<ApplicationGrant>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "oauth-authorizations/list-grants",
   clientId: "github",

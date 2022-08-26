@@ -4,7 +4,6 @@ import {
   Hovercard,
   Key,
   KeySimple,
-  Link,
   PrivateUser,
   PublicUser,
   SimpleUser,
@@ -132,7 +131,7 @@ export const list: ApiHeroEndpoint<
 export const listPublicSshKeysForAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<Key>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "users/list-public-ssh-keys-for-authenticated-user",
   clientId: "github",
@@ -192,7 +191,7 @@ export const listBlockedByAuthenticatedUser: ApiHeroEndpoint<void, Array<SimpleU
 export const listEmailsForAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<Email>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "users/list-emails-for-authenticated-user",
   clientId: "github",
@@ -266,7 +265,7 @@ export const deleteEmailForAuthenticatedUser: ApiHeroEndpoint<
 export const listGpgKeysForAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<GpgKey>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "users/list-gpg-keys-for-authenticated-user",
   clientId: "github",
@@ -311,7 +310,7 @@ export const createGpgKeyForAuthenticatedUser: ApiHeroEndpoint<
 export const listFollowersForAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<SimpleUser>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "users/list-followers-for-authenticated-user",
   clientId: "github",
@@ -329,7 +328,7 @@ export const listFollowersForAuthenticatedUser: ApiHeroEndpoint<
 export const listFollowedByAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<SimpleUser>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "users/list-followed-by-authenticated-user",
   clientId: "github",
@@ -392,7 +391,7 @@ export const deletePublicSshKeyForAuthenticatedUser: ApiHeroEndpoint<{ keyId: nu
 export const listPublicEmailsForAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<Email>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "users/list-public-emails-for-authenticated-user",
   clientId: "github",
@@ -433,7 +432,7 @@ export const setPrimaryEmailVisibilityForAuthenticatedUser: ApiHeroEndpoint<
 export const listPublicKeysForUser: ApiHeroEndpoint<
   { username: string; perPage?: number; page?: number },
   Array<KeySimple>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "users/list-public-keys-for-user",
   clientId: "github",
@@ -528,7 +527,7 @@ export const unfollow: ApiHeroEndpoint<{ username: string }, void> = {
 export const listGpgKeysForUser: ApiHeroEndpoint<
   { username: string; perPage?: number; page?: number },
   Array<GpgKey>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "users/list-gpg-keys-for-user",
   clientId: "github",
@@ -573,7 +572,7 @@ export const deleteGpgKeyForAuthenticatedUser: ApiHeroEndpoint<{ gpgKeyId: numbe
 export const listFollowersForUser: ApiHeroEndpoint<
   { username: string; perPage?: number; page?: number },
   Array<SimpleUser>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "users/list-followers-for-user",
   clientId: "github",
@@ -592,7 +591,7 @@ export const listFollowersForUser: ApiHeroEndpoint<
 export const listFollowingForUser: ApiHeroEndpoint<
   { username: string; perPage?: number; page?: number },
   Array<SimpleUser>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "users/list-following-for-user",
   clientId: "github",

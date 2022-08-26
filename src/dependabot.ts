@@ -2,7 +2,6 @@ import {
   DependabotPublicKey,
   DependabotSecret,
   EmptyObject,
-  Link,
   MinimalRepository,
   OrganizationDependabotSecret,
   ApiHeroEndpoint,
@@ -24,7 +23,7 @@ export const listOrgSecrets: ApiHeroEndpoint<
     secrets: Array<OrganizationDependabotSecret>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "dependabot/list-org-secrets",
   clientId: "github",
@@ -47,7 +46,7 @@ export const listRepoSecrets: ApiHeroEndpoint<
     secrets: Array<DependabotSecret>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "dependabot/list-repo-secrets",
   clientId: "github",

@@ -5,7 +5,6 @@ import {
   CodespacesPublicKey,
   CodespacesSecret,
   CodespacesUserPublicKey,
-  Link,
   MinimalRepository,
   RepoCodespacesSecret,
   SimpleUser,
@@ -200,7 +199,7 @@ export const listSecretsForAuthenticatedUser: ApiHeroEndpoint<
     secrets: Array<CodespacesSecret>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "codespaces/list-secrets-for-authenticated-user",
   clientId: "github",
@@ -624,7 +623,7 @@ export const listRepoSecrets: ApiHeroEndpoint<
     secrets: Array<RepoCodespacesSecret>;
     total_count: number;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "codespaces/list-repo-secrets",
   clientId: "github",

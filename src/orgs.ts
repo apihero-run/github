@@ -4,7 +4,6 @@ import {
   HookDelivery,
   HookDeliveryItem,
   Installation,
-  Link,
   OrganizationCustomRepositoryRole,
   OrganizationFull,
   OrganizationInvitation,
@@ -38,7 +37,7 @@ import {
 export const listForAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; page?: number },
   Array<OrganizationSimple>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "orgs/list-for-authenticated-user",
   clientId: "github",
@@ -215,7 +214,7 @@ export const list: ApiHeroEndpoint<
 export const listWebhooks: ApiHeroEndpoint<
   { org: string; perPage?: number; page?: number },
   Array<OrgHook>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "orgs/list-webhooks",
   clientId: "github",
@@ -314,7 +313,7 @@ export const listMembers: ApiHeroEndpoint<
     filter?: "2fa_disabled" | "all";
   },
   Array<SimpleUser>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "orgs/list-members",
   clientId: "github",
@@ -376,7 +375,7 @@ export const getAuditLog: ApiHeroEndpoint<
 export const listMembershipsForAuthenticatedUser: ApiHeroEndpoint<
   { perPage?: number; page?: number; state?: "active" | "pending" },
   Array<OrgMembership>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "orgs/list-memberships-for-authenticated-user",
   clientId: "github",
@@ -397,7 +396,7 @@ export const listMembershipsForAuthenticatedUser: ApiHeroEndpoint<
 export const listForUser: ApiHeroEndpoint<
   { username: string; perPage?: number; page?: number },
   Array<OrganizationSimple>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "orgs/list-for-user",
   clientId: "github",
@@ -416,7 +415,7 @@ export const listForUser: ApiHeroEndpoint<
 export const listPendingInvitations: ApiHeroEndpoint<
   { org: string; perPage?: number; page?: number },
   Array<OrganizationInvitation>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "orgs/list-pending-invitations",
   clientId: "github",
@@ -482,7 +481,7 @@ export const listAppInstallations: ApiHeroEndpoint<
     total_count: number;
     installations: Array<Installation>;
   },
-  { Link: Link }
+  { Link: string }
 > = {
   id: "orgs/list-app-installations",
   clientId: "github",
@@ -501,7 +500,7 @@ export const listAppInstallations: ApiHeroEndpoint<
 export const listPublicMembers: ApiHeroEndpoint<
   { org: string; perPage?: number; page?: number },
   Array<SimpleUser>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "orgs/list-public-members",
   clientId: "github",
@@ -686,7 +685,7 @@ export const listSecurityManagerTeams: ApiHeroEndpoint<{ org: string }, Array<Te
 export const listFailedInvitations: ApiHeroEndpoint<
   { org: string; perPage?: number; page?: number },
   Array<OrganizationInvitation>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "orgs/list-failed-invitations",
   clientId: "github",
@@ -748,7 +747,7 @@ export const pingWebhook: ApiHeroEndpoint<{ org: string; hookId: number }, void>
 export const listOutsideCollaborators: ApiHeroEndpoint<
   { org: string; perPage?: number; page?: number; filter?: "2fa_disabled" | "all" },
   Array<SimpleUser>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "orgs/list-outside-collaborators",
   clientId: "github",
@@ -1059,7 +1058,7 @@ export const listCustomRoles: ApiHeroEndpoint<
 export const listInvitationTeams: ApiHeroEndpoint<
   { org: string; invitationId: number; perPage?: number; page?: number },
   Array<Team>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "orgs/list-invitation-teams",
   clientId: "github",

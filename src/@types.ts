@@ -4822,7 +4822,7 @@ export type Integration = {
     metadata?: string;
     deployments?: string;
 
-    [key: string]: string;
+    [key: string]: string | undefined;
   };
 
   /**

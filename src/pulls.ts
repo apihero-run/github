@@ -1,7 +1,6 @@
 import {
   Commit,
   DiffEntry,
-  Link,
   PullRequest,
   PullRequestMergeResult,
   PullRequestReview,
@@ -41,7 +40,7 @@ export const list: ApiHeroEndpoint<
     direction?: "asc" | "desc";
   },
   Array<PullRequestSimple>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "pulls/list",
   clientId: "github",
@@ -137,7 +136,7 @@ export const listReviewCommentsForRepo: ApiHeroEndpoint<
     sort?: "created" | "updated" | "created_at";
   },
   Array<PullRequestReviewComment>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "pulls/list-review-comments-for-repo",
   clientId: "github",
@@ -240,7 +239,7 @@ export const update: ApiHeroEndpoint<
 export const listFiles: ApiHeroEndpoint<
   { repo: string; pullNumber: number; owner: string; perPage?: number; page?: number },
   Array<DiffEntry>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "pulls/list-files",
   clientId: "github",
@@ -385,7 +384,7 @@ export const updateReviewComment: ApiHeroEndpoint<
 export const listCommits: ApiHeroEndpoint<
   { repo: string; pullNumber: number; owner: string; perPage?: number; page?: number },
   Array<Commit>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "pulls/list-commits",
   clientId: "github",
@@ -406,7 +405,7 @@ export const listCommits: ApiHeroEndpoint<
 export const listReviews: ApiHeroEndpoint<
   { repo: string; pullNumber: number; owner: string; perPage?: number; page?: number },
   Array<PullRequestReview>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "pulls/list-reviews",
   clientId: "github",
@@ -531,7 +530,7 @@ export const listReviewComments: ApiHeroEndpoint<
     direction?: "asc" | "desc";
   },
   Array<PullRequestReviewComment>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "pulls/list-review-comments",
   clientId: "github",
@@ -663,7 +662,7 @@ export const updateBranch: ApiHeroEndpoint<
 export const listRequestedReviewers: ApiHeroEndpoint<
   { repo: string; pullNumber: number; owner: string; perPage?: number; page?: number },
   PullRequestReviewRequest,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "pulls/list-requested-reviewers",
   clientId: "github",
@@ -857,7 +856,7 @@ export const listCommentsForReview: ApiHeroEndpoint<
     page?: number;
   },
   Array<ReviewComment>,
-  { Link: Link }
+  { Link: string }
 > = {
   id: "pulls/list-comments-for-review",
   clientId: "github",
