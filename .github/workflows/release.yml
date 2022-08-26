@@ -1,17 +1,26 @@
-name: Publish Package to npmjs
+name: 🚀 Release new NPM package
+
 on:
   release:
     types: [created]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
-          registry-url: "https://registry.npmjs.org"
-      - run: npm ci
+          node-version: 18
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@v1
+        with:
+          useLockFile: false
+      - name: 🚀 Publish package
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
