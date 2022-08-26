@@ -391,7 +391,7 @@ export const updateRef: ApiHeroEndpoint<
     repo: string;
     ref: string;
     owner: string;
-    ref: {
+    payload: {
       /**
        * The SHA1 value to set this reference to
        */

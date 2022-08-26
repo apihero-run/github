@@ -62,7 +62,7 @@ export const getRestrictionsForOrg: ApiHeroEndpoint<{ org: string }, Interaction
 * @param org - The organization name. The name is not case sensitive. 
 */
 export const setRestrictionsForOrg: ApiHeroEndpoint<
-  { org: string; org: InteractionLimit },
+  { org: string; payload: InteractionLimit },
   InteractionLimitResponse
 > = {
   id: "interactions/set-restrictions-for-org",
@@ -109,7 +109,7 @@ export const getRestrictionsForRepo: ApiHeroEndpoint<
 * @param owner - The account owner of the repository. The name is not case sensitive. 
 */
 export const setRestrictionsForRepo: ApiHeroEndpoint<
-  { repo: string; owner: string; repo: InteractionLimit },
+  { repo: string; owner: string; payload: InteractionLimit },
   InteractionLimitResponse
 > = {
   id: "interactions/set-restrictions-for-repo",

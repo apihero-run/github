@@ -446,7 +446,7 @@ export const setRepoSubscription: ApiHeroEndpoint<
   {
     repo: string;
     owner: string;
-    repo?: {
+    payload?: {
       /**
        * Determines if all notifications should be blocked from this repository.
        */
@@ -524,7 +524,7 @@ export const markRepoNotificationsAsRead: ApiHeroEndpoint<
   {
     repo: string;
     owner: string;
-    repo?: {
+    payload?: {
       /**
        * Describes the last point that notifications were checked. Anything updated since this time will not be marked as read. If you omit this parameter, all notifications are marked as read. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Default: The current timestamp.
        */
@@ -609,7 +609,7 @@ export const getThreadSubscriptionForAuthenticatedUser: ApiHeroEndpoint<
 export const setThreadSubscription: ApiHeroEndpoint<
   {
     threadId: number;
-    threadId?: {
+    payload?: {
       /**
        * Whether to block all notifications from a thread.
        */

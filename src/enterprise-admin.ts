@@ -885,7 +885,7 @@ export const setCustomLabelsForSelfHostedRunnerForEnterprise: ApiHeroEndpoint<
   {
     runnerId: number;
     enterprise: string;
-    runnerId: {
+    payload: {
       /**
        * The names of the custom labels to set for the runner. You can pass an empty array to remove all custom labels.
        */
@@ -1179,7 +1179,7 @@ export const setSelfHostedRunnersInGroupForEnterprise: ApiHeroEndpoint<
   {
     runnerGroupId: number;
     enterprise: string;
-    runnerGroupId: {
+    payload: {
       /**
        * List of runner IDs to add to the runner group.
        * Unique identifier of the runner.
@@ -1232,7 +1232,7 @@ export const setOrgAccessToSelfHostedRunnerGroupInEnterprise: ApiHeroEndpoint<
   {
     runnerGroupId: number;
     enterprise: string;
-    runnerGroupId: {
+    payload: {
       /**
        * List of organization IDs that can access the runner group.
        * Unique identifier of the organization.

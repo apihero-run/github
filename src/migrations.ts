@@ -275,7 +275,7 @@ export const startImport: ApiHeroEndpoint<
   {
     repo: string;
     owner: string;
-    repo: {
+    payload: {
       /**
        * The originating VCS type. Without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
        */
@@ -341,7 +341,7 @@ export const updateImport: ApiHeroEndpoint<
   {
     repo: string;
     owner: string;
-    repo?: {
+    payload?: {
       /**
        * The type of version control system you are migrating from.
        *

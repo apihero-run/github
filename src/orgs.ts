@@ -72,7 +72,7 @@ export const getOrgs: ApiHeroEndpoint<{ org: string }, OrganizationFull> = {
 export const update: ApiHeroEndpoint<
   {
     org: string;
-    org?: {
+    payload?: {
       /**
        *
        * @example
@@ -604,7 +604,7 @@ export const getMembershipForAuthenticatedUser: ApiHeroEndpoint<{ org: string },
 export const updateMembershipForAuthenticatedUser: ApiHeroEndpoint<
   {
     org: string;
-    org: {
+    payload: {
       /**
        * The state that the membership should be in. Only `"active"` will be accepted.
        */
@@ -788,7 +788,7 @@ export const updateWebhookConfigForOrg: ApiHeroEndpoint<
   {
     org: string;
     hookId: number;
-    hookId?: {
+    payload?: {
       url?: WebhookConfigUrl;
       secret?: WebhookConfigSecret;
       content_type?: WebhookConfigContentType;

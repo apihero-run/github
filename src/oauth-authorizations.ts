@@ -314,7 +314,7 @@ export const getOrCreateAuthorizationForAppAndFingerprint: ApiHeroEndpoint<
   {
     clientId: string;
     fingerprint: string;
-    clientId: {
+    payload: {
       /**
        * A note to remind you what the OAuth token is for.
        *

@@ -482,7 +482,7 @@ export const update: ApiHeroEndpoint<
   {
     repo: string;
     owner: string;
-    owner?: {
+    payload?: {
       /**
        * The name of the repository.
        */
@@ -960,7 +960,7 @@ export const updateInformationAboutPagesSite: ApiHeroEndpoint<
   {
     repo: string;
     owner: string;
-    repo: {
+    payload: {
       /**
        * Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see "[Using a custom domain with GitHub Pages](https://docs.github.com/articles/using-a-custom-domain-with-github-pages/)."
        */
@@ -1120,7 +1120,7 @@ export const replaceAllTopics: ApiHeroEndpoint<
   {
     repo: string;
     owner: string;
-    repo: {
+    payload: {
       /**
        * An array of topics to add to the repository. Pass one or more topics to _replace_ the set of existing topics. Send an empty array (`[]`) to clear all topics from the repository. **Note:** Topic `names` cannot contain uppercase letters.
        */
@@ -3057,7 +3057,7 @@ export const updateWebhookConfigForRepo: ApiHeroEndpoint<
     repo: string;
     hookId: number;
     owner: string;
-    hookId?: {
+    payload?: {
       url?: WebhookConfigUrl;
       secret?: WebhookConfigSecret;
       content_type?: WebhookConfigContentType;
@@ -3669,7 +3669,7 @@ export const updateBranchProtection: ApiHeroEndpoint<
     repo: string;
     branch: string;
     owner: string;
-    branch: {
+    payload: {
       /**
        * Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
        */

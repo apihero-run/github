@@ -352,7 +352,7 @@ export const deleteToken: ApiHeroEndpoint<
 export const resetToken: ApiHeroEndpoint<
   {
     clientId: string;
-    clientId: {
+    payload: {
       /**
        * The access_token of the OAuth application.
        */

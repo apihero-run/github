@@ -1030,7 +1030,7 @@ export const setCustomLabelsForSelfHostedRunnerForOrg: ApiHeroEndpoint<
   {
     org: string;
     runnerId: number;
-    runnerId: {
+    payload: {
       /**
        * The names of the custom labels to set for the runner. You can pass an empty array to remove all custom labels.
        */
@@ -1996,7 +1996,7 @@ export const setSelectedReposForOrgSecret: ApiHeroEndpoint<
   {
     org: string;
     secretName: string;
-    secretName: {
+    payload: {
       /**
        * An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can add and remove individual repositories using the [Set selected repositories for an organization secret](https://docs.github.com/rest/reference/actions#set-selected-repositories-for-an-organization-secret) and [Remove selected repository from an organization secret](https://docs.github.com/rest/reference/actions#remove-selected-repository-from-an-organization-secret) endpoints.
        */
@@ -2112,7 +2112,7 @@ export const setCustomLabelsForSelfHostedRunnerForRepo: ApiHeroEndpoint<
     repo: string;
     runnerId: number;
     owner: string;
-    runnerId: {
+    payload: {
       /**
        * The names of the custom labels to set for the runner. You can pass an empty array to remove all custom labels.
        */
@@ -2315,7 +2315,7 @@ export const setSelfHostedRunnersInGroupForOrg: ApiHeroEndpoint<
   {
     org: string;
     runnerGroupId: number;
-    runnerGroupId: {
+    payload: {
       /**
        * List of runner IDs to add to the runner group.
        * Unique identifier of the runner.
@@ -2596,7 +2596,7 @@ export const setRepoAccessToSelfHostedRunnerGroupInOrg: ApiHeroEndpoint<
   {
     org: string;
     runnerGroupId: number;
-    runnerGroupId: {
+    payload: {
       /**
        * List of repository IDs that can access the runner group.
        * Unique identifier of the repository.
