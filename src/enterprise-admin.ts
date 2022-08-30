@@ -37,9 +37,9 @@ The default is `desc`.
 - `all` - returns both web and Git events.
 
 The default is `web`.
-* @param [phrase] - A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
 * @param [after] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
-* @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor. 
+* @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
+* @param [phrase] - A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log). 
 */
 export const getAuditLog: ApiHeroEndpoint<
   {
@@ -48,9 +48,9 @@ export const getAuditLog: ApiHeroEndpoint<
     page?: number;
     order?: "desc" | "asc";
     include?: "web" | "git" | "all";
-    phrase?: string;
     after?: string;
     before?: string;
+    phrase?: string;
   },
   Array<AuditLogEvent>
 > = {
@@ -82,12 +82,12 @@ export const getAuditLog: ApiHeroEndpoint<
  * - If the user signs in, their GitHub account is linked to this entry.
  * - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub enterprise, and the external identity `null` entry remains in place.
 * @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-* @param [startIndex] - Used for pagination: the index of the first result to return.
+* @param [count] - Used for pagination: the number of results to return.
 * @param [filter] - filter results
-* @param [count] - Used for pagination: the number of results to return. 
+* @param [startIndex] - Used for pagination: the index of the first result to return. 
 */
 export const listProvisionedIdentitiesEnterprise: ApiHeroEndpoint<
-  { enterprise: string; startIndex?: number; filter?: string; count?: number },
+  { enterprise: string; count?: number; filter?: string; startIndex?: number },
   ScimUserListEnterprise
 > = {
   id: "enterprise-admin/list-provisioned-identities-enterprise",
@@ -173,18 +173,18 @@ export const provisionAndInviteEnterpriseUser: ApiHeroEndpoint<
 * List provisioned SCIM groups for an enterprise
 * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
 * @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-* @param [startIndex] - Used for pagination: the index of the first result to return.
-* @param [filter] - filter results
 * @param [excludedAttributes] - attributes to exclude
-* @param [count] - Used for pagination: the number of results to return. 
+* @param [count] - Used for pagination: the number of results to return.
+* @param [startIndex] - Used for pagination: the index of the first result to return.
+* @param [filter] - filter results 
 */
 export const listProvisionedGroupsEnterprise: ApiHeroEndpoint<
   {
     enterprise: string;
-    startIndex?: number;
-    filter?: string;
     excludedAttributes?: string;
     count?: number;
+    startIndex?: number;
+    filter?: string;
   },
   ScimGroupListEnterprise
 > = {
@@ -408,11 +408,11 @@ export const listRunnerApplicationsForEnterprise: ApiHeroEndpoint<
 * Gets a specific self-hosted runner configured in an enterprise.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerId - Unique identifier of the self-hosted runner.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerId - Unique identifier of the self-hosted runner. 
 */
 export const getSelfHostedRunnerForEnterprise: ApiHeroEndpoint<
-  { runnerId: number; enterprise: string },
+  { enterprise: string; runnerId: number },
   Runner
 > = {
   id: "enterprise-admin/get-self-hosted-runner-for-enterprise",
@@ -427,11 +427,11 @@ export const getSelfHostedRunnerForEnterprise: ApiHeroEndpoint<
 * Forces the removal of a self-hosted runner from an enterprise. You can use this endpoint to completely remove the runner when the machine you were using no longer exists.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerId - Unique identifier of the self-hosted runner.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerId - Unique identifier of the self-hosted runner. 
 */
 export const deleteSelfHostedRunnerFromEnterprise: ApiHeroEndpoint<
-  { runnerId: number; enterprise: string },
+  { enterprise: string; runnerId: number },
   void
 > = {
   id: "enterprise-admin/delete-self-hosted-runner-from-enterprise",
@@ -471,11 +471,11 @@ export const createRemoveTokenForEnterprise: ApiHeroEndpoint<
 
 * Get SCIM provisioning information for an enterprise user
 * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-* @param scimUserId - The unique identifier of the SCIM user.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param scimUserId - The unique identifier of the SCIM user. 
 */
 export const getProvisioningInformationForEnterpriseUser: ApiHeroEndpoint<
-  { scimUserId: string; enterprise: string },
+  { enterprise: string; scimUserId: string },
   ScimEnterpriseUser
 > = {
   id: "enterprise-admin/get-provisioning-information-for-enterprise-user",
@@ -494,13 +494,13 @@ export const getProvisioningInformationForEnterpriseUser: ApiHeroEndpoint<
  * You must at least provide the required values for the user: `userName`, `name`, and `emails`.
  * 
  * **Warning:** Setting `active: false` removes the user from the enterprise, deletes the external identity, and deletes the associated `{scim_user_id}`.
-* @param scimUserId - The unique identifier of the SCIM user.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param scimUserId - The unique identifier of the SCIM user. 
 */
 export const setInformationForProvisionedEnterpriseUser: ApiHeroEndpoint<
   {
-    scimUserId: string;
     enterprise: string;
+    scimUserId: string;
     user: {
       name: {
         /**
@@ -564,11 +564,11 @@ export const setInformationForProvisionedEnterpriseUser: ApiHeroEndpoint<
 
 * Delete a SCIM user from an enterprise
 * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-* @param scimUserId - The unique identifier of the SCIM user.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param scimUserId - The unique identifier of the SCIM user. 
 */
 export const deleteUserFromEnterprise: ApiHeroEndpoint<
-  { scimUserId: string; enterprise: string },
+  { enterprise: string; scimUserId: string },
   void
 > = {
   id: "enterprise-admin/delete-user-from-enterprise",
@@ -598,13 +598,13 @@ export const deleteUserFromEnterprise: ApiHeroEndpoint<
  * }]
  * }
  * ```
-* @param scimUserId - The unique identifier of the SCIM user.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param scimUserId - The unique identifier of the SCIM user. 
 */
 export const updateAttributeForEnterpriseUser: ApiHeroEndpoint<
   {
-    scimUserId: string;
     enterprise: string;
+    scimUserId: string;
     user: {
       /**
        * The SCIM schema URIs.
@@ -823,11 +823,11 @@ export const createRegistrationTokenForEnterprise: ApiHeroEndpoint<
 * Lists all labels for a self-hosted runner configured in an enterprise.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerId - Unique identifier of the self-hosted runner.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerId - Unique identifier of the self-hosted runner. 
 */
 export const listLabelsForSelfHostedRunnerForEnterprise: ApiHeroEndpoint<
-  { runnerId: number; enterprise: string },
+  { enterprise: string; runnerId: number },
   {
     labels: Array<RunnerLabel>;
     total_count: number;
@@ -845,13 +845,13 @@ export const listLabelsForSelfHostedRunnerForEnterprise: ApiHeroEndpoint<
 * Add custom labels to a self-hosted runner configured in an enterprise.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerId - Unique identifier of the self-hosted runner.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerId - Unique identifier of the self-hosted runner. 
 */
 export const addCustomLabelsToSelfHostedRunnerForEnterprise: ApiHeroEndpoint<
   {
-    runnerId: number;
     enterprise: string;
+    runnerId: number;
     label: {
       /**
        * The names of the custom labels to add to the runner.
@@ -877,13 +877,13 @@ export const addCustomLabelsToSelfHostedRunnerForEnterprise: ApiHeroEndpoint<
  * self-hosted runner configured in an enterprise.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerId - Unique identifier of the self-hosted runner.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerId - Unique identifier of the self-hosted runner. 
 */
 export const setCustomLabelsForSelfHostedRunnerForEnterprise: ApiHeroEndpoint<
   {
-    runnerId: number;
     enterprise: string;
+    runnerId: number;
     payload: {
       /**
        * The names of the custom labels to set for the runner. You can pass an empty array to remove all custom labels.
@@ -909,11 +909,11 @@ export const setCustomLabelsForSelfHostedRunnerForEnterprise: ApiHeroEndpoint<
  * enterprise. Returns the remaining read-only labels from the runner.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerId - Unique identifier of the self-hosted runner.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerId - Unique identifier of the self-hosted runner. 
 */
 export const removeAllCustomLabelsFromSelfHostedRunnerForEnterprise: ApiHeroEndpoint<
-  { runnerId: number; enterprise: string },
+  { enterprise: string; runnerId: number },
   {
     labels: Array<RunnerLabel>;
     total_count: number;
@@ -991,11 +991,11 @@ export const setAllowedActionsEnterprise: ApiHeroEndpoint<
 * Gets a specific self-hosted runner group for an enterprise.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerGroupId - Unique identifier of the self-hosted runner group. 
 */
 export const getSelfHostedRunnerGroupForEnterprise: ApiHeroEndpoint<
-  { runnerGroupId: number; enterprise: string },
+  { enterprise: string; runnerGroupId: number },
   RunnerGroupsEnterprise
 > = {
   id: "enterprise-admin/get-self-hosted-runner-group-for-enterprise",
@@ -1010,11 +1010,11 @@ export const getSelfHostedRunnerGroupForEnterprise: ApiHeroEndpoint<
 * Deletes a self-hosted runner group for an enterprise.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerGroupId - Unique identifier of the self-hosted runner group. 
 */
 export const deleteSelfHostedRunnerGroupFromEnterprise: ApiHeroEndpoint<
-  { runnerGroupId: number; enterprise: string },
+  { enterprise: string; runnerGroupId: number },
   void
 > = {
   id: "enterprise-admin/delete-self-hosted-runner-group-from-enterprise",
@@ -1029,13 +1029,13 @@ export const deleteSelfHostedRunnerGroupFromEnterprise: ApiHeroEndpoint<
 * Updates the `name` and `visibility` of a self-hosted runner group in an enterprise.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerGroupId - Unique identifier of the self-hosted runner group. 
 */
 export const updateSelfHostedRunnerGroupForEnterprise: ApiHeroEndpoint<
   {
-    runnerGroupId: number;
     enterprise: string;
+    runnerGroupId: number;
     runnerGroup?: {
       /**
        * Name of the runner group.
@@ -1085,12 +1085,12 @@ export const updateSelfHostedRunnerGroupForEnterprise: ApiHeroEndpoint<
  * present on the runner.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerId - Unique identifier of the self-hosted runner.
 * @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-* @param name - The name of a self-hosted runner's custom label. 
+* @param name - The name of a self-hosted runner's custom label.
+* @param runnerId - Unique identifier of the self-hosted runner. 
 */
 export const removeCustomLabelFromSelfHostedRunnerForEnterprise: ApiHeroEndpoint<
-  { runnerId: number; enterprise: string; name: string },
+  { enterprise: string; name: string; runnerId: number },
   {
     labels: Array<RunnerLabel>;
     total_count: number;
@@ -1146,13 +1146,13 @@ export const disableSelectedOrganizationGithubActionsEnterprise: ApiHeroEndpoint
 * Lists the self-hosted runners that are in a specific enterprise group.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group.
 * @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerGroupId - Unique identifier of the self-hosted runner group.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listSelfHostedRunnersInGroupForEnterprise: ApiHeroEndpoint<
-  { runnerGroupId: number; enterprise: string; perPage?: number; page?: number },
+  { enterprise: string; runnerGroupId: number; perPage?: number; page?: number },
   {
     runners: Array<Runner>;
     total_count: number;
@@ -1171,13 +1171,13 @@ export const listSelfHostedRunnersInGroupForEnterprise: ApiHeroEndpoint<
 * Replaces the list of self-hosted runners that are part of an enterprise runner group.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerGroupId - Unique identifier of the self-hosted runner group. 
 */
 export const setSelfHostedRunnersInGroupForEnterprise: ApiHeroEndpoint<
   {
-    runnerGroupId: number;
     enterprise: string;
+    runnerGroupId: number;
     payload: {
       /**
        * List of runner IDs to add to the runner group.
@@ -1200,13 +1200,13 @@ export const setSelfHostedRunnersInGroupForEnterprise: ApiHeroEndpoint<
 * Lists the organizations with access to a self-hosted runner group.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group.
 * @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerGroupId - Unique identifier of the self-hosted runner group.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listOrgAccessToSelfHostedRunnerGroupInEnterprise: ApiHeroEndpoint<
-  { runnerGroupId: number; enterprise: string; perPage?: number; page?: number },
+  { enterprise: string; runnerGroupId: number; perPage?: number; page?: number },
   {
     total_count: number;
     organizations: Array<OrganizationSimple>;
@@ -1224,13 +1224,13 @@ export const listOrgAccessToSelfHostedRunnerGroupInEnterprise: ApiHeroEndpoint<
 * Replaces the list of organizations that have access to a self-hosted runner configured in an enterprise.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerGroupId - Unique identifier of the self-hosted runner group. 
 */
 export const setOrgAccessToSelfHostedRunnerGroupInEnterprise: ApiHeroEndpoint<
   {
-    runnerGroupId: number;
     enterprise: string;
+    runnerGroupId: number;
     payload: {
       /**
        * List of organization IDs that can access the runner group.
@@ -1254,12 +1254,12 @@ export const setOrgAccessToSelfHostedRunnerGroupInEnterprise: ApiHeroEndpoint<
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise`
  * scope to use this endpoint.
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
 * @param runnerId - Unique identifier of the self-hosted runner.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param runnerGroupId - Unique identifier of the self-hosted runner group. 
 */
 export const addSelfHostedRunnerToGroupForEnterprise: ApiHeroEndpoint<
-  { runnerId: number; runnerGroupId: number; enterprise: string },
+  { enterprise: string; runnerId: number; runnerGroupId: number },
   void
 > = {
   id: "enterprise-admin/add-self-hosted-runner-to-group-for-enterprise",
@@ -1274,12 +1274,12 @@ export const addSelfHostedRunnerToGroupForEnterprise: ApiHeroEndpoint<
 * Removes a self-hosted runner from a group configured in an enterprise. The runner is then returned to the default group.
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
 * @param runnerId - Unique identifier of the self-hosted runner.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param runnerGroupId - Unique identifier of the self-hosted runner group. 
 */
 export const removeSelfHostedRunnerFromGroupForEnterprise: ApiHeroEndpoint<
-  { runnerId: number; runnerGroupId: number; enterprise: string },
+  { enterprise: string; runnerId: number; runnerGroupId: number },
   void
 > = {
   id: "enterprise-admin/remove-self-hosted-runner-from-group-for-enterprise",
@@ -1295,11 +1295,11 @@ export const removeSelfHostedRunnerFromGroupForEnterprise: ApiHeroEndpoint<
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
 * @param orgId - The unique identifier of the organization.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerGroupId - Unique identifier of the self-hosted runner group. 
 */
 export const addOrgAccessToSelfHostedRunnerGroupInEnterprise: ApiHeroEndpoint<
-  { orgId: number; runnerGroupId: number; enterprise: string },
+  { orgId: number; enterprise: string; runnerGroupId: number },
   void
 > = {
   id: "enterprise-admin/add-org-access-to-self-hosted-runner-group-in-enterprise",
@@ -1315,11 +1315,11 @@ export const addOrgAccessToSelfHostedRunnerGroupInEnterprise: ApiHeroEndpoint<
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
 * @param orgId - The unique identifier of the organization.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param runnerGroupId - Unique identifier of the self-hosted runner group. 
 */
 export const removeOrgAccessToSelfHostedRunnerGroupInEnterprise: ApiHeroEndpoint<
-  { orgId: number; runnerGroupId: number; enterprise: string },
+  { orgId: number; enterprise: string; runnerGroupId: number },
   void
 > = {
   id: "enterprise-admin/remove-org-access-to-self-hosted-runner-group-in-enterprise",

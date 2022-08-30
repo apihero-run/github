@@ -25,31 +25,31 @@ import {
  * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
  * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [pulls] 
-* @param [orgs] 
-* @param [owned] 
-* @param [direction] - The direction to sort the results by.
-* @param [labels] - A list of comma separated label names. Example: `bug,ui,@high`
-* @param [state] - Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-* @param [sort] - What to sort results by. Can be either `created`, `updated`, `comments`.
-* @param [filter] - Indicates which sorts of issues to return. `assigned` means issues assigned to you. `created` means issues created by you. `mentioned` means issues mentioning you. `subscribed` means issues you're subscribed to updates for. `all` or `repos` means all issues you can see, regardless of participation or creation.
 * @param [page=1] - Page number of the results to fetch.
+* @param [orgs] 
+* @param [pulls] 
+* @param [owned] 
+* @param [sort] - What to sort results by. Can be either `created`, `updated`, `comments`.
+* @param [state] - Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+* @param [labels] - A list of comma separated label names. Example: `bug,ui,@high`
+* @param [direction] - The direction to sort the results by.
+* @param [filter] - Indicates which sorts of issues to return. `assigned` means issues assigned to you. `created` means issues created by you. `mentioned` means issues mentioning you. `subscribed` means issues you're subscribed to updates for. `all` or `repos` means all issues you can see, regardless of participation or creation.
 * @param [collab]  
 */
 export const list: ApiHeroEndpoint<
   {
     perPage?: number;
-    pulls?: boolean;
-    orgs?: boolean;
-    owned?: boolean;
-    direction?: "asc" | "desc";
-    labels?: string;
-    state?: "open" | "closed" | "all";
     since?: string;
-    sort?: "created" | "updated" | "comments";
-    filter?: "assigned" | "created" | "mentioned" | "subscribed" | "repos" | "all";
     page?: number;
+    orgs?: boolean;
+    pulls?: boolean;
+    owned?: boolean;
+    sort?: "created" | "updated" | "comments";
+    state?: "open" | "closed" | "all";
+    labels?: string;
+    direction?: "asc" | "desc";
+    filter?: "assigned" | "created" | "mentioned" | "subscribed" | "repos" | "all";
     collab?: boolean;
   },
   Array<Issue>,
@@ -71,24 +71,24 @@ export const list: ApiHeroEndpoint<
  * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
  * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [direction] - The direction to sort the results by.
-* @param [labels] - A list of comma separated label names. Example: `bug,ui,@high`
-* @param [sort] - What to sort results by. Can be either `created`, `updated`, `comments`.
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [page=1] - Page number of the results to fetch.
+* @param [labels] - A list of comma separated label names. Example: `bug,ui,@high`
+* @param [direction] - The direction to sort the results by.
 * @param [filter] - Indicates which sorts of issues to return. `assigned` means issues assigned to you. `created` means issues created by you. `mentioned` means issues mentioning you. `subscribed` means issues you're subscribed to updates for. `all` or `repos` means all issues you can see, regardless of participation or creation.
 * @param [state] - Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-* @param [page=1] - Page number of the results to fetch. 
+* @param [sort] - What to sort results by. Can be either `created`, `updated`, `comments`. 
 */
 export const listForAuthenticatedUser: ApiHeroEndpoint<
   {
     perPage?: number;
-    direction?: "asc" | "desc";
-    labels?: string;
-    sort?: "created" | "updated" | "comments";
     since?: string;
+    page?: number;
+    labels?: string;
+    direction?: "asc" | "desc";
     filter?: "assigned" | "created" | "mentioned" | "subscribed" | "repos" | "all";
     state?: "open" | "closed" | "all";
-    page?: number;
+    sort?: "created" | "updated" | "comments";
   },
   Array<Issue>,
   { Link: string }
@@ -110,25 +110,25 @@ export const listForAuthenticatedUser: ApiHeroEndpoint<
  * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
 * @param org - The organization name. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [direction] - The direction to sort the results by.
-* @param [labels] - A list of comma separated label names. Example: `bug,ui,@high`
-* @param [state] - Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
 * @param [page=1] - Page number of the results to fetch.
-* @param [sort] - What to sort results by. Can be either `created`, `updated`, `comments`.
-* @param [filter] - Indicates which sorts of issues to return. `assigned` means issues assigned to you. `created` means issues created by you. `mentioned` means issues mentioning you. `subscribed` means issues you're subscribed to updates for. `all` or `repos` means all issues you can see, regardless of participation or creation. 
+* @param [labels] - A list of comma separated label names. Example: `bug,ui,@high`
+* @param [direction] - The direction to sort the results by.
+* @param [state] - Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+* @param [filter] - Indicates which sorts of issues to return. `assigned` means issues assigned to you. `created` means issues created by you. `mentioned` means issues mentioning you. `subscribed` means issues you're subscribed to updates for. `all` or `repos` means all issues you can see, regardless of participation or creation.
+* @param [sort] - What to sort results by. Can be either `created`, `updated`, `comments`. 
 */
 export const listForOrg: ApiHeroEndpoint<
   {
     org: string;
     perPage?: number;
-    direction?: "asc" | "desc";
-    labels?: string;
-    state?: "open" | "closed" | "all";
     since?: string;
     page?: number;
-    sort?: "created" | "updated" | "comments";
+    labels?: string;
+    direction?: "asc" | "desc";
+    state?: "open" | "closed" | "all";
     filter?: "assigned" | "created" | "mentioned" | "subscribed" | "repos" | "all";
+    sort?: "created" | "updated" | "comments";
   },
   Array<Issue>,
   { Link: string }
@@ -148,35 +148,35 @@ export const listForOrg: ApiHeroEndpoint<
  * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
  * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
  * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [direction] - The direction to sort the results by.
-* @param [labels] - A list of comma separated label names. Example: `bug,ui,@high`
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
 * @param [page=1] - Page number of the results to fetch.
-* @param [mentioned] - A user that's mentioned in the issue.
+* @param [labels] - A list of comma separated label names. Example: `bug,ui,@high`
+* @param [direction] - The direction to sort the results by.
 * @param [sort] - What to sort results by. Can be either `created`, `updated`, `comments`.
-* @param [state] - Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+* @param [assignee] - Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user.
+* @param [mentioned] - A user that's mentioned in the issue.
 * @param [creator] - The user that created the issue.
-* @param [milestone] - If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned.
-* @param [assignee] - Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user. 
+* @param [state] - Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
+* @param [milestone] - If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned. 
 */
 export const listForRepo: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     perPage?: number;
-    direction?: "asc" | "desc";
-    labels?: string;
     since?: string;
     page?: number;
-    mentioned?: string;
+    labels?: string;
+    direction?: "asc" | "desc";
     sort?: "created" | "updated" | "comments";
-    state?: "open" | "closed" | "all";
-    creator?: string;
-    milestone?: string;
     assignee?: string;
+    mentioned?: string;
+    creator?: string;
+    state?: "open" | "closed" | "all";
+    milestone?: string;
   },
   Array<Issue>,
   { Link: string }
@@ -193,13 +193,13 @@ export const listForRepo: ApiHeroEndpoint<
 * Any user with pull access to a repository can create an issue. If [issues are disabled in the repository](https://docs.github.com/articles/disabling-issues/), the API returns a `410 Gone` status.
  * 
  * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const create: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     issue: {
       /**
        * The contents of the issue.
@@ -248,13 +248,13 @@ export const create: ApiHeroEndpoint<
 
 
 * List labels for a repository
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listLabelsForRepo: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<Label>,
   { Link: string }
 > = {
@@ -267,13 +267,13 @@ export const listLabelsForRepo: ApiHeroEndpoint<
 
 
 * Create a label
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createLabel: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     label: {
       /**
        * The name of the label. Emoji can be added to label names, using either native emoji or colon-style markup. For example, typing `:strawberry:` will render the emoji ![:strawberry:](https://github.githubassets.com/images/icons/emoji/unicode/1f353.png ":strawberry:"). For a full list of available emoji and codes, see "[Emoji cheat sheet](https://github.com/ikatyang/emoji-cheat-sheet)."
@@ -304,13 +304,13 @@ export const createLabel: ApiHeroEndpoint<
 
 * List assignees
 * Lists the [available assignees](https://docs.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/) for issues in a repository.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listAssignees: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<SimpleUser>,
   { Link: string }
 > = {
@@ -323,8 +323,8 @@ export const listAssignees: ApiHeroEndpoint<
 
 
 * List milestones
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [sort] - What to sort results by. Either `due_on` or `completeness`.
@@ -333,8 +333,8 @@ export const listAssignees: ApiHeroEndpoint<
 */
 export const listMilestones: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     perPage?: number;
     page?: number;
     sort?: "due_on" | "completeness";
@@ -353,13 +353,13 @@ export const listMilestones: ApiHeroEndpoint<
 
 
 * Create a milestone
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createMilestone: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     milestone: {
       /**
        * The state of the milestone. Either `open` or `closed`.
@@ -394,13 +394,13 @@ export const createMilestone: ApiHeroEndpoint<
 
 
 * List issue events for a repository
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listEventsForRepo: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<IssueEvent>,
   { Link: string }
 > = {
@@ -413,11 +413,11 @@ export const listEventsForRepo: ApiHeroEndpoint<
 
 
 * Get a label
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param name 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getLabel: ApiHeroEndpoint<{ repo: string; name: string; owner: string }, Label> = {
+export const getLabel: ApiHeroEndpoint<{ owner: string; name: string; repo: string }, Label> = {
   id: "issues/get-label",
   clientId: "github",
 };
@@ -427,11 +427,11 @@ export const getLabel: ApiHeroEndpoint<{ repo: string; name: string; owner: stri
 
 
 * Delete a label
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param name 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const deleteLabel: ApiHeroEndpoint<{ repo: string; name: string; owner: string }, void> = {
+export const deleteLabel: ApiHeroEndpoint<{ owner: string; name: string; repo: string }, void> = {
   id: "issues/delete-label",
   clientId: "github",
 };
@@ -441,15 +441,15 @@ export const deleteLabel: ApiHeroEndpoint<{ repo: string; name: string; owner: s
 
 
 * Update a label
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param name 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateLabel: ApiHeroEndpoint<
   {
-    repo: string;
-    name: string;
     owner: string;
+    name: string;
+    repo: string;
     label?: {
       /**
        * The [hexadecimal color code](http://www.color-hex.com/) for the label, without the leading `#`.
@@ -479,23 +479,23 @@ export const updateLabel: ApiHeroEndpoint<
 
 * List issue comments for a repository
 * By default, Issue Comments are ordered by ascending ID.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [sort] - The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to.
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
 * @param [page=1] - Page number of the results to fetch.
-* @param [direction] - Either `asc` or `desc`. Ignored without the `sort` parameter. 
+* @param [direction] - Either `asc` or `desc`. Ignored without the `sort` parameter.
+* @param [sort] - The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to. 
 */
 export const listCommentsForRepo: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     perPage?: number;
-    sort?: "created" | "updated";
     since?: string;
     page?: number;
     direction?: "asc" | "desc";
+    sort?: "created" | "updated";
   },
   Array<IssueComment>,
   { Link: string }
@@ -514,12 +514,12 @@ export const listCommentsForRepo: ApiHeroEndpoint<
  * If the `assignee` can be assigned to issues in the repository, a `204` header with no content is returned.
  * 
  * Otherwise a `404` status code is returned.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param assignee 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const checkUserCanBeAssigned: ApiHeroEndpoint<
-  { repo: string; assignee: string; owner: string },
+  { owner: string; assignee: string; repo: string },
   void
 > = {
   id: "issues/check-user-can-be-assigned",
@@ -542,12 +542,12 @@ export const checkUserCanBeAssigned: ApiHeroEndpoint<
  * reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by
  * the `pull_request` key. Be aware that the `id` of a pull request returned from "Issues" endpoints will be an _issue id_. To find out the pull
  * request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param issueNumber - The number that identifies the issue.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getIssues: ApiHeroEndpoint<
-  { repo: string; issueNumber: number; owner: string },
+  { owner: string; issueNumber: number; repo: string },
   Issue
 > = {
   id: "issues/get",
@@ -560,15 +560,15 @@ export const getIssues: ApiHeroEndpoint<
 
 * Update an issue
 * Issue owners and users with push access can edit an issue.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param issueNumber - The number that identifies the issue.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const update: ApiHeroEndpoint<
   {
-    repo: string;
-    issueNumber: number;
     owner: string;
+    issueNumber: number;
+    repo: string;
     issue?: {
       /**
        * The contents of the issue.
@@ -621,12 +621,12 @@ export const update: ApiHeroEndpoint<
 
 
 * Get an issue event
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param eventId 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getEvent: ApiHeroEndpoint<
-  { repo: string; eventId: number; owner: string },
+  { owner: string; eventId: number; repo: string },
   IssueEvent
 > = {
   id: "issues/get-event",
@@ -641,15 +641,15 @@ export const getEvent: ApiHeroEndpoint<
 * Users with push access can lock an issue or pull request's conversation.
  * 
  * Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param issueNumber - The number that identifies the issue.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const lock: ApiHeroEndpoint<
   {
-    repo: string;
-    issueNumber: number;
     owner: string;
+    issueNumber: number;
+    repo: string;
     payload?: {
       /** 
 * The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:  
@@ -673,11 +673,11 @@ export const lock: ApiHeroEndpoint<
 
 * Unlock an issue
 * Users with push access can unlock an issue's conversation.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param issueNumber - The number that identifies the issue.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const unlock: ApiHeroEndpoint<{ repo: string; issueNumber: number; owner: string }, void> = {
+export const unlock: ApiHeroEndpoint<{ owner: string; issueNumber: number; repo: string }, void> = {
   id: "issues/unlock",
   clientId: "github",
 };
@@ -687,12 +687,12 @@ export const unlock: ApiHeroEndpoint<{ repo: string; issueNumber: number; owner:
 
 
 * Get an issue comment
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param commentId - The unique identifier of the comment.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getComment: ApiHeroEndpoint<
-  { repo: string; commentId: number; owner: string },
+  { owner: string; commentId: number; repo: string },
   IssueComment
 > = {
   id: "issues/get-comment",
@@ -704,12 +704,12 @@ export const getComment: ApiHeroEndpoint<
 
 
 * Delete an issue comment
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param commentId - The unique identifier of the comment.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteComment: ApiHeroEndpoint<
-  { repo: string; commentId: number; owner: string },
+  { owner: string; commentId: number; repo: string },
   void
 > = {
   id: "issues/delete-comment",
@@ -721,15 +721,15 @@ export const deleteComment: ApiHeroEndpoint<
 
 
 * Update an issue comment
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param commentId - The unique identifier of the comment.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateComment: ApiHeroEndpoint<
   {
-    repo: string;
-    commentId: number;
     owner: string;
+    commentId: number;
+    repo: string;
     comment: {
       /**
        * The contents of the comment.
@@ -748,14 +748,14 @@ export const updateComment: ApiHeroEndpoint<
 
 
 * List issue events
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param issueNumber - The number that identifies the issue.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param issueNumber - The number that identifies the issue.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listEvents: ApiHeroEndpoint<
-  { repo: string; issueNumber: number; owner: string; perPage?: number; page?: number },
+  { owner: string; issueNumber: number; repo: string; perPage?: number; page?: number },
   Array<IssueEventForIssue>,
   { Link: string }
 > = {
@@ -768,14 +768,14 @@ export const listEvents: ApiHeroEndpoint<
 
 
 * List labels for an issue
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param issueNumber - The number that identifies the issue.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param issueNumber - The number that identifies the issue.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listLabelsOnIssue: ApiHeroEndpoint<
-  { repo: string; issueNumber: number; owner: string; perPage?: number; page?: number },
+  { owner: string; issueNumber: number; repo: string; perPage?: number; page?: number },
   Array<Label>,
   { Link: string }
 > = {
@@ -788,15 +788,15 @@ export const listLabelsOnIssue: ApiHeroEndpoint<
 
 
 * Add labels to an issue
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param issueNumber - The number that identifies the issue.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const addLabels: ApiHeroEndpoint<
   {
-    repo: string;
-    issueNumber: number;
     owner: string;
+    issueNumber: number;
+    repo: string;
     label?:
       | {
           /**
@@ -824,15 +824,15 @@ export const addLabels: ApiHeroEndpoint<
 
 * Set labels for an issue
 * Removes any previous labels and sets the new labels for an issue.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param issueNumber - The number that identifies the issue.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const setLabels: ApiHeroEndpoint<
   {
-    repo: string;
-    issueNumber: number;
     owner: string;
+    issueNumber: number;
+    repo: string;
     payload?:
       | {
           /**
@@ -859,12 +859,12 @@ export const setLabels: ApiHeroEndpoint<
 
 
 * Remove all labels from an issue
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param issueNumber - The number that identifies the issue.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const removeAllLabels: ApiHeroEndpoint<
-  { repo: string; issueNumber: number; owner: string },
+  { owner: string; issueNumber: number; repo: string },
   void
 > = {
   id: "issues/remove-all-labels",
@@ -876,12 +876,12 @@ export const removeAllLabels: ApiHeroEndpoint<
 
 
 * Get a milestone
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param milestoneNumber - The number that identifies the milestone.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getMilestone: ApiHeroEndpoint<
-  { repo: string; milestoneNumber: number; owner: string },
+  { owner: string; milestoneNumber: number; repo: string },
   Milestone
 > = {
   id: "issues/get-milestone",
@@ -893,12 +893,12 @@ export const getMilestone: ApiHeroEndpoint<
 
 
 * Delete a milestone
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param milestoneNumber - The number that identifies the milestone.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteMilestone: ApiHeroEndpoint<
-  { repo: string; milestoneNumber: number; owner: string },
+  { owner: string; milestoneNumber: number; repo: string },
   void
 > = {
   id: "issues/delete-milestone",
@@ -910,15 +910,15 @@ export const deleteMilestone: ApiHeroEndpoint<
 
 
 * Update a milestone
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param milestoneNumber - The number that identifies the milestone.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateMilestone: ApiHeroEndpoint<
   {
-    repo: string;
-    milestoneNumber: number;
     owner: string;
+    milestoneNumber: number;
+    repo: string;
     milestone?: {
       /**
        * The state of the milestone. Either `open` or `closed`.
@@ -953,18 +953,18 @@ export const updateMilestone: ApiHeroEndpoint<
 
 * List issue comments
 * Issue Comments are ordered by ascending ID.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param issueNumber - The number that identifies the issue.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param issueNumber - The number that identifies the issue.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listComments: ApiHeroEndpoint<
   {
-    repo: string;
-    issueNumber: number;
     owner: string;
+    issueNumber: number;
+    repo: string;
     perPage?: number;
     since?: string;
     page?: number;
@@ -982,15 +982,15 @@ export const listComments: ApiHeroEndpoint<
 
 * Create an issue comment
 * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param issueNumber - The number that identifies the issue.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createComment: ApiHeroEndpoint<
   {
-    repo: string;
-    issueNumber: number;
     owner: string;
+    issueNumber: number;
+    repo: string;
     comment: {
       /**
        * The contents of the comment.
@@ -1010,14 +1010,14 @@ export const createComment: ApiHeroEndpoint<
 
 
 * List timeline events for an issue
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param issueNumber - The number that identifies the issue.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param issueNumber - The number that identifies the issue.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listEventsForTimeline: ApiHeroEndpoint<
-  { repo: string; issueNumber: number; owner: string; perPage?: number; page?: number },
+  { owner: string; issueNumber: number; repo: string; perPage?: number; page?: number },
   Array<TimelineIssueEvents>,
   { Link: string }
 > = {
@@ -1031,15 +1031,15 @@ export const listEventsForTimeline: ApiHeroEndpoint<
 
 * Add assignees to an issue
 * Adds up to 10 assignees to an issue. Users already assigned to an issue are not replaced.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param issueNumber - The number that identifies the issue.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const addAssignees: ApiHeroEndpoint<
   {
-    repo: string;
-    issueNumber: number;
     owner: string;
+    issueNumber: number;
+    repo: string;
     assignee?: {
       /**
        * Usernames of people to assign this issue to. _NOTE: Only users with push access can add assignees to an issue. Assignees are silently ignored otherwise._
@@ -1059,15 +1059,15 @@ export const addAssignees: ApiHeroEndpoint<
 
 * Remove assignees from an issue
 * Removes one or more assignees from an issue.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param issueNumber - The number that identifies the issue.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const removeAssignees: ApiHeroEndpoint<
   {
-    repo: string;
-    issueNumber: number;
     owner: string;
+    issueNumber: number;
+    repo: string;
     assignee?: {
       /**
        * Usernames of assignees to remove from an issue. _NOTE: Only users with push access can remove assignees from an issue. Assignees are silently ignored otherwise._
@@ -1087,13 +1087,13 @@ export const removeAssignees: ApiHeroEndpoint<
 
 * Remove a label from an issue
 * Removes the specified label from the issue, and returns the remaining labels on the issue. This endpoint returns a `404 Not Found` status if the label does not exist.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param name 
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param issueNumber - The number that identifies the issue.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param name 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const removeLabel: ApiHeroEndpoint<
-  { repo: string; name: string; issueNumber: number; owner: string },
+  { owner: string; issueNumber: number; name: string; repo: string },
   Array<Label>
 > = {
   id: "issues/remove-label",
@@ -1105,14 +1105,14 @@ export const removeLabel: ApiHeroEndpoint<
 
 
 * List labels for issues in a milestone
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param milestoneNumber - The number that identifies the milestone.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param milestoneNumber - The number that identifies the milestone.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listLabelsForMilestone: ApiHeroEndpoint<
-  { repo: string; milestoneNumber: number; owner: string; perPage?: number; page?: number },
+  { owner: string; milestoneNumber: number; repo: string; perPage?: number; page?: number },
   Array<Label>,
   { Link: string }
 > = {

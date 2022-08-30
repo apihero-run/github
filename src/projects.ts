@@ -287,16 +287,16 @@ export const createColumn: ApiHeroEndpoint<
 
 * List repository projects
 * Lists the projects in a repository. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [state] - Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`. 
 */
 export const listForRepo: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     perPage?: number;
     page?: number;
     state?: "open" | "closed" | "all";
@@ -314,13 +314,13 @@ export const listForRepo: ApiHeroEndpoint<
 
 * Create a repository project
 * Creates a repository project board. Returns a `410 Gone` status if projects are disabled in the repository or if the repository does not have existing classic projects. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createForRepo: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     project: {
       /**
        * The description of the project.

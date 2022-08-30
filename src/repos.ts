@@ -81,29 +81,29 @@ import {
  * 
  * The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.
 * @param [perPage=30] - The number of results per page (max 100).
+* @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [page=1] - Page number of the results to fetch.
 * @param [type] - Limit results to repositories of the specified type. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
+* @param [direction] - The order to sort by. Default: `asc` when using `full_name`, otherwise `desc`.
+* @param [sort] - The property to sort the results by.
+* @param [visibility] - Limit results to repositories with the specified visibility.
 * @param [affiliation='owner,collaborator,organization_member'] - Comma-separated list of values. Can include:  
 \* `owner`: Repositories that are owned by the authenticated user.  
 \* `collaborator`: Repositories that the user has been added to as a collaborator.  
 \* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
-* @param [sort] - The property to sort the results by.
-* @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-* @param [direction] - The order to sort by. Default: `asc` when using `full_name`, otherwise `desc`.
-* @param [before] - Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-* @param [page=1] - Page number of the results to fetch.
-* @param [visibility] - Limit results to repositories with the specified visibility. 
+* @param [before] - Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. 
 */
 export const listForAuthenticatedUser: ApiHeroEndpoint<
   {
     perPage?: number;
-    type?: "all" | "owner" | "public" | "private" | "member";
-    affiliation?: string;
-    sort?: "created" | "updated" | "pushed" | "full_name";
     since?: string;
-    direction?: "asc" | "desc";
-    before?: string;
     page?: number;
+    type?: "all" | "owner" | "public" | "private" | "member";
+    direction?: "asc" | "desc";
+    sort?: "created" | "updated" | "pushed" | "full_name";
     visibility?: "all" | "public" | "private";
+    affiliation?: string;
+    before?: string;
   },
   Array<Repository>
 > = {
@@ -294,19 +294,19 @@ export const listPublic: ApiHeroEndpoint<
 * Lists repositories for the specified organization.
 * @param org - The organization name. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [sort] - The property to sort the results by.
 * @param [page=1] - Page number of the results to fetch.
-* @param [type] - Specifies the types of repositories you want returned. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
-* @param [direction] - The order to sort by. Default: `asc` when using `full_name`, otherwise `desc`. 
+* @param [direction] - The order to sort by. Default: `asc` when using `full_name`, otherwise `desc`.
+* @param [sort] - The property to sort the results by.
+* @param [type] - Specifies the types of repositories you want returned. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token. 
 */
 export const listForOrg: ApiHeroEndpoint<
   {
     org: string;
     perPage?: number;
-    sort?: "created" | "updated" | "pushed" | "full_name";
     page?: number;
-    type?: "all" | "public" | "private" | "forks" | "sources" | "member" | "internal";
     direction?: "asc" | "desc";
+    sort?: "created" | "updated" | "pushed" | "full_name";
+    type?: "all" | "public" | "private" | "forks" | "sources" | "member" | "internal";
   },
   Array<MinimalRepository>,
   { Link: string }
@@ -443,10 +443,10 @@ export const createInOrg: ApiHeroEndpoint<
 
 * Get a repository
 * The `parent` and `source` objects are present when the repository is a fork. `parent` is the repository this repository was forked from, `source` is the ultimate source for the network.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getRepos: ApiHeroEndpoint<{ repo: string; owner: string }, FullRepository> = {
+export const getRepos: ApiHeroEndpoint<{ owner: string; repo: string }, FullRepository> = {
   id: "repos/get",
   clientId: "github",
 };
@@ -460,10 +460,10 @@ export const getRepos: ApiHeroEndpoint<{ repo: string; owner: string }, FullRepo
  * 
  * If an organization owner has configured the organization to prevent members from deleting organization-owned
  * repositories, you will get a `403 Forbidden` response.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const deleteRepos: ApiHeroEndpoint<{ repo: string; owner: string }, void> = {
+export const deleteRepos: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "repos/delete",
   clientId: "github",
 };
@@ -474,13 +474,13 @@ export const deleteRepos: ApiHeroEndpoint<{ repo: string; owner: string }, void>
 
 * Update a repository
 * **Note**: To edit a repository's topics, use the [Replace all repository topics](https://docs.github.com/rest/reference/repos#replace-all-repository-topics) endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const update: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     payload?: {
       /**
        * The name of the repository.
@@ -629,8 +629,8 @@ export const update: ApiHeroEndpoint<
 * @param username - The handle for the GitHub user account.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
-* @param [direction] - The order to sort by. Default: `asc` when using `full_name`, otherwise `desc`.
 * @param [type] - Limit results to repositories of the specified type.
+* @param [direction] - The order to sort by. Default: `asc` when using `full_name`, otherwise `desc`.
 * @param [sort] - The property to sort the results by. 
 */
 export const listForUser: ApiHeroEndpoint<
@@ -638,8 +638,8 @@ export const listForUser: ApiHeroEndpoint<
     username: string;
     perPage?: number;
     page?: number;
-    direction?: "asc" | "desc";
     type?: "all" | "owner" | "member";
+    direction?: "asc" | "desc";
     sort?: "created" | "updated" | "pushed" | "full_name";
   },
   Array<MinimalRepository>,
@@ -654,10 +654,10 @@ export const listForUser: ApiHeroEndpoint<
 
 
 * Enable Git LFS for a repository
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const enableLfsForRepo: ApiHeroEndpoint<{ repo: string; owner: string }, {}> = {
+export const enableLfsForRepo: ApiHeroEndpoint<{ owner: string; repo: string }, {}> = {
   id: "repos/enable-lfs-for-repo",
   clientId: "github",
 };
@@ -667,10 +667,10 @@ export const enableLfsForRepo: ApiHeroEndpoint<{ repo: string; owner: string }, 
 
 
 * Disable Git LFS for a repository
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const disableLfsForRepo: ApiHeroEndpoint<{ repo: string; owner: string }, void> = {
+export const disableLfsForRepo: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "repos/disable-lfs-for-repo",
   clientId: "github",
 };
@@ -680,13 +680,13 @@ export const disableLfsForRepo: ApiHeroEndpoint<{ repo: string; owner: string },
 
 
 * List deploy keys
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listDeployKeys: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<DeployKey>,
   { Link: string }
 > = {
@@ -700,13 +700,13 @@ export const listDeployKeys: ApiHeroEndpoint<
 
 * Create a deploy key
 * You can create a read-only deploy key.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createDeployKey: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     key: {
       /**
        * The contents of the key.
@@ -738,13 +738,13 @@ Deploy keys with write access can perform the same actions as an organization me
 
 
 * List repository tags
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listTags: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<Tag>,
   { Link: string }
 > = {
@@ -757,16 +757,16 @@ export const listTags: ApiHeroEndpoint<
 
 
 * List forks
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [sort] - The sort order. Can be either `newest`, `oldest`, or `stargazers`. 
 */
 export const listForks: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     perPage?: number;
     page?: number;
     sort?: "newest" | "oldest" | "stargazers" | "watchers";
@@ -786,13 +786,13 @@ export const listForks: ApiHeroEndpoint<
 * Create a fork for the authenticated user.
  * 
  * **Note**: Forking a Repository happens asynchronously. You may have to wait a short period of time before you can access the git objects. If this takes longer than 5 minutes, be sure to contact [GitHub Support](https://support.github.com/contact?tags=dotcom-rest-api).
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createFork: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     fork?: {
       /**
        * When forking from an existing repository, a new name for the fork.
@@ -816,13 +816,13 @@ export const createFork: ApiHeroEndpoint<
 
 
 * List repository webhooks
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listWebhooks: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<Hook>,
   { Link: string }
 > = {
@@ -837,13 +837,13 @@ export const listWebhooks: ApiHeroEndpoint<
 * Create a repository webhook
 * Repositories can have multiple webhooks installed. Each webhook should have a unique `config`. Multiple webhooks can
  * share the same `config` as long as those webhooks do not have any `events` that overlap.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createWebhook: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     hook?: {
       /**
        * Use `web` to create a webhook. Default: `web`. This parameter only accepts the value `web`.
@@ -897,10 +897,10 @@ export const createWebhook: ApiHeroEndpoint<
 
 
 * Get a GitHub Pages site
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getPages: ApiHeroEndpoint<{ repo: string; owner: string }, Page> = {
+export const getPages: ApiHeroEndpoint<{ owner: string; repo: string }, Page> = {
   id: "repos/get-pages",
   clientId: "github",
 };
@@ -911,13 +911,13 @@ export const getPages: ApiHeroEndpoint<{ repo: string; owner: string }, Page> = 
 
 * Create a GitHub Pages site
 * Configures a GitHub Pages site. For more information, see "[About GitHub Pages](/github/working-with-github-pages/about-github-pages)."
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createPagesSite: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     page: {
       /**
        * The source branch and directory used to publish your Pages site.
@@ -952,13 +952,13 @@ export const createPagesSite: ApiHeroEndpoint<
 
 * Update information about a GitHub Pages site
 * Updates information for a GitHub Pages site. For more information, see "[About GitHub Pages](/github/working-with-github-pages/about-github-pages).
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateInformationAboutPagesSite: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     payload: {
       /**
        * Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see "[Using a custom domain with GitHub Pages](https://docs.github.com/articles/using-a-custom-domain-with-github-pages/)."
@@ -1007,10 +1007,10 @@ export const updateInformationAboutPagesSite: ApiHeroEndpoint<
 
 
 * Delete a GitHub Pages site
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const deletePagesSite: ApiHeroEndpoint<{ repo: string; owner: string }, void> = {
+export const deletePagesSite: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "repos/delete-pages-site",
   clientId: "github",
 };
@@ -1020,13 +1020,13 @@ export const deletePagesSite: ApiHeroEndpoint<{ repo: string; owner: string }, v
 
 
 * List repository teams
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listTeams: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<Team>,
   { Link: string }
 > = {
@@ -1039,13 +1039,13 @@ export const listTeams: ApiHeroEndpoint<
 
 
 * Merge a branch
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const merge: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     merge: {
       /**
        * The name of the base branch that the head will be merged into.
@@ -1077,12 +1077,12 @@ export const merge: ApiHeroEndpoint<
 * Gets the preferred README for a repository.
  * 
  * READMEs support [custom media types](https://docs.github.com/rest/reference/repos#custom-media-types) for retrieving the raw content or rendered HTML.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [ref] - The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`) 
 */
 export const getReadme: ApiHeroEndpoint<
-  { repo: string; owner: string; ref?: string },
+  { owner: string; repo: string; ref?: string },
   ContentFile
 > = {
   id: "repos/get-readme",
@@ -1094,13 +1094,13 @@ export const getReadme: ApiHeroEndpoint<
 
 
 * Get all repository topics
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const getAllTopics: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Topic
 > = {
   id: "repos/get-all-topics",
@@ -1112,13 +1112,13 @@ export const getAllTopics: ApiHeroEndpoint<
 
 
 * Replace all repository topics
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const replaceAllTopics: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     payload: {
       /**
        * An array of topics to add to the repository. Pass one or more topics to _replace_ the set of existing topics. Send an empty array (`[]`) to clear all topics from the repository. **Note:** Topic `names` cannot contain uppercase letters.
@@ -1183,26 +1183,26 @@ export const listInvitationsForAuthenticatedUser: ApiHeroEndpoint<
  * | `malformed_signature` | There was an error parsing the signature. |
  * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
 * @param [page=1] - Page number of the results to fetch.
 * @param [sha] - SHA or branch to start listing commits from. Default: the repository’s default branch (usually `master`).
-* @param [author] - GitHub login or email address by which to filter by commit author.
 * @param [until] - Only commits before this date will be returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [author] - GitHub login or email address by which to filter by commit author.
 * @param [path] - Only commits containing this file path will be returned. 
 */
 export const listCommits: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     perPage?: number;
     since?: string;
     page?: number;
     sha?: string;
-    author?: string;
     until?: string;
+    author?: string;
     path?: string;
   },
   Array<Commit>,
@@ -1217,14 +1217,14 @@ export const listCommits: ApiHeroEndpoint<
 
 
 * List branches
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [_protected] - Setting to `true` returns only protected branches. When set to `false`, only unprotected branches are returned. Omitting this parameter returns all branches. 
 */
 export const listBranches: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number; _protected?: boolean },
+  { owner: string; repo: string; perPage?: number; page?: number; _protected?: boolean },
   Array<ShortBranch>,
   { Link: string }
 > = {
@@ -1240,13 +1240,13 @@ export const listBranches: ApiHeroEndpoint<
 * Commit Comments use [these custom media types](https://docs.github.com/rest/reference/repos#custom-media-types). You can read more about the use of media types in the API [here](https://docs.github.com/rest/overview/media-types/).
  * 
  * Comments are ordered by ascending ID.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listCommitCommentsForRepo: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<CommitComment>,
   { Link: string }
 > = {
@@ -1262,13 +1262,13 @@ export const listCommitCommentsForRepo: ApiHeroEndpoint<
 * This returns a list of releases, which does not include regular Git tags that have not been associated with a release. To get a list of Git tags, use the [Repository Tags API](https://docs.github.com/rest/reference/repos#list-repository-tags).
  * 
  * Information about published releases are available to everyone. Only users with push access will receive listings for draft releases.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listReleases: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<Release>,
   { Link: string }
 > = {
@@ -1284,13 +1284,13 @@ export const listReleases: ApiHeroEndpoint<
 * Users with push access to the repository can create a release.
  * 
  * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createRelease: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     release: {
       /**
        * Text describing the contents of the tag.
@@ -1346,13 +1346,13 @@ export const createRelease: ApiHeroEndpoint<
 
 * Transfer a repository
 * A transfer request will need to be accepted by the new owner when transferring a personal repository to another user. The response will contain the original `owner`, and the transfer will continue asynchronously. For more details on the requirements to transfer personal and organization-owned repositories, see [about repository transfers](https://docs.github.com/articles/about-repository-transfers/).
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const transfer: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     transfer: {
       /**
        * ID of the team or teams to add to the repository. Teams can only be added to organization-owned repositories.
@@ -1379,12 +1379,12 @@ export const transfer: ApiHeroEndpoint<
 * This returns a list of autolinks configured for the given repository.
  * 
  * Information about autolinks are only available to repository administrators.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listAutolinks: ApiHeroEndpoint<
-  { repo: string; owner: string; page?: number },
+  { owner: string; repo: string; page?: number },
   Array<Autolink>
 > = {
   id: "repos/list-autolinks",
@@ -1397,13 +1397,13 @@ export const listAutolinks: ApiHeroEndpoint<
 
 * Create an autolink reference for a repository
 * Users with admin access to the repository can create an autolink.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createAutolink: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     autolink: {
       /**
        * The prefix appended by alphanumeric characters will generate a link any time it is found in an issue, pull request, or commit.
@@ -1429,10 +1429,10 @@ export const createAutolink: ApiHeroEndpoint<
 
 * List repository languages
 * Lists languages for the specified repository. The value shown for each language is the number of bytes of code written in that language.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const listLanguages: ApiHeroEndpoint<{ repo: string; owner: string }, Language> = {
+export const listLanguages: ApiHeroEndpoint<{ owner: string; repo: string }, Language> = {
   id: "repos/list-languages",
   clientId: "github",
 };
@@ -1452,13 +1452,13 @@ export const listLanguages: ApiHeroEndpoint<{ repo: string; owner: string }, Lan
  * - GitHub Apps with both `metadata:read` and `contents:read&write` permissions.
  * 
  * This input example shows how you can use the `client_payload` as a test to debug your workflow.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createDispatchEvent: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     dispatch: {
       /**
        * A custom webhook event name. Must be 100 characters or fewer.
@@ -1483,24 +1483,24 @@ export const createDispatchEvent: ApiHeroEndpoint<
 
 * List deployments
 * Simple filtering of deployments is available via query parameters:
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
+* @param [environment] - The name of the environment that was deployed to (e.g., `staging` or `production`).
 * @param [sha='none'] - The SHA recorded at creation time.
 * @param [ref='none'] - The name of the ref. This can be a branch, tag, or SHA.
-* @param [environment] - The name of the environment that was deployed to (e.g., `staging` or `production`).
 * @param [task='none'] - The name of the task for the deployment (e.g., `deploy` or `deploy:migrations`). 
 */
 export const listDeployments: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     perPage?: number;
     page?: number;
+    environment?: string | null;
     sha?: string;
     ref?: string;
-    environment?: string | null;
     task?: string;
   },
   Array<Deployment>,
@@ -1560,13 +1560,13 @@ export const listDeployments: ApiHeroEndpoint<
  * #### Failed commit status checks
  * This error happens when the `required_contexts` parameter indicates that one or more contexts need to have a `success`
  * status for the commit to be deployed, but one or more of the required contexts do not have a state of `success`.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createDeployment: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     deployment: {
       /**
        * The ref to deploy. This can be a branch, tag, or SHA.
@@ -1625,13 +1625,13 @@ export const createDeployment: ApiHeroEndpoint<
 
 * List repository invitations
 * When authenticating as a user with admin rights to a repository, this endpoint will list all currently open repository invitations.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listInvitations: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<RepositoryInvitation>,
   { Link: string }
 > = {
@@ -1647,14 +1647,14 @@ export const listInvitations: ApiHeroEndpoint<
 * Lists contributors to the specified repository and sorts them by the number of commits per contributor in descending order. This endpoint may return information that is a few hours old because the GitHub REST API v3 caches contributor data to improve performance.
  * 
  * GitHub identifies contributors by author email address. This endpoint groups contribution counts by GitHub user, which includes all associated email addresses. To improve performance, only the first 500 author email addresses in the repository link to GitHub users. The rest will appear as anonymous contributors without associated GitHub user information.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [anon] - Set to `1` or `true` to include anonymous contributors in results. 
 */
 export const listContributors: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number; anon?: string },
+  { owner: string; repo: string; perPage?: number; page?: number; anon?: string },
   Array<Contributor>,
   { Link: string }
 > = {
@@ -1670,13 +1670,13 @@ export const listContributors: ApiHeroEndpoint<
 * Get all environments for a repository.
  * 
  * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const getAllEnvironments: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   {
     /**
      * The number of environments in this repository
@@ -1697,13 +1697,13 @@ export const getAllEnvironments: ApiHeroEndpoint<
 
 
 * List GitHub Pages builds
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listPagesBuilds: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<PageBuild>,
   { Link: string }
 > = {
@@ -1719,10 +1719,10 @@ export const listPagesBuilds: ApiHeroEndpoint<
 * You can request that your site be built from the latest revision on the default branch. This has the same effect as pushing a commit to your default branch, but does not require an additional commit. Manually triggering page builds can be helpful when diagnosing build warnings and failures.
  * 
  * Build requests are limited to one concurrent build per repository and one concurrent build per requester. If you request a build while another is still in progress, the second request will be queued until the first completes.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const requestPagesBuild: ApiHeroEndpoint<{ repo: string; owner: string }, PageBuildStatus> =
+export const requestPagesBuild: ApiHeroEndpoint<{ owner: string; repo: string }, PageBuildStatus> =
   {
     id: "repos/request-pages-build",
     clientId: "github",
@@ -1738,11 +1738,11 @@ export const requestPagesBuild: ApiHeroEndpoint<{ repo: string; owner: string },
  * The first request to this endpoint returns a `202 Accepted` status and starts an asynchronous background task to get the results for the domain. After the background task completes, subsequent requests to this endpoint return a `200 OK` status with the health check results in the response.
  * 
  * Users must have admin or owner permissions. GitHub Apps must have the `pages:write` and `administration:write` permission to use this endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getPagesHealthCheck: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   PagesHealthCheck | EmptyObject
 > = {
   id: "repos/get-pages-health-check",
@@ -1757,13 +1757,13 @@ export const getPagesHealthCheck: ApiHeroEndpoint<
 * Gets the README from a repository directory.
  * 
  * READMEs support [custom media types](https://docs.github.com/rest/reference/repos#custom-media-types) for retrieving the raw content or rendered HTML.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param dir - The alternate path to look for a README file
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param dir - The alternate path to look for a README file
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [ref] - The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`) 
 */
 export const getReadmeInDirectory: ApiHeroEndpoint<
-  { repo: string; dir: string; owner: string; ref?: string },
+  { owner: string; dir: string; repo: string; ref?: string },
   ContentFile
 > = {
   id: "repos/get-readme-in-directory",
@@ -1783,16 +1783,16 @@ export const getReadmeInDirectory: ApiHeroEndpoint<
  * You must authenticate using an access token with the `read:org` and `repo` scopes with push access to use this
  * endpoint. GitHub Apps must have the `members` organization permission and `metadata` repository permission to use this
  * endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [affiliation] - Filter collaborators returned by their affiliation. `outside` means all outside collaborators of an organization-owned repository. `direct` means all collaborators with permissions to an organization-owned repository, regardless of organization membership status. `all` means all collaborators the authenticated user can see. 
 */
 export const listCollaborators: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     perPage?: number;
     page?: number;
     affiliation?: "outside" | "direct" | "all";
@@ -1845,14 +1845,14 @@ export const listCollaborators: ApiHeroEndpoint<
  * | `malformed_signature` | There was an error parsing the signature. |
  * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param ref - ref parameter
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param ref - ref parameter
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const getCommit: ApiHeroEndpoint<
-  { repo: string; ref: string; owner: string; perPage?: number; page?: number },
+  { owner: string; ref: string; repo: string; perPage?: number; page?: number },
   Commit
 > = {
   id: "repos/get-commit",
@@ -1864,12 +1864,12 @@ export const getCommit: ApiHeroEndpoint<
 
 
 * Get a deploy key
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param keyId - The unique identifier of the key.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getDeployKey: ApiHeroEndpoint<
-  { keyId: number; repo: string; owner: string },
+  { owner: string; keyId: number; repo: string },
   DeployKey
 > = {
   id: "repos/get-deploy-key",
@@ -1882,12 +1882,12 @@ export const getDeployKey: ApiHeroEndpoint<
 
 * Delete a deploy key
 * Deploy keys are immutable. If you need to update a key, remove the key and create a new one instead.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param keyId - The unique identifier of the key.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteDeployKey: ApiHeroEndpoint<
-  { keyId: number; repo: string; owner: string },
+  { owner: string; keyId: number; repo: string },
   void
 > = {
   id: "repos/delete-deploy-key",
@@ -1903,12 +1903,12 @@ export const deleteDeployKey: ApiHeroEndpoint<
  * `master`) will be used. Please make sure your HTTP framework is configured to follow redirects or you will need to use
  * the `Location` header to make a second `GET` request.
  * **Note**: For private repositories, these links are temporary and expire after five minutes.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param ref 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const downloadTarballArchive: ApiHeroEndpoint<
-  { repo: string; ref: string; owner: string },
+  { owner: string; ref: string; repo: string },
   void
 > = {
   id: "repos/download-tarball-archive",
@@ -1921,12 +1921,12 @@ export const downloadTarballArchive: ApiHeroEndpoint<
 
 * Get page views
 * Get the total number of views and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [per] - The time frame to display results for. 
 */
 export const getViews: ApiHeroEndpoint<
-  { repo: string; owner: string; per?: "" | "day" | "week" },
+  { owner: string; repo: string; per?: "" | "day" | "week" },
   ViewTraffic
 > = {
   id: "repos/get-views",
@@ -1942,12 +1942,12 @@ export const getViews: ApiHeroEndpoint<
  * `master`) will be used. Please make sure your HTTP framework is configured to follow redirects or you will need to use
  * the `Location` header to make a second `GET` request.
  * **Note**: For private repositories, these links are temporary and expire after five minutes.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param ref 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const downloadZipballArchive: ApiHeroEndpoint<
-  { repo: string; ref: string; owner: string },
+  { owner: string; ref: string; repo: string },
   void
 > = {
   id: "repos/download-zipball-archive",
@@ -1960,13 +1960,13 @@ export const downloadZipballArchive: ApiHeroEndpoint<
 
 * Sync a fork branch with the upstream repository
 * Sync a branch of a forked repository to keep it up-to-date with the upstream repository.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const mergeUpstream: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     mergeUpstream: {
       /**
        * The name of the branch which should be updated to match upstream.
@@ -1988,15 +1988,15 @@ export const mergeUpstream: ApiHeroEndpoint<
 * Users with push access in a repository can create commit statuses for a given SHA.
  * 
  * Note: there is a limit of 1000 statuses per `sha` and `context` within a repository. Attempts to create more than 1000 statuses will result in a validation error.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param sha 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createCommitStatus: ApiHeroEndpoint<
   {
-    repo: string;
-    sha: string;
     owner: string;
+    sha: string;
+    repo: string;
     status: {
       /**
        * The state of the status.
@@ -2034,12 +2034,12 @@ For example, if your continuous integration system is posting build status, you 
 
 * Get repository clones
 * Get the total number of clones and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [per] - The time frame to display results for. 
 */
 export const getClones: ApiHeroEndpoint<
-  { repo: string; owner: string; per?: "" | "day" | "week" },
+  { owner: string; repo: string; per?: "" | "day" | "week" },
   CloneTraffic
 > = {
   id: "repos/get-clones",
@@ -2088,13 +2088,13 @@ export const getClones: ApiHeroEndpoint<
  * 
  * If the submodule repository is not hosted on github.com, the Git URLs (`git_url` and `_links["git"]`) and the
  * github.com URLs (`html_url` and `_links["html"]`) will have null values.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param path - path parameter
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param path - path parameter
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [ref] - The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`) 
 */
 export const getContent: ApiHeroEndpoint<
-  { repo: string; path: string; owner: string; ref?: string },
+  { owner: string; path: string; repo: string; ref?: string },
   ContentDirectory | ContentFile | ContentSymlink | ContentSubmodule
 > = {
   id: "repos/get-content",
@@ -2107,15 +2107,15 @@ export const getContent: ApiHeroEndpoint<
 
 * Create or update file contents
 * Creates a new file or replaces an existing file in a repository.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param path - path parameter
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createOrUpdateFileContents: ApiHeroEndpoint<
   {
-    repo: string;
-    path: string;
     owner: string;
+    path: string;
+    repo: string;
     content: {
       /**
        * **Required if you are updating a file**. The blob SHA of the file being replaced.
@@ -2200,15 +2200,15 @@ export const createOrUpdateFileContents: ApiHeroEndpoint<
  * The `author` section is optional and is filled in with the `committer` information if omitted. If the `committer` information is omitted, the authenticated user's information is used.
  * 
  * You must provide values for both `name` and `email`, whether you choose to use `author` or `committer`. Otherwise, you'll receive a `422` status code.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param path - path parameter
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteFile: ApiHeroEndpoint<
   {
-    repo: string;
-    path: string;
     owner: string;
+    path: string;
+    repo: string;
     content: {
       /**
        * The blob SHA of the file being replaced.
@@ -2268,11 +2268,11 @@ export const deleteFile: ApiHeroEndpoint<
 
 * Get a repository webhook
 * Returns a webhook configured in a repository. To get only the webhook `config` properties, see "[Get a webhook configuration for a repository](/rest/reference/repos#get-a-webhook-configuration-for-a-repository)."
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param repo - The name of the repository. The name is not case sensitive.
-* @param hookId - The unique identifier of the hook.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param hookId - The unique identifier of the hook. 
 */
-export const getWebhook: ApiHeroEndpoint<{ repo: string; hookId: number; owner: string }, Hook> = {
+export const getWebhook: ApiHeroEndpoint<{ owner: string; repo: string; hookId: number }, Hook> = {
   id: "repos/get-webhook",
   clientId: "github",
 };
@@ -2282,11 +2282,11 @@ export const getWebhook: ApiHeroEndpoint<{ repo: string; hookId: number; owner: 
 
 
 * Delete a repository webhook
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param repo - The name of the repository. The name is not case sensitive.
-* @param hookId - The unique identifier of the hook.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param hookId - The unique identifier of the hook. 
 */
-export const deleteWebhook: ApiHeroEndpoint<{ repo: string; hookId: number; owner: string }, void> =
+export const deleteWebhook: ApiHeroEndpoint<{ owner: string; repo: string; hookId: number }, void> =
   {
     id: "repos/delete-webhook",
     clientId: "github",
@@ -2298,15 +2298,15 @@ export const deleteWebhook: ApiHeroEndpoint<{ repo: string; hookId: number; owne
 
 * Update a repository webhook
 * Updates a webhook configured in a repository. If you previously had a `secret` set, you must provide the same `secret` or set a new `secret` or the secret will be removed. If you are only updating individual webhook `config` properties, use "[Update a webhook configuration for a repository](/rest/reference/repos#update-a-webhook-configuration-for-a-repository)."
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param repo - The name of the repository. The name is not case sensitive.
-* @param hookId - The unique identifier of the hook.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param hookId - The unique identifier of the hook. 
 */
 export const updateWebhook: ApiHeroEndpoint<
   {
+    owner: string;
     repo: string;
     hookId: number;
-    owner: string;
     hook: {
       /**
        * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
@@ -2367,10 +2367,10 @@ export const updateWebhook: ApiHeroEndpoint<
 * View the latest published full release for the repository.
  * 
  * The latest release is the most recent non-prerelease, non-draft release, sorted by the `created_at` attribute. The `created_at` attribute is the date of the commit used for the release, and not the date when the release was drafted or published.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getLatestRelease: ApiHeroEndpoint<{ repo: string; owner: string }, Release> = {
+export const getLatestRelease: ApiHeroEndpoint<{ owner: string; repo: string }, Release> = {
   id: "repos/get-latest-release",
   clientId: "github",
 };
@@ -2383,11 +2383,11 @@ export const getLatestRelease: ApiHeroEndpoint<{ repo: string; owner: string }, 
 * This returns the tag protection states of a repository.
  * 
  * This information is only available to repository administrators.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const listTagProtection: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   Array<TagProtection>
 > = {
   id: "repos/list-tag-protection",
@@ -2401,13 +2401,13 @@ export const listTagProtection: ApiHeroEndpoint<
 * Create a tag protection state for a repository
 * This creates a tag protection state for a repository.
  * This endpoint is only available to repository administrators.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createTagProtection: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     protection: {
       /**
        * An optional glob pattern to match against when enforcing tag protection.
@@ -2429,13 +2429,13 @@ export const createTagProtection: ApiHeroEndpoint<
 * Create a GitHub Pages deployment for a repository.
  * 
  * Users must have write permissions. GitHub Apps must have the `pages:write` permission to use this endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createPagesDeployment: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     deployment: {
       /**
        * The OIDC token issued by GitHub Actions certifying the origin of the deployment.
@@ -2476,11 +2476,11 @@ export const createPagesDeployment: ApiHeroEndpoint<
  * *   Number of commits
  * 
  * For example, `[2, 14, 25]` indicates that there were 25 total commits, during the 2:00pm hour on Tuesdays. All times are based on the time zone of individual commits.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getPunchCardStats: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   Array<CodeFrequencyStat>
 > = {
   id: "repos/get-punch-card-stats",
@@ -2492,12 +2492,12 @@ export const getPunchCardStats: ApiHeroEndpoint<
 
 
 * Get a branch
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getBranch: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   BranchWithProtection
 > = {
   id: "repos/get-branch",
@@ -2514,12 +2514,12 @@ export const getBranch: ApiHeroEndpoint<
  * 
  * For more information about the correct CODEOWNERS syntax,
  * see "[About code owners](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)."
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [ref] - A branch, tag or commit name used to determine which version of the CODEOWNERS file to use. Default: the repository's default branch (e.g. `main`) 
 */
 export const codeownersErrors: ApiHeroEndpoint<
-  { repo: string; owner: string; ref?: string },
+  { owner: string; repo: string; ref?: string },
   CodeownersErrors
 > = {
   id: "repos/codeowners-errors",
@@ -2543,11 +2543,11 @@ export const codeownersErrors: ApiHeroEndpoint<
  * `health_percentage` is `25`.
  * 
  * `content_reports_enabled` is only returned for organization-owned repositories.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getCommunityProfileMetrics: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   CommunityProfile
 > = {
   id: "repos/get-community-profile-metrics",
@@ -2599,14 +2599,14 @@ export const getCommunityProfileMetrics: ApiHeroEndpoint<
  * | `malformed_signature` | There was an error parsing the signature. |
  * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param basehead - The base branch and head branch to compare. This parameter expects the format `{base}...{head}`.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param basehead - The base branch and head branch to compare. This parameter expects the format `{base}...{head}`.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const compareCommits: ApiHeroEndpoint<
-  { repo: string; basehead: string; owner: string; perPage?: number; page?: number },
+  { owner: string; basehead: string; repo: string; perPage?: number; page?: number },
   CommitComparison
 > = {
   id: "repos/compare-commits",
@@ -2625,11 +2625,11 @@ export const compareCommits: ApiHeroEndpoint<
  * *   `a` - Number of additions
  * *   `d` - Number of deletions
  * *   `c` - Number of commits
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getContributorsStats: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   Array<ContributorActivity> | {}
 > = {
   id: "repos/get-contributors-stats",
@@ -2641,10 +2641,10 @@ export const getContributorsStats: ApiHeroEndpoint<
 
 
 * Get latest Pages build
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getLatestPagesBuild: ApiHeroEndpoint<{ repo: string; owner: string }, PageBuild> = {
+export const getLatestPagesBuild: ApiHeroEndpoint<{ owner: string; repo: string }, PageBuild> = {
   id: "repos/get-latest-pages-build",
   clientId: "github",
 };
@@ -2655,12 +2655,12 @@ export const getLatestPagesBuild: ApiHeroEndpoint<{ repo: string; owner: string 
 
 * Get a release by tag name
 * Get a published release with the specified tag.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param tag - tag parameter
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getReleaseByTag: ApiHeroEndpoint<
-  { repo: string; tag: string; owner: string },
+  { owner: string; tag: string; repo: string },
   Release
 > = {
   id: "repos/get-release-by-tag",
@@ -2675,11 +2675,11 @@ export const getReleaseByTag: ApiHeroEndpoint<
 * Returns the total commit counts for the `owner` and total commit counts in `all`. `all` is everyone combined, including the `owner` in the last 52 weeks. If you'd like to get the commit counts for non-owners, you can subtract `owner` from `all`.
  * 
  * The array order is oldest week (index 0) to most recent week.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getParticipationStats: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   ParticipationStats
 > = {
   id: "repos/get-participation-stats",
@@ -2699,14 +2699,14 @@ export const getParticipationStats: ApiHeroEndpoint<
  * *   **failure** if any of the contexts report as `error` or `failure`
  * *   **pending** if there are no statuses or a context is `pending`
  * *   **success** if the latest status for all contexts is `success`
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param ref - ref parameter
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param ref - ref parameter
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const getCombinedStatusForRef: ApiHeroEndpoint<
-  { repo: string; ref: string; owner: string; perPage?: number; page?: number },
+  { owner: string; ref: string; repo: string; perPage?: number; page?: number },
   CombinedCommitStatus
 > = {
   id: "repos/get-combined-status-for-ref",
@@ -2719,11 +2719,11 @@ export const getCombinedStatusForRef: ApiHeroEndpoint<
 
 * Get the weekly commit activity
 * Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getCodeFrequencyStats: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   Array<CodeFrequencyStat> | {}
 > = {
   id: "repos/get-code-frequency-stats",
@@ -2736,10 +2736,10 @@ export const getCodeFrequencyStats: ApiHeroEndpoint<
 
 * Check if vulnerability alerts are enabled for a repository
 * Shows whether dependency alerts are enabled or disabled for a repository. The authenticated user must have admin read access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://docs.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const checkVulnerabilityAlerts: ApiHeroEndpoint<{ repo: string; owner: string }, void> = {
+export const checkVulnerabilityAlerts: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "repos/check-vulnerability-alerts",
   clientId: "github",
 };
@@ -2750,10 +2750,10 @@ export const checkVulnerabilityAlerts: ApiHeroEndpoint<{ repo: string; owner: st
 
 * Enable vulnerability alerts
 * Enables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://docs.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const enableVulnerabilityAlerts: ApiHeroEndpoint<{ repo: string; owner: string }, void> = {
+export const enableVulnerabilityAlerts: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "repos/enable-vulnerability-alerts",
   clientId: "github",
 };
@@ -2764,10 +2764,10 @@ export const enableVulnerabilityAlerts: ApiHeroEndpoint<{ repo: string; owner: s
 
 * Disable vulnerability alerts
 * Disables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://docs.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const disableVulnerabilityAlerts: ApiHeroEndpoint<{ repo: string; owner: string }, void> = {
+export const disableVulnerabilityAlerts: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "repos/disable-vulnerability-alerts",
   clientId: "github",
 };
@@ -2777,12 +2777,12 @@ export const disableVulnerabilityAlerts: ApiHeroEndpoint<{ repo: string; owner: 
 
 
 * Get a commit comment
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param commentId - The unique identifier of the comment.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getCommitComment: ApiHeroEndpoint<
-  { repo: string; commentId: number; owner: string },
+  { owner: string; commentId: number; repo: string },
   CommitComment
 > = {
   id: "repos/get-commit-comment",
@@ -2794,12 +2794,12 @@ export const getCommitComment: ApiHeroEndpoint<
 
 
 * Delete a commit comment
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param commentId - The unique identifier of the comment.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteCommitComment: ApiHeroEndpoint<
-  { repo: string; commentId: number; owner: string },
+  { owner: string; commentId: number; repo: string },
   void
 > = {
   id: "repos/delete-commit-comment",
@@ -2811,15 +2811,15 @@ export const deleteCommitComment: ApiHeroEndpoint<
 
 
 * Update a commit comment
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param commentId - The unique identifier of the comment.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateCommitComment: ApiHeroEndpoint<
   {
-    repo: string;
-    commentId: number;
     owner: string;
+    commentId: number;
+    repo: string;
     comment: {
       /**
        * The contents of the comment
@@ -2839,11 +2839,11 @@ export const updateCommitComment: ApiHeroEndpoint<
 
 * Ping a repository webhook
 * This will trigger a [ping event](https://docs.github.com/webhooks/#ping-event) to be sent to the hook.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param repo - The name of the repository. The name is not case sensitive.
-* @param hookId - The unique identifier of the hook.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param hookId - The unique identifier of the hook. 
 */
-export const pingWebhook: ApiHeroEndpoint<{ repo: string; hookId: number; owner: string }, void> = {
+export const pingWebhook: ApiHeroEndpoint<{ owner: string; repo: string; hookId: number }, void> = {
   id: "repos/ping-webhook",
   clientId: "github",
 };
@@ -2856,12 +2856,12 @@ export const pingWebhook: ApiHeroEndpoint<{ repo: string; hookId: number; owner:
 * This will trigger the hook with the latest push to the current repository if the hook is subscribed to `push` events. If the hook is not subscribed to `push` events, the server will respond with 204 but no test POST will be generated.
  * 
  * **Note**: Previously `/repos/:owner/:repo/hooks/:hook_id/test`
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param repo - The name of the repository. The name is not case sensitive.
-* @param hookId - The unique identifier of the hook.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param hookId - The unique identifier of the hook. 
 */
 export const testPushWebhook: ApiHeroEndpoint<
-  { repo: string; hookId: number; owner: string },
+  { owner: string; repo: string; hookId: number },
   void
 > = {
   id: "repos/test-push-webhook",
@@ -2874,12 +2874,12 @@ export const testPushWebhook: ApiHeroEndpoint<
 
 * Get a release
 * **Note:** This returns an `upload_url` key corresponding to the endpoint for uploading release assets. This key is a [hypermedia resource](https://docs.github.com/rest/overview/resources-in-the-rest-api#hypermedia).
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param releaseId - The unique identifier of the release.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getRelease: ApiHeroEndpoint<
-  { repo: string; releaseId: number; owner: string },
+  { owner: string; releaseId: number; repo: string },
   Release
 > = {
   id: "repos/get-release",
@@ -2892,12 +2892,12 @@ export const getRelease: ApiHeroEndpoint<
 
 * Delete a release
 * Users with push access to the repository can delete a release.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param releaseId - The unique identifier of the release.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteRelease: ApiHeroEndpoint<
-  { repo: string; releaseId: number; owner: string },
+  { owner: string; releaseId: number; repo: string },
   void
 > = {
   id: "repos/delete-release",
@@ -2910,15 +2910,15 @@ export const deleteRelease: ApiHeroEndpoint<
 
 * Update a release
 * Users with push access to the repository can edit a release.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param releaseId - The unique identifier of the release.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateRelease: ApiHeroEndpoint<
   {
-    repo: string;
-    releaseId: number;
     owner: string;
+    releaseId: number;
+    repo: string;
     release?: {
       /**
        * Text describing the contents of the tag.
@@ -2968,11 +2968,11 @@ export const updateRelease: ApiHeroEndpoint<
 
 * Get the last year of commit activity
 * Returns the last year of commit activity grouped by week. The `days` array is a group of commits per day, starting on `Sunday`.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getCommitActivityStats: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   Array<CommitActivity> | {}
 > = {
   id: "repos/get-commit-activity-stats",
@@ -2985,11 +2985,11 @@ export const getCommitActivityStats: ApiHeroEndpoint<
 
 * Get top referral paths
 * Get the top 10 popular contents over the last 14 days.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getTopPaths: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   Array<ContentTraffic>
 > = {
   id: "repos/get-top-paths",
@@ -3004,14 +3004,14 @@ export const getTopPaths: ApiHeroEndpoint<
 * Users with pull access in a repository can view commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name. Statuses are returned in reverse chronological order. The first status in the list will be the latest one.
  * 
  * This resource is also available via a legacy route: `GET /repos/:owner/:repo/statuses/:ref`.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param ref - ref parameter
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param ref - ref parameter
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listCommitStatusesForRef: ApiHeroEndpoint<
-  { repo: string; ref: string; owner: string; perPage?: number; page?: number },
+  { owner: string; ref: string; repo: string; perPage?: number; page?: number },
   Array<Status>,
   { Link: string }
 > = {
@@ -3027,12 +3027,12 @@ export const listCommitStatusesForRef: ApiHeroEndpoint<
 * Returns the webhook configuration for a repository. To get more information about the webhook, including the `active` state and `events`, use "[Get a repository webhook](/rest/reference/orgs#get-a-repository-webhook)."
  * 
  * Access tokens must have the `read:repo_hook` or `repo` scope, and GitHub Apps must have the `repository_hooks:read` permission.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param repo - The name of the repository. The name is not case sensitive.
-* @param hookId - The unique identifier of the hook.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param hookId - The unique identifier of the hook. 
 */
 export const getWebhookConfigForRepo: ApiHeroEndpoint<
-  { repo: string; hookId: number; owner: string },
+  { owner: string; repo: string; hookId: number },
   WebhookConfig
 > = {
   id: "repos/get-webhook-config-for-repo",
@@ -3047,15 +3047,15 @@ export const getWebhookConfigForRepo: ApiHeroEndpoint<
 * Updates the webhook configuration for a repository. To update more information about the webhook, including the `active` state and `events`, use "[Update a repository webhook](/rest/reference/orgs#update-a-repository-webhook)."
  * 
  * Access tokens must have the `write:repo_hook` or `repo` scope, and GitHub Apps must have the `repository_hooks:write` permission.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param repo - The name of the repository. The name is not case sensitive.
-* @param hookId - The unique identifier of the hook.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param hookId - The unique identifier of the hook. 
 */
 export const updateWebhookConfigForRepo: ApiHeroEndpoint<
   {
+    owner: string;
     repo: string;
     hookId: number;
-    owner: string;
     payload?: {
       url?: WebhookConfigUrl;
       secret?: WebhookConfigSecret;
@@ -3105,12 +3105,12 @@ export const acceptInvitationForAuthenticatedUser: ApiHeroEndpoint<{ invitationI
 * This returns a single autolink reference by ID that was configured for the given repository.
  * 
  * Information about autolinks are only available to repository administrators.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param autolinkId - The unique identifier of the autolink.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getAutolink: ApiHeroEndpoint<
-  { repo: string; autolinkId: number; owner: string },
+  { owner: string; autolinkId: number; repo: string },
   Autolink
 > = {
   id: "repos/get-autolink",
@@ -3125,12 +3125,12 @@ export const getAutolink: ApiHeroEndpoint<
 * This deletes a single autolink reference by ID that was configured for the given repository.
  * 
  * Information about autolinks are only available to repository administrators.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param autolinkId - The unique identifier of the autolink.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteAutolink: ApiHeroEndpoint<
-  { repo: string; autolinkId: number; owner: string },
+  { owner: string; autolinkId: number; repo: string },
   void
 > = {
   id: "repos/delete-autolink",
@@ -3142,12 +3142,12 @@ export const deleteAutolink: ApiHeroEndpoint<
 
 
 * Get GitHub Pages build
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param buildId 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getPagesBuild: ApiHeroEndpoint<
-  { repo: string; buildId: number; owner: string },
+  { owner: string; buildId: number; repo: string },
   PageBuild
 > = {
   id: "repos/get-pages-build",
@@ -3160,13 +3160,13 @@ export const getPagesBuild: ApiHeroEndpoint<
 
 * Generate release notes content for a release
 * Generate a name and body describing a [release](https://docs.github.com/rest/reference/repos#releases). The body content will be markdown formatted and contain information like the changes since last release and users who contributed. The generated release notes are not saved anywhere. They are intended to be generated and used when creating a new release.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const generateReleaseNotes: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     generateNote: {
       /**
        * The tag name for the release. This can be an existing tag or a new one.
@@ -3201,10 +3201,10 @@ export const generateReleaseNotes: ApiHeroEndpoint<
 
 * Enable automated security fixes
 * Enables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://docs.github.com/en/articles/configuring-automated-security-fixes)".
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const enableAutomatedSecurityFixes: ApiHeroEndpoint<{ repo: string; owner: string }, void> =
+export const enableAutomatedSecurityFixes: ApiHeroEndpoint<{ owner: string; repo: string }, void> =
   {
     id: "repos/enable-automated-security-fixes",
     clientId: "github",
@@ -3216,10 +3216,10 @@ export const enableAutomatedSecurityFixes: ApiHeroEndpoint<{ repo: string; owner
 
 * Disable automated security fixes
 * Disables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://docs.github.com/en/articles/configuring-automated-security-fixes)".
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const disableAutomatedSecurityFixes: ApiHeroEndpoint<{ repo: string; owner: string }, void> =
+export const disableAutomatedSecurityFixes: ApiHeroEndpoint<{ owner: string; repo: string }, void> =
   {
     id: "repos/disable-automated-security-fixes",
     clientId: "github",
@@ -3245,15 +3245,15 @@ export const disableAutomatedSecurityFixes: ApiHeroEndpoint<{ repo: string; owne
  * 
  * * Users must have admin or owner permissions.
  * * GitHub Apps must have the `administration:write` repository permission.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const renameBranch: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     rename: {
       /**
        * The new name of the branch.
@@ -3280,11 +3280,11 @@ export const renameBranch: ApiHeroEndpoint<
  * endpoint. GitHub Apps must have the `members` organization permission and `metadata` repository permission to use this
  * endpoint.
 * @param username - The handle for the GitHub user account.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const checkCollaborator: ApiHeroEndpoint<
-  { username: string; repo: string; owner: string },
+  { username: string; owner: string; repo: string },
   void
 > = {
   id: "repos/check-collaborator",
@@ -3318,14 +3318,14 @@ export const checkCollaborator: ApiHeroEndpoint<
  * 
  * You are limited to sending 50 invitations to a repository per 24 hour period. Note there is no limit if you are inviting organization members to an organization repository.
 * @param username - The handle for the GitHub user account.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const addCollaborator: ApiHeroEndpoint<
   {
     username: string;
-    repo: string;
     owner: string;
+    repo: string;
     collaborator?: {
       /**
        * The permission to grant the collaborator. **Only valid on organization-owned repositories.** In addition to the enumerated values, you can also specify a custom repository role name, if the owning organization has defined any.
@@ -3345,11 +3345,11 @@ export const addCollaborator: ApiHeroEndpoint<
 
 * Remove a repository collaborator
 * @param username - The handle for the GitHub user account.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const removeCollaborator: ApiHeroEndpoint<
-  { username: string; repo: string; owner: string },
+  { username: string; owner: string; repo: string },
   void
 > = {
   id: "repos/remove-collaborator",
@@ -3362,11 +3362,11 @@ export const removeCollaborator: ApiHeroEndpoint<
 
 * Get top referral sources
 * Get the top 10 referrers over the last 14 days.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getTopReferrers: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   Array<ReferrerTraffic>
 > = {
   id: "repos/get-top-referrers",
@@ -3379,14 +3379,14 @@ export const getTopReferrers: ApiHeroEndpoint<
 
 * List pull requests associated with a commit
 * Lists the merged pull request that introduced the commit to the repository. If the commit is not present in the default branch, additionally returns open pull requests associated with the commit. The results may include open and closed pull requests.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param commitSha - The SHA of the commit.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param commitSha - The SHA of the commit.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listPullRequestsAssociatedWithCommit: ApiHeroEndpoint<
-  { repo: string; commitSha: string; owner: string; perPage?: number; page?: number },
+  { owner: string; commitSha: string; repo: string; perPage?: number; page?: number },
   Array<PullRequestSimple>,
   { Link: string }
 > = {
@@ -3400,14 +3400,14 @@ export const listPullRequestsAssociatedWithCommit: ApiHeroEndpoint<
 
 * List deliveries for a repository webhook
 * Returns a list of webhook deliveries for a webhook configured in a repository.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param repo - The name of the repository. The name is not case sensitive.
 * @param hookId - The unique identifier of the hook.
-* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [cursor] - Used for pagination: the starting delivery from which the page of deliveries is fetched. Refer to the `link` header for the next and previous page cursors. 
 */
 export const listWebhookDeliveries: ApiHeroEndpoint<
-  { repo: string; hookId: number; owner: string; perPage?: number; cursor?: string },
+  { owner: string; repo: string; hookId: number; perPage?: number; cursor?: string },
   Array<HookDeliveryItem>
 > = {
   id: "repos/list-webhook-deliveries",
@@ -3420,12 +3420,12 @@ export const listWebhookDeliveries: ApiHeroEndpoint<
 
 * Get a release asset
 * To download the asset's binary content, set the `Accept` header of the request to [`application/octet-stream`](https://docs.github.com/rest/overview/media-types). The API will either redirect the client to the location, or stream it directly if possible. API clients should handle both a `200` or `302` response.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param assetId - The unique identifier of the asset.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getReleaseAsset: ApiHeroEndpoint<
-  { repo: string; assetId: number; owner: string },
+  { owner: string; assetId: number; repo: string },
   ReleaseAsset
 > = {
   id: "repos/get-release-asset",
@@ -3437,12 +3437,12 @@ export const getReleaseAsset: ApiHeroEndpoint<
 
 
 * Delete a release asset
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param assetId - The unique identifier of the asset.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteReleaseAsset: ApiHeroEndpoint<
-  { repo: string; assetId: number; owner: string },
+  { owner: string; assetId: number; repo: string },
   void
 > = {
   id: "repos/delete-release-asset",
@@ -3455,15 +3455,15 @@ export const deleteReleaseAsset: ApiHeroEndpoint<
 
 * Update a release asset
 * Users with push access to the repository can edit a release asset.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param assetId - The unique identifier of the asset.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateReleaseAsset: ApiHeroEndpoint<
   {
-    repo: string;
-    assetId: number;
     owner: string;
+    assetId: number;
+    repo: string;
     asset?: {
       /**
        * The file name of the asset.
@@ -3548,12 +3548,12 @@ export const createUsingTemplate: ApiHeroEndpoint<
 
 
 * Get a deployment
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param deploymentId - deployment_id parameter
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getDeployment: ApiHeroEndpoint<
-  { repo: string; deploymentId: number; owner: string },
+  { owner: string; deploymentId: number; repo: string },
   Deployment
 > = {
   id: "repos/get-deployment",
@@ -3573,12 +3573,12 @@ export const getDeployment: ApiHeroEndpoint<
  * *   Mark the active deployment as inactive by adding any non-successful deployment status.
  * 
  * For more information, see "[Create a deployment](https://docs.github.com/rest/reference/repos/#create-a-deployment)" and "[Create a deployment status](https://docs.github.com/rest/reference/repos#create-a-deployment-status)."
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param deploymentId - deployment_id parameter
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteDeployment: ApiHeroEndpoint<
-  { repo: string; deploymentId: number; owner: string },
+  { owner: string; deploymentId: number; repo: string },
   void
 > = {
   id: "repos/delete-deployment",
@@ -3590,12 +3590,12 @@ export const deleteDeployment: ApiHeroEndpoint<
 
 
 * Delete a repository invitation
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param invitationId - The unique identifier of the invitation.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteInvitation: ApiHeroEndpoint<
-  { repo: string; invitationId: number; owner: string },
+  { owner: string; invitationId: number; repo: string },
   void
 > = {
   id: "repos/delete-invitation",
@@ -3607,15 +3607,15 @@ export const deleteInvitation: ApiHeroEndpoint<
 
 
 * Update a repository invitation
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param invitationId - The unique identifier of the invitation.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateInvitation: ApiHeroEndpoint<
   {
-    repo: string;
-    invitationId: number;
     owner: string;
+    invitationId: number;
+    repo: string;
     invitation?: {
       /**
        * The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`.
@@ -3635,12 +3635,12 @@ export const updateInvitation: ApiHeroEndpoint<
 
 * Get branch protection
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getBranchProtection: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   BranchProtection
 > = {
   id: "repos/get-branch-protection",
@@ -3659,15 +3659,15 @@ export const getBranchProtection: ApiHeroEndpoint<
  * **Note**: Passing new arrays of `users` and `teams` replaces their previous values.
  * 
  * **Note**: The list of users, apps, and teams in total is limited to 100 items.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateBranchProtection: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     payload: {
       /**
        * Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
@@ -3824,12 +3824,12 @@ export const updateBranchProtection: ApiHeroEndpoint<
 
 * Delete branch protection
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteBranchProtection: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   void
 > = {
   id: "repos/delete-branch-protection",
@@ -3841,14 +3841,14 @@ export const deleteBranchProtection: ApiHeroEndpoint<
 
 
 * List release assets
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param releaseId - The unique identifier of the release.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param releaseId - The unique identifier of the release.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listReleaseAssets: ApiHeroEndpoint<
-  { repo: string; releaseId: number; owner: string; perPage?: number; page?: number },
+  { owner: string; releaseId: number; repo: string; perPage?: number; page?: number },
   Array<ReleaseAsset>,
   { Link: string }
 > = {
@@ -3879,14 +3879,14 @@ export const listReleaseAssets: ApiHeroEndpoint<
  * *   GitHub renames asset filenames that have special characters, non-alphanumeric characters, and leading or trailing periods. The "[List assets for a release](https://docs.github.com/rest/reference/repos#list-assets-for-a-release)"
  * endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://support.github.com/contact?tags=dotcom-rest-api).
  * *   If you upload an asset with the same filename as another uploaded asset, you'll receive an error and must delete the old file before you can re-upload the new asset.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param name 
-* @param releaseId - The unique identifier of the release.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param releaseId - The unique identifier of the release.
+* @param name 
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [label]  
 */
 export const uploadReleaseAsset: ApiHeroEndpoint<
-  { repo: string; name: string; releaseId: number; owner: string; label?: string; asset?: string },
+  { owner: string; releaseId: number; name: string; repo: string; label?: string; asset?: string },
   ReleaseAsset
 > = {
   id: "repos/upload-release-asset",
@@ -3899,14 +3899,14 @@ export const uploadReleaseAsset: ApiHeroEndpoint<
 
 * List commit comments
 * Use the `:commit_sha` to specify the commit that will have its comments listed.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param commitSha - The SHA of the commit.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param commitSha - The SHA of the commit.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listCommentsForCommit: ApiHeroEndpoint<
-  { repo: string; commitSha: string; owner: string; perPage?: number; page?: number },
+  { owner: string; commitSha: string; repo: string; perPage?: number; page?: number },
   Array<CommitComment>,
   { Link: string }
 > = {
@@ -3922,15 +3922,15 @@ export const listCommentsForCommit: ApiHeroEndpoint<
 * Create a comment for a commit using its `:commit_sha`.
  * 
  * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param commitSha - The SHA of the commit.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createCommitComment: ApiHeroEndpoint<
   {
-    repo: string;
-    commitSha: string;
     owner: string;
+    commitSha: string;
+    repo: string;
     comment: {
       /**
        * The contents of the comment.
@@ -3966,12 +3966,12 @@ export const createCommitComment: ApiHeroEndpoint<
 
 * Get an environment
 * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param environmentName - The name of the environment
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getEnvironment: ApiHeroEndpoint<
-  { repo: string; environmentName: string; owner: string },
+  { owner: string; environmentName: string; repo: string },
   Environment
 > = {
   id: "repos/get-environment",
@@ -3990,15 +3990,15 @@ export const getEnvironment: ApiHeroEndpoint<
  * **Note:** To create or update secrets for an environment, see "[Secrets](/rest/reference/actions#secrets)."
  * 
  * You must authenticate using an access token with the repo scope to use this endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param environmentName - The name of the environment
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createOrUpdateEnvironment: ApiHeroEndpoint<
   {
-    repo: string;
-    environmentName: string;
     owner: string;
+    environmentName: string;
+    repo: string;
     environment?: {
       /**
        * The people or teams that may review jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
@@ -4029,12 +4029,12 @@ export const createOrUpdateEnvironment: ApiHeroEndpoint<
 
 * Delete an environment
 * You must authenticate using an access token with the repo scope to use this endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param environmentName - The name of the environment
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteAnEnvironment: ApiHeroEndpoint<
-  { repo: string; environmentName: string; owner: string },
+  { owner: string; environmentName: string; repo: string },
   void
 > = {
   id: "repos/delete-an-environment",
@@ -4048,11 +4048,11 @@ export const deleteAnEnvironment: ApiHeroEndpoint<
 * Get repository permissions for a user
 * Checks the repository permission of a collaborator. The possible repository permissions are `admin`, `write`, `read`, and `none`.
 * @param username - The handle for the GitHub user account.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getCollaboratorPermissionLevel: ApiHeroEndpoint<
-  { username: string; repo: string; owner: string },
+  { username: string; owner: string; repo: string },
   RepositoryCollaboratorPermission
 > = {
   id: "repos/get-collaborator-permission-level",
@@ -4066,12 +4066,12 @@ export const getCollaboratorPermissionLevel: ApiHeroEndpoint<
 * Delete a tag protection state for a repository
 * This deletes a tag protection state for a repository.
  * This endpoint is only available to repository administrators.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param tagProtectionId - The unique identifier of the tag protection.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteTagProtection: ApiHeroEndpoint<
-  { repo: string; tagProtectionId: number; owner: string },
+  { owner: string; tagProtectionId: number; repo: string },
   void
 > = {
   id: "repos/delete-tag-protection",
@@ -4084,14 +4084,14 @@ export const deleteTagProtection: ApiHeroEndpoint<
 
 * List deployment statuses
 * Users with pull access can view deployment statuses for a deployment:
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param deploymentId - deployment_id parameter
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param deploymentId - deployment_id parameter
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listDeploymentStatuses: ApiHeroEndpoint<
-  { repo: string; deploymentId: number; owner: string; perPage?: number; page?: number },
+  { owner: string; deploymentId: number; repo: string; perPage?: number; page?: number },
   Array<DeploymentStatus>,
   { Link: string }
 > = {
@@ -4107,15 +4107,15 @@ export const listDeploymentStatuses: ApiHeroEndpoint<
 * Users with `push` access can create deployment statuses for a given deployment.
  * 
  * GitHub Apps require `read & write` access to "Deployments" and `read-only` access to "Repo contents" (for private repos). OAuth Apps require the `repo_deployment` scope.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param deploymentId - deployment_id parameter
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createDeploymentStatus: ApiHeroEndpoint<
   {
-    repo: string;
-    deploymentId: number;
     owner: string;
+    deploymentId: number;
+    repo: string;
     status: {
       /**
        * The state of the status. When you set a transient deployment to `inactive`, the deployment will be shown as `destroyed` in GitHub.
@@ -4168,12 +4168,12 @@ export const createDeploymentStatus: ApiHeroEndpoint<
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  * 
  * Returns all branches where the given commit SHA is the HEAD, or latest commit for the branch.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param commitSha - The SHA of the commit.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const listBranchesForHeadCommit: ApiHeroEndpoint<
-  { repo: string; commitSha: string; owner: string },
+  { owner: string; commitSha: string; repo: string },
   Array<BranchShort>
 > = {
   id: "repos/list-branches-for-head-commit",
@@ -4186,13 +4186,13 @@ export const listBranchesForHeadCommit: ApiHeroEndpoint<
 
 * Get a delivery for a repository webhook
 * Returns a delivery for a webhook configured in a repository.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param hookId - The unique identifier of the hook.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param deliveryId 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param hookId - The unique identifier of the hook. 
 */
 export const getWebhookDelivery: ApiHeroEndpoint<
-  { repo: string; hookId: number; deliveryId: number; owner: string },
+  { owner: string; deliveryId: number; repo: string; hookId: number },
   HookDelivery
 > = {
   id: "repos/get-webhook-delivery",
@@ -4209,12 +4209,12 @@ export const getWebhookDelivery: ApiHeroEndpoint<
  * Lists who has access to this protected branch.
  * 
  * **Note**: Users, apps, and teams `restrictions` are only available for organization-owned repositories.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getAccessRestrictions: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   BranchRestrictionPolicy
 > = {
   id: "repos/get-access-restrictions",
@@ -4229,12 +4229,12 @@ export const getAccessRestrictions: ApiHeroEndpoint<
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  * 
  * Disables the ability to restrict who can push to this branch.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteAccessRestrictions: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   void
 > = {
   id: "repos/delete-access-restrictions",
@@ -4247,12 +4247,12 @@ export const deleteAccessRestrictions: ApiHeroEndpoint<
 
 * Get admin branch protection
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getAdminBranchProtection: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   ProtectedBranchAdminEnforced
 > = {
   id: "repos/get-admin-branch-protection",
@@ -4267,12 +4267,12 @@ export const getAdminBranchProtection: ApiHeroEndpoint<
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  * 
  * Adding admin enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const setAdminBranchProtection: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   ProtectedBranchAdminEnforced
 > = {
   id: "repos/set-admin-branch-protection",
@@ -4287,12 +4287,12 @@ export const setAdminBranchProtection: ApiHeroEndpoint<
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  * 
  * Removing admin enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteAdminBranchProtection: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   void
 > = {
   id: "repos/delete-admin-branch-protection",
@@ -4307,12 +4307,12 @@ export const deleteAdminBranchProtection: ApiHeroEndpoint<
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  * 
  * Lists the GitHub Apps that have push access to this branch. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getAppsWithAccessToProtectedBranch: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   Array<Integration>
 > = {
   id: "repos/get-apps-with-access-to-protected-branch",
@@ -4331,15 +4331,15 @@ export const getAppsWithAccessToProtectedBranch: ApiHeroEndpoint<
  * | Type    | Description                                                                                                                                                |
  * | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
  * | `array` | The GitHub Apps that have push access to this branch. Use the app's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const addAppAccessRestrictions: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     app?:
       | {
           /**
@@ -4367,15 +4367,15 @@ export const addAppAccessRestrictions: ApiHeroEndpoint<
  * | Type    | Description                                                                                                                                                |
  * | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
  * | `array` | The GitHub Apps that have push access to this branch. Use the app's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const setAppAccessRestrictions: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     restriction?:
       | {
           /**
@@ -4403,15 +4403,15 @@ export const setAppAccessRestrictions: ApiHeroEndpoint<
  * | Type    | Description                                                                                                                                                |
  * | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
  * | `array` | The GitHub Apps that have push access to this branch. Use the app's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const removeAppAccessRestrictions: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     app?:
       | {
           /**
@@ -4435,12 +4435,12 @@ export const removeAppAccessRestrictions: ApiHeroEndpoint<
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  * 
  * Lists the teams who have push access to this branch. The list includes child teams.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getTeamsWithAccessToProtectedBranch: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   Array<Team>
 > = {
   id: "repos/get-teams-with-access-to-protected-branch",
@@ -4459,15 +4459,15 @@ export const getTeamsWithAccessToProtectedBranch: ApiHeroEndpoint<
  * | Type    | Description                                                                                                                                |
  * | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
  * | `array` | The teams that can have push access. Use the team's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const addTeamAccessRestrictions: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     team?:
       | {
           /**
@@ -4495,15 +4495,15 @@ export const addTeamAccessRestrictions: ApiHeroEndpoint<
  * | Type    | Description                                                                                                                                |
  * | ------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
  * | `array` | The teams that can have push access. Use the team's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const setTeamAccessRestrictions: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     restriction?:
       | {
           /**
@@ -4531,15 +4531,15 @@ export const setTeamAccessRestrictions: ApiHeroEndpoint<
  * | Type    | Description                                                                                                                                         |
  * | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
  * | `array` | Teams that should no longer have push access. Use the team's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const removeTeamAccessRestrictions: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     team?:
       | {
           /**
@@ -4563,12 +4563,12 @@ export const removeTeamAccessRestrictions: ApiHeroEndpoint<
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  * 
  * Lists the people who have push access to this branch.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getUsersWithAccessToProtectedBranch: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   Array<SimpleUser>
 > = {
   id: "repos/get-users-with-access-to-protected-branch",
@@ -4587,15 +4587,15 @@ export const getUsersWithAccessToProtectedBranch: ApiHeroEndpoint<
  * | Type    | Description                                                                                                                   |
  * | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
  * | `array` | Usernames for people who can have push access. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const addUserAccessRestrictions: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     user?:
       | {
           /**
@@ -4623,15 +4623,15 @@ export const addUserAccessRestrictions: ApiHeroEndpoint<
  * | Type    | Description                                                                                                                   |
  * | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
  * | `array` | Usernames for people who can have push access. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const setUserAccessRestrictions: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     restriction?:
       | {
           /**
@@ -4659,15 +4659,15 @@ export const setUserAccessRestrictions: ApiHeroEndpoint<
  * | Type    | Description                                                                                                                                   |
  * | ------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
  * | `array` | Usernames of the people who should no longer have push access. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const removeUserAccessRestrictions: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     user?:
       | {
           /**
@@ -4693,12 +4693,12 @@ export const removeUserAccessRestrictions: ApiHeroEndpoint<
  * When authenticated with admin or owner permissions to the repository, you can use this endpoint to check whether a branch requires signed commits. An enabled status of `true` indicates you must sign commits on this branch. For more information, see [Signing commits with GPG](https://docs.github.com/articles/signing-commits-with-gpg) in GitHub Help.
  * 
  * **Note**: You must enable branch protection to require signed commits.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getCommitSignatureProtection: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   ProtectedBranchAdminEnforced
 > = {
   id: "repos/get-commit-signature-protection",
@@ -4713,12 +4713,12 @@ export const getCommitSignatureProtection: ApiHeroEndpoint<
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  * 
  * When authenticated with admin or owner permissions to the repository, you can use this endpoint to require signed commits on a branch. You must enable branch protection to require signed commits.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createCommitSignatureProtection: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   ProtectedBranchAdminEnforced
 > = {
   id: "repos/create-commit-signature-protection",
@@ -4733,12 +4733,12 @@ export const createCommitSignatureProtection: ApiHeroEndpoint<
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  * 
  * When authenticated with admin or owner permissions to the repository, you can use this endpoint to disable required signed commits on a branch. You must enable branch protection to require signed commits.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deleteCommitSignatureProtection: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   void
 > = {
   id: "repos/delete-commit-signature-protection",
@@ -4751,13 +4751,13 @@ export const deleteCommitSignatureProtection: ApiHeroEndpoint<
 
 * Get a deployment status
 * Users with pull access can view a deployment status for a deployment:
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param deploymentId - deployment_id parameter
 * @param statusId 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getDeploymentStatus: ApiHeroEndpoint<
-  { repo: string; deploymentId: number; statusId: number; owner: string },
+  { owner: string; deploymentId: number; statusId: number; repo: string },
   DeploymentStatus
 > = {
   id: "repos/get-deployment-status",
@@ -4770,13 +4770,13 @@ export const getDeploymentStatus: ApiHeroEndpoint<
 
 * Redeliver a delivery for a repository webhook
 * Redeliver a webhook delivery for a webhook configured in a repository.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param hookId - The unique identifier of the hook.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param deliveryId 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param hookId - The unique identifier of the hook. 
 */
 export const redeliverWebhookDelivery: ApiHeroEndpoint<
-  { repo: string; hookId: number; deliveryId: number; owner: string },
+  { owner: string; deliveryId: number; repo: string; hookId: number },
   {}
 > = {
   id: "repos/redeliver-webhook-delivery",
@@ -4789,12 +4789,12 @@ export const redeliverWebhookDelivery: ApiHeroEndpoint<
 
 * Get status checks protection
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getStatusChecksProtection: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   StatusCheckPolicy
 > = {
   id: "repos/get-status-checks-protection",
@@ -4807,12 +4807,12 @@ export const getStatusChecksProtection: ApiHeroEndpoint<
 
 * Remove status check protection
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const removeStatusCheckProtection: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   void
 > = {
   id: "repos/remove-status-check-protection",
@@ -4827,15 +4827,15 @@ export const removeStatusCheckProtection: ApiHeroEndpoint<
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
  * 
  * Updating required status checks requires admin or owner permissions to the repository and branch protection to be enabled.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateStatusCheckProtection: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     protection?: {
       /**
        * The list of status checks to require in order to merge into this branch.
@@ -4877,12 +4877,12 @@ export const updateStatusCheckProtection: ApiHeroEndpoint<
 
 * Get pull request review protection
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getPullRequestReviewProtection: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   ProtectedBranchPullRequestReview
 > = {
   id: "repos/get-pull-request-review-protection",
@@ -4895,12 +4895,12 @@ export const getPullRequestReviewProtection: ApiHeroEndpoint<
 
 * Delete pull request review protection
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const deletePullRequestReviewProtection: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   void
 > = {
   id: "repos/delete-pull-request-review-protection",
@@ -4917,15 +4917,15 @@ export const deletePullRequestReviewProtection: ApiHeroEndpoint<
  * Updating pull request review enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
  * 
  * **Note**: Passing new arrays of `users` and `teams` replaces their previous values.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updatePullRequestReviewProtection: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     protection?: {
       /**
        * Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit.
@@ -4995,12 +4995,12 @@ export const updatePullRequestReviewProtection: ApiHeroEndpoint<
 
 * Get all status check contexts
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getAllStatusCheckContexts: ApiHeroEndpoint<
-  { repo: string; branch: string; owner: string },
+  { owner: string; branch: string; repo: string },
   Array<string>
 > = {
   id: "repos/get-all-status-check-contexts",
@@ -5013,15 +5013,15 @@ export const getAllStatusCheckContexts: ApiHeroEndpoint<
 
 * Add status check contexts
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const addStatusCheckContexts: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     context?:
       | {
           /**
@@ -5043,15 +5043,15 @@ export const addStatusCheckContexts: ApiHeroEndpoint<
 
 * Set status check contexts
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const setStatusCheckContexts: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     requiredStatusCheck?:
       | {
           /**
@@ -5073,15 +5073,15 @@ export const setStatusCheckContexts: ApiHeroEndpoint<
 
 * Remove status check contexts
 * Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param branch - The name of the branch.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const removeStatusCheckContexts: ApiHeroEndpoint<
   {
-    repo: string;
-    branch: string;
     owner: string;
+    branch: string;
+    repo: string;
     context?:
       | {
           /**

@@ -31,27 +31,27 @@ import {
  * GitHub Apps must have the `security_events` read permission to use this endpoint.
 * @param org - The organization name. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [direction] - The direction to sort the results by.
 * @param [page=1] - Page number of the results to fetch.
+* @param [direction] - The direction to sort the results by.
+* @param [toolName] - The name of a code scanning tool. Only results by this tool will be listed. You can specify the tool by using either `tool_name` or `tool_guid`, but not both.
 * @param [sort] - The property by which to sort the results.
 * @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
-* @param [toolName] - The name of a code scanning tool. Only results by this tool will be listed. You can specify the tool by using either `tool_name` or `tool_guid`, but not both.
 * @param [state] - If specified, only code scanning alerts with this state will be returned.
-* @param [toolGuid] - The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both.
-* @param [after] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor. 
+* @param [after] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
+* @param [toolGuid] - The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both. 
 */
 export const listAlertsForOrg: ApiHeroEndpoint<
   {
     org: string;
     perPage?: number;
-    direction?: "asc" | "desc";
     page?: number;
+    direction?: "asc" | "desc";
+    toolName?: CodeScanningAnalysisToolName;
     sort?: "created" | "updated";
     before?: string;
-    toolName?: CodeScanningAnalysisToolName;
     state?: "open" | "closed" | "dismissed" | "fixed";
-    toolGuid?: CodeScanningAnalysisToolGuid;
     after?: string;
+    toolGuid?: CodeScanningAnalysisToolGuid;
   },
   Array<CodeScanningOrganizationAlertItems>,
   { Link: string }
@@ -75,29 +75,29 @@ export const listAlertsForOrg: ApiHeroEndpoint<
  * The response includes a `most_recent_instance` object.
  * This provides details of the most recent instance of this alert
  * for the default branch (or for the specified Git reference if you used `ref` in the request).
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [direction] - The direction to sort the results by.
 * @param [page=1] - Page number of the results to fetch.
+* @param [direction] - The direction to sort the results by.
 * @param [toolName] - The name of a code scanning tool. Only results by this tool will be listed. You can specify the tool by using either `tool_name` or `tool_guid`, but not both.
-* @param [toolGuid] - The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both.
-* @param [ref] - The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
+* @param [sort] - The property by which to sort the results.
 * @param [state] - If specified, only code scanning alerts with this state will be returned.
-* @param [sort] - The property by which to sort the results. 
+* @param [ref] - The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
+* @param [toolGuid] - The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both. 
 */
 export const listAlertsForRepo: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     perPage?: number;
-    direction?: "asc" | "desc";
     page?: number;
+    direction?: "asc" | "desc";
     toolName?: CodeScanningAnalysisToolName;
-    toolGuid?: CodeScanningAnalysisToolGuid;
-    ref?: CodeScanningRef;
-    state?: "open" | "closed" | "dismissed" | "fixed";
     sort?: "created" | "updated";
+    state?: "open" | "closed" | "dismissed" | "fixed";
+    ref?: CodeScanningRef;
+    toolGuid?: CodeScanningAnalysisToolGuid;
   },
   Array<CodeScanningAlertItems>
 > = {
@@ -127,13 +127,13 @@ export const listAlertsForRepo: ApiHeroEndpoint<
  * The `202 Accepted`, response includes an `id` value.
  * You can use this ID to check the status of the upload by using this for the `/sarifs/{sarif_id}` endpoint.
  * For more information, see "[Get information about a SARIF upload](/rest/reference/code-scanning#get-information-about-a-sarif-upload)."
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const uploadSarif: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     sarif: {
       ref: CodeScanningRef;
       sarif: CodeScanningAnalysisSarifFile;
@@ -187,25 +187,25 @@ This property is used to convert file paths from absolute to relative, so that a
  * 
  * **Deprecation notice**:
  * The `tool_name` field is deprecated and will, in future, not be included in the response for this endpoint. The example response reflects this change. The tool name can now be found inside the `tool` field.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [toolName] - The name of a code scanning tool. Only results by this tool will be listed. You can specify the tool by using either `tool_name` or `tool_guid`, but not both.
-* @param [toolGuid] - The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both.
+* @param [sarifId] - Filter analyses belonging to the same SARIF upload.
 * @param [ref] - The Git reference for the analyses you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
-* @param [sarifId] - Filter analyses belonging to the same SARIF upload. 
+* @param [toolGuid] - The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both. 
 */
 export const listRecentAnalyses: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     perPage?: number;
     page?: number;
     toolName?: CodeScanningAnalysisToolName;
-    toolGuid?: CodeScanningAnalysisToolGuid;
-    ref?: string;
     sarifId?: string;
+    ref?: string;
+    toolGuid?: CodeScanningAnalysisToolGuid;
   },
   Array<CodeScanningAnalysis>
 > = {
@@ -224,27 +224,27 @@ export const listRecentAnalyses: ApiHeroEndpoint<
  * and you must use an access token with the `repo` scope or `security_events` scope.
 * @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [direction] - The direction to sort the results by.
 * @param [page=1] - Page number of the results to fetch.
-* @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
+* @param [direction] - The direction to sort the results by.
 * @param [toolName] - The name of a code scanning tool. Only results by this tool will be listed. You can specify the tool by using either `tool_name` or `tool_guid`, but not both.
-* @param [toolGuid] - The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both.
+* @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
 * @param [after] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
 * @param [sort] - The property by which to sort the results.
-* @param [state] - If specified, only code scanning alerts with this state will be returned. 
+* @param [state] - If specified, only code scanning alerts with this state will be returned.
+* @param [toolGuid] - The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both. 
 */
 export const listAlertsForEnterprise: ApiHeroEndpoint<
   {
     enterprise: string;
     perPage?: number;
-    direction?: "asc" | "desc";
     page?: number;
-    before?: string;
+    direction?: "asc" | "desc";
     toolName?: CodeScanningAnalysisToolName;
-    toolGuid?: CodeScanningAnalysisToolGuid;
+    before?: string;
     after?: string;
     sort?: "created" | "updated";
     state?: "open" | "closed" | "dismissed" | "fixed";
+    toolGuid?: CodeScanningAnalysisToolGuid;
   },
   Array<CodeScanningOrganizationAlertItems>,
   { Link: string }
@@ -259,12 +259,12 @@ export const listAlertsForEnterprise: ApiHeroEndpoint<
 
 * Get information about a SARIF upload
 * Gets information about a SARIF upload, including the status and the URL of the analysis that was uploaded so that you can retrieve details of the analysis. For more information, see "[Get a code scanning analysis for a repository](/rest/reference/code-scanning#get-a-code-scanning-analysis-for-a-repository)." You must use an access token with the `security_events` scope to use this endpoint with private repos, the `public_repo` scope also grants permission to read security events on public repos only. GitHub Apps must have the `security_events` read permission to use this endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param sarifId - The SARIF ID obtained after uploading.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getSarif: ApiHeroEndpoint<
-  { repo: string; sarifId: string; owner: string },
+  { owner: string; sarifId: string; repo: string },
   CodeScanningSarifsStatus
 > = {
   id: "code-scanning/get-sarif",
@@ -280,12 +280,12 @@ export const getSarif: ApiHeroEndpoint<
  * 
  * **Deprecation notice**:
  * The instances field is deprecated and will, in future, not be included in the response for this endpoint. The example response reflects this change. The same information can now be retrieved via a GET request to the URL specified by `instances_url`.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param alertNumber - The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getAlert: ApiHeroEndpoint<
-  { repo: string; alertNumber: AlertNumber; owner: string },
+  { owner: string; alertNumber: AlertNumber; repo: string },
   CodeScanningAlert
 > = {
   id: "code-scanning/get-alert",
@@ -298,15 +298,15 @@ export const getAlert: ApiHeroEndpoint<
 
 * Update a code scanning alert
 * Updates the status of a single code scanning alert. You must use an access token with the `security_events` scope to use this endpoint with private repositories. You can also use tokens with the `public_repo` scope for public repositories only. GitHub Apps must have the `security_events` write permission to use this endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param alertNumber - The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateAlert: ApiHeroEndpoint<
   {
-    repo: string;
-    alertNumber: AlertNumber;
     owner: string;
+    alertNumber: AlertNumber;
+    repo: string;
     alert: {
       state: CodeScanningAlertSetState;
       dismissed_reason?: CodeScanningAlertDismissedReason;
@@ -343,12 +343,12 @@ export const updateAlert: ApiHeroEndpoint<
  * the response contains the analysis data that was uploaded.
  * This is formatted as
  * [SARIF version 2.1.0](https://docs.oasis-open.org/sarif/sarif/v2.1.0/cs01/sarif-v2.1.0-cs01.html).
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param analysisId - The ID of the analysis, as returned from the `GET /repos/{owner}/{repo}/code-scanning/analyses` operation.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getAnalysis: ApiHeroEndpoint<
-  { repo: string; analysisId: number; owner: string },
+  { owner: string; analysisId: number; repo: string },
   CodeScanningAnalysis
 > = {
   id: "code-scanning/get-analysis",
@@ -426,13 +426,13 @@ export const getAnalysis: ApiHeroEndpoint<
  * * Parse the response for the value of `confirm_delete_url` and, if found, use this in the next iteration.
  * 
  * The above process assumes that you want to remove all trace of the tool's analyses from the GitHub user interface, for the specified repository, and it therefore uses the `confirm_delete_url` value. Alternatively, you could use the `next_analysis_url` value, which would leave the last analysis in each set undeleted to avoid removing a tool's analysis entirely.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param analysisId - The ID of the analysis, as returned from the `GET /repos/{owner}/{repo}/code-scanning/analyses` operation.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param analysisId - The ID of the analysis, as returned from the `GET /repos/{owner}/{repo}/code-scanning/analyses` operation.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [confirmDelete] - Allow deletion if the specified analysis is the last in a set. If you attempt to delete the final analysis in a set without setting this parameter to `true`, you'll get a 400 response with the message: `Analysis is last of its type and deletion may result in the loss of historical alert data. Please specify confirm_delete.` 
 */
 export const deleteAnalysis: ApiHeroEndpoint<
-  { repo: string; analysisId: number; owner: string; confirmDelete?: string | null },
+  { owner: string; analysisId: number; repo: string; confirmDelete?: string | null },
   CodeScanningAnalysisDeletion
 > = {
   id: "code-scanning/delete-analysis",
@@ -448,18 +448,18 @@ export const deleteAnalysis: ApiHeroEndpoint<
  * You must use an access token with the `security_events` scope to use this endpoint with private repos,
  * the `public_repo` scope also grants permission to read security events on public repos only.
  * GitHub Apps must have the `security_events` read permission to use this endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param alertNumber - The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param alertNumber - The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [ref] - The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`. 
 */
 export const listAlertInstances: ApiHeroEndpoint<
   {
-    repo: string;
-    alertNumber: AlertNumber;
     owner: string;
+    alertNumber: AlertNumber;
+    repo: string;
     perPage?: number;
     page?: number;
     ref?: CodeScanningRef;

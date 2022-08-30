@@ -611,14 +611,14 @@ export const listFollowingForUser: ApiHeroEndpoint<
  * https://api.github.com/users/octocat/hovercard?subject_type=repository&subject_id=1300192
  * ```
 * @param username - The handle for the GitHub user account.
-* @param [subjectType] - Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.
-* @param [subjectId] - Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`. 
+* @param [subjectId] - Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`.
+* @param [subjectType] - Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`. 
 */
 export const getContextForUser: ApiHeroEndpoint<
   {
     username: string;
-    subjectType?: "organization" | "repository" | "issue" | "pull_request";
     subjectId?: string;
+    subjectType?: "organization" | "repository" | "issue" | "pull_request";
   },
   Hovercard
 > = {

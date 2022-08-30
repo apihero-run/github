@@ -8,11 +8,11 @@ import { ApplicationGrant, Authorization, ApiHeroEndpoint } from "./@types";
 * List your authorizations
 * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [clientId] - The client ID of your GitHub app.
-* @param [page=1] - Page number of the results to fetch. 
+* @param [page=1] - Page number of the results to fetch.
+* @param [clientId] - The client ID of your GitHub app. 
 */
 export const listAuthorizations: ApiHeroEndpoint<
-  { perPage?: number; clientId?: string; page?: number },
+  { perPage?: number; page?: number; clientId?: string },
   Array<Authorization>,
   { Link: string }
 > = {
@@ -97,12 +97,12 @@ export const createAuthorization: ApiHeroEndpoint<
 * **Deprecation Notice:** GitHub will discontinue the [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations/), which is used by integrations to create personal access tokens and OAuth tokens, and you must now create these tokens using our [web application flow](https://docs.github.com/developers/apps/authorizing-oauth-apps#web-application-flow). The [OAuth Authorizations API](https://docs.github.com/rest/reference/oauth-authorizations) will be removed on November, 13, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-auth-endpoint/).
  * 
  * You can use this API to list the set of OAuth applications that have been granted access to your account. Unlike the [list your authorizations](https://docs.github.com/rest/reference/oauth-authorizations#list-your-authorizations) API, this API does not manage individual tokens. This API will return one entry for each OAuth application that has been granted access to your account, regardless of the number of tokens an application has generated for your user. The list of OAuth applications returned matches what is shown on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized). The `scopes` returned are the union of scopes authorized for the application. For example, if an application has one token with `repo` scope and another token with `user` scope, the grant will return `["repo", "user"]`.
-* @param [clientId] - The client ID of your GitHub app.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [page=1] - Page number of the results to fetch. 
+* @param [page=1] - Page number of the results to fetch.
+* @param [clientId] - The client ID of your GitHub app. 
 */
 export const listGrants: ApiHeroEndpoint<
-  { clientId?: string; perPage?: number; page?: number },
+  { perPage?: number; page?: number; clientId?: string },
   Array<ApplicationGrant>,
   { Link: string }
 > = {
@@ -307,13 +307,13 @@ export const getOrCreateAuthorizationForApp: ApiHeroEndpoint<
  * This method will create a new authorization for the specified OAuth application, only if an authorization for that application and fingerprint do not already exist for the user. The URL includes the 20 character client ID for the OAuth app that is requesting the token. `fingerprint` is a unique string to distinguish an authorization from others created for the same client ID and user. It returns the user's existing authorization for the application if one is present. Otherwise, it creates and returns a new one.
  * 
  * If you have two-factor authentication setup, Basic Authentication for this endpoint requires that you use a one-time password (OTP) and your username and password instead of tokens. For more information, see "[Working with two-factor authentication](https://docs.github.com/rest/overview/other-authentication-methods#working-with-two-factor-authentication)."
-* @param clientId - The client ID of the OAuth app.
-* @param fingerprint  
+* @param fingerprint 
+* @param clientId - The client ID of the OAuth app. 
 */
 export const getOrCreateAuthorizationForAppAndFingerprint: ApiHeroEndpoint<
   {
-    clientId: string;
     fingerprint: string;
+    clientId: string;
     payload: {
       /**
        * A note to remind you what the OAuth token is for.

@@ -22,18 +22,18 @@ import { ScimUser, ScimUserList, ApiHeroEndpoint } from "./@types";
  * - If the user signs in, their GitHub account is linked to this entry.
  * - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub organization, and the external identity `null` entry remains in place.
 * @param org - The organization name. The name is not case sensitive.
-* @param [startIndex] - Used for pagination: the index of the first result to return.
-* @param [count] - Used for pagination: the number of results to return.
 * @param [filter] - Filters results using the equals query parameter operator (`eq`). You can filter results that are equal to `id`, `userName`, `emails`, and `external_id`. For example, to search for an identity with the `userName` Octocat, you would use this query:
 
 `?filter=userName%20eq%20\"Octocat\"`.
 
 To filter results for the identity with the email `octocat@github.com`, you would use this query:
 
-`?filter=emails%20eq%20\"octocat@github.com\"`. 
+`?filter=emails%20eq%20\"octocat@github.com\"`.
+* @param [startIndex] - Used for pagination: the index of the first result to return.
+* @param [count] - Used for pagination: the number of results to return. 
 */
 export const listProvisionedIdentities: ApiHeroEndpoint<
-  { org: string; startIndex?: number; count?: number; filter?: string },
+  { org: string; filter?: string; startIndex?: number; count?: number },
   ScimUserList
 > = {
   id: "scim/list-provisioned-identities",

@@ -34,12 +34,12 @@ import {
  * language:go`](https://github.com/search?utf8=%E2%9C%93&q=amazing+language%3Ago&type=Code) is.
 * @param q - The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as the web interface for GitHub. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching code](https://docs.github.com/search-github/searching-on-github/searching-code)" for a detailed list of qualifiers.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [order] - Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
+* @param [page=1] - Page number of the results to fetch.
 * @param [sort] - Sorts the results of your query. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
-* @param [page=1] - Page number of the results to fetch. 
+* @param [order] - Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`. 
 */
 export const code: ApiHeroEndpoint<
-  { q: string; perPage?: number; order?: "desc" | "asc"; sort?: "indexed"; page?: number },
+  { q: string; perPage?: number; page?: number; sort?: "indexed"; order?: "desc" | "asc" },
   {
     items: Array<CodeSearchResultItem>;
     total_count: number;
@@ -66,17 +66,17 @@ export const code: ApiHeroEndpoint<
  * This query searches for users with the name `tom`. The results are restricted to users with more than 42 repositories and over 1,000 followers.
 * @param q - The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as the web interface for GitHub. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching users](https://docs.github.com/search-github/searching-on-github/searching-users)" for a detailed list of qualifiers.
 * @param [perPage=30] - The number of results per page (max 100).
+* @param [page=1] - Page number of the results to fetch.
 * @param [order] - Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
-* @param [sort] - Sorts the results of your query by number of `followers` or `repositories`, or when the person `joined` GitHub. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
-* @param [page=1] - Page number of the results to fetch. 
+* @param [sort] - Sorts the results of your query by number of `followers` or `repositories`, or when the person `joined` GitHub. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) 
 */
 export const users: ApiHeroEndpoint<
   {
     q: string;
     perPage?: number;
+    page?: number;
     order?: "desc" | "asc";
     sort?: "followers" | "repositories" | "joined";
-    page?: number;
   },
   {
     items: Array<UserSearchResultItem>;
@@ -107,14 +107,15 @@ export const users: ApiHeroEndpoint<
  * **Note:** For [user-to-server](https://docs.github.com/developers/apps/identifying-and-authorizing-users-for-github-apps#user-to-server-requests) GitHub App requests, you can't retrieve a combination of issues and pull requests in a single query. Requests that don't include the `is:issue` or `is:pull-request` qualifier will receive an HTTP `422 Unprocessable Entity` response. To get results for both issues and pull requests, you must send separate queries for issues and pull requests. For more information about the `is` qualifier, see "[Searching only issues or pull requests](https://docs.github.com/github/searching-for-information-on-github/searching-issues-and-pull-requests#search-only-issues-or-pull-requests)."
 * @param q - The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as the web interface for GitHub. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching issues and pull requests](https://docs.github.com/search-github/searching-on-github/searching-issues-and-pull-requests)" for a detailed list of qualifiers.
 * @param [perPage=30] - The number of results per page (max 100).
+* @param [page=1] - Page number of the results to fetch.
 * @param [order] - Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
-* @param [sort] - Sorts the results of your query by the number of `comments`, `reactions`, `reactions-+1`, `reactions--1`, `reactions-smile`, `reactions-thinking_face`, `reactions-heart`, `reactions-tada`, or `interactions`. You can also sort results by how recently the items were `created` or `updated`, Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
-* @param [page=1] - Page number of the results to fetch. 
+* @param [sort] - Sorts the results of your query by the number of `comments`, `reactions`, `reactions-+1`, `reactions--1`, `reactions-smile`, `reactions-thinking_face`, `reactions-heart`, `reactions-tada`, or `interactions`. You can also sort results by how recently the items were `created` or `updated`, Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) 
 */
 export const issuesAndPullRequests: ApiHeroEndpoint<
   {
     q: string;
     perPage?: number;
+    page?: number;
     order?: "desc" | "asc";
     sort?:
       | "comments"
@@ -128,7 +129,6 @@ export const issuesAndPullRequests: ApiHeroEndpoint<
       | "interactions"
       | "created"
       | "updated";
-    page?: number;
   },
   {
     items: Array<IssueSearchResultItem>;
@@ -154,20 +154,20 @@ export const issuesAndPullRequests: ApiHeroEndpoint<
  * `q=bug+defect+enhancement&repository_id=64778136`
  * 
  * The labels that best match the query appear first in the search results.
-* @param q - The search keywords. This endpoint does not accept qualifiers in the query. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query).
 * @param repositoryId - The id of the repository.
+* @param q - The search keywords. This endpoint does not accept qualifiers in the query. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query).
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [order] - Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
 * @param [page=1] - Page number of the results to fetch.
+* @param [order] - Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
 * @param [sort] - Sorts the results of your query by when the label was `created` or `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) 
 */
 export const labels: ApiHeroEndpoint<
   {
-    q: string;
     repositoryId: number;
+    q: string;
     perPage?: number;
-    order?: "desc" | "asc";
     page?: number;
+    order?: "desc" | "asc";
     sort?: "created" | "updated";
   },
   {
@@ -225,17 +225,17 @@ export const topics: ApiHeroEndpoint<
  * `q=repo:octocat/Spoon-Knife+css`
 * @param q - The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as the web interface for GitHub. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching commits](https://docs.github.com/search-github/searching-on-github/searching-commits)" for a detailed list of qualifiers.
 * @param [perPage=30] - The number of results per page (max 100).
+* @param [page=1] - Page number of the results to fetch.
 * @param [order] - Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
-* @param [sort] - Sorts the results of your query by `author-date` or `committer-date`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results)
-* @param [page=1] - Page number of the results to fetch. 
+* @param [sort] - Sorts the results of your query by `author-date` or `committer-date`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) 
 */
 export const commits: ApiHeroEndpoint<
   {
     q: string;
     perPage?: number;
+    page?: number;
     order?: "desc" | "asc";
     sort?: "author-date" | "committer-date";
-    page?: number;
   },
   {
     items: Array<CommitSearchResultItem>;
@@ -263,16 +263,16 @@ export const commits: ApiHeroEndpoint<
  * This query searches for repositories with the word `tetris` in the name, the description, or the README. The results are limited to repositories where the primary language is assembly. The results are sorted by stars in descending order, so that the most popular repositories appear first in the search results.
 * @param q - The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as the web interface for GitHub. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching for repositories](https://docs.github.com/articles/searching-for-repositories/)" for a detailed list of qualifiers.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [order] - Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
 * @param [page=1] - Page number of the results to fetch.
+* @param [order] - Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
 * @param [sort] - Sorts the results of your query by number of `stars`, `forks`, or `help-wanted-issues` or how recently the items were `updated`. Default: [best match](https://docs.github.com/rest/reference/search#ranking-search-results) 
 */
 export const repos: ApiHeroEndpoint<
   {
     q: string;
     perPage?: number;
-    order?: "desc" | "asc";
     page?: number;
+    order?: "desc" | "asc";
     sort?: "stars" | "forks" | "help-wanted-issues" | "updated";
   },
   {

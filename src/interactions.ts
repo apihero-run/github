@@ -88,11 +88,11 @@ export const removeRestrictionsForOrg: ApiHeroEndpoint<{ org: string }, void> = 
 
 * Get interaction restrictions for a repository
 * Shows which type of GitHub user can interact with this repository and when the restriction expires. If there are no restrictions, you will see an empty response.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getRestrictionsForRepo: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   InteractionLimitResponse
 > = {
   id: "interactions/get-restrictions-for-repo",
@@ -105,11 +105,11 @@ export const getRestrictionsForRepo: ApiHeroEndpoint<
 
 * Set interaction restrictions for a repository
 * Temporarily restricts interactions to a certain type of GitHub user within the given repository. You must have owner or admin access to set these restrictions. If an interaction limit is set for the user or organization that owns this repository, you will receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for a single repository.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const setRestrictionsForRepo: ApiHeroEndpoint<
-  { repo: string; owner: string; payload: InteractionLimit },
+  { owner: string; repo: string; payload: InteractionLimit },
   InteractionLimitResponse
 > = {
   id: "interactions/set-restrictions-for-repo",
@@ -122,10 +122,10 @@ export const setRestrictionsForRepo: ApiHeroEndpoint<
 
 * Remove interaction restrictions for a repository
 * Removes all interaction restrictions from the given repository. You must have owner or admin access to remove restrictions. If the interaction limit is set for the user or organization that owns this repository, you will receive a `409 Conflict` response and will not be able to use this endpoint to change the interaction limit for a single repository.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const removeRestrictionsForRepo: ApiHeroEndpoint<{ repo: string; owner: string }, void> = {
+export const removeRestrictionsForRepo: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "interactions/remove-restrictions-for-repo",
   clientId: "github",
 };

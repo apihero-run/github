@@ -60,12 +60,12 @@ export const listPublicEvents: ApiHeroEndpoint<
  * 
  * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
 * @param [perPage=30] - The number of results per page (max 100).
+* @param [page=1] - Page number of the results to fetch.
 * @param [direction] - The direction to sort the results by.
-* @param [sort] - The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to.
-* @param [page=1] - Page number of the results to fetch. 
+* @param [sort] - The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to. 
 */
 export const listReposStarredByAuthenticatedUser: ApiHeroEndpoint<
-  { perPage?: number; direction?: "asc" | "desc"; sort?: "created" | "updated"; page?: number },
+  { perPage?: number; page?: number; direction?: "asc" | "desc"; sort?: "created" | "updated" },
   Array<Repository>,
   { Link: string }
 > = {
@@ -80,20 +80,20 @@ export const listReposStarredByAuthenticatedUser: ApiHeroEndpoint<
 * List notifications for the authenticated user
 * List all notifications for the current user, sorted by most recently updated.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [participating=false] - If `true`, only shows notifications in which the user is directly participating or mentioned.
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [page=1] - Page number of the results to fetch.
 * @param [before] - Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
 * @param [all=false] - If `true`, show notifications marked as read.
-* @param [page=1] - Page number of the results to fetch. 
+* @param [participating=false] - If `true`, only shows notifications in which the user is directly participating or mentioned. 
 */
 export const listNotificationsForAuthenticatedUser: ApiHeroEndpoint<
   {
     perPage?: number;
-    participating?: boolean;
     since?: string;
+    page?: number;
     before?: string;
     all?: boolean;
-    page?: number;
+    participating?: boolean;
   },
   Array<Thread>,
   { Link: string }
@@ -194,17 +194,17 @@ export const listEventsForAuthenticatedUser: ApiHeroEndpoint<
  * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
 * @param username - The handle for the GitHub user account.
 * @param [perPage=30] - The number of results per page (max 100).
+* @param [page=1] - Page number of the results to fetch.
 * @param [direction] - The direction to sort the results by.
-* @param [sort] - The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to.
-* @param [page=1] - Page number of the results to fetch. 
+* @param [sort] - The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to. 
 */
 export const listReposStarredByUser: ApiHeroEndpoint<
   {
     username: string;
     perPage?: number;
+    page?: number;
     direction?: "asc" | "desc";
     sort?: "created" | "updated";
-    page?: number;
   },
   Array<StarredRepository> | Array<Repository>,
   { Link: string }
@@ -218,13 +218,13 @@ export const listReposStarredByUser: ApiHeroEndpoint<
 
 
 * List repository events
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listRepoEvents: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<Event>
 > = {
   id: "activity/list-repo-events",
@@ -236,11 +236,11 @@ export const listRepoEvents: ApiHeroEndpoint<
 
 
 * Check if a repository is starred by the authenticated user
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const checkRepoIsStarredByAuthenticatedUser: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   void
 > = {
   id: "activity/check-repo-is-starred-by-authenticated-user",
@@ -253,10 +253,10 @@ export const checkRepoIsStarredByAuthenticatedUser: ApiHeroEndpoint<
 
 * Star a repository for the authenticated user
 * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const starRepoForAuthenticatedUser: ApiHeroEndpoint<{ repo: string; owner: string }, void> =
+export const starRepoForAuthenticatedUser: ApiHeroEndpoint<{ owner: string; repo: string }, void> =
   {
     id: "activity/star-repo-for-authenticated-user",
     clientId: "github",
@@ -267,11 +267,11 @@ export const starRepoForAuthenticatedUser: ApiHeroEndpoint<{ repo: string; owner
 
 
 * Unstar a repository for the authenticated user
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const unstarRepoForAuthenticatedUser: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   void
 > = {
   id: "activity/unstar-repo-for-authenticated-user",
@@ -283,13 +283,13 @@ export const unstarRepoForAuthenticatedUser: ApiHeroEndpoint<
 
 
 * List public events for a network of repositories
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listPublicEventsForRepoNetwork: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<Event>
 > = {
   id: "activity/list-public-events-for-repo-network",
@@ -340,13 +340,13 @@ export const listReposWatchedByUser: ApiHeroEndpoint<
 * Lists the people that have starred the repository.
  * 
  * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listStargazersForRepo: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<SimpleUser> | Array<Stargazer>,
   { Link: string }
 > = {
@@ -360,13 +360,13 @@ export const listStargazersForRepo: ApiHeroEndpoint<
 
 * List watchers
 * Lists the people watching the specified repository.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listWatchersForRepo: ApiHeroEndpoint<
-  { repo: string; owner: string; perPage?: number; page?: number },
+  { owner: string; repo: string; perPage?: number; page?: number },
   Array<SimpleUser>,
   { Link: string }
 > = {
@@ -421,11 +421,11 @@ export const markThreadAsRead: ApiHeroEndpoint<{ threadId: number }, any> = {
 
 
 * Get a repository subscription
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getRepoSubscription: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   RepositorySubscription
 > = {
   id: "activity/get-repo-subscription",
@@ -438,13 +438,13 @@ export const getRepoSubscription: ApiHeroEndpoint<
 
 * Set a repository subscription
 * If you would like to watch a repository, set `subscribed` to `true`. If you would like to ignore notifications made within a repository, set `ignored` to `true`. If you would like to stop watching a repository, [delete the repository's subscription](https://docs.github.com/rest/reference/activity#delete-a-repository-subscription) completely.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const setRepoSubscription: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     payload?: {
       /**
        * Determines if all notifications should be blocked from this repository.
@@ -469,10 +469,10 @@ export const setRepoSubscription: ApiHeroEndpoint<
 
 * Delete a repository subscription
 * This endpoint should only be used to stop watching a repository. To control whether or not you wish to receive notifications from a repository, [set the repository's subscription manually](https://docs.github.com/rest/reference/activity#set-a-repository-subscription).
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const deleteRepoSubscription: ApiHeroEndpoint<{ repo: string; owner: string }, void> = {
+export const deleteRepoSubscription: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "activity/delete-repo-subscription",
   clientId: "github",
 };
@@ -483,25 +483,25 @@ export const deleteRepoSubscription: ApiHeroEndpoint<{ repo: string; owner: stri
 
 * List repository notifications for the authenticated user
 * List all notifications for the current user.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [participating=false] - If `true`, only shows notifications in which the user is directly participating or mentioned.
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [page=1] - Page number of the results to fetch.
 * @param [before] - Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
 * @param [all=false] - If `true`, show notifications marked as read.
-* @param [page=1] - Page number of the results to fetch. 
+* @param [participating=false] - If `true`, only shows notifications in which the user is directly participating or mentioned. 
 */
 export const listRepoNotificationsForAuthenticatedUser: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     perPage?: number;
-    participating?: boolean;
     since?: string;
+    page?: number;
     before?: string;
     all?: boolean;
-    page?: number;
+    participating?: boolean;
   },
   Array<Thread>,
   { Link: string }
@@ -516,13 +516,13 @@ export const listRepoNotificationsForAuthenticatedUser: ApiHeroEndpoint<
 
 * Mark repository notifications as read
 * Marks all notifications in a repository as "read" removes them from the [default view on GitHub](https://github.com/notifications). If the number of notifications is too large to complete in one request, you will receive a `202 Accepted` status and GitHub will run an asynchronous process to mark notifications as "read." To check whether any "unread" notifications remain, you can use the [List repository notifications for the authenticated user](https://docs.github.com/rest/reference/activity#list-repository-notifications-for-the-authenticated-user) endpoint and pass the query parameter `all=false`.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const markRepoNotificationsAsRead: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     payload?: {
       /**
        * Describes the last point that notifications were checked. Anything updated since this time will not be marked as read. If you omit this parameter, all notifications are marked as read. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Default: The current timestamp.

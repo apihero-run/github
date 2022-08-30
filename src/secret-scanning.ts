@@ -20,29 +20,29 @@ import {
  * GitHub Apps must have the `secret_scanning_alerts` read permission to use this endpoint.
 * @param org - The organization name. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [direction] - The direction to sort the results by.
 * @param [page=1] - Page number of the results to fetch.
+* @param [direction] - The direction to sort the results by.
+* @param [sort] - The property to sort the results by. `created` means when the alert was created. `updated` means when the alert was updated or resolved.
+* @param [after] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.  To receive an initial cursor on your first request, include an empty "after" query string.
 * @param [secretType] - A comma-separated list of secret types to return. By default all secret types are returned.
 See "[Secret scanning patterns](https://docs.github.com/code-security/secret-scanning/secret-scanning-patterns#supported-secrets-for-advanced-security)"
 for a complete list of secret types.
-* @param [after] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.  To receive an initial cursor on your first request, include an empty "after" query string.
 * @param [state] - Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
-* @param [resolution] - A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`.
-* @param [sort] - The property to sort the results by. `created` means when the alert was created. `updated` means when the alert was updated or resolved.
-* @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor. To receive an initial cursor on your first request, include an empty "before" query string. 
+* @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor. To receive an initial cursor on your first request, include an empty "before" query string.
+* @param [resolution] - A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`. 
 */
 export const listAlertsForOrg: ApiHeroEndpoint<
   {
     org: string;
     perPage?: number;
-    direction?: "asc" | "desc";
     page?: number;
-    secretType?: string;
-    after?: string;
-    state?: "open" | "resolved";
-    resolution?: string;
+    direction?: "asc" | "desc";
     sort?: "created" | "updated";
+    after?: string;
+    secretType?: string;
+    state?: "open" | "resolved";
     before?: string;
+    resolution?: string;
   },
   Array<OrganizationSecretScanningAlert>,
   { Link: string }
@@ -61,33 +61,33 @@ export const listAlertsForOrg: ApiHeroEndpoint<
  * For public repositories, you may instead use the `public_repo` scope.
  * 
  * GitHub Apps must have the `secret_scanning_alerts` read permission to use this endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [direction] - The direction to sort the results by.
 * @param [page=1] - Page number of the results to fetch.
+* @param [direction] - The direction to sort the results by.
+* @param [sort] - The property to sort the results by. `created` means when the alert was created. `updated` means when the alert was updated or resolved.
+* @param [after] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.  To receive an initial cursor on your first request, include an empty "after" query string.
 * @param [secretType] - A comma-separated list of secret types to return. By default all secret types are returned.
 See "[Secret scanning patterns](https://docs.github.com/code-security/secret-scanning/secret-scanning-patterns#supported-secrets-for-advanced-security)"
 for a complete list of secret types.
-* @param [after] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.  To receive an initial cursor on your first request, include an empty "after" query string.
 * @param [state] - Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
-* @param [resolution] - A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`.
-* @param [sort] - The property to sort the results by. `created` means when the alert was created. `updated` means when the alert was updated or resolved.
-* @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor. To receive an initial cursor on your first request, include an empty "before" query string. 
+* @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor. To receive an initial cursor on your first request, include an empty "before" query string.
+* @param [resolution] - A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`. 
 */
 export const listAlertsForRepo: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     perPage?: number;
-    direction?: "asc" | "desc";
     page?: number;
-    secretType?: string;
-    after?: string;
-    state?: "open" | "resolved";
-    resolution?: string;
+    direction?: "asc" | "desc";
     sort?: "created" | "updated";
+    after?: string;
+    secretType?: string;
+    state?: "open" | "resolved";
     before?: string;
+    resolution?: string;
   },
   Array<SecretScanningAlert>
 > = {
@@ -107,12 +107,12 @@ export const listAlertsForRepo: ApiHeroEndpoint<
 * @param [direction] - The direction to sort the results by.
 * @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
 * @param [after] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
+* @param [sort] - The property to sort the results by. `created` means when the alert was created. `updated` means when the alert was updated or resolved.
 * @param [secretType] - A comma-separated list of secret types to return. By default all secret types are returned.
 See "[Secret scanning patterns](https://docs.github.com/code-security/secret-scanning/secret-scanning-patterns#supported-secrets-for-advanced-security)"
 for a complete list of secret types.
 * @param [state] - Set to `open` or `resolved` to only list secret scanning alerts in a specific state.
-* @param [resolution] - A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`.
-* @param [sort] - The property to sort the results by. `created` means when the alert was created. `updated` means when the alert was updated or resolved. 
+* @param [resolution] - A comma-separated list of resolutions. Only secret scanning alerts with one of these resolutions are listed. Valid resolutions are `false_positive`, `wont_fix`, `revoked`, `pattern_edited`, `pattern_deleted` or `used_in_tests`. 
 */
 export const listAlertsForEnterprise: ApiHeroEndpoint<
   {
@@ -121,10 +121,10 @@ export const listAlertsForEnterprise: ApiHeroEndpoint<
     direction?: "asc" | "desc";
     before?: string;
     after?: string;
+    sort?: "created" | "updated";
     secretType?: string;
     state?: "open" | "resolved";
     resolution?: string;
-    sort?: "created" | "updated";
   },
   Array<OrganizationSecretScanningAlert>,
   { Link: string }
@@ -143,12 +143,12 @@ export const listAlertsForEnterprise: ApiHeroEndpoint<
  * For public repositories, you may instead use the `public_repo` scope.
  * 
  * GitHub Apps must have the `secret_scanning_alerts` read permission to use this endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param alertNumber - The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getAlert: ApiHeroEndpoint<
-  { repo: string; alertNumber: AlertNumber; owner: string },
+  { owner: string; alertNumber: AlertNumber; repo: string },
   SecretScanningAlert
 > = {
   id: "secret-scanning/get-alert",
@@ -165,15 +165,15 @@ export const getAlert: ApiHeroEndpoint<
  * For public repositories, you may instead use the `public_repo` scope.
  * 
  * GitHub Apps must have the `secret_scanning_alerts` write permission to use this endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param alertNumber - The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateAlert: ApiHeroEndpoint<
   {
-    repo: string;
-    alertNumber: AlertNumber;
     owner: string;
+    alertNumber: AlertNumber;
+    repo: string;
     alert: {
       state: SecretScanningAlertState;
       resolution?: SecretScanningAlertResolution;
@@ -195,14 +195,14 @@ export const updateAlert: ApiHeroEndpoint<
  * For public repositories, you may instead use the `public_repo` scope.
  * 
  * GitHub Apps must have the `secret_scanning_alerts` read permission to use this endpoint.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param alertNumber - The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param alertNumber - The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listLocationsForAlert: ApiHeroEndpoint<
-  { repo: string; alertNumber: AlertNumber; owner: string; perPage?: number; page?: number },
+  { owner: string; alertNumber: AlertNumber; repo: string; perPage?: number; page?: number },
   Array<SecretScanningLocation>,
   { Link: string }
 > = {

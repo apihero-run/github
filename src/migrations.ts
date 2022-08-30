@@ -253,10 +253,10 @@ export const startForOrg: ApiHeroEndpoint<
  * *   `has_large_files` - the boolean value describing whether files larger than 100MB were found during the `importing` step.
  * *   `large_files_size` - the total size in gigabytes of files larger than 100MB found in the originating repository.
  * *   `large_files_count` - the total number of files larger than 100MB found in the originating repository. To see a list of these files, make a "Get Large Files" request.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getImportStatus: ApiHeroEndpoint<{ repo: string; owner: string }, Import> = {
+export const getImportStatus: ApiHeroEndpoint<{ owner: string; repo: string }, Import> = {
   id: "migrations/get-import-status",
   clientId: "github",
 };
@@ -267,13 +267,13 @@ export const getImportStatus: ApiHeroEndpoint<{ repo: string; owner: string }, I
 
 * Start an import
 * Start a source import to a GitHub repository using GitHub Importer.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const startImport: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     payload: {
       /**
        * The originating VCS type. Without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
@@ -314,10 +314,10 @@ export const startImport: ApiHeroEndpoint<
 
 * Cancel an import
 * Stop an import for a repository.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const cancelImport: ApiHeroEndpoint<{ repo: string; owner: string }, void> = {
+export const cancelImport: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "migrations/cancel-import",
   clientId: "github",
 };
@@ -333,13 +333,13 @@ export const cancelImport: ApiHeroEndpoint<{ repo: string; owner: string }, void
  * Some servers (e.g. TFS servers) can have several projects at a single URL. In those cases the import progress will
  * have the status `detection_found_multiple` and the Import Progress response will include a `project_choices` array.
  * You can select the project to import by providing one of the objects in the `project_choices` array in the update request.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateImport: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     payload?: {
       /**
        * The type of version control system you are migrating from.
@@ -404,13 +404,13 @@ export const getStatusForAuthenticatedUser: ApiHeroEndpoint<
 
 * Update Git LFS preference
 * You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability is powered by [Git LFS](https://git-lfs.github.com). You can learn more about our LFS feature and working with large files [on our help site](https://docs.github.com/articles/versioning-large-files/).
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const setLfsPreference: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     import: {
       /**
        * Whether to store large files during the import. `opt_in` means large files will be stored using Git LFS. `opt_out` means large files will be removed during the import.
@@ -432,12 +432,12 @@ export const setLfsPreference: ApiHeroEndpoint<
 * Each type of source control system represents authors in a different way. For example, a Git commit author has a display name and an email address, but a Subversion commit author just has a username. The GitHub Importer will make the author information valid, but the author might not be correct. For example, it will change the bare Subversion username `hubot` into something like `hubot <hubot@12341234-abab-fefe-8787-fedcba987654>`.
  * 
  * This endpoint and the [Map a commit author](https://docs.github.com/rest/reference/migrations#map-a-commit-author) endpoint allow you to provide correct Git author information.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [since] - A user ID. Only return users with an ID greater than this ID. 
 */
 export const getCommitAuthors: ApiHeroEndpoint<
-  { repo: string; owner: string; since?: number },
+  { owner: string; repo: string; since?: number },
   Array<PorterAuthor>
 > = {
   id: "migrations/get-commit-authors",
@@ -521,11 +521,11 @@ export const deleteArchiveForAuthenticatedUser: ApiHeroEndpoint<{ migrationId: n
 
 * Get large files
 * List files larger than 100MB found during the import
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getLargeFiles: ApiHeroEndpoint<
-  { repo: string; owner: string },
+  { owner: string; repo: string },
   Array<PorterLargeFile>
 > = {
   id: "migrations/get-large-files",
@@ -585,15 +585,15 @@ export const deleteArchiveForOrg: ApiHeroEndpoint<{ org: string; migrationId: nu
 
 * Map a commit author
 * Update an author's identity for the import. Your application can continue updating authors any time before you push new commits to the repository.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param authorId 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const mapCommitAuthor: ApiHeroEndpoint<
   {
-    repo: string;
-    authorId: number;
     owner: string;
+    authorId: number;
+    repo: string;
     author?: {
       /**
        * The new Git author name.

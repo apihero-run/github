@@ -6,13 +6,13 @@ import { Blob, GitCommit, GitRef, GitTag, GitTree, ShortBlob, ApiHeroEndpoint } 
 
 * Create a reference
 * Creates a reference for your repository. You are unable to create new references for empty repositories, even if the commit SHA-1 hash used exists. Empty repositories are repositories without branches.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createRef: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     ref: {
       /**
        *
@@ -74,13 +74,13 @@ export const createRef: ApiHeroEndpoint<
  * | `malformed_signature` | There was an error parsing the signature. |
  * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createTag: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     tag: {
       /**
        * The tag's name. This is typically a version (e.g., "v0.0.1").
@@ -135,13 +135,13 @@ export const createTag: ApiHeroEndpoint<
 
 
 * Create a blob
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createBlob: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     blob: {
       /**
        * The new blob's content.
@@ -169,13 +169,13 @@ export const createBlob: ApiHeroEndpoint<
 * The tree creation API accepts nested entries. If you specify both a tree and a nested path modifying that tree, this endpoint will overwrite the contents of the tree with the new path contents, and create a new tree structure.
  * 
  * If you use this endpoint to add, delete, or modify the file contents in a tree, you will need to commit the tree and then update a branch to point to the commit. For more information see "[Create a commit](https://docs.github.com/rest/reference/git#create-a-commit)" and "[Update a reference](https://docs.github.com/rest/reference/git#update-a-reference)."
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createTree: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     tree: {
       /**
        * Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure.
@@ -261,13 +261,13 @@ If not provided, GitHub will create a new Git tree object from only the entries 
  * | `malformed_signature` | There was an error parsing the signature. |
  * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const createCommit: ApiHeroEndpoint<
   {
-    repo: string;
     owner: string;
+    repo: string;
     commit: {
       /**
        * The SHA of the tree object this commit points to
@@ -345,11 +345,11 @@ export const createCommit: ApiHeroEndpoint<
 * Returns a single reference from your Git database. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't match an existing ref, a `404` is returned.
  * 
  * **Note:** You need to explicitly [request a pull request](https://docs.github.com/rest/reference/pulls#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param ref - ref parameter
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getRef: ApiHeroEndpoint<{ repo: string; ref: string; owner: string }, GitRef> = {
+export const getRef: ApiHeroEndpoint<{ owner: string; ref: string; repo: string }, GitRef> = {
   id: "git/get-ref",
   clientId: "github",
 };
@@ -359,11 +359,11 @@ export const getRef: ApiHeroEndpoint<{ repo: string; ref: string; owner: string 
 
 
 * Delete a reference
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param ref - ref parameter
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const deleteRef: ApiHeroEndpoint<{ repo: string; ref: string; owner: string }, void> = {
+export const deleteRef: ApiHeroEndpoint<{ owner: string; ref: string; repo: string }, void> = {
   id: "git/delete-ref",
   clientId: "github",
 };
@@ -373,15 +373,15 @@ export const deleteRef: ApiHeroEndpoint<{ repo: string; ref: string; owner: stri
 
 
 * Update a reference
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param ref - ref parameter
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const updateRef: ApiHeroEndpoint<
   {
-    repo: string;
-    ref: string;
     owner: string;
+    ref: string;
+    repo: string;
     payload: {
       /**
        * The SHA1 value to set this reference to
@@ -433,11 +433,11 @@ export const updateRef: ApiHeroEndpoint<
  * | `malformed_signature` | There was an error parsing the signature. |
  * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param tagSha 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getTag: ApiHeroEndpoint<{ repo: string; tagSha: string; owner: string }, GitTag> = {
+export const getTag: ApiHeroEndpoint<{ owner: string; tagSha: string; repo: string }, GitTag> = {
   id: "git/get-tag",
   clientId: "github",
 };
@@ -450,11 +450,11 @@ export const getTag: ApiHeroEndpoint<{ repo: string; tagSha: string; owner: stri
 * The `content` in the response will always be Base64 encoded.
  * 
  * _Note_: This API supports blobs up to 100 megabytes in size.
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param fileSha 
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getBlob: ApiHeroEndpoint<{ repo: string; fileSha: string; owner: string }, Blob> = {
+export const getBlob: ApiHeroEndpoint<{ owner: string; fileSha: string; repo: string }, Blob> = {
   id: "git/get-blob",
   clientId: "github",
 };
@@ -467,13 +467,13 @@ export const getBlob: ApiHeroEndpoint<{ repo: string; fileSha: string; owner: st
 * Returns a single tree using the SHA1 value for that tree.
  * 
  * If `truncated` is `true` in the response then the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param treeSha 
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param treeSha 
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [recursive] - Setting this parameter to any value returns the objects or subtrees referenced by the tree specified in `:tree_sha`. For example, setting `recursive` to any of the following will enable returning objects or subtrees: `0`, `1`, `"true"`, and `"false"`. Omit this parameter to prevent recursively returning objects or subtrees. 
 */
 export const getTree: ApiHeroEndpoint<
-  { repo: string; treeSha: string; owner: string; recursive?: string },
+  { owner: string; treeSha: string; repo: string; recursive?: string },
   GitTree
 > = {
   id: "git/get-tree",
@@ -492,14 +492,14 @@ export const getTree: ApiHeroEndpoint<
  * **Note:** You need to explicitly [request a pull request](https://docs.github.com/rest/reference/pulls#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
  * 
  * If you request matching references for a branch named `feature` but the branch `feature` doesn't exist, the response can still include other matching head refs that start with the word `feature`, such as `featureA` and `featureB`.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param ref - ref parameter
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param ref - ref parameter
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listMatchingRefs: ApiHeroEndpoint<
-  { repo: string; ref: string; owner: string; perPage?: number; page?: number },
+  { owner: string; ref: string; repo: string; perPage?: number; page?: number },
   Array<GitRef>,
   { Link: string }
 > = {
@@ -542,12 +542,12 @@ export const listMatchingRefs: ApiHeroEndpoint<
  * | `malformed_signature` | There was an error parsing the signature. |
  * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
-* @param repo - The name of the repository. The name is not case sensitive.
+* @param owner - The account owner of the repository. The name is not case sensitive.
 * @param commitSha - The SHA of the commit.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getCommit: ApiHeroEndpoint<
-  { repo: string; commitSha: string; owner: string },
+  { owner: string; commitSha: string; repo: string },
   GitCommit
 > = {
   id: "git/get-commit",

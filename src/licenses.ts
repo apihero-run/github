@@ -6,11 +6,11 @@ import { License, LicenseContent, LicenseSimple, ApiHeroEndpoint } from "./@type
 
 * Get all commonly used licenses
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [featured] 
-* @param [page=1] - Page number of the results to fetch. 
+* @param [page=1] - Page number of the results to fetch.
+* @param [featured]  
 */
 export const getAllCommonlyUsed: ApiHeroEndpoint<
-  { perPage?: number; featured?: boolean; page?: number },
+  { perPage?: number; page?: number; featured?: boolean },
   Array<LicenseSimple>
 > = {
   id: "licenses/get-all-commonly-used",
@@ -37,10 +37,10 @@ export const getLicenses: ApiHeroEndpoint<{ license: string }, License> = {
 * This method returns the contents of the repository's license file, if one is detected.
  * 
  * Similar to [Get repository content](https://docs.github.com/rest/reference/repos#get-repository-content), this method also supports [custom media types](https://docs.github.com/rest/overview/media-types) for retrieving the raw license content or rendered license HTML.
-* @param repo - The name of the repository. The name is not case sensitive.
-* @param owner - The account owner of the repository. The name is not case sensitive. 
+* @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getForRepo: ApiHeroEndpoint<{ repo: string; owner: string }, LicenseContent> = {
+export const getForRepo: ApiHeroEndpoint<{ owner: string; repo: string }, LicenseContent> = {
   id: "licenses/get-for-repo",
   clientId: "github",
 };

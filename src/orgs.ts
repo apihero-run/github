@@ -301,16 +301,16 @@ export const listBlockedUsers: ApiHeroEndpoint<{ org: string }, Array<SimpleUser
 * @param org - The organization name. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
-* @param [role] - Filter members returned by their role.
-* @param [filter] - Filter members returned in the list. `2fa_disabled` means that only members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled will be returned. This options is only available for organization owners. 
+* @param [filter] - Filter members returned in the list. `2fa_disabled` means that only members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled will be returned. This options is only available for organization owners.
+* @param [role] - Filter members returned by their role. 
 */
 export const listMembers: ApiHeroEndpoint<
   {
     org: string;
     perPage?: number;
     page?: number;
-    role?: "all" | "admin" | "member";
     filter?: "2fa_disabled" | "all";
+    role?: "all" | "admin" | "member";
   },
   Array<SimpleUser>,
   { Link: string }
@@ -343,9 +343,9 @@ The default is `desc`.
 - `all` - returns both web and Git events.
 
 The default is `web`.
-* @param [phrase] - A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
 * @param [after] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
-* @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor. 
+* @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
+* @param [phrase] - A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log). 
 */
 export const getAuditLog: ApiHeroEndpoint<
   {
@@ -353,9 +353,9 @@ export const getAuditLog: ApiHeroEndpoint<
     perPage?: number;
     order?: "desc" | "asc";
     include?: "web" | "git" | "all";
-    phrase?: string;
     after?: string;
     before?: string;
+    phrase?: string;
   },
   Array<AuditLogEvent>
 > = {
@@ -879,11 +879,11 @@ export const removeMembershipForUser: ApiHeroEndpoint<{ org: string; username: s
  * An authenticated organization owner with the `read:org` scope can list all credential authorizations for an organization that uses SAML single sign-on (SSO). The credentials are either personal access tokens or SSH keys that organization members have authorized for the organization. For more information, see [About authentication with SAML single sign-on](https://docs.github.com/en/articles/about-authentication-with-saml-single-sign-on).
 * @param org - The organization name. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
-* @param [page] - Page token
-* @param [login] - Limits the list of credentials authorizations for an organization to a specific login 
+* @param [login] - Limits the list of credentials authorizations for an organization to a specific login
+* @param [page] - Page token 
 */
 export const listSamlSsoAuthorizations: ApiHeroEndpoint<
-  { org: string; perPage?: number; page?: number; login?: string },
+  { org: string; perPage?: number; login?: string; page?: number },
   Array<CredentialAuthorization>
 > = {
   id: "orgs/list-saml-sso-authorizations",
@@ -1107,11 +1107,11 @@ export const removeSecurityManagerTeam: ApiHeroEndpoint<{ org: string; teamSlug:
 * Get a webhook delivery for an organization webhook
 * Returns a delivery for a webhook configured in an organization.
 * @param org - The organization name. The name is not case sensitive.
-* @param hookId - The unique identifier of the hook.
-* @param deliveryId  
+* @param deliveryId 
+* @param hookId - The unique identifier of the hook. 
 */
 export const getWebhookDelivery: ApiHeroEndpoint<
-  { org: string; hookId: number; deliveryId: number },
+  { org: string; deliveryId: number; hookId: number },
   HookDelivery
 > = {
   id: "orgs/get-webhook-delivery",
@@ -1144,11 +1144,11 @@ export const removeSamlSsoAuthorization: ApiHeroEndpoint<
 * Redeliver a delivery for an organization webhook
 * Redeliver a delivery for a webhook configured in an organization.
 * @param org - The organization name. The name is not case sensitive.
-* @param hookId - The unique identifier of the hook.
-* @param deliveryId  
+* @param deliveryId 
+* @param hookId - The unique identifier of the hook. 
 */
 export const redeliverWebhookDelivery: ApiHeroEndpoint<
-  { org: string; hookId: number; deliveryId: number },
+  { org: string; deliveryId: number; hookId: number },
   {}
 > = {
   id: "orgs/redeliver-webhook-delivery",
