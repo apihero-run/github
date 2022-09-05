@@ -546,7 +546,7 @@ export const checkUserCanBeAssigned: ApiHeroEndpoint<
 * @param issueNumber - The number that identifies the issue.
 * @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getIssues: ApiHeroEndpoint<
+export const getIssue: ApiHeroEndpoint<
   { owner: string; issueNumber: number; repo: string },
   Issue
 > = {

@@ -97,7 +97,7 @@ export const createForOrg: ApiHeroEndpoint<
 * Gets a project by its `id`. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
 * @param projectId - The unique identifier of the project. 
 */
-export const getProjects: ApiHeroEndpoint<{ projectId: number }, Project> = {
+export const getProject: ApiHeroEndpoint<{ projectId: number }, Project> = {
   id: "projects/get",
   clientId: "github",
 };
@@ -110,7 +110,7 @@ export const getProjects: ApiHeroEndpoint<{ projectId: number }, Project> = {
 * Deletes a project board. Returns a `404 Not Found` status if projects are disabled.
 * @param projectId - The unique identifier of the project. 
 */
-export const deleteProjects: ApiHeroEndpoint<{ projectId: number }, void> = {
+export const deleteProject: ApiHeroEndpoint<{ projectId: number }, void> = {
   id: "projects/delete",
   clientId: "github",
 };

@@ -32,7 +32,7 @@ export const getZen: ApiHeroEndpoint<void, string> = {
  * 
  * **Note:** The IP addresses shown in the documentation's response are only example values. You must always query the API directly to get the latest list of IP addresses. 
 */
-export const getMeta: ApiHeroEndpoint<void, ApiOverview> = {
+export const getMetas: ApiHeroEndpoint<void, ApiOverview> = {
   id: "meta/get",
   clientId: "github",
 };

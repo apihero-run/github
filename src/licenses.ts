@@ -24,7 +24,7 @@ export const getAllCommonlyUsed: ApiHeroEndpoint<
 * Get a license
 * @param license  
 */
-export const getLicenses: ApiHeroEndpoint<{ license: string }, License> = {
+export const getLicense: ApiHeroEndpoint<{ license: string }, License> = {
   id: "licenses/get",
   clientId: "github",
 };

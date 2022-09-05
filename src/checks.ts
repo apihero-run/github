@@ -306,7 +306,7 @@ export const listForRef: ApiHeroEndpoint<
 * @param checkRunId - The unique identifier of the check run.
 * @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getChecks: ApiHeroEndpoint<
+export const getCheck: ApiHeroEndpoint<
   { owner: string; checkRunId: number; repo: string },
   CheckRun
 > = {

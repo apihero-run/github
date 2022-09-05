@@ -9,7 +9,7 @@ import { RateLimitOverview, ApiHeroEndpoint } from "./@types";
  * 
  * **Note:** The `rate` object is deprecated. If you're writing new API client code or updating existing code, you should use the `core` object instead of the `rate` object. The `core` object contains the same information that is present in the `rate` object. 
 */
-export const getRateLimit: ApiHeroEndpoint<
+export const getRateLimits: ApiHeroEndpoint<
   void,
   RateLimitOverview,
   { "X-RateLimit-Limit": number; "X-RateLimit-Reset": number; "X-RateLimit-Remaining": number }

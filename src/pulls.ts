@@ -166,7 +166,7 @@ export const listReviewCommentsForRepo: ApiHeroEndpoint<
 * @param pullNumber - The number that identifies the pull request.
 * @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getPulls: ApiHeroEndpoint<
+export const getPull: ApiHeroEndpoint<
   { owner: string; pullNumber: number; repo: string },
   PullRequest
 > = {

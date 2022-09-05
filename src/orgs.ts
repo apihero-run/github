@@ -53,7 +53,7 @@ export const listForAuthenticatedUser: ApiHeroEndpoint<
  * GitHub Apps with the `Organization plan` permission can use this endpoint to retrieve information about an organization's GitHub plan. See "[Authenticating with GitHub Apps](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/)" for details. For an example response, see 'Response with GitHub plan information' below."
 * @param org - The organization name. The name is not case sensitive. 
 */
-export const getOrgs: ApiHeroEndpoint<{ org: string }, OrganizationFull> = {
+export const getOrg: ApiHeroEndpoint<{ org: string }, OrganizationFull> = {
   id: "orgs/get",
   clientId: "github",
 };

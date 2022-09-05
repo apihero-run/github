@@ -1,7 +1,4 @@
-export type ApiHeroEndpoint<Params, ResponseBody, Headers = unknown> = {
-  id: string;
-  [key: string]: string | number;
-};
+export type { ApiHeroEndpoint } from "@apihero/core";
 
 /**
  * Information of a job execution in a workflow run

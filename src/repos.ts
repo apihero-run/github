@@ -446,7 +446,7 @@ export const createInOrg: ApiHeroEndpoint<
 * @param owner - The account owner of the repository. The name is not case sensitive.
 * @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const getRepos: ApiHeroEndpoint<{ owner: string; repo: string }, FullRepository> = {
+export const getRepo: ApiHeroEndpoint<{ owner: string; repo: string }, FullRepository> = {
   id: "repos/get",
   clientId: "github",
 };
@@ -463,7 +463,7 @@ export const getRepos: ApiHeroEndpoint<{ owner: string; repo: string }, FullRepo
 * @param owner - The account owner of the repository. The name is not case sensitive.
 * @param repo - The name of the repository. The name is not case sensitive. 
 */
-export const deleteRepos: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
+export const deleteRepo: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "repos/delete",
   clientId: "github",
 };

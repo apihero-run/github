@@ -115,7 +115,7 @@ export const listStarred: ApiHeroEndpoint<
 * Get a gist
 * @param gistId - The unique identifier of the gist. 
 */
-export const getGists: ApiHeroEndpoint<{ gistId: string }, GistSimple> = {
+export const getGist: ApiHeroEndpoint<{ gistId: string }, GistSimple> = {
   id: "gists/get",
   clientId: "github",
 };
@@ -127,7 +127,7 @@ export const getGists: ApiHeroEndpoint<{ gistId: string }, GistSimple> = {
 * Delete a gist
 * @param gistId - The unique identifier of the gist. 
 */
-export const deleteGists: ApiHeroEndpoint<{ gistId: string }, void> = {
+export const deleteGist: ApiHeroEndpoint<{ gistId: string }, void> = {
   id: "gists/delete",
   clientId: "github",
 };
