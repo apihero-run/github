@@ -44,12 +44,12 @@ export const createRepositorySnapshot: ApiHeroEndpoint<
 * Get a diff of the dependencies between commits
 * Gets the diff of the dependency changes between two commits of a repository, based on the changes to the dependency manifests made in those commits.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param basehead - The base and head Git revisions to compare. The Git revisions will be resolved to commit SHAs. Named revisions will be resolved to their corresponding HEAD commits, and an appropriate merge base will be determined. This parameter expects the format `{base}...{head}`.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param basehead - The base and head Git revisions to compare. The Git revisions will be resolved to commit SHAs. Named revisions will be resolved to their corresponding HEAD commits, and an appropriate merge base will be determined. This parameter expects the format `{base}...{head}`.
 * @param [name] - The full path, relative to the repository root, of the dependency manifest file. 
 */
 export const diffRange: ApiHeroEndpoint<
-  { owner: string; basehead: string; repo: string; name?: string },
+  { owner: string; repo: string; basehead: string; name?: string },
   DependencyGraphDiff,
   { Link: string }
 > = {

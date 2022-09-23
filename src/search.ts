@@ -154,8 +154,8 @@ export const issuesAndPullRequests: ApiHeroEndpoint<
  * `q=bug+defect+enhancement&repository_id=64778136`
  * 
  * The labels that best match the query appear first in the search results.
-* @param repositoryId - The id of the repository.
 * @param q - The search keywords. This endpoint does not accept qualifiers in the query. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query).
+* @param repositoryId - The id of the repository.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [order] - Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.
@@ -163,8 +163,8 @@ export const issuesAndPullRequests: ApiHeroEndpoint<
 */
 export const labels: ApiHeroEndpoint<
   {
-    repositoryId: number;
     q: string;
+    repositoryId: number;
     perPage?: number;
     page?: number;
     order?: "desc" | "asc";

@@ -6,12 +6,12 @@ import { BaseGist, GistComment, GistCommit, GistSimple, ApiHeroEndpoint } from "
 
 * List gists for the authenticated user
 * Lists the authenticated user's gists or if called anonymously, this endpoint returns all public gists:
-* @param [perPage=30] - The number of results per page (max 100).
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const list: ApiHeroEndpoint<
-  { perPage?: number; since?: string; page?: number },
+  { since?: string; perPage?: number; page?: number },
   Array<BaseGist>,
   { Link: string }
 > = {
@@ -76,12 +76,12 @@ export const create: ApiHeroEndpoint<
 * List public gists sorted by most recently updated to least recently updated.
  * 
  * Note: With [pagination](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.
-* @param [perPage=30] - The number of results per page (max 100).
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listPublic: ApiHeroEndpoint<
-  { perPage?: number; since?: string; page?: number },
+  { since?: string; perPage?: number; page?: number },
   Array<BaseGist>,
   { Link: string }
 > = {
@@ -95,12 +95,12 @@ export const listPublic: ApiHeroEndpoint<
 
 * List starred gists
 * List the authenticated user's starred gists:
-* @param [perPage=30] - The number of results per page (max 100).
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listStarred: ApiHeroEndpoint<
-  { perPage?: number; since?: string; page?: number },
+  { since?: string; perPage?: number; page?: number },
   Array<BaseGist>,
   { Link: string }
 > = {
@@ -273,12 +273,12 @@ export const getRevision: ApiHeroEndpoint<{ gistId: string; sha: string }, GistS
 * List gists for a user
 * Lists public gists for the specified user:
 * @param username - The handle for the GitHub user account.
-* @param [perPage=30] - The number of results per page (max 100).
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listForUser: ApiHeroEndpoint<
-  { username: string; perPage?: number; since?: string; page?: number },
+  { username: string; since?: string; perPage?: number; page?: number },
   Array<BaseGist>,
   { Link: string }
 > = {

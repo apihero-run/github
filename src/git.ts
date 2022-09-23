@@ -346,10 +346,10 @@ export const createCommit: ApiHeroEndpoint<
  * 
  * **Note:** You need to explicitly [request a pull request](https://docs.github.com/rest/reference/pulls#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://docs.github.com/rest/guides/getting-started-with-the-git-database-api#checking-mergeability-of-pull-requests)".
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param ref - ref parameter
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param ref - ref parameter 
 */
-export const getRef: ApiHeroEndpoint<{ owner: string; ref: string; repo: string }, GitRef> = {
+export const getRef: ApiHeroEndpoint<{ owner: string; repo: string; ref: string }, GitRef> = {
   id: "git/get-ref",
   clientId: "github",
 };
@@ -360,10 +360,10 @@ export const getRef: ApiHeroEndpoint<{ owner: string; ref: string; repo: string 
 
 * Delete a reference
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param ref - ref parameter
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param ref - ref parameter 
 */
-export const deleteRef: ApiHeroEndpoint<{ owner: string; ref: string; repo: string }, void> = {
+export const deleteRef: ApiHeroEndpoint<{ owner: string; repo: string; ref: string }, void> = {
   id: "git/delete-ref",
   clientId: "github",
 };
@@ -374,14 +374,14 @@ export const deleteRef: ApiHeroEndpoint<{ owner: string; ref: string; repo: stri
 
 * Update a reference
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param ref - ref parameter
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param ref - ref parameter 
 */
 export const updateRef: ApiHeroEndpoint<
   {
     owner: string;
-    ref: string;
     repo: string;
+    ref: string;
     payload: {
       /**
        * The SHA1 value to set this reference to
@@ -434,10 +434,10 @@ export const updateRef: ApiHeroEndpoint<
  * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param tagSha 
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param tagSha  
 */
-export const getTag: ApiHeroEndpoint<{ owner: string; tagSha: string; repo: string }, GitTag> = {
+export const getTag: ApiHeroEndpoint<{ owner: string; repo: string; tagSha: string }, GitTag> = {
   id: "git/get-tag",
   clientId: "github",
 };
@@ -451,10 +451,10 @@ export const getTag: ApiHeroEndpoint<{ owner: string; tagSha: string; repo: stri
  * 
  * _Note_: This API supports blobs up to 100 megabytes in size.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param fileSha 
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param fileSha  
 */
-export const getBlob: ApiHeroEndpoint<{ owner: string; fileSha: string; repo: string }, Blob> = {
+export const getBlob: ApiHeroEndpoint<{ owner: string; repo: string; fileSha: string }, Blob> = {
   id: "git/get-blob",
   clientId: "github",
 };
@@ -468,12 +468,12 @@ export const getBlob: ApiHeroEndpoint<{ owner: string; fileSha: string; repo: st
  * 
  * If `truncated` is `true` in the response then the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param treeSha 
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param treeSha 
 * @param [recursive] - Setting this parameter to any value returns the objects or subtrees referenced by the tree specified in `:tree_sha`. For example, setting `recursive` to any of the following will enable returning objects or subtrees: `0`, `1`, `"true"`, and `"false"`. Omit this parameter to prevent recursively returning objects or subtrees. 
 */
 export const getTree: ApiHeroEndpoint<
-  { owner: string; treeSha: string; repo: string; recursive?: string },
+  { owner: string; repo: string; treeSha: string; recursive?: string },
   GitTree
 > = {
   id: "git/get-tree",
@@ -493,13 +493,13 @@ export const getTree: ApiHeroEndpoint<
  * 
  * If you request matching references for a branch named `feature` but the branch `feature` doesn't exist, the response can still include other matching head refs that start with the word `feature`, such as `featureA` and `featureB`.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param ref - ref parameter
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param ref - ref parameter
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listMatchingRefs: ApiHeroEndpoint<
-  { owner: string; ref: string; repo: string; perPage?: number; page?: number },
+  { owner: string; repo: string; ref: string; perPage?: number; page?: number },
   Array<GitRef>,
   { Link: string }
 > = {
@@ -543,11 +543,11 @@ export const listMatchingRefs: ApiHeroEndpoint<
  * | `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
  * | `valid` | None of the above errors applied, so the signature is considered to be verified. |
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param commitSha - The SHA of the commit.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param commitSha - The SHA of the commit. 
 */
 export const getCommit: ApiHeroEndpoint<
-  { owner: string; commitSha: string; repo: string },
+  { owner: string; repo: string; commitSha: string },
   GitCommit
 > = {
   id: "git/get-commit",

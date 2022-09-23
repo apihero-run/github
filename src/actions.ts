@@ -249,12 +249,12 @@ export const createSelfHostedRunnerGroupForOrg: ApiHeroEndpoint<
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [branch] - Returns workflow runs associated with a branch. Use the name of the branch of the `push`.
-* @param [checkSuiteId] - Returns workflow runs with the `check_suite_id` that you specify.
-* @param [excludePullRequests=false] - If `true` pull requests are omitted from the response (empty array).
-* @param [created] - Returns workflow runs created within the given date-time range. For more information on the syntax, see "[Understanding the search syntax](https://docs.github.com/search-github/getting-started-with-searching-on-github/understanding-the-search-syntax#query-for-dates)."
-* @param [actor] - Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run.
+* @param [event] - Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://docs.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)."
 * @param [status] - Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
-* @param [event] - Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://docs.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)." 
+* @param [checkSuiteId] - Returns workflow runs with the `check_suite_id` that you specify.
+* @param [actor] - Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run.
+* @param [created] - Returns workflow runs created within the given date-time range. For more information on the syntax, see "[Understanding the search syntax](https://docs.github.com/search-github/getting-started-with-searching-on-github/understanding-the-search-syntax#query-for-dates)."
+* @param [excludePullRequests=false] - If `true` pull requests are omitted from the response (empty array). 
 */
 export const listWorkflowRunsForRepo: ApiHeroEndpoint<
   {
@@ -263,10 +263,7 @@ export const listWorkflowRunsForRepo: ApiHeroEndpoint<
     perPage?: number;
     page?: number;
     branch?: string;
-    checkSuiteId?: number;
-    excludePullRequests?: boolean;
-    created?: string;
-    actor?: string;
+    event?: string;
     status?:
       | "completed"
       | "action_required"
@@ -281,7 +278,10 @@ export const listWorkflowRunsForRepo: ApiHeroEndpoint<
       | "queued"
       | "requested"
       | "waiting";
-    event?: string;
+    checkSuiteId?: number;
+    actor?: string;
+    created?: string;
+    excludePullRequests?: boolean;
   },
   {
     total_count: number;
@@ -306,9 +306,9 @@ export const listWorkflowRunsForRepo: ApiHeroEndpoint<
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [direction] - The direction to sort the results by.
-* @param [key] - An explicit key or prefix for identifying the cache
 * @param [sort] - The property to sort the results by. `created_at` means when the cache was created. `last_accessed_at` means when the cache was last accessed. `size_in_bytes` is the size of the cache in bytes.
-* @param [ref] - The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`. 
+* @param [ref] - The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
+* @param [key] - An explicit key or prefix for identifying the cache 
 */
 export const getActionsCacheList: ApiHeroEndpoint<
   {
@@ -317,9 +317,9 @@ export const getActionsCacheList: ApiHeroEndpoint<
     perPage?: number;
     page?: number;
     direction?: "asc" | "desc";
-    key?: string;
     sort?: "created_at" | "last_accessed_at" | "size_in_bytes";
     ref?: CodeScanningRef;
+    key?: string;
   },
   ActionsCacheList,
   { Link: string }
@@ -339,12 +339,12 @@ export const getActionsCacheList: ApiHeroEndpoint<
  * 
  * GitHub Apps must have the `actions:write` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param key - A key for identifying the cache.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param key - A key for identifying the cache.
 * @param [ref] - The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`. 
 */
 export const deleteActionsCacheByKey: ApiHeroEndpoint<
-  { owner: string; key: string; repo: string; ref?: CodeScanningRef },
+  { owner: string; repo: string; key: string; ref?: CodeScanningRef },
   ActionsCacheList
 > = {
   id: "actions/delete-actions-cache-by-key",
@@ -793,11 +793,11 @@ export const setGithubActionsPermissionsRepository: ApiHeroEndpoint<
 * Get a job for a workflow run
 * Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param jobId - The unique identifier of the job.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param jobId - The unique identifier of the job. 
 */
 export const getJobForWorkflowRun: ApiHeroEndpoint<
-  { owner: string; jobId: number; repo: string },
+  { owner: string; repo: string; jobId: number },
   Job
 > = {
   id: "actions/get-job-for-workflow-run",
@@ -811,12 +811,12 @@ export const getJobForWorkflowRun: ApiHeroEndpoint<
 * Get a workflow run
 * Gets a specific workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run.
 * @param [excludePullRequests=false] - If `true` pull requests are omitted from the response (empty array). 
 */
 export const getWorkflowRun: ApiHeroEndpoint<
-  { owner: string; runId: number; repo: string; excludePullRequests?: boolean },
+  { owner: string; repo: string; runId: number; excludePullRequests?: boolean },
   WorkflowRun
 > = {
   id: "actions/get-workflow-run",
@@ -832,11 +832,11 @@ export const getWorkflowRun: ApiHeroEndpoint<
  * private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:write` permission to use
  * this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run. 
 */
 export const deleteWorkflowRun: ApiHeroEndpoint<
-  { owner: string; runId: number; repo: string },
+  { owner: string; repo: string; runId: number },
   void
 > = {
   id: "actions/delete-workflow-run",
@@ -1079,11 +1079,11 @@ export const removeAllCustomLabelsFromSelfHostedRunnerForOrg: ApiHeroEndpoint<
  * 
  * GitHub Apps must have the `actions:write` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param cacheId - The unique identifier of the GitHub Actions cache.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param cacheId - The unique identifier of the GitHub Actions cache. 
 */
 export const deleteActionsCacheById: ApiHeroEndpoint<
-  { owner: string; cacheId: number; repo: string },
+  { owner: string; repo: string; cacheId: number },
   void
 > = {
   id: "actions/delete-actions-cache-by-id",
@@ -1156,11 +1156,11 @@ export const setAllowedActionsOrganization: ApiHeroEndpoint<
  * use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must
  * have the `actions:read` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param jobId - The unique identifier of the job.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param jobId - The unique identifier of the job. 
 */
 export const downloadJobLogsForWorkflowRun: ApiHeroEndpoint<
-  { owner: string; jobId: number; repo: string },
+  { owner: string; repo: string; jobId: number },
   void
 > = {
   id: "actions/download-job-logs-for-workflow-run",
@@ -1216,8 +1216,8 @@ export const setWorkflowAccessToRepository: ApiHeroEndpoint<
 * List jobs for a workflow run
 * Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [filter] - Filters jobs by their `completed_at` timestamp. `latest` returns jobs from the most recent execution of the workflow run. `all` returns all jobs for a workflow run, including from old executions of the workflow run. 
@@ -1225,8 +1225,8 @@ export const setWorkflowAccessToRepository: ApiHeroEndpoint<
 export const listJobsForWorkflowRun: ApiHeroEndpoint<
   {
     owner: string;
-    runId: number;
     repo: string;
+    runId: number;
     perPage?: number;
     page?: number;
     filter?: "latest" | "all";
@@ -1251,11 +1251,11 @@ export const listJobsForWorkflowRun: ApiHeroEndpoint<
  * this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have
  * the `actions:read` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run. 
 */
 export const downloadWorkflowRunLogs: ApiHeroEndpoint<
-  { owner: string; runId: number; repo: string },
+  { owner: string; repo: string; runId: number },
   void
 > = {
   id: "actions/download-workflow-run-logs",
@@ -1269,11 +1269,11 @@ export const downloadWorkflowRunLogs: ApiHeroEndpoint<
 * Delete workflow run logs
 * Deletes all logs for a workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run. 
 */
 export const deleteWorkflowRunLogs: ApiHeroEndpoint<
-  { owner: string; runId: number; repo: string },
+  { owner: string; repo: string; runId: number },
   void
 > = {
   id: "actions/delete-workflow-run-logs",
@@ -1302,14 +1302,14 @@ export const getRepoPublicKey: ApiHeroEndpoint<{ owner: string; repo: string }, 
 * Re-run a job from a workflow run
 * Re-run a job and its dependent jobs in a workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param jobId - The unique identifier of the job.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param jobId - The unique identifier of the job. 
 */
 export const reRunJobForWorkflowRun: ApiHeroEndpoint<
   {
     owner: string;
-    jobId: number;
     repo: string;
+    jobId: number;
     rerun?: {
       /**
        * Whether to enable debug logging for the re-run.
@@ -1333,11 +1333,11 @@ export const reRunJobForWorkflowRun: ApiHeroEndpoint<
  * You must authenticate using an access token with the `repo` scope to use this
  * endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runnerId - Unique identifier of the self-hosted runner.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runnerId - Unique identifier of the self-hosted runner. 
 */
 export const getSelfHostedRunnerForRepo: ApiHeroEndpoint<
-  { owner: string; runnerId: number; repo: string },
+  { owner: string; repo: string; runnerId: number },
   Runner
 > = {
   id: "actions/get-self-hosted-runner-for-repo",
@@ -1354,11 +1354,11 @@ export const getSelfHostedRunnerForRepo: ApiHeroEndpoint<
  * You must authenticate using an access token with the `repo`
  * scope to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runnerId - Unique identifier of the self-hosted runner.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runnerId - Unique identifier of the self-hosted runner. 
 */
 export const deleteSelfHostedRunnerFromRepo: ApiHeroEndpoint<
-  { owner: string; runnerId: number; repo: string },
+  { owner: string; repo: string; runnerId: number },
   void
 > = {
   id: "actions/delete-self-hosted-runner-from-repo",
@@ -1372,14 +1372,14 @@ export const deleteSelfHostedRunnerFromRepo: ApiHeroEndpoint<
 * Re-run a workflow
 * Re-runs your workflow run using its `id`. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run. 
 */
 export const reRunWorkflow: ApiHeroEndpoint<
   {
     owner: string;
-    runId: number;
     repo: string;
+    runId: number;
     rerun?: {
       /**
        * Whether to enable debug logging for the re-run.
@@ -1468,11 +1468,11 @@ export const createRemoveTokenForRepo: ApiHeroEndpoint<
 * Cancel a workflow run
 * Cancels a workflow run using its `id`. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run. 
 */
 export const cancelWorkflowRun: ApiHeroEndpoint<
-  { owner: string; runId: number; repo: string },
+  { owner: string; repo: string; runId: number },
   {}
 > = {
   id: "actions/cancel-workflow-run",
@@ -1488,11 +1488,11 @@ export const cancelWorkflowRun: ApiHeroEndpoint<
  * 
  * Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run. 
 */
 export const getWorkflowRunUsage: ApiHeroEndpoint<
-  { owner: string; runId: number; repo: string },
+  { owner: string; repo: string; runId: number },
   WorkflowRunUsage
 > = {
   id: "actions/get-workflow-run-usage",
@@ -1604,11 +1604,11 @@ export const updateSelfHostedRunnerGroupForOrg: ApiHeroEndpoint<
  * 
  * You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run. 
 */
 export const approveWorkflowRun: ApiHeroEndpoint<
-  { owner: string; runId: number; repo: string },
+  { owner: string; repo: string; runId: number },
   EmptyObject
 > = {
   id: "actions/approve-workflow-run",
@@ -1622,11 +1622,11 @@ export const approveWorkflowRun: ApiHeroEndpoint<
 * Get a repository secret
 * Gets a single repository secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param secretName - The name of the secret.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param secretName - The name of the secret. 
 */
 export const getRepoSecret: ApiHeroEndpoint<
-  { owner: string; secretName: string; repo: string },
+  { owner: string; repo: string; secretName: string },
   ActionsSecret
 > = {
   id: "actions/get-repo-secret",
@@ -1714,14 +1714,14 @@ export const getRepoSecret: ApiHeroEndpoint<
  * puts Base64.strict_encode64(encrypted_secret)
  * ```
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param secretName - The name of the secret.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param secretName - The name of the secret. 
 */
 export const createOrUpdateRepoSecret: ApiHeroEndpoint<
   {
     owner: string;
-    secretName: string;
     repo: string;
+    secretName: string;
     secret: {
       /**
        * ID of the key you used to encrypt the secret.
@@ -1747,11 +1747,11 @@ export const createOrUpdateRepoSecret: ApiHeroEndpoint<
 * Delete a repository secret
 * Deletes a secret in a repository using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param secretName - The name of the secret.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param secretName - The name of the secret. 
 */
 export const deleteRepoSecret: ApiHeroEndpoint<
-  { owner: string; secretName: string; repo: string },
+  { owner: string; repo: string; secretName: string },
   void
 > = {
   id: "actions/delete-repo-secret",
@@ -1809,11 +1809,11 @@ export const setCustomOidcSubClaimForRepo: ApiHeroEndpoint<
  * 
  * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 * @param org - The organization name. The name is not case sensitive.
-* @param name - The name of a self-hosted runner's custom label.
-* @param runnerId - Unique identifier of the self-hosted runner. 
+* @param runnerId - Unique identifier of the self-hosted runner.
+* @param name - The name of a self-hosted runner's custom label. 
 */
 export const removeCustomLabelFromSelfHostedRunnerForOrg: ApiHeroEndpoint<
-  { org: string; name: string; runnerId: number },
+  { org: string; runnerId: number; name: string },
   {
     labels: Array<RunnerLabel>;
     total_count: number;
@@ -1830,11 +1830,11 @@ export const removeCustomLabelFromSelfHostedRunnerForOrg: ApiHeroEndpoint<
 * Get an artifact
 * Gets a specific artifact for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param artifactId - The unique identifier of the artifact.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param artifactId - The unique identifier of the artifact. 
 */
 export const getArtifact: ApiHeroEndpoint<
-  { owner: string; artifactId: number; repo: string },
+  { owner: string; repo: string; artifactId: number },
   Artifact
 > = {
   id: "actions/get-artifact",
@@ -1848,11 +1848,11 @@ export const getArtifact: ApiHeroEndpoint<
 * Delete an artifact
 * Deletes an artifact for a workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param artifactId - The unique identifier of the artifact.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param artifactId - The unique identifier of the artifact. 
 */
 export const deleteArtifact: ApiHeroEndpoint<
-  { owner: string; artifactId: number; repo: string },
+  { owner: string; repo: string; artifactId: number },
   void
 > = {
   id: "actions/delete-artifact",
@@ -1866,11 +1866,11 @@ export const deleteArtifact: ApiHeroEndpoint<
 * Get the review history for a workflow run
 * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run. 
 */
 export const getReviewsForRun: ApiHeroEndpoint<
-  { owner: string; runId: number; repo: string },
+  { owner: string; repo: string; runId: number },
   Array<EnvironmentApprovals>
 > = {
   id: "actions/get-reviews-for-run",
@@ -1884,13 +1884,13 @@ export const getReviewsForRun: ApiHeroEndpoint<
 * List workflow run artifacts
 * Lists artifacts for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listWorkflowRunArtifacts: ApiHeroEndpoint<
-  { owner: string; runId: number; repo: string; perPage?: number; page?: number },
+  { owner: string; repo: string; runId: number; perPage?: number; page?: number },
   {
     artifacts: Array<Artifact>;
     total_count: number;
@@ -1911,7 +1911,7 @@ export const listWorkflowRunArtifacts: ApiHeroEndpoint<
 * @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getWorkflow: ApiHeroEndpoint<
-  { owner: string; workflowId: number | string; repo: string },
+  { owner: string; repo: string; workflowId: number | string },
   Workflow
 > = {
   id: "actions/get-workflow",
@@ -2044,11 +2044,11 @@ export const createRegistrationTokenForRepo: ApiHeroEndpoint<
  * You must authenticate using an access token with the `repo` scope to use this
  * endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runnerId - Unique identifier of the self-hosted runner.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runnerId - Unique identifier of the self-hosted runner. 
 */
 export const listLabelsForSelfHostedRunnerForRepo: ApiHeroEndpoint<
-  { owner: string; runnerId: number; repo: string },
+  { owner: string; repo: string; runnerId: number },
   {
     labels: Array<RunnerLabel>;
     total_count: number;
@@ -2068,14 +2068,14 @@ export const listLabelsForSelfHostedRunnerForRepo: ApiHeroEndpoint<
  * You must authenticate using an access token with the `repo` scope to use this
  * endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runnerId - Unique identifier of the self-hosted runner.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runnerId - Unique identifier of the self-hosted runner. 
 */
 export const addCustomLabelsToSelfHostedRunnerForRepo: ApiHeroEndpoint<
   {
     owner: string;
-    runnerId: number;
     repo: string;
+    runnerId: number;
     label: {
       /**
        * The names of the custom labels to add to the runner.
@@ -2103,14 +2103,14 @@ export const addCustomLabelsToSelfHostedRunnerForRepo: ApiHeroEndpoint<
  * You must authenticate using an access token with the `repo` scope to use this
  * endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runnerId - Unique identifier of the self-hosted runner.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runnerId - Unique identifier of the self-hosted runner. 
 */
 export const setCustomLabelsForSelfHostedRunnerForRepo: ApiHeroEndpoint<
   {
     owner: string;
-    runnerId: number;
     repo: string;
+    runnerId: number;
     payload: {
       /**
        * The names of the custom labels to set for the runner. You can pass an empty array to remove all custom labels.
@@ -2138,11 +2138,11 @@ export const setCustomLabelsForSelfHostedRunnerForRepo: ApiHeroEndpoint<
  * You must authenticate using an access token with the `repo` scope to use this
  * endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runnerId - Unique identifier of the self-hosted runner.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runnerId - Unique identifier of the self-hosted runner. 
 */
 export const removeAllCustomLabelsFromSelfHostedRunnerForRepo: ApiHeroEndpoint<
-  { owner: string; runnerId: number; repo: string },
+  { owner: string; repo: string; runnerId: number },
   {
     labels: Array<RunnerLabel>;
     total_count: number;
@@ -2207,25 +2207,22 @@ export const setAllowedActionsRepository: ApiHeroEndpoint<
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [branch] - Returns workflow runs associated with a branch. Use the name of the branch of the `push`.
-* @param [checkSuiteId] - Returns workflow runs with the `check_suite_id` that you specify.
-* @param [excludePullRequests=false] - If `true` pull requests are omitted from the response (empty array).
-* @param [created] - Returns workflow runs created within the given date-time range. For more information on the syntax, see "[Understanding the search syntax](https://docs.github.com/search-github/getting-started-with-searching-on-github/understanding-the-search-syntax#query-for-dates)."
-* @param [actor] - Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run.
+* @param [event] - Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://docs.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)."
 * @param [status] - Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
-* @param [event] - Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://docs.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)." 
+* @param [checkSuiteId] - Returns workflow runs with the `check_suite_id` that you specify.
+* @param [actor] - Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run.
+* @param [created] - Returns workflow runs created within the given date-time range. For more information on the syntax, see "[Understanding the search syntax](https://docs.github.com/search-github/getting-started-with-searching-on-github/understanding-the-search-syntax#query-for-dates)."
+* @param [excludePullRequests=false] - If `true` pull requests are omitted from the response (empty array). 
 */
 export const listWorkflowRuns: ApiHeroEndpoint<
   {
     owner: string;
-    workflowId: number | string;
     repo: string;
+    workflowId: number | string;
     perPage?: number;
     page?: number;
     branch?: string;
-    checkSuiteId?: number;
-    excludePullRequests?: boolean;
-    created?: string;
-    actor?: string;
+    event?: string;
     status?:
       | "completed"
       | "action_required"
@@ -2240,7 +2237,10 @@ export const listWorkflowRuns: ApiHeroEndpoint<
       | "queued"
       | "requested"
       | "waiting";
-    event?: string;
+    checkSuiteId?: number;
+    actor?: string;
+    created?: string;
+    excludePullRequests?: boolean;
   },
   {
     total_count: number;
@@ -2378,7 +2378,7 @@ export const disableSelectedRepositoryGithubActionsOrganization: ApiHeroEndpoint
 * @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const enableWorkflow: ApiHeroEndpoint<
-  { owner: string; workflowId: number | string; repo: string },
+  { owner: string; repo: string; workflowId: number | string },
   void
 > = {
   id: "actions/enable-workflow",
@@ -2397,7 +2397,7 @@ export const enableWorkflow: ApiHeroEndpoint<
 * @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const getWorkflowUsage: ApiHeroEndpoint<
-  { owner: string; workflowId: number | string; repo: string },
+  { owner: string; repo: string; workflowId: number | string },
   WorkflowUsage
 > = {
   id: "actions/get-workflow-usage",
@@ -2411,14 +2411,14 @@ export const getWorkflowUsage: ApiHeroEndpoint<
 * Re-run failed jobs from a workflow run
 * Re-run all of the failed jobs and their dependent jobs in a workflow run using the `id` of the workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run. 
 */
 export const reRunWorkflowFailedJobs: ApiHeroEndpoint<
   {
     owner: string;
-    runId: number;
     repo: string;
+    runId: number;
     rerunFailedJob?: {
       /**
        * Whether to enable debug logging for the re-run.
@@ -2444,7 +2444,7 @@ export const reRunWorkflowFailedJobs: ApiHeroEndpoint<
 * @param repo - The name of the repository. The name is not case sensitive. 
 */
 export const disableWorkflow: ApiHeroEndpoint<
-  { owner: string; workflowId: number | string; repo: string },
+  { owner: string; repo: string; workflowId: number | string },
   void
 > = {
   id: "actions/disable-workflow",
@@ -2465,12 +2465,12 @@ export const disableWorkflow: ApiHeroEndpoint<
  * You must authenticate using an access token with the `repo` scope to use this
  * endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param name - The name of a self-hosted runner's custom label.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param runnerId - Unique identifier of the self-hosted runner.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param name - The name of a self-hosted runner's custom label. 
 */
 export const removeCustomLabelFromSelfHostedRunnerForRepo: ApiHeroEndpoint<
-  { owner: string; name: string; runnerId: number; repo: string },
+  { owner: string; repo: string; runnerId: number; name: string },
   {
     labels: Array<RunnerLabel>;
     total_count: number;
@@ -2489,11 +2489,11 @@ export const removeCustomLabelFromSelfHostedRunnerForRepo: ApiHeroEndpoint<
  * 
  * Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run. 
 */
 export const getPendingDeploymentsForRun: ApiHeroEndpoint<
-  { owner: string; runId: number; repo: string },
+  { owner: string; repo: string; runId: number },
   Array<PendingDeployment>
 > = {
   id: "actions/get-pending-deployments-for-run",
@@ -2509,14 +2509,14 @@ export const getPendingDeploymentsForRun: ApiHeroEndpoint<
  * 
  * Required reviewers with read access to the repository contents and deployments can use this endpoint. Required reviewers must authenticate using an access token with the `repo` scope to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param runId - The unique identifier of the workflow run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run. 
 */
 export const reviewPendingDeploymentsForRun: ApiHeroEndpoint<
   {
     owner: string;
-    runId: number;
     repo: string;
+    runId: number;
     pendingDeployment: {
       /**
        * Whether to approve or reject deployment to the specified environments.
@@ -2625,8 +2625,8 @@ export const setRepoAccessToSelfHostedRunnerGroupInOrg: ApiHeroEndpoint<
 export const createWorkflowDispatch: ApiHeroEndpoint<
   {
     owner: string;
-    workflowId: number | string;
     repo: string;
+    workflowId: number | string;
     dispatch: {
       /**
        * The git reference for the workflow. The reference can be a branch or tag name.
@@ -2655,17 +2655,17 @@ export const createWorkflowDispatch: ApiHeroEndpoint<
  * with the `repo` scope. GitHub Apps must have the `actions:read` permission to
  * use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param attemptNumber - The attempt number of the workflow run.
-* @param runId - The unique identifier of the workflow run.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run.
+* @param attemptNumber - The attempt number of the workflow run.
 * @param [excludePullRequests=false] - If `true` pull requests are omitted from the response (empty array). 
 */
 export const getWorkflowRunAttempt: ApiHeroEndpoint<
   {
     owner: string;
-    attemptNumber: number;
-    runId: number;
     repo: string;
+    runId: number;
+    attemptNumber: number;
     excludePullRequests?: boolean;
   },
   WorkflowRun
@@ -2743,12 +2743,12 @@ export const removeSelectedRepoFromOrgSecret: ApiHeroEndpoint<
  * the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope.
  * GitHub Apps must have the `actions:read` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param archiveFormat 
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param artifactId - The unique identifier of the artifact.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param archiveFormat  
 */
 export const downloadArtifact: ApiHeroEndpoint<
-  { owner: string; archiveFormat: string; artifactId: number; repo: string },
+  { owner: string; repo: string; artifactId: number; archiveFormat: string },
   void
 > = {
   id: "actions/download-artifact",
@@ -2809,18 +2809,18 @@ export const removeSelfHostedRunnerFromGroupForOrg: ApiHeroEndpoint<
 * List jobs for a workflow run attempt
 * Lists jobs for a specific workflow run attempt. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://docs.github.com/rest/overview/resources-in-the-rest-api#parameters).
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param attemptNumber - The attempt number of the workflow run.
-* @param runId - The unique identifier of the workflow run.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param runId - The unique identifier of the workflow run.
+* @param attemptNumber - The attempt number of the workflow run.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listJobsForWorkflowRunAttempt: ApiHeroEndpoint<
   {
     owner: string;
-    attemptNumber: number;
-    runId: number;
     repo: string;
+    runId: number;
+    attemptNumber: number;
     perPage?: number;
     page?: number;
   },
@@ -2844,12 +2844,12 @@ export const listJobsForWorkflowRunAttempt: ApiHeroEndpoint<
  * the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope.
  * GitHub Apps must have the `actions:read` permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param attemptNumber - The attempt number of the workflow run.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param runId - The unique identifier of the workflow run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param attemptNumber - The attempt number of the workflow run. 
 */
 export const downloadWorkflowRunAttemptLogs: ApiHeroEndpoint<
-  { owner: string; attemptNumber: number; runId: number; repo: string },
+  { owner: string; repo: string; runId: number; attemptNumber: number },
   void
 > = {
   id: "actions/download-workflow-run-attempt-logs",
@@ -2869,11 +2869,11 @@ export const downloadWorkflowRunAttemptLogs: ApiHeroEndpoint<
  * You must authenticate using an access token with the `admin:org`
  * scope to use this endpoint.
 * @param org - The organization name. The name is not case sensitive.
-* @param repositoryId - The unique identifier of the repository.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group. 
+* @param runnerGroupId - Unique identifier of the self-hosted runner group.
+* @param repositoryId - The unique identifier of the repository. 
 */
 export const addRepoAccessToSelfHostedRunnerGroupInOrg: ApiHeroEndpoint<
-  { org: string; repositoryId: number; runnerGroupId: number },
+  { org: string; runnerGroupId: number; repositoryId: number },
   void
 > = {
   id: "actions/add-repo-access-to-self-hosted-runner-group-in-org",
@@ -2892,11 +2892,11 @@ export const addRepoAccessToSelfHostedRunnerGroupInOrg: ApiHeroEndpoint<
  * 
  * You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 * @param org - The organization name. The name is not case sensitive.
-* @param repositoryId - The unique identifier of the repository.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group. 
+* @param runnerGroupId - Unique identifier of the self-hosted runner group.
+* @param repositoryId - The unique identifier of the repository. 
 */
 export const removeRepoAccessToSelfHostedRunnerGroupInOrg: ApiHeroEndpoint<
-  { org: string; repositoryId: number; runnerGroupId: number },
+  { org: string; runnerGroupId: number; repositoryId: number },
   void
 > = {
   id: "actions/remove-repo-access-to-self-hosted-runner-group-in-org",
@@ -2926,12 +2926,12 @@ export const getEnvironmentPublicKey: ApiHeroEndpoint<
 
 * Get an environment secret
 * Gets a single environment secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+* @param secretName - The name of the secret.
 * @param repositoryId - The unique identifier of the repository.
-* @param environmentName - The name of the environment
-* @param secretName - The name of the secret. 
+* @param environmentName - The name of the environment 
 */
 export const getEnvironmentSecret: ApiHeroEndpoint<
-  { repositoryId: number; environmentName: string; secretName: string },
+  { secretName: string; repositoryId: number; environmentName: string },
   ActionsSecret
 > = {
   id: "actions/get-environment-secret",
@@ -3018,15 +3018,15 @@ export const getEnvironmentSecret: ApiHeroEndpoint<
  * # Print the base64 encoded secret
  * puts Base64.strict_encode64(encrypted_secret)
  * ```
+* @param secretName - The name of the secret.
 * @param repositoryId - The unique identifier of the repository.
-* @param environmentName - The name of the environment
-* @param secretName - The name of the secret. 
+* @param environmentName - The name of the environment 
 */
 export const createOrUpdateEnvironmentSecret: ApiHeroEndpoint<
   {
+    secretName: string;
     repositoryId: number;
     environmentName: string;
-    secretName: string;
     secret: {
       /**
        * ID of the key you used to encrypt the secret.
@@ -3051,12 +3051,12 @@ export const createOrUpdateEnvironmentSecret: ApiHeroEndpoint<
 
 * Delete an environment secret
 * Deletes a secret in an environment using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+* @param secretName - The name of the secret.
 * @param repositoryId - The unique identifier of the repository.
-* @param environmentName - The name of the environment
-* @param secretName - The name of the secret. 
+* @param environmentName - The name of the environment 
 */
 export const deleteEnvironmentSecret: ApiHeroEndpoint<
-  { repositoryId: number; environmentName: string; secretName: string },
+  { secretName: string; repositoryId: number; environmentName: string },
   void
 > = {
   id: "actions/delete-environment-secret",

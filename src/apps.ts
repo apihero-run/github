@@ -93,13 +93,13 @@ export const getBySlug: ApiHeroEndpoint<{ appSlug: string }, Integration> = {
 * You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
  * 
  * The permissions the installation has are included under the `permissions` key.
-* @param [perPage=30] - The number of results per page (max 100).
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [outdated]  
 */
 export const listInstallations: ApiHeroEndpoint<
-  { perPage?: number; since?: string; page?: number; outdated?: string },
+  { since?: string; perPage?: number; page?: number; outdated?: string },
   Array<Installation>,
   { Link: string }
 > = {
@@ -588,16 +588,16 @@ export const redeliverWebhookDelivery: ApiHeroEndpoint<{ deliveryId: number }, {
 * @param planId - The unique identifier of the plan.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
-* @param [direction] - To return the oldest accounts first, set to `asc`. Ignored without the `sort` parameter.
-* @param [sort] - The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to. 
+* @param [sort] - The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to.
+* @param [direction] - To return the oldest accounts first, set to `asc`. Ignored without the `sort` parameter. 
 */
 export const listAccountsForPlan: ApiHeroEndpoint<
   {
     planId: number;
     perPage?: number;
     page?: number;
-    direction?: "asc" | "desc";
     sort?: "created" | "updated";
+    direction?: "asc" | "desc";
   },
   Array<MarketplacePurchase>,
   { Link: string }
@@ -733,16 +733,16 @@ export const listInstallationReposForAuthenticatedUser: ApiHeroEndpoint<
 * @param planId - The unique identifier of the plan.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
-* @param [direction] - To return the oldest accounts first, set to `asc`. Ignored without the `sort` parameter.
-* @param [sort] - The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to. 
+* @param [sort] - The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to.
+* @param [direction] - To return the oldest accounts first, set to `asc`. Ignored without the `sort` parameter. 
 */
 export const listAccountsForPlanStubbed: ApiHeroEndpoint<
   {
     planId: number;
     perPage?: number;
     page?: number;
-    direction?: "asc" | "desc";
     sort?: "created" | "updated";
+    direction?: "asc" | "desc";
   },
   Array<MarketplacePurchase>,
   { Link: string }
@@ -759,11 +759,11 @@ export const listAccountsForPlanStubbed: ApiHeroEndpoint<
 * Add a single repository to an installation. The authenticated user must have admin access to the repository.
  * 
  * You must use a personal access token (which you can create via the [command line](https://docs.github.com/github/authenticating-to-github/creating-a-personal-access-token) or [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication)) to access this endpoint.
-* @param repositoryId - The unique identifier of the repository.
-* @param installationId - The unique identifier of the installation. 
+* @param installationId - The unique identifier of the installation.
+* @param repositoryId - The unique identifier of the repository. 
 */
 export const addRepoToInstallationForAuthenticatedUser: ApiHeroEndpoint<
-  { repositoryId: number; installationId: number },
+  { installationId: number; repositoryId: number },
   void
 > = {
   id: "apps/add-repo-to-installation-for-authenticated-user",
@@ -778,11 +778,11 @@ export const addRepoToInstallationForAuthenticatedUser: ApiHeroEndpoint<
 * Remove a single repository from an installation. The authenticated user must have admin access to the repository.
  * 
  * You must use a personal access token (which you can create via the [command line](https://docs.github.com/github/authenticating-to-github/creating-a-personal-access-token) or [Basic Authentication](https://docs.github.com/rest/overview/other-authentication-methods#basic-authentication)) to access this endpoint.
-* @param repositoryId - The unique identifier of the repository.
-* @param installationId - The unique identifier of the installation. 
+* @param installationId - The unique identifier of the installation.
+* @param repositoryId - The unique identifier of the repository. 
 */
 export const removeRepoFromInstallationForAuthenticatedUser: ApiHeroEndpoint<
-  { repositoryId: number; installationId: number },
+  { installationId: number; repositoryId: number },
   void
 > = {
   id: "apps/remove-repo-from-installation-for-authenticated-user",

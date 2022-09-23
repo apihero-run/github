@@ -555,10 +555,10 @@ export const listChildInOrg: ApiHeroEndpoint<
  * We recommend using the [Get team membership for a user](https://docs.github.com/rest/reference/teams#get-team-membership-for-a-user) endpoint instead. It allows you to get both active and pending memberships.
  * 
  * To list members in a team, the team must be visible to the authenticated user.
-* @param username - The handle for the GitHub user account.
-* @param teamId - The unique identifier of the team. 
+* @param teamId - The unique identifier of the team.
+* @param username - The handle for the GitHub user account. 
 */
-export const getMemberLegacy: ApiHeroEndpoint<{ username: string; teamId: number }, void> = {
+export const getMemberLegacy: ApiHeroEndpoint<{ teamId: number; username: string }, void> = {
   id: "teams/get-member-legacy",
   clientId: "github",
 };
@@ -580,10 +580,10 @@ export const getMemberLegacy: ApiHeroEndpoint<{ username: string; teamId: number
  * **Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://docs.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
  * 
  * Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
-* @param username - The handle for the GitHub user account.
-* @param teamId - The unique identifier of the team. 
+* @param teamId - The unique identifier of the team.
+* @param username - The handle for the GitHub user account. 
 */
-export const addMemberLegacy: ApiHeroEndpoint<{ username: string; teamId: number }, void> = {
+export const addMemberLegacy: ApiHeroEndpoint<{ teamId: number; username: string }, void> = {
   id: "teams/add-member-legacy",
   clientId: "github",
 };
@@ -603,10 +603,10 @@ export const addMemberLegacy: ApiHeroEndpoint<{ username: string; teamId: number
  * To remove a team member, the authenticated user must have 'admin' permissions to the team or be an owner of the org that the team is associated with. Removing a team member does not delete the user, it just removes them from the team.
  * 
  * **Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://docs.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
-* @param username - The handle for the GitHub user account.
-* @param teamId - The unique identifier of the team. 
+* @param teamId - The unique identifier of the team.
+* @param username - The handle for the GitHub user account. 
 */
-export const removeMemberLegacy: ApiHeroEndpoint<{ username: string; teamId: number }, void> = {
+export const removeMemberLegacy: ApiHeroEndpoint<{ teamId: number; username: string }, void> = {
   id: "teams/remove-member-legacy",
   clientId: "github",
 };
@@ -840,11 +840,11 @@ export const removeProjectLegacy: ApiHeroEndpoint<{ teamId: number; projectId: n
  * The response contains the `state` of the membership and the member's `role`.
  * 
  * The `role` for organization owners is set to `maintainer`. For more information about `maintainer` roles, see [Create a team](https://docs.github.com/rest/reference/teams#create-a-team).
-* @param username - The handle for the GitHub user account.
-* @param teamId - The unique identifier of the team. 
+* @param teamId - The unique identifier of the team.
+* @param username - The handle for the GitHub user account. 
 */
 export const getMembershipForUserLegacy: ApiHeroEndpoint<
-  { username: string; teamId: number },
+  { teamId: number; username: string },
   TeamMembership
 > = {
   id: "teams/get-membership-for-user-legacy",
@@ -868,13 +868,13 @@ export const getMembershipForUserLegacy: ApiHeroEndpoint<
  * If the user is unaffiliated with the team's organization, this endpoint will send an invitation to the user via email. This newly-created membership will be in the "pending" state until the user accepts the invitation, at which point the membership will transition to the "active" state and the user will be added as a member of the team. To add a membership between an unaffiliated user and a team, the authenticated user must be an organization owner.
  * 
  * If the user is already a member of the team, this endpoint will update the role of the team member's role. To update the membership of a team member, the authenticated user must be an organization owner or a team maintainer.
-* @param username - The handle for the GitHub user account.
-* @param teamId - The unique identifier of the team. 
+* @param teamId - The unique identifier of the team.
+* @param username - The handle for the GitHub user account. 
 */
 export const addOrUpdateMembershipForUserLegacy: ApiHeroEndpoint<
   {
-    username: string;
     teamId: number;
+    username: string;
     membership?: {
       /**
        * The role that this user should have in the team.
@@ -901,11 +901,11 @@ export const addOrUpdateMembershipForUserLegacy: ApiHeroEndpoint<
  * To remove a membership between a user and a team, the authenticated user must have 'admin' permissions to the team or be an owner of the organization that the team is associated with. Removing team membership does not delete the user, it just removes their membership from the team.
  * 
  * **Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://docs.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
-* @param username - The handle for the GitHub user account.
-* @param teamId - The unique identifier of the team. 
+* @param teamId - The unique identifier of the team.
+* @param username - The handle for the GitHub user account. 
 */
 export const removeMembershipForUserLegacy: ApiHeroEndpoint<
-  { username: string; teamId: number },
+  { teamId: number; username: string },
   void
 > = {
   id: "teams/remove-membership-for-user-legacy",
@@ -1252,11 +1252,11 @@ export const updateDiscussionLegacy: ApiHeroEndpoint<
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
 * @param org - The organization name. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param teamSlug - The slug of the team name.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param teamSlug - The slug of the team name. 
 */
 export const checkPermissionsForRepoInOrg: ApiHeroEndpoint<
-  { org: string; owner: string; teamSlug: string; repo: string },
+  { org: string; owner: string; repo: string; teamSlug: string },
   TeamRepository
 > = {
   id: "teams/check-permissions-for-repo-in-org",
@@ -1275,15 +1275,15 @@ export const checkPermissionsForRepoInOrg: ApiHeroEndpoint<
  * For more information about the permission levels, see "[Repository permission levels for an organization](https://docs.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
 * @param org - The organization name. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param teamSlug - The slug of the team name.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param teamSlug - The slug of the team name. 
 */
 export const addOrUpdateRepoPermissionsInOrg: ApiHeroEndpoint<
   {
     org: string;
     owner: string;
-    teamSlug: string;
     repo: string;
+    teamSlug: string;
     payload?: {
       /**
        * The permission to grant the team on this repository. In addition to the enumerated values, you can also specify a custom repository role name, if the owning organization has defined any. If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.
@@ -1307,11 +1307,11 @@ export const addOrUpdateRepoPermissionsInOrg: ApiHeroEndpoint<
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
 * @param org - The organization name. The name is not case sensitive.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param teamSlug - The slug of the team name.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param teamSlug - The slug of the team name. 
 */
 export const removeRepoInOrg: ApiHeroEndpoint<
-  { org: string; owner: string; teamSlug: string; repo: string },
+  { org: string; owner: string; repo: string; teamSlug: string },
   void
 > = {
   id: "teams/remove-repo-in-org",
@@ -1749,12 +1749,12 @@ export const createDiscussionCommentInOrg: ApiHeroEndpoint<
 * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get a discussion comment](https://docs.github.com/rest/reference/teams#get-a-discussion-comment) endpoint.
  * 
  * Get a specific comment on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-* @param commentNumber - The number that identifies the comment.
 * @param teamId - The unique identifier of the team.
-* @param discussionNumber - The number that identifies the discussion. 
+* @param discussionNumber - The number that identifies the discussion.
+* @param commentNumber - The number that identifies the comment. 
 */
 export const getDiscussionCommentLegacy: ApiHeroEndpoint<
-  { commentNumber: number; teamId: number; discussionNumber: number },
+  { teamId: number; discussionNumber: number; commentNumber: number },
   TeamDiscussionComment
 > = {
   id: "teams/get-discussion-comment-legacy",
@@ -1770,12 +1770,12 @@ export const getDiscussionCommentLegacy: ApiHeroEndpoint<
 * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Delete a discussion comment](https://docs.github.com/rest/reference/teams#delete-a-discussion-comment) endpoint.
  * 
  * Deletes a comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-* @param commentNumber - The number that identifies the comment.
 * @param teamId - The unique identifier of the team.
-* @param discussionNumber - The number that identifies the discussion. 
+* @param discussionNumber - The number that identifies the discussion.
+* @param commentNumber - The number that identifies the comment. 
 */
 export const deleteDiscussionCommentLegacy: ApiHeroEndpoint<
-  { commentNumber: number; teamId: number; discussionNumber: number },
+  { teamId: number; discussionNumber: number; commentNumber: number },
   void
 > = {
   id: "teams/delete-discussion-comment-legacy",
@@ -1791,15 +1791,15 @@ export const deleteDiscussionCommentLegacy: ApiHeroEndpoint<
 * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a discussion comment](https://docs.github.com/rest/reference/teams#update-a-discussion-comment) endpoint.
  * 
  * Edits the body text of a discussion comment. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-* @param commentNumber - The number that identifies the comment.
 * @param teamId - The unique identifier of the team.
-* @param discussionNumber - The number that identifies the discussion. 
+* @param discussionNumber - The number that identifies the discussion.
+* @param commentNumber - The number that identifies the comment. 
 */
 export const updateDiscussionCommentLegacy: ApiHeroEndpoint<
   {
-    commentNumber: number;
     teamId: number;
     discussionNumber: number;
+    commentNumber: number;
     comment: {
       /**
        * The discussion comment's body text.
@@ -1822,12 +1822,12 @@ export const updateDiscussionCommentLegacy: ApiHeroEndpoint<
  * 
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
 * @param org - The organization name. The name is not case sensitive.
-* @param commentNumber - The number that identifies the comment.
 * @param teamSlug - The slug of the team name.
-* @param discussionNumber - The number that identifies the discussion. 
+* @param discussionNumber - The number that identifies the discussion.
+* @param commentNumber - The number that identifies the comment. 
 */
 export const getDiscussionCommentInOrg: ApiHeroEndpoint<
-  { org: string; commentNumber: number; teamSlug: string; discussionNumber: number },
+  { org: string; teamSlug: string; discussionNumber: number; commentNumber: number },
   TeamDiscussionComment
 > = {
   id: "teams/get-discussion-comment-in-org",
@@ -1843,12 +1843,12 @@ export const getDiscussionCommentInOrg: ApiHeroEndpoint<
  * 
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
 * @param org - The organization name. The name is not case sensitive.
-* @param commentNumber - The number that identifies the comment.
 * @param teamSlug - The slug of the team name.
-* @param discussionNumber - The number that identifies the discussion. 
+* @param discussionNumber - The number that identifies the discussion.
+* @param commentNumber - The number that identifies the comment. 
 */
 export const deleteDiscussionCommentInOrg: ApiHeroEndpoint<
-  { org: string; commentNumber: number; teamSlug: string; discussionNumber: number },
+  { org: string; teamSlug: string; discussionNumber: number; commentNumber: number },
   void
 > = {
   id: "teams/delete-discussion-comment-in-org",
@@ -1864,16 +1864,16 @@ export const deleteDiscussionCommentInOrg: ApiHeroEndpoint<
  * 
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
 * @param org - The organization name. The name is not case sensitive.
-* @param commentNumber - The number that identifies the comment.
 * @param teamSlug - The slug of the team name.
-* @param discussionNumber - The number that identifies the discussion. 
+* @param discussionNumber - The number that identifies the discussion.
+* @param commentNumber - The number that identifies the comment. 
 */
 export const updateDiscussionCommentInOrg: ApiHeroEndpoint<
   {
     org: string;
-    commentNumber: number;
     teamSlug: string;
     discussionNumber: number;
+    commentNumber: number;
     comment: {
       /**
        * The discussion comment's body text.

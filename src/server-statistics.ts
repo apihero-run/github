@@ -15,11 +15,11 @@ import { ServerStatistics, ApiHeroEndpoint } from "./@types";
  * 
  * For more information on creating a personal access token, see "[Creating a personal access token](/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)."
 * @param enterpriseOrOrg - The slug version of the enterprise name or the login of an organization.
-* @param [dateEnd] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
-* @param [dateStart] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor. 
+* @param [dateStart] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
+* @param [dateEnd] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor. 
 */
 export const getServerStatistics: ApiHeroEndpoint<
-  { enterpriseOrOrg: string; dateEnd?: string; dateStart?: string },
+  { enterpriseOrOrg: string; dateStart?: string; dateEnd?: string },
   ServerStatistics
 > = {
   id: "enterprise-admin/get-server-statistics",

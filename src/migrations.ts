@@ -586,14 +586,14 @@ export const deleteArchiveForOrg: ApiHeroEndpoint<{ org: string; migrationId: nu
 * Map a commit author
 * Update an author's identity for the import. Your application can continue updating authors any time before you push new commits to the repository.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param authorId 
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param authorId  
 */
 export const mapCommitAuthor: ApiHeroEndpoint<
   {
     owner: string;
-    authorId: number;
     repo: string;
+    authorId: number;
     author?: {
       /**
        * The new Git author name.

@@ -27,6 +27,7 @@ import {
 * @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
+* @param [phrase] - A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
 * @param [order] - The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
 
 The default is `desc`.
@@ -38,19 +39,18 @@ The default is `desc`.
 
 The default is `web`.
 * @param [after] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
-* @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
-* @param [phrase] - A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log). 
+* @param [before] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor. 
 */
 export const getAuditLog: ApiHeroEndpoint<
   {
     enterprise: string;
     perPage?: number;
     page?: number;
+    phrase?: string;
     order?: "desc" | "asc";
     include?: "web" | "git" | "all";
     after?: string;
     before?: string;
-    phrase?: string;
   },
   Array<AuditLogEvent>
 > = {
@@ -82,12 +82,12 @@ export const getAuditLog: ApiHeroEndpoint<
  * - If the user signs in, their GitHub account is linked to this entry.
  * - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub enterprise, and the external identity `null` entry remains in place.
 * @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-* @param [count] - Used for pagination: the number of results to return.
 * @param [filter] - filter results
-* @param [startIndex] - Used for pagination: the index of the first result to return. 
+* @param [startIndex] - Used for pagination: the index of the first result to return.
+* @param [count] - Used for pagination: the number of results to return. 
 */
 export const listProvisionedIdentitiesEnterprise: ApiHeroEndpoint<
-  { enterprise: string; count?: number; filter?: string; startIndex?: number },
+  { enterprise: string; filter?: string; startIndex?: number; count?: number },
   ScimUserListEnterprise
 > = {
   id: "enterprise-admin/list-provisioned-identities-enterprise",
@@ -173,17 +173,17 @@ export const provisionAndInviteEnterpriseUser: ApiHeroEndpoint<
 * List provisioned SCIM groups for an enterprise
 * **Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
 * @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-* @param [excludedAttributes] - attributes to exclude
-* @param [count] - Used for pagination: the number of results to return.
 * @param [startIndex] - Used for pagination: the index of the first result to return.
+* @param [count] - Used for pagination: the number of results to return.
+* @param [excludedAttributes] - attributes to exclude
 * @param [filter] - filter results 
 */
 export const listProvisionedGroupsEnterprise: ApiHeroEndpoint<
   {
     enterprise: string;
-    excludedAttributes?: string;
-    count?: number;
     startIndex?: number;
+    count?: number;
+    excludedAttributes?: string;
     filter?: string;
   },
   ScimGroupListEnterprise
@@ -938,11 +938,11 @@ export const removeAllCustomLabelsFromSelfHostedRunnerForEnterprise: ApiHeroEndp
  * 
  * For more information on creating a personal access token, see "[Creating a personal access token](/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)."
 * @param enterpriseOrOrg - The slug version of the enterprise name or the login of an organization.
-* @param [dateEnd] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor.
-* @param [dateStart] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor. 
+* @param [dateStart] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events after this cursor.
+* @param [dateEnd] - A cursor, as given in the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header). If specified, the query only searches for events before this cursor. 
 */
 export const getServerStatistics: ApiHeroEndpoint<
-  { enterpriseOrOrg: string; dateEnd?: string; dateStart?: string },
+  { enterpriseOrOrg: string; dateStart?: string; dateEnd?: string },
   ServerStatistics
 > = {
   id: "enterprise-admin/get-server-statistics",
@@ -1086,11 +1086,11 @@ export const updateSelfHostedRunnerGroupForEnterprise: ApiHeroEndpoint<
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
 * @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-* @param name - The name of a self-hosted runner's custom label.
-* @param runnerId - Unique identifier of the self-hosted runner. 
+* @param runnerId - Unique identifier of the self-hosted runner.
+* @param name - The name of a self-hosted runner's custom label. 
 */
 export const removeCustomLabelFromSelfHostedRunnerForEnterprise: ApiHeroEndpoint<
-  { enterprise: string; name: string; runnerId: number },
+  { enterprise: string; runnerId: number; name: string },
   {
     labels: Array<RunnerLabel>;
     total_count: number;
@@ -1108,11 +1108,11 @@ export const removeCustomLabelFromSelfHostedRunnerForEnterprise: ApiHeroEndpoint
 * Adds an organization to the list of selected organizations that are enabled for GitHub Actions in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
  * 
  * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-* @param orgId - The unique identifier of the organization.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param orgId - The unique identifier of the organization. 
 */
 export const enableSelectedOrganizationGithubActionsEnterprise: ApiHeroEndpoint<
-  { orgId: number; enterprise: string },
+  { enterprise: string; orgId: number },
   void
 > = {
   id: "enterprise-admin/enable-selected-organization-github-actions-enterprise",
@@ -1127,11 +1127,11 @@ export const enableSelectedOrganizationGithubActionsEnterprise: ApiHeroEndpoint<
 * Removes an organization from the list of selected organizations that are enabled for GitHub Actions in an enterprise. To use this endpoint, the enterprise permission policy for `enabled_organizations` must be configured to `selected`. For more information, see "[Set GitHub Actions permissions for an enterprise](#set-github-actions-permissions-for-an-enterprise)."
  * 
  * You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
-* @param orgId - The unique identifier of the organization.
-* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id. 
+* @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
+* @param orgId - The unique identifier of the organization. 
 */
 export const disableSelectedOrganizationGithubActionsEnterprise: ApiHeroEndpoint<
-  { orgId: number; enterprise: string },
+  { enterprise: string; orgId: number },
   void
 > = {
   id: "enterprise-admin/disable-selected-organization-github-actions-enterprise",
@@ -1294,12 +1294,12 @@ export const removeSelfHostedRunnerFromGroupForEnterprise: ApiHeroEndpoint<
 * Adds an organization to the list of selected organizations that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an enterprise](#create-a-self-hosted-runner-group-for-an-enterprise)."
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param orgId - The unique identifier of the organization.
 * @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group. 
+* @param runnerGroupId - Unique identifier of the self-hosted runner group.
+* @param orgId - The unique identifier of the organization. 
 */
 export const addOrgAccessToSelfHostedRunnerGroupInEnterprise: ApiHeroEndpoint<
-  { orgId: number; enterprise: string; runnerGroupId: number },
+  { enterprise: string; runnerGroupId: number; orgId: number },
   void
 > = {
   id: "enterprise-admin/add-org-access-to-self-hosted-runner-group-in-enterprise",
@@ -1314,12 +1314,12 @@ export const addOrgAccessToSelfHostedRunnerGroupInEnterprise: ApiHeroEndpoint<
 * Removes an organization from the list of selected organizations that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an enterprise](#create-a-self-hosted-runner-group-for-an-enterprise)."
  * 
  * You must authenticate using an access token with the `manage_runners:enterprise` scope to use this endpoint.
-* @param orgId - The unique identifier of the organization.
 * @param enterprise - The slug version of the enterprise name. You can also substitute this value with the enterprise id.
-* @param runnerGroupId - Unique identifier of the self-hosted runner group. 
+* @param runnerGroupId - Unique identifier of the self-hosted runner group.
+* @param orgId - The unique identifier of the organization. 
 */
 export const removeOrgAccessToSelfHostedRunnerGroupInEnterprise: ApiHeroEndpoint<
-  { orgId: number; enterprise: string; runnerGroupId: number },
+  { enterprise: string; runnerGroupId: number; orgId: number },
   void
 > = {
   id: "enterprise-admin/remove-org-access-to-self-hosted-runner-group-in-enterprise",

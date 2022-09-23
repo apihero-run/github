@@ -407,15 +407,15 @@ export const getAllPackageVersionsForPackageOwnedByUser: ApiHeroEndpoint<
  * 
  * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
  * If `package_type` is not `container`, your token must also include the `repo` scope.
-* @param packageVersionId - Unique identifier of the package version.
 * @param packageName - The name of the package.
-* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry. 
+* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+* @param packageVersionId - Unique identifier of the package version. 
 */
 export const getPackageVersionForAuthenticatedUser: ApiHeroEndpoint<
   {
-    packageVersionId: number;
     packageName: string;
     packageType: "npm" | "maven" | "rubygems" | "docker" | "nuget" | "container";
+    packageVersionId: number;
   },
   PackageVersion
 > = {
@@ -432,15 +432,15 @@ export const getPackageVersionForAuthenticatedUser: ApiHeroEndpoint<
  * 
  * To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:delete` scopes.
  * If `package_type` is not `container`, your token must also include the `repo` scope.
-* @param packageVersionId - Unique identifier of the package version.
 * @param packageName - The name of the package.
-* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry. 
+* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+* @param packageVersionId - Unique identifier of the package version. 
 */
 export const deletePackageVersionForAuthenticatedUser: ApiHeroEndpoint<
   {
-    packageVersionId: number;
     packageName: string;
     packageType: "npm" | "maven" | "rubygems" | "docker" | "nuget" | "container";
+    packageVersionId: number;
   },
   void
 > = {
@@ -458,16 +458,16 @@ export const deletePackageVersionForAuthenticatedUser: ApiHeroEndpoint<
  * You must authenticate using an access token with the `packages:read` scope.
  * If `package_type` is not `container`, your token must also include the `repo` scope.
 * @param org - The organization name. The name is not case sensitive.
-* @param packageVersionId - Unique identifier of the package version.
 * @param packageName - The name of the package.
-* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry. 
+* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+* @param packageVersionId - Unique identifier of the package version. 
 */
 export const getPackageVersionForOrganization: ApiHeroEndpoint<
   {
     org: string;
-    packageVersionId: number;
     packageName: string;
     packageType: "npm" | "maven" | "rubygems" | "docker" | "nuget" | "container";
+    packageVersionId: number;
   },
   PackageVersion
 > = {
@@ -486,16 +486,16 @@ export const getPackageVersionForOrganization: ApiHeroEndpoint<
  * - If `package_type` is not `container`, your token must also include the `repo` scope.
  * - If `package_type` is `container`, you must also have admin permissions to the container you want to delete.
 * @param org - The organization name. The name is not case sensitive.
-* @param packageVersionId - Unique identifier of the package version.
 * @param packageName - The name of the package.
-* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry. 
+* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+* @param packageVersionId - Unique identifier of the package version. 
 */
 export const deletePackageVersionForOrg: ApiHeroEndpoint<
   {
     org: string;
-    packageVersionId: number;
     packageName: string;
     packageType: "npm" | "maven" | "rubygems" | "docker" | "nuget" | "container";
+    packageVersionId: number;
   },
   void
 > = {
@@ -515,15 +515,15 @@ export const deletePackageVersionForOrg: ApiHeroEndpoint<
  * - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
  * 
  * To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:write` scopes. If `package_type` is not `container`, your token must also include the `repo` scope.
-* @param packageVersionId - Unique identifier of the package version.
 * @param packageName - The name of the package.
-* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry. 
+* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+* @param packageVersionId - Unique identifier of the package version. 
 */
 export const restorePackageVersionForAuthenticatedUser: ApiHeroEndpoint<
   {
-    packageVersionId: number;
     packageName: string;
     packageType: "npm" | "maven" | "rubygems" | "docker" | "nuget" | "container";
+    packageVersionId: number;
   },
   void
 > = {
@@ -541,16 +541,16 @@ export const restorePackageVersionForAuthenticatedUser: ApiHeroEndpoint<
  * At this time, to use this endpoint, you must authenticate using an access token with the `packages:read` scope.
  * If `package_type` is not `container`, your token must also include the `repo` scope.
 * @param username - The handle for the GitHub user account.
-* @param packageVersionId - Unique identifier of the package version.
 * @param packageName - The name of the package.
-* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry. 
+* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+* @param packageVersionId - Unique identifier of the package version. 
 */
 export const getPackageVersionForUser: ApiHeroEndpoint<
   {
     username: string;
-    packageVersionId: number;
     packageName: string;
     packageType: "npm" | "maven" | "rubygems" | "docker" | "nuget" | "container";
+    packageVersionId: number;
   },
   PackageVersion
 > = {
@@ -569,16 +569,16 @@ export const getPackageVersionForUser: ApiHeroEndpoint<
  * - If `package_type` is not `container`, your token must also include the `repo` scope.
  * - If `package_type` is `container`, you must also have admin permissions to the container you want to delete.
 * @param username - The handle for the GitHub user account.
-* @param packageVersionId - Unique identifier of the package version.
 * @param packageName - The name of the package.
-* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry. 
+* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+* @param packageVersionId - Unique identifier of the package version. 
 */
 export const deletePackageVersionForUser: ApiHeroEndpoint<
   {
     username: string;
-    packageVersionId: number;
     packageName: string;
     packageType: "npm" | "maven" | "rubygems" | "docker" | "nuget" | "container";
+    packageVersionId: number;
   },
   void
 > = {
@@ -601,16 +601,16 @@ export const deletePackageVersionForUser: ApiHeroEndpoint<
  * - If `package_type` is not `container`, your token must also include the `repo` scope.
  * - If `package_type` is `container`, you must also have admin permissions to the container that you want to restore.
 * @param org - The organization name. The name is not case sensitive.
-* @param packageVersionId - Unique identifier of the package version.
 * @param packageName - The name of the package.
-* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry. 
+* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+* @param packageVersionId - Unique identifier of the package version. 
 */
 export const restorePackageVersionForOrg: ApiHeroEndpoint<
   {
     org: string;
-    packageVersionId: number;
     packageName: string;
     packageType: "npm" | "maven" | "rubygems" | "docker" | "nuget" | "container";
+    packageVersionId: number;
   },
   void
 > = {
@@ -633,16 +633,16 @@ export const restorePackageVersionForOrg: ApiHeroEndpoint<
  * - If `package_type` is not `container`, your token must also include the `repo` scope.
  * - If `package_type` is `container`, you must also have admin permissions to the container that you want to restore.
 * @param username - The handle for the GitHub user account.
-* @param packageVersionId - Unique identifier of the package version.
 * @param packageName - The name of the package.
-* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry. 
+* @param packageType - The type of supported package. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+* @param packageVersionId - Unique identifier of the package version. 
 */
 export const restorePackageVersionForUser: ApiHeroEndpoint<
   {
     username: string;
-    packageVersionId: number;
     packageName: string;
     packageType: "npm" | "maven" | "rubygems" | "docker" | "nuget" | "container";
+    packageVersionId: number;
   },
   void
 > = {

@@ -79,8 +79,8 @@ export const listReposStarredByAuthenticatedUser: ApiHeroEndpoint<
 
 * List notifications for the authenticated user
 * List all notifications for the current user, sorted by most recently updated.
-* @param [perPage=30] - The number of results per page (max 100).
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [before] - Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
 * @param [all=false] - If `true`, show notifications marked as read.
@@ -88,8 +88,8 @@ export const listReposStarredByAuthenticatedUser: ApiHeroEndpoint<
 */
 export const listNotificationsForAuthenticatedUser: ApiHeroEndpoint<
   {
-    perPage?: number;
     since?: string;
+    perPage?: number;
     page?: number;
     before?: string;
     all?: boolean;
@@ -485,8 +485,8 @@ export const deleteRepoSubscription: ApiHeroEndpoint<{ owner: string; repo: stri
 * List all notifications for the current user.
 * @param owner - The account owner of the repository. The name is not case sensitive.
 * @param repo - The name of the repository. The name is not case sensitive.
-* @param [perPage=30] - The number of results per page (max 100).
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [before] - Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
 * @param [all=false] - If `true`, show notifications marked as read.
@@ -496,8 +496,8 @@ export const listRepoNotificationsForAuthenticatedUser: ApiHeroEndpoint<
   {
     owner: string;
     repo: string;
-    perPage?: number;
     since?: string;
+    perPage?: number;
     page?: number;
     before?: string;
     all?: boolean;

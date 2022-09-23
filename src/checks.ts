@@ -263,26 +263,26 @@ export const setSuitesPreferences: ApiHeroEndpoint<
  * 
  * Lists check runs for a commit ref. The `ref` can be a SHA, branch name, or a tag name. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check runs. OAuth Apps and authenticated users must have the `repo` scope to get check runs in a private repository.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param ref - ref parameter
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param ref - ref parameter
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [checkName] - Returns check runs with the specified `name`.
-* @param [appId] 
+* @param [filter] - Filters check runs by their `completed_at` timestamp. `latest` returns the most recent check runs.
 * @param [status] - Returns check runs with the specified `status`.
-* @param [filter] - Filters check runs by their `completed_at` timestamp. `latest` returns the most recent check runs. 
+* @param [appId]  
 */
 export const listForRef: ApiHeroEndpoint<
   {
     owner: string;
-    ref: string;
     repo: string;
+    ref: string;
     perPage?: number;
     page?: number;
     checkName?: string;
-    appId?: number;
-    status?: "queued" | "in_progress" | "completed";
     filter?: "latest" | "all";
+    status?: "queued" | "in_progress" | "completed";
+    appId?: number;
   },
   {
     check_runs: Array<CheckRun>;
@@ -303,11 +303,11 @@ export const listForRef: ApiHeroEndpoint<
  * 
  * Gets a single check run using its `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check runs. OAuth Apps and authenticated users must have the `repo` scope to get check runs in a private repository.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param checkRunId - The unique identifier of the check run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param checkRunId - The unique identifier of the check run. 
 */
 export const getCheck: ApiHeroEndpoint<
-  { owner: string; checkRunId: number; repo: string },
+  { owner: string; repo: string; checkRunId: number },
   CheckRun
 > = {
   id: "checks/get",
@@ -323,14 +323,14 @@ export const getCheck: ApiHeroEndpoint<
  * 
  * Updates a check run for a specific commit in a repository. Your GitHub App must have the `checks:write` permission to edit check runs.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param checkRunId - The unique identifier of the check run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param checkRunId - The unique identifier of the check run. 
 */
 export const update: ApiHeroEndpoint<
   {
     owner: string;
-    checkRunId: number;
     repo: string;
+    checkRunId: number;
     checkRun: {
       /**
        * The name of the check. For example, "code-coverage".
@@ -502,8 +502,8 @@ export const update: ApiHeroEndpoint<
  * 
  * Lists check suites for a commit `ref`. The `ref` can be a SHA, branch name, or a tag name. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to list check suites. OAuth Apps and authenticated users must have the `repo` scope to get check suites in a private repository.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param ref - ref parameter
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param ref - ref parameter
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [checkName] - Returns check runs with the specified `name`.
@@ -512,8 +512,8 @@ export const update: ApiHeroEndpoint<
 export const listSuitesForRef: ApiHeroEndpoint<
   {
     owner: string;
-    ref: string;
     repo: string;
+    ref: string;
     perPage?: number;
     page?: number;
     checkName?: string;
@@ -538,11 +538,11 @@ export const listSuitesForRef: ApiHeroEndpoint<
  * 
  * Gets a single check suite using its `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check suites. OAuth Apps and authenticated users must have the `repo` scope to get check suites in a private repository.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param checkSuiteId - The unique identifier of the check suite.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param checkSuiteId - The unique identifier of the check suite. 
 */
 export const getSuite: ApiHeroEndpoint<
-  { owner: string; checkSuiteId: number; repo: string },
+  { owner: string; repo: string; checkSuiteId: number },
   CheckSuite
 > = {
   id: "checks/get-suite",
@@ -558,11 +558,11 @@ export const getSuite: ApiHeroEndpoint<
  * 
  * To rerequest a check run, your GitHub App must have the `checks:read` permission on a private repository or pull access to a public repository.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param checkRunId - The unique identifier of the check run.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param checkRunId - The unique identifier of the check run. 
 */
 export const rerequestRun: ApiHeroEndpoint<
-  { owner: string; checkRunId: number; repo: string },
+  { owner: string; repo: string; checkRunId: number },
   {}
 > = {
   id: "checks/rerequest-run",
@@ -576,13 +576,13 @@ export const rerequestRun: ApiHeroEndpoint<
 * List check run annotations
 * Lists annotations for a check run using the annotation `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get annotations for a check run. OAuth Apps and authenticated users must have the `repo` scope to get annotations for a check run in a private repository.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param checkRunId - The unique identifier of the check run.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param checkRunId - The unique identifier of the check run.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listAnnotations: ApiHeroEndpoint<
-  { owner: string; checkRunId: number; repo: string; perPage?: number; page?: number },
+  { owner: string; repo: string; checkRunId: number; perPage?: number; page?: number },
   Array<CheckAnnotation>,
   { Link: string }
 > = {
@@ -599,11 +599,11 @@ export const listAnnotations: ApiHeroEndpoint<
  * 
  * To rerequest a check suite, your GitHub App must have the `checks:read` permission on a private repository or pull access to a public repository.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param checkSuiteId - The unique identifier of the check suite.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param checkSuiteId - The unique identifier of the check suite. 
 */
 export const rerequestSuite: ApiHeroEndpoint<
-  { owner: string; checkSuiteId: number; repo: string },
+  { owner: string; repo: string; checkSuiteId: number },
   {}
 > = {
   id: "checks/rerequest-suite",
@@ -619,8 +619,8 @@ export const rerequestSuite: ApiHeroEndpoint<
  * 
  * Lists check runs for a check suite using its `id`. GitHub Apps must have the `checks:read` permission on a private repository or pull access to a public repository to get check runs. OAuth Apps and authenticated users must have the `repo` scope to get check runs in a private repository.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param checkSuiteId - The unique identifier of the check suite.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param checkSuiteId - The unique identifier of the check suite.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [checkName] - Returns check runs with the specified `name`.
@@ -630,8 +630,8 @@ export const rerequestSuite: ApiHeroEndpoint<
 export const listForSuite: ApiHeroEndpoint<
   {
     owner: string;
-    checkSuiteId: number;
     repo: string;
+    checkSuiteId: number;
     perPage?: number;
     page?: number;
     checkName?: string;

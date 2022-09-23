@@ -806,14 +806,14 @@ export const setRepositoriesForSecretForAuthenticatedUser: ApiHeroEndpoint<
  * 
  * GitHub Apps must have write access to the `codespaces` repository permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request. 
 */
 export const createWithPrForAuthenticatedUser: ApiHeroEndpoint<
   {
     owner: string;
-    pullNumber: number;
     repo: string;
+    pullNumber: number;
     codespace: {
       /**
        * Machine type to use for this codespace
@@ -894,11 +894,11 @@ export const getExportDetailsForAuthenticatedUser: ApiHeroEndpoint<
 * Get a repository secret
 * Gets a single repository secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `codespaces_secrets` repository permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param secretName - The name of the secret.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param secretName - The name of the secret. 
 */
 export const getRepoSecret: ApiHeroEndpoint<
-  { owner: string; secretName: string; repo: string },
+  { owner: string; repo: string; secretName: string },
   RepoCodespacesSecret
 > = {
   id: "codespaces/get-repo-secret",
@@ -986,14 +986,14 @@ export const getRepoSecret: ApiHeroEndpoint<
  * puts Base64.strict_encode64(encrypted_secret)
  * ```
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param secretName - The name of the secret.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param secretName - The name of the secret. 
 */
 export const createOrUpdateRepoSecret: ApiHeroEndpoint<
   {
     owner: string;
-    secretName: string;
     repo: string;
+    secretName: string;
     secret: {
       /**
        * ID of the key you used to encrypt the secret.
@@ -1019,11 +1019,11 @@ export const createOrUpdateRepoSecret: ApiHeroEndpoint<
 * Delete a repository secret
 * Deletes a secret in a repository using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `codespaces_secrets` repository permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param secretName - The name of the secret.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param secretName - The name of the secret. 
 */
 export const deleteRepoSecret: ApiHeroEndpoint<
-  { owner: string; secretName: string; repo: string },
+  { owner: string; repo: string; secretName: string },
   void
 > = {
   id: "codespaces/delete-repo-secret",
@@ -1078,11 +1078,11 @@ export const stopInOrganization: ApiHeroEndpoint<
 * Adds a repository to the selected repositories for a user's codespace secret.
  * You must authenticate using an access token with the `codespace` or `codespace:secrets` scope to use this endpoint. User must have Codespaces access to use this endpoint.
  * GitHub Apps must have write access to the `codespaces_user_secrets` user permission and write access to the `codespaces_secrets` repository permission on the referenced repository to use this endpoint.
-* @param repositoryId 
-* @param secretName - The name of the secret. 
+* @param secretName - The name of the secret.
+* @param repositoryId  
 */
 export const addRepositoryForSecretForAuthenticatedUser: ApiHeroEndpoint<
-  { repositoryId: number; secretName: string },
+  { secretName: string; repositoryId: number },
   void
 > = {
   id: "codespaces/add-repository-for-secret-for-authenticated-user",
@@ -1097,11 +1097,11 @@ export const addRepositoryForSecretForAuthenticatedUser: ApiHeroEndpoint<
 * Removes a repository from the selected repositories for a user's codespace secret.
  * You must authenticate using an access token with the `codespace` or `codespace:secrets` scope to use this endpoint. User must have Codespaces access to use this endpoint.
  * GitHub Apps must have write access to the `codespaces_user_secrets` user permission to use this endpoint.
-* @param repositoryId 
-* @param secretName - The name of the secret. 
+* @param secretName - The name of the secret.
+* @param repositoryId  
 */
 export const removeRepositoryForSecretForAuthenticatedUser: ApiHeroEndpoint<
-  { repositoryId: number; secretName: string },
+  { secretName: string; repositoryId: number },
   void
 > = {
   id: "codespaces/remove-repository-for-secret-for-authenticated-user",

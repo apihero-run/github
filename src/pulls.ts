@@ -21,11 +21,11 @@ import {
 * @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
-* @param [head] - Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`.
 * @param [sort] - What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
-* @param [direction] - The direction of the sort. Can be either `asc` or `desc`. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`.
+* @param [state] - Either `open`, `closed`, or `all` to filter by state.
+* @param [head] - Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`.
 * @param [base] - Filter pulls by base branch name. Example: `gh-pages`.
-* @param [state] - Either `open`, `closed`, or `all` to filter by state. 
+* @param [direction] - The direction of the sort. Can be either `asc` or `desc`. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`. 
 */
 export const list: ApiHeroEndpoint<
   {
@@ -33,11 +33,11 @@ export const list: ApiHeroEndpoint<
     repo: string;
     perPage?: number;
     page?: number;
-    head?: string;
     sort?: "created" | "updated" | "popularity" | "long-running";
-    direction?: "asc" | "desc";
-    base?: string;
     state?: "open" | "closed" | "all";
+    head?: string;
+    base?: string;
+    direction?: "asc" | "desc";
   },
   Array<PullRequestSimple>,
   { Link: string }
@@ -119,21 +119,21 @@ export const create: ApiHeroEndpoint<
 * Lists review comments for all pull requests in a repository. By default, review comments are in ascending order by ID.
 * @param owner - The account owner of the repository. The name is not case sensitive.
 * @param repo - The name of the repository. The name is not case sensitive.
-* @param [perPage=30] - The number of results per page (max 100).
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
-* @param [direction] - Can be either `asc` or `desc`. Ignored without `sort` parameter.
-* @param [sort]  
+* @param [sort] 
+* @param [direction] - Can be either `asc` or `desc`. Ignored without `sort` parameter. 
 */
 export const listReviewCommentsForRepo: ApiHeroEndpoint<
   {
     owner: string;
     repo: string;
-    perPage?: number;
     since?: string;
+    perPage?: number;
     page?: number;
-    direction?: "asc" | "desc";
     sort?: "created" | "updated" | "created_at";
+    direction?: "asc" | "desc";
   },
   Array<PullRequestReviewComment>,
   { Link: string }
@@ -163,11 +163,11 @@ export const listReviewCommentsForRepo: ApiHeroEndpoint<
  * 
  * Pass the appropriate [media type](https://docs.github.com/rest/overview/media-types/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request. 
 */
 export const getPull: ApiHeroEndpoint<
-  { owner: string; pullNumber: number; repo: string },
+  { owner: string; repo: string; pullNumber: number },
   PullRequest
 > = {
   id: "pulls/get",
@@ -183,14 +183,14 @@ export const getPull: ApiHeroEndpoint<
  * 
  * To open or update a pull request in a public repository, you must have write access to the head or the source branch. For organization-owned repositories, you must be a member of the organization that owns the repository to open or update a pull request.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request. 
 */
 export const update: ApiHeroEndpoint<
   {
     owner: string;
-    pullNumber: number;
     repo: string;
+    pullNumber: number;
     pull?: {
       /**
        * The name of the branch you want your changes pulled into. This should be an existing branch on the current repository. You cannot update the base branch on a pull request to point to another repository.
@@ -231,13 +231,13 @@ export const update: ApiHeroEndpoint<
 * List pull requests files
 * **Note:** Responses include a maximum of 3000 files. The paginated response returns 30 files per page by default.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listFiles: ApiHeroEndpoint<
-  { owner: string; pullNumber: number; repo: string; perPage?: number; page?: number },
+  { owner: string; repo: string; pullNumber: number; perPage?: number; page?: number },
   Array<DiffEntry>,
   { Link: string }
 > = {
@@ -251,11 +251,11 @@ export const listFiles: ApiHeroEndpoint<
 
 * Check if a pull request has been merged
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request. 
 */
 export const checkIfMerged: ApiHeroEndpoint<
-  { owner: string; pullNumber: number; repo: string },
+  { owner: string; repo: string; pullNumber: number },
   void
 > = {
   id: "pulls/check-if-merged",
@@ -269,14 +269,14 @@ export const checkIfMerged: ApiHeroEndpoint<
 * Merge a pull request
 * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request. 
 */
 export const merge: ApiHeroEndpoint<
   {
     owner: string;
-    pullNumber: number;
     repo: string;
+    pullNumber: number;
     payload?: {
       /**
        * SHA that pull request head must match to allow merge.
@@ -312,11 +312,11 @@ export const merge: ApiHeroEndpoint<
 * Get a review comment for a pull request
 * Provides details for a review comment.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param commentId - The unique identifier of the comment.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param commentId - The unique identifier of the comment. 
 */
 export const getReviewComment: ApiHeroEndpoint<
-  { owner: string; commentId: number; repo: string },
+  { owner: string; repo: string; commentId: number },
   PullRequestReviewComment
 > = {
   id: "pulls/get-review-comment",
@@ -330,11 +330,11 @@ export const getReviewComment: ApiHeroEndpoint<
 * Delete a review comment for a pull request
 * Deletes a review comment.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param commentId - The unique identifier of the comment.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param commentId - The unique identifier of the comment. 
 */
 export const deleteReviewComment: ApiHeroEndpoint<
-  { owner: string; commentId: number; repo: string },
+  { owner: string; repo: string; commentId: number },
   void
 > = {
   id: "pulls/delete-review-comment",
@@ -348,14 +348,14 @@ export const deleteReviewComment: ApiHeroEndpoint<
 * Update a review comment for a pull request
 * Enables you to edit a review comment.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param commentId - The unique identifier of the comment.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param commentId - The unique identifier of the comment. 
 */
 export const updateReviewComment: ApiHeroEndpoint<
   {
     owner: string;
-    commentId: number;
     repo: string;
+    commentId: number;
     comment: {
       /**
        * The text of the reply to the review comment.
@@ -376,13 +376,13 @@ export const updateReviewComment: ApiHeroEndpoint<
 * List commits on a pull request
 * Lists a maximum of 250 commits for a pull request. To receive a complete commit list for pull requests with more than 250 commits, use the [List commits](https://docs.github.com/rest/reference/repos#list-commits) endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listCommits: ApiHeroEndpoint<
-  { owner: string; pullNumber: number; repo: string; perPage?: number; page?: number },
+  { owner: string; repo: string; pullNumber: number; perPage?: number; page?: number },
   Array<Commit>,
   { Link: string }
 > = {
@@ -397,13 +397,13 @@ export const listCommits: ApiHeroEndpoint<
 * List reviews for a pull request
 * The list of reviews returns in chronological order.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listReviews: ApiHeroEndpoint<
-  { owner: string; pullNumber: number; repo: string; perPage?: number; page?: number },
+  { owner: string; repo: string; pullNumber: number; perPage?: number; page?: number },
   Array<PullRequestReview>,
   { Link: string }
 > = {
@@ -424,14 +424,14 @@ export const listReviews: ApiHeroEndpoint<
  * 
  * The `position` value equals the number of lines down from the first "@@" hunk header in the file you want to add a comment. The line just below the "@@" line is position 1, the next line is position 2, and so on. The position in the diff continues to increase through lines of whitespace and additional hunks until the beginning of a new file.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request. 
 */
 export const createReview: ApiHeroEndpoint<
   {
     owner: string;
-    pullNumber: number;
     repo: string;
+    pullNumber: number;
     review?: {
       /**
        * **Required** when using `REQUEST_CHANGES` or `COMMENT` for the `event` parameter. The body text of the pull request review.
@@ -510,24 +510,24 @@ export const createReview: ApiHeroEndpoint<
 * List review comments on a pull request
 * Lists all review comments for a pull request. By default, review comments are in ascending order by ID.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
 * @param repo - The name of the repository. The name is not case sensitive.
-* @param [perPage=30] - The number of results per page (max 100).
+* @param pullNumber - The number that identifies the pull request.
 * @param [since] - Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+* @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
-* @param [direction] - Can be either `asc` or `desc`. Ignored without `sort` parameter.
-* @param [sort] - The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to. 
+* @param [sort] - The property to sort the results by. `created` means when the repository was starred. `updated` means when the repository was last pushed to.
+* @param [direction] - Can be either `asc` or `desc`. Ignored without `sort` parameter. 
 */
 export const listReviewComments: ApiHeroEndpoint<
   {
     owner: string;
-    pullNumber: number;
     repo: string;
-    perPage?: number;
+    pullNumber: number;
     since?: string;
+    perPage?: number;
     page?: number;
-    direction?: "asc" | "desc";
     sort?: "created" | "updated";
+    direction?: "asc" | "desc";
   },
   Array<PullRequestReviewComment>,
   { Link: string }
@@ -550,14 +550,14 @@ export const listReviewComments: ApiHeroEndpoint<
  * 
  * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request. 
 */
 export const createReviewComment: ApiHeroEndpoint<
   {
     owner: string;
-    pullNumber: number;
     repo: string;
+    pullNumber: number;
     comment: {
       /**
        * The text of the review comment.
@@ -623,14 +623,14 @@ export const createReviewComment: ApiHeroEndpoint<
 * Update a pull request branch
 * Updates the pull request branch with the latest upstream changes by merging HEAD from the base branch into the pull request branch.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request. 
 */
 export const updateBranch: ApiHeroEndpoint<
   {
     owner: string;
-    pullNumber: number;
     repo: string;
+    pullNumber: number;
     payload?: {
       /**
        * The expected SHA of the pull request's HEAD ref. This is the most recent commit on the pull request's branch. If the expected SHA does not match the pull request's HEAD, you will receive a `422 Unprocessable Entity` status. You can use the "[List commits](https://docs.github.com/rest/reference/repos#list-commits)" endpoint to find the most recent commit SHA. Default: SHA of the pull request's current HEAD ref.
@@ -654,13 +654,13 @@ export const updateBranch: ApiHeroEndpoint<
 * List requested reviewers for a pull request
 * Lists the users or teams whose review is requested for a pull request. Once a requested reviewer submits a review, they are no longer considered a requested reviewer. Their review will instead be returned by the [List reviews for a pull request](https://docs.github.com/rest/pulls/reviews#list-reviews-for-a-pull-request) operation.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listRequestedReviewers: ApiHeroEndpoint<
-  { owner: string; pullNumber: number; repo: string; perPage?: number; page?: number },
+  { owner: string; repo: string; pullNumber: number; perPage?: number; page?: number },
   PullRequestReviewRequest,
   { Link: string }
 > = {
@@ -675,14 +675,14 @@ export const listRequestedReviewers: ApiHeroEndpoint<
 * Request reviewers for a pull request
 * This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request. 
 */
 export const requestReviewers: ApiHeroEndpoint<
   {
     owner: string;
-    pullNumber: number;
     repo: string;
+    pullNumber: number;
     requestedReviewer?: {
       /**
        * An array of user `login`s that will be requested.
@@ -707,14 +707,14 @@ export const requestReviewers: ApiHeroEndpoint<
 
 * Remove requested reviewers from a pull request
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param pullNumber - The number that identifies the pull request. 
 */
 export const removeRequestedReviewers: ApiHeroEndpoint<
   {
     owner: string;
-    pullNumber: number;
     repo: string;
+    pullNumber: number;
     requestedReviewer: {
       /**
        * An array of user `login`s that will be removed.
@@ -739,12 +739,12 @@ export const removeRequestedReviewers: ApiHeroEndpoint<
 
 * Get a review for a pull request
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param pullNumber - The number that identifies the pull request.
-* @param reviewId - The unique identifier of the review.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param reviewId - The unique identifier of the review. 
 */
 export const getReview: ApiHeroEndpoint<
-  { owner: string; pullNumber: number; reviewId: number; repo: string },
+  { owner: string; repo: string; pullNumber: number; reviewId: number },
   PullRequestReview
 > = {
   id: "pulls/get-review",
@@ -758,16 +758,16 @@ export const getReview: ApiHeroEndpoint<
 * Update a review for a pull request
 * Update the review summary comment with new text.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param pullNumber - The number that identifies the pull request.
-* @param reviewId - The unique identifier of the review.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param reviewId - The unique identifier of the review. 
 */
 export const updateReview: ApiHeroEndpoint<
   {
     owner: string;
+    repo: string;
     pullNumber: number;
     reviewId: number;
-    repo: string;
     review: {
       /**
        * The body text of the pull request review.
@@ -787,12 +787,12 @@ export const updateReview: ApiHeroEndpoint<
 
 * Delete a pending review for a pull request
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param pullNumber - The number that identifies the pull request.
-* @param reviewId - The unique identifier of the review.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param reviewId - The unique identifier of the review. 
 */
 export const deletePendingReview: ApiHeroEndpoint<
-  { owner: string; pullNumber: number; reviewId: number; repo: string },
+  { owner: string; repo: string; pullNumber: number; reviewId: number },
   PullRequestReview
 > = {
   id: "pulls/delete-pending-review",
@@ -805,16 +805,16 @@ export const deletePendingReview: ApiHeroEndpoint<
 
 * Submit a review for a pull request
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param pullNumber - The number that identifies the pull request.
-* @param reviewId - The unique identifier of the review.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param reviewId - The unique identifier of the review. 
 */
 export const submitReview: ApiHeroEndpoint<
   {
     owner: string;
+    repo: string;
     pullNumber: number;
     reviewId: number;
-    repo: string;
     event: {
       /**
        * The body text of the pull request review
@@ -840,18 +840,18 @@ export const submitReview: ApiHeroEndpoint<
 * List comments for a pull request review
 * List comments for a specific pull request review.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param pullNumber - The number that identifies the pull request.
 * @param reviewId - The unique identifier of the review.
-* @param repo - The name of the repository. The name is not case sensitive.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch. 
 */
 export const listCommentsForReview: ApiHeroEndpoint<
   {
     owner: string;
+    repo: string;
     pullNumber: number;
     reviewId: number;
-    repo: string;
     perPage?: number;
     page?: number;
   },
@@ -871,16 +871,16 @@ export const listCommentsForReview: ApiHeroEndpoint<
  * 
  * This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in secondary rate limiting. See "[Secondary rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#secondary-rate-limits)" and "[Dealing with secondary rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-secondary-rate-limits)" for details.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param pullNumber - The number that identifies the pull request.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param commentId - The unique identifier of the comment.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param pullNumber - The number that identifies the pull request. 
 */
 export const createReplyForReviewComment: ApiHeroEndpoint<
   {
     owner: string;
-    pullNumber: number;
-    commentId: number;
     repo: string;
+    commentId: number;
+    pullNumber: number;
     reply: {
       /**
        * The text of the review comment.
@@ -902,16 +902,16 @@ export const createReplyForReviewComment: ApiHeroEndpoint<
 * Dismiss a review for a pull request
 * **Note:** To dismiss a pull request review on a [protected branch](https://docs.github.com/rest/reference/repos#branches), you must be a repository administrator or be included in the list of people or teams who can dismiss pull request reviews.
 * @param owner - The account owner of the repository. The name is not case sensitive.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param pullNumber - The number that identifies the pull request.
-* @param reviewId - The unique identifier of the review.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param reviewId - The unique identifier of the review. 
 */
 export const dismissReview: ApiHeroEndpoint<
   {
     owner: string;
+    repo: string;
     pullNumber: number;
     reviewId: number;
-    repo: string;
     payload: {
       /**
        *

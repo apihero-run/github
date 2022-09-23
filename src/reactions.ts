@@ -7,8 +7,8 @@ import { Reaction, ApiHeroEndpoint } from "./@types";
 * List reactions for a commit comment
 * List the reactions to a [commit comment](https://docs.github.com/rest/reference/repos#comments).
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param commentId - The unique identifier of the comment.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param commentId - The unique identifier of the comment.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [content] - Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a commit comment. 
@@ -16,8 +16,8 @@ import { Reaction, ApiHeroEndpoint } from "./@types";
 export const listForCommitComment: ApiHeroEndpoint<
   {
     owner: string;
-    commentId: number;
     repo: string;
+    commentId: number;
     perPage?: number;
     page?: number;
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
@@ -36,14 +36,14 @@ export const listForCommitComment: ApiHeroEndpoint<
 * Create reaction for a commit comment
 * Create a reaction to a [commit comment](https://docs.github.com/rest/reference/repos#comments). A response with an HTTP `200` status means that you already added the reaction type to this commit comment.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param commentId - The unique identifier of the comment.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param commentId - The unique identifier of the comment. 
 */
 export const createForCommitComment: ApiHeroEndpoint<
   {
     owner: string;
-    commentId: number;
     repo: string;
+    commentId: number;
     reaction: {
       /**
        * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
@@ -64,8 +64,8 @@ export const createForCommitComment: ApiHeroEndpoint<
 * List reactions for an issue
 * List the reactions to an [issue](https://docs.github.com/rest/reference/issues).
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param issueNumber - The number that identifies the issue.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param issueNumber - The number that identifies the issue.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [content] - Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue. 
@@ -73,8 +73,8 @@ export const createForCommitComment: ApiHeroEndpoint<
 export const listForIssue: ApiHeroEndpoint<
   {
     owner: string;
-    issueNumber: number;
     repo: string;
+    issueNumber: number;
     perPage?: number;
     page?: number;
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
@@ -93,14 +93,14 @@ export const listForIssue: ApiHeroEndpoint<
 * Create reaction for an issue
 * Create a reaction to an [issue](https://docs.github.com/rest/reference/issues/). A response with an HTTP `200` status means that you already added the reaction type to this issue.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param issueNumber - The number that identifies the issue.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param issueNumber - The number that identifies the issue. 
 */
 export const createForIssue: ApiHeroEndpoint<
   {
     owner: string;
-    issueNumber: number;
     repo: string;
+    issueNumber: number;
     reaction: {
       /**
        * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
@@ -121,8 +121,8 @@ export const createForIssue: ApiHeroEndpoint<
 * List reactions for a release
 * List the reactions to a [release](https://docs.github.com/rest/reference/repos#releases).
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param releaseId - The unique identifier of the release.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param releaseId - The unique identifier of the release.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [content] - Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a release. 
@@ -130,8 +130,8 @@ export const createForIssue: ApiHeroEndpoint<
 export const listForRelease: ApiHeroEndpoint<
   {
     owner: string;
-    releaseId: number;
     repo: string;
+    releaseId: number;
     perPage?: number;
     page?: number;
     content?: "+1" | "laugh" | "heart" | "hooray" | "rocket" | "eyes";
@@ -150,14 +150,14 @@ export const listForRelease: ApiHeroEndpoint<
 * Create reaction for a release
 * Create a reaction to a [release](https://docs.github.com/rest/reference/repos#releases). A response with a `Status: 200 OK` means that you already added the reaction type to this release.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param releaseId - The unique identifier of the release.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param releaseId - The unique identifier of the release. 
 */
 export const createForRelease: ApiHeroEndpoint<
   {
     owner: string;
-    releaseId: number;
     repo: string;
+    releaseId: number;
     reaction: {
       /**
        * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
@@ -237,8 +237,8 @@ export const createForTeamDiscussionLegacy: ApiHeroEndpoint<
 * List reactions for a pull request review comment
 * List the reactions to a [pull request review comment](https://docs.github.com/rest/reference/pulls#review-comments).
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param commentId - The unique identifier of the comment.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param commentId - The unique identifier of the comment.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [content] - Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a pull request review comment. 
@@ -246,8 +246,8 @@ export const createForTeamDiscussionLegacy: ApiHeroEndpoint<
 export const listForPullRequestReviewComment: ApiHeroEndpoint<
   {
     owner: string;
-    commentId: number;
     repo: string;
+    commentId: number;
     perPage?: number;
     page?: number;
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
@@ -266,14 +266,14 @@ export const listForPullRequestReviewComment: ApiHeroEndpoint<
 * Create reaction for a pull request review comment
 * Create a reaction to a [pull request review comment](https://docs.github.com/rest/reference/pulls#comments). A response with an HTTP `200` status means that you already added the reaction type to this pull request review comment.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param commentId - The unique identifier of the comment.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param commentId - The unique identifier of the comment. 
 */
 export const createForPullRequestReviewComment: ApiHeroEndpoint<
   {
     owner: string;
-    commentId: number;
     repo: string;
+    commentId: number;
     reaction: {
       /**
        * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
@@ -294,8 +294,8 @@ export const createForPullRequestReviewComment: ApiHeroEndpoint<
 * List reactions for an issue comment
 * List the reactions to an [issue comment](https://docs.github.com/rest/reference/issues#comments).
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param commentId - The unique identifier of the comment.
 * @param repo - The name of the repository. The name is not case sensitive.
+* @param commentId - The unique identifier of the comment.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [content] - Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to an issue comment. 
@@ -303,8 +303,8 @@ export const createForPullRequestReviewComment: ApiHeroEndpoint<
 export const listForIssueComment: ApiHeroEndpoint<
   {
     owner: string;
-    commentId: number;
     repo: string;
+    commentId: number;
     perPage?: number;
     page?: number;
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
@@ -323,14 +323,14 @@ export const listForIssueComment: ApiHeroEndpoint<
 * Create reaction for an issue comment
 * Create a reaction to an [issue comment](https://docs.github.com/rest/reference/issues#comments). A response with an HTTP `200` status means that you already added the reaction type to this issue comment.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param commentId - The unique identifier of the comment.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param commentId - The unique identifier of the comment. 
 */
 export const createForIssueComment: ApiHeroEndpoint<
   {
     owner: string;
-    commentId: number;
     repo: string;
+    commentId: number;
     reaction: {
       /**
        * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
@@ -353,12 +353,12 @@ export const createForIssueComment: ApiHeroEndpoint<
  * 
  * Delete a reaction to a [commit comment](https://docs.github.com/rest/reference/repos#comments).
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param reactionId - The unique identifier of the reaction.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param commentId - The unique identifier of the comment.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param reactionId - The unique identifier of the reaction. 
 */
 export const deleteForCommitComment: ApiHeroEndpoint<
-  { owner: string; reactionId: number; commentId: number; repo: string },
+  { owner: string; repo: string; commentId: number; reactionId: number },
   void
 > = {
   id: "reactions/delete-for-commit-comment",
@@ -374,12 +374,12 @@ export const deleteForCommitComment: ApiHeroEndpoint<
  * 
  * Delete a reaction to an [issue](https://docs.github.com/rest/reference/issues/).
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param reactionId - The unique identifier of the reaction.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param issueNumber - The number that identifies the issue.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param reactionId - The unique identifier of the reaction. 
 */
 export const deleteForIssue: ApiHeroEndpoint<
-  { owner: string; reactionId: number; issueNumber: number; repo: string },
+  { owner: string; repo: string; issueNumber: number; reactionId: number },
   void
 > = {
   id: "reactions/delete-for-issue",
@@ -395,12 +395,12 @@ export const deleteForIssue: ApiHeroEndpoint<
  * 
  * Delete a reaction to a [release](https://docs.github.com/rest/reference/repos#releases).
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param reactionId - The unique identifier of the reaction.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param releaseId - The unique identifier of the release.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param reactionId - The unique identifier of the reaction. 
 */
 export const deleteForRelease: ApiHeroEndpoint<
-  { owner: string; reactionId: number; releaseId: number; repo: string },
+  { owner: string; repo: string; releaseId: number; reactionId: number },
   void
 > = {
   id: "reactions/delete-for-release",
@@ -477,12 +477,12 @@ export const createForTeamDiscussionInOrg: ApiHeroEndpoint<
  * 
  * Delete a reaction to a [pull request review comment](https://docs.github.com/rest/reference/pulls#review-comments).
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param reactionId - The unique identifier of the reaction.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param commentId - The unique identifier of the comment.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param reactionId - The unique identifier of the reaction. 
 */
 export const deleteForPullRequestComment: ApiHeroEndpoint<
-  { owner: string; reactionId: number; commentId: number; repo: string },
+  { owner: string; repo: string; commentId: number; reactionId: number },
   void
 > = {
   id: "reactions/delete-for-pull-request-comment",
@@ -498,12 +498,12 @@ export const deleteForPullRequestComment: ApiHeroEndpoint<
  * 
  * Delete a reaction to an [issue comment](https://docs.github.com/rest/reference/issues#comments).
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param reactionId - The unique identifier of the reaction.
+* @param repo - The name of the repository. The name is not case sensitive.
 * @param commentId - The unique identifier of the comment.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param reactionId - The unique identifier of the reaction. 
 */
 export const deleteForIssueComment: ApiHeroEndpoint<
-  { owner: string; reactionId: number; commentId: number; repo: string },
+  { owner: string; repo: string; commentId: number; reactionId: number },
   void
 > = {
   id: "reactions/delete-for-issue-comment",
@@ -519,18 +519,18 @@ export const deleteForIssueComment: ApiHeroEndpoint<
 * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List reactions for a team discussion comment`](https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion-comment) endpoint.
  * 
  * List the reactions to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
-* @param commentNumber - The number that identifies the comment.
 * @param teamId - The unique identifier of the team.
 * @param discussionNumber - The number that identifies the discussion.
+* @param commentNumber - The number that identifies the comment.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [content] - Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment. 
 */
 export const listForTeamDiscussionCommentLegacy: ApiHeroEndpoint<
   {
-    commentNumber: number;
     teamId: number;
     discussionNumber: number;
+    commentNumber: number;
     perPage?: number;
     page?: number;
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
@@ -551,15 +551,15 @@ export const listForTeamDiscussionCommentLegacy: ApiHeroEndpoint<
 * **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new "[Create reaction for a team discussion comment](https://docs.github.com/rest/reference/reactions#create-reaction-for-a-team-discussion-comment)" endpoint.
  * 
  * Create a reaction to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with an HTTP `200` status means that you already added the reaction type to this team discussion comment.
-* @param commentNumber - The number that identifies the comment.
 * @param teamId - The unique identifier of the team.
-* @param discussionNumber - The number that identifies the discussion. 
+* @param discussionNumber - The number that identifies the discussion.
+* @param commentNumber - The number that identifies the comment. 
 */
 export const createForTeamDiscussionCommentLegacy: ApiHeroEndpoint<
   {
-    commentNumber: number;
     teamId: number;
     discussionNumber: number;
+    commentNumber: number;
     reaction: {
       /**
        * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
@@ -583,11 +583,11 @@ export const createForTeamDiscussionCommentLegacy: ApiHeroEndpoint<
  * Delete a reaction to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 * @param org - The organization name. The name is not case sensitive.
 * @param teamSlug - The slug of the team name.
-* @param reactionId - The unique identifier of the reaction.
-* @param discussionNumber - The number that identifies the discussion. 
+* @param discussionNumber - The number that identifies the discussion.
+* @param reactionId - The unique identifier of the reaction. 
 */
 export const deleteForTeamDiscussion: ApiHeroEndpoint<
-  { org: string; teamSlug: string; reactionId: number; discussionNumber: number },
+  { org: string; teamSlug: string; discussionNumber: number; reactionId: number },
   void
 > = {
   id: "reactions/delete-for-team-discussion",
@@ -603,9 +603,9 @@ export const deleteForTeamDiscussion: ApiHeroEndpoint<
  * 
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number/reactions`.
 * @param org - The organization name. The name is not case sensitive.
-* @param commentNumber - The number that identifies the comment.
 * @param teamSlug - The slug of the team name.
 * @param discussionNumber - The number that identifies the discussion.
+* @param commentNumber - The number that identifies the comment.
 * @param [perPage=30] - The number of results per page (max 100).
 * @param [page=1] - Page number of the results to fetch.
 * @param [content] - Returns a single [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types). Omit this parameter to list all reactions to a team discussion comment. 
@@ -613,9 +613,9 @@ export const deleteForTeamDiscussion: ApiHeroEndpoint<
 export const listForTeamDiscussionCommentInOrg: ApiHeroEndpoint<
   {
     org: string;
-    commentNumber: number;
     teamSlug: string;
     discussionNumber: number;
+    commentNumber: number;
     perPage?: number;
     page?: number;
     content?: "+1" | "-1" | "laugh" | "confused" | "heart" | "hooray" | "rocket" | "eyes";
@@ -636,16 +636,16 @@ export const listForTeamDiscussionCommentInOrg: ApiHeroEndpoint<
  * 
  * **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number/reactions`.
 * @param org - The organization name. The name is not case sensitive.
-* @param commentNumber - The number that identifies the comment.
 * @param teamSlug - The slug of the team name.
-* @param discussionNumber - The number that identifies the discussion. 
+* @param discussionNumber - The number that identifies the discussion.
+* @param commentNumber - The number that identifies the comment. 
 */
 export const createForTeamDiscussionCommentInOrg: ApiHeroEndpoint<
   {
     org: string;
-    commentNumber: number;
     teamSlug: string;
     discussionNumber: number;
+    commentNumber: number;
     reaction: {
       /**
        * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
@@ -668,18 +668,18 @@ export const createForTeamDiscussionCommentInOrg: ApiHeroEndpoint<
  * 
  * Delete a reaction to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 * @param org - The organization name. The name is not case sensitive.
-* @param commentNumber - The number that identifies the comment.
 * @param teamSlug - The slug of the team name.
+* @param discussionNumber - The number that identifies the discussion.
 * @param reactionId - The unique identifier of the reaction.
-* @param discussionNumber - The number that identifies the discussion. 
+* @param commentNumber - The number that identifies the comment. 
 */
 export const deleteForTeamDiscussionComment: ApiHeroEndpoint<
   {
     org: string;
-    commentNumber: number;
     teamSlug: string;
-    reactionId: number;
     discussionNumber: number;
+    reactionId: number;
+    commentNumber: number;
   },
   void
 > = {

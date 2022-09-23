@@ -235,11 +235,11 @@ export const getRepoPublicKey: ApiHeroEndpoint<
 * Get a repository secret
 * Gets a single repository secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `dependabot_secrets` repository permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param secretName - The name of the secret.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param secretName - The name of the secret. 
 */
 export const getRepoSecret: ApiHeroEndpoint<
-  { owner: string; secretName: string; repo: string },
+  { owner: string; repo: string; secretName: string },
   DependabotSecret
 > = {
   id: "dependabot/get-repo-secret",
@@ -327,14 +327,14 @@ export const getRepoSecret: ApiHeroEndpoint<
  * puts Base64.strict_encode64(encrypted_secret)
  * ```
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param secretName - The name of the secret.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param secretName - The name of the secret. 
 */
 export const createOrUpdateRepoSecret: ApiHeroEndpoint<
   {
     owner: string;
-    secretName: string;
     repo: string;
+    secretName: string;
     secret: {
       /**
        * ID of the key you used to encrypt the secret.
@@ -360,11 +360,11 @@ export const createOrUpdateRepoSecret: ApiHeroEndpoint<
 * Delete a repository secret
 * Deletes a secret in a repository using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `dependabot_secrets` repository permission to use this endpoint.
 * @param owner - The account owner of the repository. The name is not case sensitive.
-* @param secretName - The name of the secret.
-* @param repo - The name of the repository. The name is not case sensitive. 
+* @param repo - The name of the repository. The name is not case sensitive.
+* @param secretName - The name of the secret. 
 */
 export const deleteRepoSecret: ApiHeroEndpoint<
-  { owner: string; secretName: string; repo: string },
+  { owner: string; repo: string; secretName: string },
   void
 > = {
   id: "dependabot/delete-repo-secret",
@@ -426,11 +426,11 @@ export const setSelectedReposForOrgSecret: ApiHeroEndpoint<
 * Add selected repository to an organization secret
 * Adds a repository to an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/dependabot#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `dependabot_secrets` organization permission to use this endpoint.
 * @param org - The organization name. The name is not case sensitive.
-* @param repositoryId 
-* @param secretName - The name of the secret. 
+* @param secretName - The name of the secret.
+* @param repositoryId  
 */
 export const addSelectedRepoToOrgSecret: ApiHeroEndpoint<
-  { org: string; repositoryId: number; secretName: string },
+  { org: string; secretName: string; repositoryId: number },
   void
 > = {
   id: "dependabot/add-selected-repo-to-org-secret",
@@ -444,11 +444,11 @@ export const addSelectedRepoToOrgSecret: ApiHeroEndpoint<
 * Remove selected repository from an organization secret
 * Removes a repository from an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://docs.github.com/rest/reference/dependabot#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `dependabot_secrets` organization permission to use this endpoint.
 * @param org - The organization name. The name is not case sensitive.
-* @param repositoryId 
-* @param secretName - The name of the secret. 
+* @param secretName - The name of the secret.
+* @param repositoryId  
 */
 export const removeSelectedRepoFromOrgSecret: ApiHeroEndpoint<
-  { org: string; repositoryId: number; secretName: string },
+  { org: string; secretName: string; repositoryId: number },
   void
 > = {
   id: "dependabot/remove-selected-repo-from-org-secret",
