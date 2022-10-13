@@ -23,171 +23,179 @@ export const create: ApiHeroEndpoint<
   {
     owner: string;
     repo: string;
-    checkRun: {
-      /**
-       * The name of the check. For example, "code-coverage".
-       */
-      name: string;
-
-      /**
-       * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
-       */
-      output?: {
-        /**
-         * The details of the check run. This parameter supports Markdown.
-         */
-        text?: string;
-
-        /**
-         * The title of the check run.
-         */
-        title: string;
-
-        /**
-         * Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://docs.github.com/rest/reference/checks#images-object) description for details.
-         */
-        images?: Array<{
+    checkRun:
+      | {
+          status: "completed";
+        }
+      | {
+          status?: "queued" | "in_progress";
+        }
+      | {
           /**
-           * The alternative text for the image.
+           * The name of the check. For example, "code-coverage".
            */
-          alt: string;
+          name: string;
 
           /**
-           * A short image description.
+           * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
            */
-          caption?: string;
+          output?: {
+            /**
+             * The details of the check run. This parameter supports Markdown.
+             */
+            text?: string;
+
+            /**
+             * The title of the check run.
+             */
+            title: string;
+
+            /**
+             * Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://docs.github.com/rest/reference/checks#images-object) description for details.
+             */
+            images?: Array<{
+              /**
+               * The alternative text for the image.
+               */
+              alt: string;
+
+              /**
+               * A short image description.
+               */
+              caption?: string;
+
+              /**
+               * The full URL of the image.
+               */
+              image_url: string;
+            }>;
+
+            /**
+             * The summary of the check run. This parameter supports Markdown.
+             */
+            summary: string;
+
+            /**
+             * Adds information from your analysis to specific lines of code. Annotations are visible on GitHub in the **Checks** and **Files changed** tab of the pull request. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://docs.github.com/rest/reference/checks#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about how you can view annotations on GitHub, see "[About status checks](https://docs.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://docs.github.com/rest/reference/checks#annotations-object) description for details about how to use this parameter.
+             */
+            annotations?: Array<{
+              /**
+               * The path of the file to add an annotation to. For example, `assets/css/main.css`.
+               */
+              path: string;
+
+              /**
+               * The title that represents the annotation. The maximum size is 255 characters.
+               */
+              title?: string;
+
+              /**
+               * A short description of the feedback for these lines of code. The maximum size is 64 KB.
+               */
+              message: string;
+
+              /**
+               * The end line of the annotation.
+               */
+              end_line: number;
+
+              /**
+               * The end column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values.
+               */
+              end_column?: number;
+
+              /**
+               * The start line of the annotation.
+               */
+              start_line: number;
+
+              /**
+               * Details about this annotation. The maximum size is 64 KB.
+               */
+              raw_details?: string;
+
+              /**
+               * The start column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values.
+               */
+              start_column?: number;
+
+              /**
+               * The level of the annotation.
+               */
+              annotation_level: "notice" | "warning" | "failure";
+            }>;
+          };
 
           /**
-           * The full URL of the image.
+           * The current status.
            */
-          image_url: string;
-        }>;
-
-        /**
-         * The summary of the check run. This parameter supports Markdown.
-         */
-        summary: string;
-
-        /**
-         * Adds information from your analysis to specific lines of code. Annotations are visible on GitHub in the **Checks** and **Files changed** tab of the pull request. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://docs.github.com/rest/reference/checks#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about how you can view annotations on GitHub, see "[About status checks](https://docs.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://docs.github.com/rest/reference/checks#annotations-object) description for details about how to use this parameter.
-         */
-        annotations?: Array<{
-          /**
-           * The path of the file to add an annotation to. For example, `assets/css/main.css`.
-           */
-          path: string;
+          status?: "queued" | "in_progress" | "completed";
 
           /**
-           * The title that represents the annotation. The maximum size is 255 characters.
+           * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
            */
-          title?: string;
+          actions?: Array<{
+            /**
+             * The text to be displayed on a button in the web UI. The maximum size is 20 characters.
+             */
+            label: string;
+
+            /**
+             * A reference for the action on the integrator's system. The maximum size is 20 characters.
+             */
+            identifier: string;
+
+            /**
+             * A short explanation of what this action would do. The maximum size is 40 characters.
+             */
+            description: string;
+          }>;
 
           /**
-           * A short description of the feedback for these lines of code. The maximum size is 64 KB.
+           * The SHA of the commit.
            */
-          message: string;
+          head_sha: string;
 
           /**
-           * The end line of the annotation.
+           * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check.
+           **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
            */
-          end_line: number;
+          conclusion?:
+            | "action_required"
+            | "cancelled"
+            | "failure"
+            | "neutral"
+            | "success"
+            | "skipped"
+            | "stale"
+            | "timed_out";
 
           /**
-           * The end column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values.
+           * The time that the check run began. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
            */
-          end_column?: number;
+          started_at?: string;
 
           /**
-           * The start line of the annotation.
+           * The URL of the integrator's site that has the full details of the check. If the integrator does not provide this, then the homepage of the GitHub app is used.
            */
-          start_line: number;
+          details_url?: string;
 
           /**
-           * Details about this annotation. The maximum size is 64 KB.
+           * A reference for the run on the integrator's system.
            */
-          raw_details?: string;
+          external_id?: string;
 
           /**
-           * The start column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values.
+           * The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
            */
-          start_column?: number;
-
-          /**
-           * The level of the annotation.
-           */
-          annotation_level: "notice" | "warning" | "failure";
-        }>;
-      };
-
-      /**
-       * The current status.
-       */
-      status?: "queued" | "in_progress" | "completed";
-
-      /**
-       * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
-       */
-      actions?: Array<{
-        /**
-         * The text to be displayed on a button in the web UI. The maximum size is 20 characters.
-         */
-        label: string;
-
-        /**
-         * A reference for the action on the integrator's system. The maximum size is 20 characters.
-         */
-        identifier: string;
-
-        /**
-         * A short explanation of what this action would do. The maximum size is 40 characters.
-         */
-        description: string;
-      }>;
-
-      /**
-       * The SHA of the commit.
-       */
-      head_sha: string;
-
-      /**
-       * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check.
-       **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
-       */
-      conclusion?:
-        | "action_required"
-        | "cancelled"
-        | "failure"
-        | "neutral"
-        | "success"
-        | "skipped"
-        | "stale"
-        | "timed_out";
-
-      /**
-       * The time that the check run began. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-       */
-      started_at?: string;
-
-      /**
-       * The URL of the integrator's site that has the full details of the check. If the integrator does not provide this, then the homepage of the GitHub app is used.
-       */
-      details_url?: string;
-
-      /**
-       * A reference for the run on the integrator's system.
-       */
-      external_id?: string;
-
-      /**
-       * The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-       */
-      completed_at?: string;
-    };
+          completed_at?: string;
+        };
   },
   CheckRun
 > = {
   id: "checks/create",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -216,6 +224,7 @@ export const createSuite: ApiHeroEndpoint<
 > = {
   id: "checks/create-suite",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -252,6 +261,7 @@ export const setSuitesPreferences: ApiHeroEndpoint<
 > = {
   id: "checks/set-suites-preferences",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -292,6 +302,7 @@ export const listForRef: ApiHeroEndpoint<
 > = {
   id: "checks/list-for-ref",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -312,6 +323,7 @@ export const getCheck: ApiHeroEndpoint<
 > = {
   id: "checks/get",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -331,166 +343,174 @@ export const update: ApiHeroEndpoint<
     owner: string;
     repo: string;
     checkRunId: number;
-    checkRun: {
-      /**
-       * The name of the check. For example, "code-coverage".
-       */
-      name?: string;
-
-      /**
-       * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
-       */
-      output?: {
-        /**
-         * Can contain Markdown.
-         */
-        text?: string;
-
-        /**
-         * **Required**.
-         */
-        title?: string;
-
-        /**
-         * Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://docs.github.com/rest/reference/checks#annotations-object-1) description for details.
-         */
-        images?: Array<{
+    checkRun:
+      | {
+          status?: "completed";
+        }
+      | {
+          status?: "queued" | "in_progress";
+        }
+      | {
           /**
-           * The alternative text for the image.
+           * The name of the check. For example, "code-coverage".
            */
-          alt: string;
+          name?: string;
 
           /**
-           * A short image description.
+           * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
            */
-          caption?: string;
+          output?: {
+            /**
+             * Can contain Markdown.
+             */
+            text?: string;
+
+            /**
+             * **Required**.
+             */
+            title?: string;
+
+            /**
+             * Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://docs.github.com/rest/reference/checks#annotations-object-1) description for details.
+             */
+            images?: Array<{
+              /**
+               * The alternative text for the image.
+               */
+              alt: string;
+
+              /**
+               * A short image description.
+               */
+              caption?: string;
+
+              /**
+               * The full URL of the image.
+               */
+              image_url: string;
+            }>;
+
+            /**
+             * Can contain Markdown.
+             */
+            summary: string;
+
+            /**
+             * Adds information from your analysis to specific lines of code. Annotations are visible in GitHub's pull request UI. Annotations are visible in GitHub's pull request UI. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://docs.github.com/rest/reference/checks#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about annotations in the UI, see "[About status checks](https://docs.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://docs.github.com/rest/reference/checks#annotations-object-1) description for details.
+             */
+            annotations?: Array<{
+              /**
+               * The path of the file to add an annotation to. For example, `assets/css/main.css`.
+               */
+              path: string;
+
+              /**
+               * The title that represents the annotation. The maximum size is 255 characters.
+               */
+              title?: string;
+
+              /**
+               * A short description of the feedback for these lines of code. The maximum size is 64 KB.
+               */
+              message: string;
+
+              /**
+               * The end line of the annotation.
+               */
+              end_line: number;
+
+              /**
+               * The end column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values.
+               */
+              end_column?: number;
+
+              /**
+               * The start line of the annotation.
+               */
+              start_line: number;
+
+              /**
+               * Details about this annotation. The maximum size is 64 KB.
+               */
+              raw_details?: string;
+
+              /**
+               * The start column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values.
+               */
+              start_column?: number;
+
+              /**
+               * The level of the annotation.
+               */
+              annotation_level: "notice" | "warning" | "failure";
+            }>;
+          };
 
           /**
-           * The full URL of the image.
+           * The current status.
            */
-          image_url: string;
-        }>;
-
-        /**
-         * Can contain Markdown.
-         */
-        summary: string;
-
-        /**
-         * Adds information from your analysis to specific lines of code. Annotations are visible in GitHub's pull request UI. Annotations are visible in GitHub's pull request UI. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://docs.github.com/rest/reference/checks#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about annotations in the UI, see "[About status checks](https://docs.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://docs.github.com/rest/reference/checks#annotations-object-1) description for details.
-         */
-        annotations?: Array<{
-          /**
-           * The path of the file to add an annotation to. For example, `assets/css/main.css`.
-           */
-          path: string;
+          status?: "queued" | "in_progress" | "completed";
 
           /**
-           * The title that represents the annotation. The maximum size is 255 characters.
+           * Possible further actions the integrator can perform, which a user may trigger. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
            */
-          title?: string;
+          actions?: Array<{
+            /**
+             * The text to be displayed on a button in the web UI. The maximum size is 20 characters.
+             */
+            label: string;
+
+            /**
+             * A reference for the action on the integrator's system. The maximum size is 20 characters.
+             */
+            identifier: string;
+
+            /**
+             * A short explanation of what this action would do. The maximum size is 40 characters.
+             */
+            description: string;
+          }>;
 
           /**
-           * A short description of the feedback for these lines of code. The maximum size is 64 KB.
+           * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check.
+           **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
            */
-          message: string;
+          conclusion?:
+            | "action_required"
+            | "cancelled"
+            | "failure"
+            | "neutral"
+            | "success"
+            | "skipped"
+            | "stale"
+            | "timed_out";
 
           /**
-           * The end line of the annotation.
+           * This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
            */
-          end_line: number;
+          started_at?: string;
 
           /**
-           * The end column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values.
+           * The URL of the integrator's site that has the full details of the check.
            */
-          end_column?: number;
+          details_url?: string;
 
           /**
-           * The start line of the annotation.
+           * A reference for the run on the integrator's system.
            */
-          start_line: number;
+          external_id?: string;
 
           /**
-           * Details about this annotation. The maximum size is 64 KB.
+           * The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
            */
-          raw_details?: string;
-
-          /**
-           * The start column of the annotation. Annotations only support `start_column` and `end_column` on the same line. Omit this parameter if `start_line` and `end_line` have different values.
-           */
-          start_column?: number;
-
-          /**
-           * The level of the annotation.
-           */
-          annotation_level: "notice" | "warning" | "failure";
-        }>;
-      };
-
-      /**
-       * The current status.
-       */
-      status?: "queued" | "in_progress" | "completed";
-
-      /**
-       * Possible further actions the integrator can perform, which a user may trigger. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
-       */
-      actions?: Array<{
-        /**
-         * The text to be displayed on a button in the web UI. The maximum size is 20 characters.
-         */
-        label: string;
-
-        /**
-         * A reference for the action on the integrator's system. The maximum size is 20 characters.
-         */
-        identifier: string;
-
-        /**
-         * A short explanation of what this action would do. The maximum size is 40 characters.
-         */
-        description: string;
-      }>;
-
-      /**
-       * **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check.
-       **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
-       */
-      conclusion?:
-        | "action_required"
-        | "cancelled"
-        | "failure"
-        | "neutral"
-        | "success"
-        | "skipped"
-        | "stale"
-        | "timed_out";
-
-      /**
-       * This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-       */
-      started_at?: string;
-
-      /**
-       * The URL of the integrator's site that has the full details of the check.
-       */
-      details_url?: string;
-
-      /**
-       * A reference for the run on the integrator's system.
-       */
-      external_id?: string;
-
-      /**
-       * The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
-       */
-      completed_at?: string;
-    };
+          completed_at?: string;
+        };
   },
   CheckRun
 > = {
   id: "checks/update",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -527,6 +547,7 @@ export const listSuitesForRef: ApiHeroEndpoint<
 > = {
   id: "checks/list-suites-for-ref",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -547,6 +568,7 @@ export const getSuite: ApiHeroEndpoint<
 > = {
   id: "checks/get-suite",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -567,6 +589,7 @@ export const rerequestRun: ApiHeroEndpoint<
 > = {
   id: "checks/rerequest-run",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -588,6 +611,7 @@ export const listAnnotations: ApiHeroEndpoint<
 > = {
   id: "checks/list-annotations",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -608,6 +632,7 @@ export const rerequestSuite: ApiHeroEndpoint<
 > = {
   id: "checks/rerequest-suite",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -646,4 +671,5 @@ export const listForSuite: ApiHeroEndpoint<
 > = {
   id: "checks/list-for-suite",
   clientId: "github",
+  version: "1.1.5",
 };

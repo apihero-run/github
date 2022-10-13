@@ -10,6 +10,7 @@ import { GitignoreTemplate, ApiHeroEndpoint } from "./@types";
 export const getAllTemplates: ApiHeroEndpoint<void, Array<string>> = {
   id: "gitignore/get-all-templates",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -24,4 +25,5 @@ export const getAllTemplates: ApiHeroEndpoint<void, Array<string>> = {
 export const getTemplate: ApiHeroEndpoint<{ name: string }, GitignoreTemplate> = {
   id: "gitignore/get-template",
   clientId: "github",
+  version: "1.1.5",
 };

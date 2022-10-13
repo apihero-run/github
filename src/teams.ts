@@ -31,6 +31,7 @@ export const listForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "teams/list-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -45,6 +46,7 @@ export const listForAuthenticatedUser: ApiHeroEndpoint<
 export const getLegacy: ApiHeroEndpoint<{ teamId: number }, TeamFull> = {
   id: "teams/get-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -63,6 +65,7 @@ export const getLegacy: ApiHeroEndpoint<{ teamId: number }, TeamFull> = {
 export const deleteLegacy: ApiHeroEndpoint<{ teamId: number }, void> = {
   id: "teams/delete-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -117,6 +120,7 @@ export const updateLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/update-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -136,6 +140,7 @@ export const list: ApiHeroEndpoint<
 > = {
   id: "teams/list",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -199,6 +204,7 @@ Default for child team: `closed`
 > = {
   id: "teams/create",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -219,6 +225,7 @@ export const listReposLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/list-repos-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -239,6 +246,7 @@ export const listChildLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/list-child-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -262,6 +270,7 @@ export const listMembersLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/list-members-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -284,6 +293,7 @@ export const listProjectsLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/list-projects-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -306,6 +316,7 @@ export const listExternalIdpGroupsForOrg: ApiHeroEndpoint<
 > = {
   id: "teams/list-external-idp-groups-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -327,6 +338,7 @@ export const listIdpGroupsForOrg: ApiHeroEndpoint<
 > = {
   id: "teams/list-idp-groups-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -350,6 +362,7 @@ export const listDiscussionsLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/list-discussions-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -389,6 +402,7 @@ export const createDiscussionLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/create-discussion-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -411,6 +425,7 @@ export const listPendingInvitationsLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/list-pending-invitations-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -427,6 +442,7 @@ export const listPendingInvitationsLegacy: ApiHeroEndpoint<
 export const getByName: ApiHeroEndpoint<{ org: string; teamSlug: string }, TeamFull> = {
   id: "teams/get-by-name",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -445,6 +461,7 @@ export const getByName: ApiHeroEndpoint<{ org: string; teamSlug: string }, TeamF
 export const deleteInOrg: ApiHeroEndpoint<{ org: string; teamSlug: string }, void> = {
   id: "teams/delete-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -498,6 +515,7 @@ export const updateInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/update-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -520,6 +538,7 @@ export const listReposInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/list-repos-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -542,6 +561,7 @@ export const listChildInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/list-child-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -561,6 +581,7 @@ export const listChildInOrg: ApiHeroEndpoint<
 export const getMemberLegacy: ApiHeroEndpoint<{ teamId: number; username: string }, void> = {
   id: "teams/get-member-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -586,6 +607,7 @@ export const getMemberLegacy: ApiHeroEndpoint<{ teamId: number; username: string
 export const addMemberLegacy: ApiHeroEndpoint<{ teamId: number; username: string }, void> = {
   id: "teams/add-member-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -609,6 +631,7 @@ export const addMemberLegacy: ApiHeroEndpoint<{ teamId: number; username: string
 export const removeMemberLegacy: ApiHeroEndpoint<{ teamId: number; username: string }, void> = {
   id: "teams/remove-member-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -628,6 +651,7 @@ export const externalIdpGroupInfoForOrg: ApiHeroEndpoint<
 > = {
   id: "teams/external-idp-group-info-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -657,6 +681,7 @@ export const listMembersInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/list-members-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -680,6 +705,7 @@ export const checkPermissionsForRepoLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/check-permissions-for-repo-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -713,6 +739,7 @@ export const addOrUpdateRepoPermissionsLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/add-or-update-repo-permissions-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -734,6 +761,7 @@ export const removeRepoLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/remove-repo-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -756,6 +784,7 @@ export const listProjectsInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/list-projects-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -776,6 +805,7 @@ export const checkPermissionsForProjectLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/check-permissions-for-project-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -805,6 +835,7 @@ export const addOrUpdateProjectPermissionsLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/add-or-update-project-permissions-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -822,6 +853,7 @@ export const addOrUpdateProjectPermissionsLegacy: ApiHeroEndpoint<
 export const removeProjectLegacy: ApiHeroEndpoint<{ teamId: number; projectId: number }, void> = {
   id: "teams/remove-project-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -849,6 +881,7 @@ export const getMembershipForUserLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/get-membership-for-user-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -886,6 +919,7 @@ export const addOrUpdateMembershipForUserLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/add-or-update-membership-for-user-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -910,6 +944,7 @@ export const removeMembershipForUserLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/remove-membership-for-user-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -941,6 +976,7 @@ export const listDiscussionsInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/list-discussions-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -981,6 +1017,7 @@ export const createDiscussionInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/create-discussion-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1003,6 +1040,7 @@ export const listPendingInvitationsInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/list-pending-invitations-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1021,6 +1059,7 @@ export const listPendingInvitationsInOrg: ApiHeroEndpoint<
 export const listIdpGroupsForLegacy: ApiHeroEndpoint<{ teamId: number }, GroupMapping> = {
   id: "teams/list-idp-groups-for-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1093,6 +1132,7 @@ export const createOrUpdateIdpGroupConnectionsLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/create-or-update-idp-group-connections-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1112,6 +1152,7 @@ export const listLinkedExternalIdpGroupsToTeamForOrg: ApiHeroEndpoint<
 > = {
   id: "teams/list-linked-external-idp-groups-to-team-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1131,6 +1172,7 @@ export const unlinkExternalIdpGroupFromTeamForOrg: ApiHeroEndpoint<
 > = {
   id: "teams/unlink-external-idp-group-from-team-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1162,6 +1204,7 @@ export const linkExternalIdpGroupToTeamForOrg: ApiHeroEndpoint<
 > = {
   id: "teams/link-external-idp-group-to-team-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1182,6 +1225,7 @@ export const getDiscussionLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/get-discussion-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1202,6 +1246,7 @@ export const deleteDiscussionLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/delete-discussion-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1236,6 +1281,7 @@ export const updateDiscussionLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/update-discussion-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1261,6 +1307,7 @@ export const checkPermissionsForRepoInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/check-permissions-for-repo-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1295,6 +1342,7 @@ export const addOrUpdateRepoPermissionsInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/add-or-update-repo-permissions-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1316,6 +1364,7 @@ export const removeRepoInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/remove-repo-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1336,6 +1385,7 @@ export const checkPermissionsForProjectInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/check-permissions-for-project-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1366,6 +1416,7 @@ export const addOrUpdateProjectPermissionsInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/add-or-update-project-permissions-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1386,6 +1437,7 @@ export const removeProjectInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/remove-project-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1413,6 +1465,7 @@ export const getMembershipForUserInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/get-membership-for-user-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1451,6 +1504,7 @@ export const addOrUpdateMembershipForUserInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/add-or-update-membership-for-user-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1475,6 +1529,7 @@ export const removeMembershipForUserInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/remove-membership-for-user-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1494,6 +1549,7 @@ export const listIdpGroupsInOrg: ApiHeroEndpoint<{ org: string; teamSlug: string
   {
     id: "teams/list-idp-groups-in-org",
     clientId: "github",
+    version: "1.1.5",
   };
 
 /** 
@@ -1539,6 +1595,7 @@ export const createOrUpdateIdpGroupConnectionsInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/create-or-update-idp-group-connections-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1569,6 +1626,7 @@ export const listDiscussionCommentsLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/list-discussion-comments-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1600,6 +1658,7 @@ export const createDiscussionCommentLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/create-discussion-comment-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1620,6 +1679,7 @@ export const getDiscussionInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/get-discussion-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1640,6 +1700,7 @@ export const deleteDiscussionInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/delete-discussion-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1675,6 +1736,7 @@ export const updateDiscussionInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/update-discussion-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1706,6 +1768,7 @@ export const listDiscussionCommentsInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/list-discussion-comments-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1738,6 +1801,7 @@ export const createDiscussionCommentInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/create-discussion-comment-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1759,6 +1823,7 @@ export const getDiscussionCommentLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/get-discussion-comment-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1780,6 +1845,7 @@ export const deleteDiscussionCommentLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/delete-discussion-comment-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1811,6 +1877,7 @@ export const updateDiscussionCommentLegacy: ApiHeroEndpoint<
 > = {
   id: "teams/update-discussion-comment-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1832,6 +1899,7 @@ export const getDiscussionCommentInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/get-discussion-comment-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1853,6 +1921,7 @@ export const deleteDiscussionCommentInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/delete-discussion-comment-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1885,4 +1954,5 @@ export const updateDiscussionCommentInOrg: ApiHeroEndpoint<
 > = {
   id: "teams/update-discussion-comment-in-org",
   clientId: "github",
+  version: "1.1.5",
 };

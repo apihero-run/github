@@ -30,6 +30,7 @@ import {
 export const getAuthenticated: ApiHeroEndpoint<void, Integration> = {
   id: "apps/get-authenticated",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -44,6 +45,7 @@ export const getAuthenticated: ApiHeroEndpoint<void, Integration> = {
 export const getWebhookConfigForApp: ApiHeroEndpoint<void, WebhookConfig> = {
   id: "apps/get-webhook-config-for-app",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -68,6 +70,7 @@ export const updateWebhookConfigForApp: ApiHeroEndpoint<
 > = {
   id: "apps/update-webhook-config-for-app",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -83,6 +86,7 @@ export const updateWebhookConfigForApp: ApiHeroEndpoint<
 export const getBySlug: ApiHeroEndpoint<{ appSlug: string }, Integration> = {
   id: "apps/get-by-slug",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -105,6 +109,7 @@ export const listInstallations: ApiHeroEndpoint<
 > = {
   id: "apps/list-installations",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -121,6 +126,7 @@ export const listInstallations: ApiHeroEndpoint<
 export const revokeInstallationAccessToken: ApiHeroEndpoint<void, void> = {
   id: "apps/revoke-installation-access-token",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -148,6 +154,7 @@ export const listInstallationsForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "apps/list-installations-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -167,6 +174,7 @@ export const listWebhookDeliveries: ApiHeroEndpoint<
 > = {
   id: "apps/list-webhook-deliveries",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -182,6 +190,7 @@ export const listWebhookDeliveries: ApiHeroEndpoint<
 export const getOrgInstallation: ApiHeroEndpoint<{ org: string }, Installation> = {
   id: "apps/get-org-installation",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -212,6 +221,7 @@ export const listReposAccessibleToInstallation: ApiHeroEndpoint<
 > = {
   id: "apps/list-repos-accessible-to-installation",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -232,6 +242,7 @@ export const listPlans: ApiHeroEndpoint<
 > = {
   id: "apps/list-plans",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -250,6 +261,7 @@ export const listSubscriptionsForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "apps/list-subscriptions-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -265,6 +277,7 @@ export const listSubscriptionsForAuthenticatedUser: ApiHeroEndpoint<
 export const getUserInstallation: ApiHeroEndpoint<{ username: string }, Installation> = {
   id: "apps/get-user-installation",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -290,6 +303,7 @@ export const deleteAuthorization: ApiHeroEndpoint<
 > = {
   id: "apps/delete-authorization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -314,6 +328,7 @@ export const checkToken: ApiHeroEndpoint<
 > = {
   id: "apps/check-token",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -338,6 +353,7 @@ export const deleteToken: ApiHeroEndpoint<
 > = {
   id: "apps/delete-token",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -362,6 +378,7 @@ export const resetToken: ApiHeroEndpoint<
 > = {
   id: "apps/reset-token",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -383,6 +400,7 @@ export const createFromManifest: ApiHeroEndpoint<
 > = {
   id: "apps/create-from-manifest",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -398,6 +416,7 @@ export const createFromManifest: ApiHeroEndpoint<
 export const getWebhookDelivery: ApiHeroEndpoint<{ deliveryId: number }, HookDelivery> = {
   id: "apps/get-webhook-delivery",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -418,6 +437,7 @@ export const listPlansStubbed: ApiHeroEndpoint<
 > = {
   id: "apps/list-plans-stubbed",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -434,6 +454,7 @@ export const listPlansStubbed: ApiHeroEndpoint<
 export const getRepoInstallation: ApiHeroEndpoint<{ owner: string; repo: string }, Installation> = {
   id: "apps/get-repo-installation",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -452,6 +473,7 @@ export const listSubscriptionsForAuthenticatedUserStubbed: ApiHeroEndpoint<
 > = {
   id: "apps/list-subscriptions-for-authenticated-user-stubbed",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -467,6 +489,7 @@ export const listSubscriptionsForAuthenticatedUserStubbed: ApiHeroEndpoint<
 export const getInstallation: ApiHeroEndpoint<{ installationId: number }, Installation> = {
   id: "apps/get-installation",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -482,6 +505,7 @@ export const getInstallation: ApiHeroEndpoint<{ installationId: number }, Instal
 export const deleteInstallation: ApiHeroEndpoint<{ installationId: number }, void> = {
   id: "apps/delete-installation",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -542,6 +566,7 @@ export const scopeToken: ApiHeroEndpoint<
 > = {
   id: "apps/scope-token",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -560,6 +585,7 @@ export const getSubscriptionPlanForAccount: ApiHeroEndpoint<
 > = {
   id: "apps/get-subscription-plan-for-account",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -575,6 +601,7 @@ export const getSubscriptionPlanForAccount: ApiHeroEndpoint<
 export const redeliverWebhookDelivery: ApiHeroEndpoint<{ deliveryId: number }, {}> = {
   id: "apps/redeliver-webhook-delivery",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -604,6 +631,7 @@ export const listAccountsForPlan: ApiHeroEndpoint<
 > = {
   id: "apps/list-accounts-for-plan",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -619,6 +647,7 @@ export const listAccountsForPlan: ApiHeroEndpoint<
 export const suspendInstallation: ApiHeroEndpoint<{ installationId: number }, void> = {
   id: "apps/suspend-installation",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -634,6 +663,7 @@ export const suspendInstallation: ApiHeroEndpoint<{ installationId: number }, vo
 export const unsuspendInstallation: ApiHeroEndpoint<{ installationId: number }, void> = {
   id: "apps/unsuspend-installation",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -673,6 +703,7 @@ export const createInstallationAccessToken: ApiHeroEndpoint<
 > = {
   id: "apps/create-installation-access-token",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -691,6 +722,7 @@ export const getSubscriptionPlanForAccountStubbed: ApiHeroEndpoint<
 > = {
   id: "apps/get-subscription-plan-for-account-stubbed",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -720,6 +752,7 @@ export const listInstallationReposForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "apps/list-installation-repos-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -749,6 +782,7 @@ export const listAccountsForPlanStubbed: ApiHeroEndpoint<
 > = {
   id: "apps/list-accounts-for-plan-stubbed",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -768,6 +802,7 @@ export const addRepoToInstallationForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "apps/add-repo-to-installation-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -787,4 +822,5 @@ export const removeRepoFromInstallationForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "apps/remove-repo-from-installation-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };

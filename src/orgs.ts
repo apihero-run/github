@@ -41,6 +41,7 @@ export const listForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "orgs/list-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -56,6 +57,7 @@ export const listForAuthenticatedUser: ApiHeroEndpoint<
 export const getOrg: ApiHeroEndpoint<{ org: string }, OrganizationFull> = {
   id: "orgs/get",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -180,6 +182,7 @@ export const update: ApiHeroEndpoint<
 > = {
   id: "orgs/update",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -200,6 +203,7 @@ export const list: ApiHeroEndpoint<
 > = {
   id: "orgs/list",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -218,6 +222,7 @@ export const listWebhooks: ApiHeroEndpoint<
 > = {
   id: "orgs/list-webhooks",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -277,6 +282,7 @@ export const createWebhook: ApiHeroEndpoint<
 > = {
   id: "orgs/create-webhook",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -290,6 +296,7 @@ export const createWebhook: ApiHeroEndpoint<
 export const listBlockedUsers: ApiHeroEndpoint<{ org: string }, Array<SimpleUser>> = {
   id: "orgs/list-blocked-users",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -317,6 +324,7 @@ export const listMembers: ApiHeroEndpoint<
 > = {
   id: "orgs/list-members",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -361,6 +369,7 @@ export const getAuditLog: ApiHeroEndpoint<
 > = {
   id: "orgs/get-audit-log",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -379,6 +388,7 @@ export const listMembershipsForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "orgs/list-memberships-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -400,6 +410,7 @@ export const listForUser: ApiHeroEndpoint<
 > = {
   id: "orgs/list-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -419,6 +430,7 @@ export const listPendingInvitations: ApiHeroEndpoint<
 > = {
   id: "orgs/list-pending-invitations",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -463,6 +475,7 @@ export const createInvitation: ApiHeroEndpoint<
 > = {
   id: "orgs/create-invitation",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -485,6 +498,7 @@ export const listAppInstallations: ApiHeroEndpoint<
 > = {
   id: "orgs/list-app-installations",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -504,6 +518,7 @@ export const listPublicMembers: ApiHeroEndpoint<
 > = {
   id: "orgs/list-public-members",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -518,6 +533,7 @@ export const listPublicMembers: ApiHeroEndpoint<
 export const getWebhook: ApiHeroEndpoint<{ org: string; hookId: number }, OrgHook> = {
   id: "orgs/get-webhook",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -531,6 +547,7 @@ export const getWebhook: ApiHeroEndpoint<{ org: string; hookId: number }, OrgHoo
 export const deleteWebhook: ApiHeroEndpoint<{ org: string; hookId: number }, void> = {
   id: "orgs/delete-webhook",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -579,6 +596,7 @@ export const updateWebhook: ApiHeroEndpoint<
 > = {
   id: "orgs/update-webhook",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -591,6 +609,7 @@ export const updateWebhook: ApiHeroEndpoint<
 export const getMembershipForAuthenticatedUser: ApiHeroEndpoint<{ org: string }, OrgMembership> = {
   id: "orgs/get-membership-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -614,6 +633,7 @@ export const updateMembershipForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "orgs/update-membership-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -627,6 +647,7 @@ export const updateMembershipForAuthenticatedUser: ApiHeroEndpoint<
 export const checkBlockedUser: ApiHeroEndpoint<{ org: string; username: string }, void> = {
   id: "orgs/check-blocked-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -640,6 +661,7 @@ export const checkBlockedUser: ApiHeroEndpoint<{ org: string; username: string }
 export const blockUser: ApiHeroEndpoint<{ org: string; username: string }, void> = {
   id: "orgs/block-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -653,6 +675,7 @@ export const blockUser: ApiHeroEndpoint<{ org: string; username: string }, void>
 export const unblockUser: ApiHeroEndpoint<{ org: string; username: string }, void> = {
   id: "orgs/unblock-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -670,6 +693,7 @@ export const unblockUser: ApiHeroEndpoint<{ org: string; username: string }, voi
 export const listSecurityManagerTeams: ApiHeroEndpoint<{ org: string }, Array<TeamSimple>> = {
   id: "orgs/list-security-manager-teams",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -689,6 +713,7 @@ export const listFailedInvitations: ApiHeroEndpoint<
 > = {
   id: "orgs/list-failed-invitations",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -703,6 +728,7 @@ export const listFailedInvitations: ApiHeroEndpoint<
 export const checkMembershipForUser: ApiHeroEndpoint<{ org: string; username: string }, void> = {
   id: "orgs/check-membership-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -717,6 +743,7 @@ export const checkMembershipForUser: ApiHeroEndpoint<{ org: string; username: st
 export const removeMember: ApiHeroEndpoint<{ org: string; username: string }, void> = {
   id: "orgs/remove-member",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -731,6 +758,7 @@ export const removeMember: ApiHeroEndpoint<{ org: string; username: string }, vo
 export const pingWebhook: ApiHeroEndpoint<{ org: string; hookId: number }, void> = {
   id: "orgs/ping-webhook",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -751,6 +779,7 @@ export const listOutsideCollaborators: ApiHeroEndpoint<
 > = {
   id: "orgs/list-outside-collaborators",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -770,6 +799,7 @@ export const getWebhookConfigForOrg: ApiHeroEndpoint<
 > = {
   id: "orgs/get-webhook-config-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -798,6 +828,7 @@ export const updateWebhookConfigForOrg: ApiHeroEndpoint<
 > = {
   id: "orgs/update-webhook-config-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -815,6 +846,7 @@ export const getMembershipForUser: ApiHeroEndpoint<
 > = {
   id: "orgs/get-membership-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -851,6 +883,7 @@ export const setMembershipForUser: ApiHeroEndpoint<
 > = {
   id: "orgs/set-membership-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -867,6 +900,7 @@ export const setMembershipForUser: ApiHeroEndpoint<
 export const removeMembershipForUser: ApiHeroEndpoint<{ org: string; username: string }, void> = {
   id: "orgs/remove-membership-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -888,6 +922,7 @@ export const listSamlSsoAuthorizations: ApiHeroEndpoint<
 > = {
   id: "orgs/list-saml-sso-authorizations",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -904,6 +939,7 @@ export const checkPublicMembershipForUser: ApiHeroEndpoint<
 > = {
   id: "orgs/check-public-membership-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -923,6 +959,7 @@ export const setPublicMembershipForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "orgs/set-public-membership-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -939,6 +976,7 @@ export const removePublicMembershipForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "orgs/remove-public-membership-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -958,6 +996,7 @@ export const listWebhookDeliveries: ApiHeroEndpoint<
 > = {
   id: "orgs/list-webhook-deliveries",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -974,6 +1013,7 @@ export const listWebhookDeliveries: ApiHeroEndpoint<
 export const cancelInvitation: ApiHeroEndpoint<{ org: string; invitationId: number }, void> = {
   id: "orgs/cancel-invitation",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1000,6 +1040,7 @@ export const convertMemberToOutsideCollaborator: ApiHeroEndpoint<
 > = {
   id: "orgs/convert-member-to-outside-collaborator",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1014,6 +1055,7 @@ export const convertMemberToOutsideCollaborator: ApiHeroEndpoint<
 export const removeOutsideCollaborator: ApiHeroEndpoint<{ org: string; username: string }, void> = {
   id: "orgs/remove-outside-collaborator",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1042,6 +1084,7 @@ export const listCustomRoles: ApiHeroEndpoint<
 > = {
   id: "orgs/list-custom-roles",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1062,6 +1105,7 @@ export const listInvitationTeams: ApiHeroEndpoint<
 > = {
   id: "orgs/list-invitation-teams",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1080,6 +1124,7 @@ export const listInvitationTeams: ApiHeroEndpoint<
 export const addSecurityManagerTeam: ApiHeroEndpoint<{ org: string; teamSlug: string }, void> = {
   id: "orgs/add-security-manager-team",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1098,6 +1143,7 @@ export const addSecurityManagerTeam: ApiHeroEndpoint<{ org: string; teamSlug: st
 export const removeSecurityManagerTeam: ApiHeroEndpoint<{ org: string; teamSlug: string }, void> = {
   id: "orgs/remove-security-manager-team",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1116,6 +1162,7 @@ export const getWebhookDelivery: ApiHeroEndpoint<
 > = {
   id: "orgs/get-webhook-delivery",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1135,6 +1182,7 @@ export const removeSamlSsoAuthorization: ApiHeroEndpoint<
 > = {
   id: "orgs/remove-saml-sso-authorization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1153,4 +1201,5 @@ export const redeliverWebhookDelivery: ApiHeroEndpoint<
 > = {
   id: "orgs/redeliver-webhook-delivery",
   clientId: "github",
+  version: "1.1.5",
 };

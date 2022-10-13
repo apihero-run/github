@@ -17,6 +17,7 @@ export const list: ApiHeroEndpoint<
 > = {
   id: "gists/list",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -66,6 +67,7 @@ export const create: ApiHeroEndpoint<
 > = {
   id: "gists/create",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -87,6 +89,7 @@ export const listPublic: ApiHeroEndpoint<
 > = {
   id: "gists/list-public",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -106,6 +109,7 @@ export const listStarred: ApiHeroEndpoint<
 > = {
   id: "gists/list-starred",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -118,6 +122,7 @@ export const listStarred: ApiHeroEndpoint<
 export const getGist: ApiHeroEndpoint<{ gistId: string }, GistSimple> = {
   id: "gists/get",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -130,6 +135,7 @@ export const getGist: ApiHeroEndpoint<{ gistId: string }, GistSimple> = {
 export const deleteGist: ApiHeroEndpoint<{ gistId: string }, void> = {
   id: "gists/delete",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -183,6 +189,7 @@ export const update: ApiHeroEndpoint<
 > = {
   id: "gists/update",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -195,6 +202,7 @@ export const update: ApiHeroEndpoint<
 export const checkIsStarred: ApiHeroEndpoint<{ gistId: string }, void> = {
   id: "gists/check-is-starred",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -208,6 +216,7 @@ export const checkIsStarred: ApiHeroEndpoint<{ gistId: string }, void> = {
 export const star: ApiHeroEndpoint<{ gistId: string }, void> = {
   id: "gists/star",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -220,6 +229,7 @@ export const star: ApiHeroEndpoint<{ gistId: string }, void> = {
 export const unstar: ApiHeroEndpoint<{ gistId: string }, void> = {
   id: "gists/unstar",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -238,6 +248,7 @@ export const listForks: ApiHeroEndpoint<
 > = {
   id: "gists/list-forks",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -251,6 +262,7 @@ export const listForks: ApiHeroEndpoint<
 export const fork: ApiHeroEndpoint<{ gistId: string }, BaseGist, { Location: string }> = {
   id: "gists/fork",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -264,6 +276,7 @@ export const fork: ApiHeroEndpoint<{ gistId: string }, BaseGist, { Location: str
 export const getRevision: ApiHeroEndpoint<{ gistId: string; sha: string }, GistSimple> = {
   id: "gists/get-revision",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -284,6 +297,7 @@ export const listForUser: ApiHeroEndpoint<
 > = {
   id: "gists/list-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -302,6 +316,7 @@ export const listCommits: ApiHeroEndpoint<
 > = {
   id: "gists/list-commits",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -320,6 +335,7 @@ export const listComments: ApiHeroEndpoint<
 > = {
   id: "gists/list-comments",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -347,6 +363,7 @@ export const createComment: ApiHeroEndpoint<
 > = {
   id: "gists/create-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -360,6 +377,7 @@ export const createComment: ApiHeroEndpoint<
 export const getComment: ApiHeroEndpoint<{ gistId: string; commentId: number }, GistComment> = {
   id: "gists/get-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -373,6 +391,7 @@ export const getComment: ApiHeroEndpoint<{ gistId: string; commentId: number }, 
 export const deleteComment: ApiHeroEndpoint<{ gistId: string; commentId: number }, void> = {
   id: "gists/delete-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -401,4 +420,5 @@ export const updateComment: ApiHeroEndpoint<
 > = {
   id: "gists/update-comment",
   clientId: "github",
+  version: "1.1.5",
 };

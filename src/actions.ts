@@ -59,6 +59,7 @@ export const listSelfHostedRunnersForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/list-self-hosted-runners-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -81,6 +82,7 @@ export const listOrgSecrets: ApiHeroEndpoint<
 > = {
   id: "actions/list-org-secrets",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -100,6 +102,7 @@ export const getActionsCacheUsageForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/get-actions-cache-usage-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -118,6 +121,7 @@ export const getGithubActionsPermissionsOrganization: ApiHeroEndpoint<
 > = {
   id: "actions/get-github-actions-permissions-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -144,6 +148,7 @@ export const setGithubActionsPermissionsOrganization: ApiHeroEndpoint<
 > = {
   id: "actions/set-github-actions-permissions-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -170,6 +175,7 @@ export const listSelfHostedRunnerGroupsForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/list-self-hosted-runner-groups-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -234,6 +240,7 @@ export const createSelfHostedRunnerGroupForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/create-self-hosted-runner-group-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -291,6 +298,7 @@ export const listWorkflowRunsForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/list-workflow-runs-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -326,6 +334,7 @@ export const getActionsCacheList: ApiHeroEndpoint<
 > = {
   id: "actions/get-actions-cache-list",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -349,6 +358,7 @@ export const deleteActionsCacheByKey: ApiHeroEndpoint<
 > = {
   id: "actions/delete-actions-cache-by-key",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -367,6 +377,7 @@ export const listRunnerApplicationsForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/list-runner-applications-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -390,6 +401,7 @@ export const listSelfHostedRunnersForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/list-self-hosted-runners-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -413,6 +425,7 @@ export const listRepoSecrets: ApiHeroEndpoint<
 > = {
   id: "actions/list-repo-secrets",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -426,6 +439,7 @@ export const listRepoSecrets: ApiHeroEndpoint<
 export const getOrgPublicKey: ApiHeroEndpoint<{ org: string }, ActionsPublicKey> = {
   id: "actions/get-org-public-key",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -443,6 +457,7 @@ export const getSelfHostedRunnerForOrg: ApiHeroEndpoint<{ org: string; runnerId:
   {
     id: "actions/get-self-hosted-runner-for-org",
     clientId: "github",
+    version: "1.1.5",
   };
 
 /** 
@@ -462,6 +477,7 @@ export const deleteSelfHostedRunnerFromOrg: ApiHeroEndpoint<
 > = {
   id: "actions/delete-self-hosted-runner-from-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -485,6 +501,7 @@ export const listArtifactsForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/list-artifacts-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -508,6 +525,7 @@ export const listRepoWorkflows: ApiHeroEndpoint<
 > = {
   id: "actions/list-repo-workflows",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -528,6 +546,7 @@ export const getGithubActionsDefaultWorkflowPermissionsOrganization: ApiHeroEndp
 > = {
   id: "actions/get-github-actions-default-workflow-permissions-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -548,6 +567,7 @@ export const setGithubActionsDefaultWorkflowPermissionsOrganization: ApiHeroEndp
 > = {
   id: "actions/set-github-actions-default-workflow-permissions-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -572,6 +592,7 @@ export const setGithubActionsDefaultWorkflowPermissionsOrganization: ApiHeroEndp
 export const createRemoveTokenForOrg: ApiHeroEndpoint<{ org: string }, AuthenticationToken> = {
   id: "actions/create-remove-token-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -589,6 +610,7 @@ export const getOrgSecret: ApiHeroEndpoint<
 > = {
   id: "actions/get-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -704,6 +726,7 @@ export const createOrUpdateOrgSecret: ApiHeroEndpoint<
 > = {
   id: "actions/create-or-update-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -718,6 +741,7 @@ export const createOrUpdateOrgSecret: ApiHeroEndpoint<
 export const deleteOrgSecret: ApiHeroEndpoint<{ org: string; secretName: string }, void> = {
   id: "actions/delete-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -737,6 +761,7 @@ export const getActionsCacheUsage: ApiHeroEndpoint<
 > = {
   id: "actions/get-actions-cache-usage",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -756,6 +781,7 @@ export const getGithubActionsPermissionsRepository: ApiHeroEndpoint<
 > = {
   id: "actions/get-github-actions-permissions-repository",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -784,6 +810,7 @@ export const setGithubActionsPermissionsRepository: ApiHeroEndpoint<
 > = {
   id: "actions/set-github-actions-permissions-repository",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -802,6 +829,7 @@ export const getJobForWorkflowRun: ApiHeroEndpoint<
 > = {
   id: "actions/get-job-for-workflow-run",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -821,6 +849,7 @@ export const getWorkflowRun: ApiHeroEndpoint<
 > = {
   id: "actions/get-workflow-run",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -841,6 +870,7 @@ export const deleteWorkflowRun: ApiHeroEndpoint<
 > = {
   id: "actions/delete-workflow-run",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -864,6 +894,7 @@ export const listSelectedRepositoriesEnabledGithubActionsOrganization: ApiHeroEn
 > = {
   id: "actions/list-selected-repositories-enabled-github-actions-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -891,6 +922,7 @@ export const setSelectedRepositoriesEnabledGithubActionsOrganization: ApiHeroEnd
 > = {
   id: "actions/set-selected-repositories-enabled-github-actions-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -910,6 +942,7 @@ export const getActionsCacheUsageForEnterprise: ApiHeroEndpoint<
 > = {
   id: "actions/get-actions-cache-usage-for-enterprise",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -934,6 +967,7 @@ export const getActionsCacheUsageByRepoForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/get-actions-cache-usage-by-repo-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -958,6 +992,7 @@ export const createRegistrationTokenForOrg: ApiHeroEndpoint<{ org: string }, Aut
   {
     id: "actions/create-registration-token-for-org",
     clientId: "github",
+    version: "1.1.5",
   };
 
 /** 
@@ -980,6 +1015,7 @@ export const listLabelsForSelfHostedRunnerForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/list-labels-for-self-hosted-runner-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1011,6 +1047,7 @@ export const addCustomLabelsToSelfHostedRunnerForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/add-custom-labels-to-self-hosted-runner-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1043,6 +1080,7 @@ export const setCustomLabelsForSelfHostedRunnerForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/set-custom-labels-for-self-hosted-runner-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1066,6 +1104,7 @@ export const removeAllCustomLabelsFromSelfHostedRunnerForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/remove-all-custom-labels-from-self-hosted-runner-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1088,6 +1127,7 @@ export const deleteActionsCacheById: ApiHeroEndpoint<
 > = {
   id: "actions/delete-actions-cache-by-id",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1107,6 +1147,7 @@ export const listRunnerApplicationsForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/list-runner-applications-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1122,6 +1163,7 @@ export const listRunnerApplicationsForRepo: ApiHeroEndpoint<
 export const getAllowedActionsOrganization: ApiHeroEndpoint<{ org: string }, SelectedActions> = {
   id: "actions/get-allowed-actions-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1144,6 +1186,7 @@ export const setAllowedActionsOrganization: ApiHeroEndpoint<
 > = {
   id: "actions/set-allowed-actions-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1165,6 +1208,7 @@ export const downloadJobLogsForWorkflowRun: ApiHeroEndpoint<
 > = {
   id: "actions/download-job-logs-for-workflow-run",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1186,6 +1230,7 @@ export const getWorkflowAccessToRepository: ApiHeroEndpoint<
 > = {
   id: "actions/get-workflow-access-to-repository",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1207,6 +1252,7 @@ export const setWorkflowAccessToRepository: ApiHeroEndpoint<
 > = {
   id: "actions/set-workflow-access-to-repository",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1239,6 +1285,7 @@ export const listJobsForWorkflowRun: ApiHeroEndpoint<
 > = {
   id: "actions/list-jobs-for-workflow-run",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1260,6 +1307,7 @@ export const downloadWorkflowRunLogs: ApiHeroEndpoint<
 > = {
   id: "actions/download-workflow-run-logs",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1278,6 +1326,7 @@ export const deleteWorkflowRunLogs: ApiHeroEndpoint<
 > = {
   id: "actions/delete-workflow-run-logs",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1293,6 +1342,7 @@ export const getRepoPublicKey: ApiHeroEndpoint<{ owner: string; repo: string }, 
   {
     id: "actions/get-repo-public-key",
     clientId: "github",
+    version: "1.1.5",
   };
 
 /** 
@@ -1321,6 +1371,7 @@ export const reRunJobForWorkflowRun: ApiHeroEndpoint<
 > = {
   id: "actions/re-run-job-for-workflow-run",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1342,6 +1393,7 @@ export const getSelfHostedRunnerForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/get-self-hosted-runner-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1363,6 +1415,7 @@ export const deleteSelfHostedRunnerFromRepo: ApiHeroEndpoint<
 > = {
   id: "actions/delete-self-hosted-runner-from-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1391,6 +1444,7 @@ export const reRunWorkflow: ApiHeroEndpoint<
 > = {
   id: "actions/re-run-workflow",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1412,6 +1466,7 @@ export const getGithubActionsDefaultWorkflowPermissionsRepository: ApiHeroEndpoi
 > = {
   id: "actions/get-github-actions-default-workflow-permissions-repository",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1433,6 +1488,7 @@ export const setGithubActionsDefaultWorkflowPermissionsRepository: ApiHeroEndpoi
 > = {
   id: "actions/set-github-actions-default-workflow-permissions-repository",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1459,6 +1515,7 @@ export const createRemoveTokenForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/create-remove-token-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1477,6 +1534,7 @@ export const cancelWorkflowRun: ApiHeroEndpoint<
 > = {
   id: "actions/cancel-workflow-run",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1497,6 +1555,7 @@ export const getWorkflowRunUsage: ApiHeroEndpoint<
 > = {
   id: "actions/get-workflow-run-usage",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1518,6 +1577,7 @@ export const getSelfHostedRunnerGroupForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/get-self-hosted-runner-group-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1539,6 +1599,7 @@ export const deleteSelfHostedRunnerGroupFromOrg: ApiHeroEndpoint<
 > = {
   id: "actions/delete-self-hosted-runner-group-from-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1593,6 +1654,7 @@ export const updateSelfHostedRunnerGroupForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/update-self-hosted-runner-group-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1613,6 +1675,7 @@ export const approveWorkflowRun: ApiHeroEndpoint<
 > = {
   id: "actions/approve-workflow-run",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1631,6 +1694,7 @@ export const getRepoSecret: ApiHeroEndpoint<
 > = {
   id: "actions/get-repo-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1738,6 +1802,7 @@ export const createOrUpdateRepoSecret: ApiHeroEndpoint<
 > = {
   id: "actions/create-or-update-repo-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1756,6 +1821,7 @@ export const deleteRepoSecret: ApiHeroEndpoint<
 > = {
   id: "actions/delete-repo-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1775,6 +1841,7 @@ export const getCustomOidcSubClaimForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/get-custom-oidc-sub-claim-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1794,6 +1861,7 @@ export const setCustomOidcSubClaimForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/set-custom-oidc-sub-claim-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1821,6 +1889,7 @@ export const removeCustomLabelFromSelfHostedRunnerForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/remove-custom-label-from-self-hosted-runner-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1839,6 +1908,7 @@ export const getArtifact: ApiHeroEndpoint<
 > = {
   id: "actions/get-artifact",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1857,6 +1927,7 @@ export const deleteArtifact: ApiHeroEndpoint<
 > = {
   id: "actions/delete-artifact",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1875,6 +1946,7 @@ export const getReviewsForRun: ApiHeroEndpoint<
 > = {
   id: "actions/get-reviews-for-run",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1899,6 +1971,7 @@ export const listWorkflowRunArtifacts: ApiHeroEndpoint<
 > = {
   id: "actions/list-workflow-run-artifacts",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1916,6 +1989,7 @@ export const getWorkflow: ApiHeroEndpoint<
 > = {
   id: "actions/get-workflow",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1937,6 +2011,7 @@ export const getGithubActionsDefaultWorkflowPermissionsEnterprise: ApiHeroEndpoi
 > = {
   id: "actions/get-github-actions-default-workflow-permissions-enterprise",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1958,6 +2033,7 @@ export const setGithubActionsDefaultWorkflowPermissionsEnterprise: ApiHeroEndpoi
 > = {
   id: "actions/set-github-actions-default-workflow-permissions-enterprise",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1980,6 +2056,7 @@ export const listSelectedReposForOrgSecret: ApiHeroEndpoint<
 > = {
   id: "actions/list-selected-repos-for-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2006,6 +2083,7 @@ export const setSelectedReposForOrgSecret: ApiHeroEndpoint<
 > = {
   id: "actions/set-selected-repos-for-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2032,6 +2110,7 @@ export const createRegistrationTokenForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/create-registration-token-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2056,6 +2135,7 @@ export const listLabelsForSelfHostedRunnerForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/list-labels-for-self-hosted-runner-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2090,6 +2170,7 @@ export const addCustomLabelsToSelfHostedRunnerForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/add-custom-labels-to-self-hosted-runner-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2125,6 +2206,7 @@ export const setCustomLabelsForSelfHostedRunnerForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/set-custom-labels-for-self-hosted-runner-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2150,6 +2232,7 @@ export const removeAllCustomLabelsFromSelfHostedRunnerForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/remove-all-custom-labels-from-self-hosted-runner-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2169,6 +2252,7 @@ export const getAllowedActionsRepository: ApiHeroEndpoint<
 > = {
   id: "actions/get-allowed-actions-repository",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2192,6 +2276,7 @@ export const setAllowedActionsRepository: ApiHeroEndpoint<
 > = {
   id: "actions/set-allowed-actions-repository",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2250,6 +2335,7 @@ export const listWorkflowRuns: ApiHeroEndpoint<
 > = {
   id: "actions/list-workflow-runs",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2268,6 +2354,7 @@ export const setActionsOidcCustomIssuerPolicyForEnterprise: ApiHeroEndpoint<
 > = {
   id: "actions/set-actions-oidc-custom-issuer-policy-for-enterprise",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2295,6 +2382,7 @@ export const listSelfHostedRunnersInGroupForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/list-self-hosted-runners-in-group-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2326,6 +2414,7 @@ export const setSelfHostedRunnersInGroupForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/set-self-hosted-runners-in-group-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2345,6 +2434,7 @@ export const enableSelectedRepositoryGithubActionsOrganization: ApiHeroEndpoint<
 > = {
   id: "actions/enable-selected-repository-github-actions-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2364,6 +2454,7 @@ export const disableSelectedRepositoryGithubActionsOrganization: ApiHeroEndpoint
 > = {
   id: "actions/disable-selected-repository-github-actions-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2383,6 +2474,7 @@ export const enableWorkflow: ApiHeroEndpoint<
 > = {
   id: "actions/enable-workflow",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2402,6 +2494,7 @@ export const getWorkflowUsage: ApiHeroEndpoint<
 > = {
   id: "actions/get-workflow-usage",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2430,6 +2523,7 @@ export const reRunWorkflowFailedJobs: ApiHeroEndpoint<
 > = {
   id: "actions/re-run-workflow-failed-jobs",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2449,6 +2543,7 @@ export const disableWorkflow: ApiHeroEndpoint<
 > = {
   id: "actions/disable-workflow",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2478,6 +2573,7 @@ export const removeCustomLabelFromSelfHostedRunnerForRepo: ApiHeroEndpoint<
 > = {
   id: "actions/remove-custom-label-from-self-hosted-runner-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2498,6 +2594,7 @@ export const getPendingDeploymentsForRun: ApiHeroEndpoint<
 > = {
   id: "actions/get-pending-deployments-for-run",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2550,6 +2647,7 @@ export const reviewPendingDeploymentsForRun: ApiHeroEndpoint<
 > = {
   id: "actions/review-pending-deployments-for-run",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2576,6 +2674,7 @@ export const listRepoAccessToSelfHostedRunnerGroupInOrg: ApiHeroEndpoint<
 > = {
   id: "actions/list-repo-access-to-self-hosted-runner-group-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2607,6 +2706,7 @@ export const setRepoAccessToSelfHostedRunnerGroupInOrg: ApiHeroEndpoint<
 > = {
   id: "actions/set-repo-access-to-self-hosted-runner-group-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2643,6 +2743,7 @@ export const createWorkflowDispatch: ApiHeroEndpoint<
 > = {
   id: "actions/create-workflow-dispatch",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2672,6 +2773,7 @@ export const getWorkflowRunAttempt: ApiHeroEndpoint<
 > = {
   id: "actions/get-workflow-run-attempt",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2695,6 +2797,7 @@ export const listEnvironmentSecrets: ApiHeroEndpoint<
 > = {
   id: "actions/list-environment-secrets",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2713,6 +2816,7 @@ export const addSelectedRepoToOrgSecret: ApiHeroEndpoint<
 > = {
   id: "actions/add-selected-repo-to-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2731,6 +2835,7 @@ export const removeSelectedRepoFromOrgSecret: ApiHeroEndpoint<
 > = {
   id: "actions/remove-selected-repo-from-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2753,6 +2858,7 @@ export const downloadArtifact: ApiHeroEndpoint<
 > = {
   id: "actions/download-artifact",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2777,6 +2883,7 @@ export const addSelfHostedRunnerToGroupForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/add-self-hosted-runner-to-group-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2800,6 +2907,7 @@ export const removeSelfHostedRunnerFromGroupForOrg: ApiHeroEndpoint<
 > = {
   id: "actions/remove-self-hosted-runner-from-group-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2832,6 +2940,7 @@ export const listJobsForWorkflowRunAttempt: ApiHeroEndpoint<
 > = {
   id: "actions/list-jobs-for-workflow-run-attempt",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2854,6 +2963,7 @@ export const downloadWorkflowRunAttemptLogs: ApiHeroEndpoint<
 > = {
   id: "actions/download-workflow-run-attempt-logs",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2878,6 +2988,7 @@ export const addRepoAccessToSelfHostedRunnerGroupInOrg: ApiHeroEndpoint<
 > = {
   id: "actions/add-repo-access-to-self-hosted-runner-group-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2901,6 +3012,7 @@ export const removeRepoAccessToSelfHostedRunnerGroupInOrg: ApiHeroEndpoint<
 > = {
   id: "actions/remove-repo-access-to-self-hosted-runner-group-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2918,6 +3030,7 @@ export const getEnvironmentPublicKey: ApiHeroEndpoint<
 > = {
   id: "actions/get-environment-public-key",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2936,6 +3049,7 @@ export const getEnvironmentSecret: ApiHeroEndpoint<
 > = {
   id: "actions/get-environment-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3043,6 +3157,7 @@ export const createOrUpdateEnvironmentSecret: ApiHeroEndpoint<
 > = {
   id: "actions/create-or-update-environment-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3061,4 +3176,5 @@ export const deleteEnvironmentSecret: ApiHeroEndpoint<
 > = {
   id: "actions/delete-environment-secret",
   clientId: "github",
+  version: "1.1.5",
 };

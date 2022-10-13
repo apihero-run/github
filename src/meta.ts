@@ -10,6 +10,7 @@ import { ApiOverview, Root, ApiHeroEndpoint } from "./@types";
 export const root: ApiHeroEndpoint<void, Root> = {
   id: "meta/root",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -21,6 +22,7 @@ export const root: ApiHeroEndpoint<void, Root> = {
 export const getZen: ApiHeroEndpoint<void, string> = {
   id: "meta/get-zen",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -35,6 +37,7 @@ export const getZen: ApiHeroEndpoint<void, string> = {
 export const getMetas: ApiHeroEndpoint<void, ApiOverview> = {
   id: "meta/get",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -48,4 +51,5 @@ export const getMetas: ApiHeroEndpoint<void, ApiOverview> = {
 export const getOctocat: ApiHeroEndpoint<{ s?: string }, string> = {
   id: "meta/get-octocat",
   clientId: "github",
+  version: "1.1.5",
 };

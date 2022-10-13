@@ -37,6 +37,7 @@ export const createRef: ApiHeroEndpoint<
 > = {
   id: "git/create-ref",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -128,6 +129,7 @@ export const createTag: ApiHeroEndpoint<
 > = {
   id: "git/create-tag",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -159,6 +161,7 @@ export const createBlob: ApiHeroEndpoint<
 > = {
   id: "git/create-blob",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -224,6 +227,7 @@ If not provided, GitHub will create a new Git tree object from only the entries 
 > = {
   id: "git/create-tree",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -335,6 +339,7 @@ export const createCommit: ApiHeroEndpoint<
 > = {
   id: "git/create-commit",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -352,6 +357,7 @@ export const createCommit: ApiHeroEndpoint<
 export const getRef: ApiHeroEndpoint<{ owner: string; repo: string; ref: string }, GitRef> = {
   id: "git/get-ref",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -366,6 +372,7 @@ export const getRef: ApiHeroEndpoint<{ owner: string; repo: string; ref: string 
 export const deleteRef: ApiHeroEndpoint<{ owner: string; repo: string; ref: string }, void> = {
   id: "git/delete-ref",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -398,6 +405,7 @@ export const updateRef: ApiHeroEndpoint<
 > = {
   id: "git/update-ref",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -440,6 +448,7 @@ export const updateRef: ApiHeroEndpoint<
 export const getTag: ApiHeroEndpoint<{ owner: string; repo: string; tagSha: string }, GitTag> = {
   id: "git/get-tag",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -457,6 +466,7 @@ export const getTag: ApiHeroEndpoint<{ owner: string; repo: string; tagSha: stri
 export const getBlob: ApiHeroEndpoint<{ owner: string; repo: string; fileSha: string }, Blob> = {
   id: "git/get-blob",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -478,6 +488,7 @@ export const getTree: ApiHeroEndpoint<
 > = {
   id: "git/get-tree",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -505,6 +516,7 @@ export const listMatchingRefs: ApiHeroEndpoint<
 > = {
   id: "git/list-matching-refs",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -552,4 +564,5 @@ export const getCommit: ApiHeroEndpoint<
 > = {
   id: "git/get-commit",
   clientId: "github",
+  version: "1.1.5",
 };

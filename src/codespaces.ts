@@ -34,6 +34,7 @@ export const listForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/list-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -154,6 +155,7 @@ export const createForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/create-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -177,6 +179,7 @@ export const listInOrganization: ApiHeroEndpoint<
 > = {
   id: "codespaces/list-in-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -203,6 +206,7 @@ export const listSecretsForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/list-secrets-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -229,6 +233,7 @@ export const listInRepositoryForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/list-in-repository-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -304,6 +309,7 @@ export const createWithRepoForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/create-with-repo-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -321,6 +327,7 @@ export const createWithRepoForAuthenticatedUser: ApiHeroEndpoint<
 export const getForAuthenticatedUser: ApiHeroEndpoint<{ codespaceName: string }, Codespace> = {
   id: "codespaces/get-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -338,6 +345,7 @@ export const getForAuthenticatedUser: ApiHeroEndpoint<{ codespaceName: string },
 export const deleteForAuthenticatedUser: ApiHeroEndpoint<{ codespaceName: string }, {}> = {
   id: "codespaces/delete-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -378,6 +386,7 @@ export const updateForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/update-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -394,6 +403,7 @@ export const updateForAuthenticatedUser: ApiHeroEndpoint<
 export const getPublicKeyForAuthenticatedUser: ApiHeroEndpoint<void, CodespacesUserPublicKey> = {
   id: "codespaces/get-public-key-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -423,6 +433,7 @@ export const preFlightWithRepoForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/pre-flight-with-repo-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -443,6 +454,7 @@ export const getSecretForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/get-secret-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -553,6 +565,7 @@ export const createOrUpdateSecretForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/create-or-update-secret-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -570,6 +583,7 @@ export const createOrUpdateSecretForAuthenticatedUser: ApiHeroEndpoint<
 export const deleteSecretForAuthenticatedUser: ApiHeroEndpoint<{ secretName: string }, void> = {
   id: "codespaces/delete-secret-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -587,6 +601,7 @@ export const deleteSecretForAuthenticatedUser: ApiHeroEndpoint<{ secretName: str
 export const stopForAuthenticatedUser: ApiHeroEndpoint<{ codespaceName: string }, Codespace> = {
   id: "codespaces/stop-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -604,6 +619,7 @@ export const stopForAuthenticatedUser: ApiHeroEndpoint<{ codespaceName: string }
 export const startForAuthenticatedUser: ApiHeroEndpoint<{ codespaceName: string }, Codespace> = {
   id: "codespaces/start-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -627,6 +643,7 @@ export const listRepoSecrets: ApiHeroEndpoint<
 > = {
   id: "codespaces/list-repo-secrets",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -653,6 +670,7 @@ export const repoMachinesForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/repo-machines-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -672,6 +690,7 @@ export const exportForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/export-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -695,6 +714,7 @@ export const codespaceMachinesForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/codespace-machines-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -725,6 +745,7 @@ export const listDevcontainersInRepositoryForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/list-devcontainers-in-repository-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -742,6 +763,7 @@ export const getRepoPublicKey: ApiHeroEndpoint<
 > = {
   id: "codespaces/get-repo-public-key",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -765,6 +787,7 @@ export const listRepositoriesForSecretForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/list-repositories-for-secret-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -793,6 +816,7 @@ export const setRepositoriesForSecretForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/set-repositories-for-secret-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -865,6 +889,7 @@ export const createWithPrForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/create-with-pr-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -885,6 +910,7 @@ export const getExportDetailsForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/get-export-details-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -903,6 +929,7 @@ export const getRepoSecret: ApiHeroEndpoint<
 > = {
   id: "codespaces/get-repo-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1010,6 +1037,7 @@ export const createOrUpdateRepoSecret: ApiHeroEndpoint<
 > = {
   id: "codespaces/create-or-update-repo-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1028,6 +1056,7 @@ export const deleteRepoSecret: ApiHeroEndpoint<
 > = {
   id: "codespaces/delete-repo-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1048,6 +1077,7 @@ export const deleteFromOrganization: ApiHeroEndpoint<
 > = {
   id: "codespaces/delete-from-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1068,6 +1098,7 @@ export const stopInOrganization: ApiHeroEndpoint<
 > = {
   id: "codespaces/stop-in-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1087,6 +1118,7 @@ export const addRepositoryForSecretForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/add-repository-for-secret-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1106,4 +1138,5 @@ export const removeRepositoryForSecretForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "codespaces/remove-repository-for-secret-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };

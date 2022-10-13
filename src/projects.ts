@@ -38,6 +38,7 @@ export const createForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "projects/create-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -58,6 +59,7 @@ export const listForOrg: ApiHeroEndpoint<
 > = {
   id: "projects/list-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -87,6 +89,7 @@ export const createForOrg: ApiHeroEndpoint<
 > = {
   id: "projects/create-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -100,6 +103,7 @@ export const createForOrg: ApiHeroEndpoint<
 export const getProject: ApiHeroEndpoint<{ projectId: number }, Project> = {
   id: "projects/get",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -113,6 +117,7 @@ export const getProject: ApiHeroEndpoint<{ projectId: number }, Project> = {
 export const deleteProject: ApiHeroEndpoint<{ projectId: number }, void> = {
   id: "projects/delete",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -166,6 +171,7 @@ export const update: ApiHeroEndpoint<
 > = {
   id: "projects/update",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -185,6 +191,7 @@ export const listForUser: ApiHeroEndpoint<
 > = {
   id: "projects/list-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -197,6 +204,7 @@ export const listForUser: ApiHeroEndpoint<
 export const getColumn: ApiHeroEndpoint<{ columnId: number }, ProjectColumn> = {
   id: "projects/get-column",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -209,6 +217,7 @@ export const getColumn: ApiHeroEndpoint<{ columnId: number }, ProjectColumn> = {
 export const deleteColumn: ApiHeroEndpoint<{ columnId: number }, void> = {
   id: "projects/delete-column",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -235,6 +244,7 @@ export const updateColumn: ApiHeroEndpoint<
 > = {
   id: "projects/update-column",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -253,6 +263,7 @@ export const listColumns: ApiHeroEndpoint<
 > = {
   id: "projects/list-columns",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -279,6 +290,7 @@ export const createColumn: ApiHeroEndpoint<
 > = {
   id: "projects/create-column",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -306,6 +318,7 @@ export const listForRepo: ApiHeroEndpoint<
 > = {
   id: "projects/list-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -337,6 +350,7 @@ export const createForRepo: ApiHeroEndpoint<
 > = {
   id: "projects/create-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -349,6 +363,7 @@ export const createForRepo: ApiHeroEndpoint<
 export const getCard: ApiHeroEndpoint<{ cardId: number }, ProjectCard> = {
   id: "projects/get-card",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -361,6 +376,7 @@ export const getCard: ApiHeroEndpoint<{ cardId: number }, ProjectCard> = {
 export const deleteCard: ApiHeroEndpoint<{ cardId: number }, void> = {
   id: "projects/delete-card",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -395,6 +411,7 @@ export const updateCard: ApiHeroEndpoint<
 > = {
   id: "projects/update-card",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -419,6 +436,7 @@ export const listCards: ApiHeroEndpoint<
 > = {
   id: "projects/list-cards",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -463,6 +481,7 @@ export const createCard: ApiHeroEndpoint<
 > = {
   id: "projects/create-card",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -489,6 +508,7 @@ export const moveColumn: ApiHeroEndpoint<
 > = {
   id: "projects/move-column",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -514,6 +534,7 @@ export const listCollaborators: ApiHeroEndpoint<
 > = {
   id: "projects/list-collaborators",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -548,6 +569,7 @@ export const moveCard: ApiHeroEndpoint<
 > = {
   id: "projects/move-card",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -577,6 +599,7 @@ export const addCollaborator: ApiHeroEndpoint<
 > = {
   id: "projects/add-collaborator",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -591,6 +614,7 @@ export const addCollaborator: ApiHeroEndpoint<
 export const removeCollaborator: ApiHeroEndpoint<{ username: string; projectId: number }, void> = {
   id: "projects/remove-collaborator",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -608,4 +632,5 @@ export const getPermissionForUser: ApiHeroEndpoint<
 > = {
   id: "projects/get-permission-for-user",
   clientId: "github",
+  version: "1.1.5",
 };

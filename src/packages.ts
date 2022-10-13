@@ -21,6 +21,7 @@ export const listPackagesForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "packages/list-packages-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -46,6 +47,7 @@ export const listPackagesForOrganization: ApiHeroEndpoint<
 > = {
   id: "packages/list-packages-for-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -71,6 +73,7 @@ export const listPackagesForUser: ApiHeroEndpoint<
 > = {
   id: "packages/list-packages-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -94,6 +97,7 @@ export const getPackageForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "packages/get-package-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -117,6 +121,7 @@ export const deletePackageForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "packages/delete-package-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -142,6 +147,7 @@ export const getPackageForOrganization: ApiHeroEndpoint<
 > = {
   id: "packages/get-package-for-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -168,6 +174,7 @@ export const deletePackageForOrg: ApiHeroEndpoint<
 > = {
   id: "packages/delete-package-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -196,6 +203,7 @@ export const restorePackageForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "packages/restore-package-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -225,6 +233,7 @@ export const getAllPackageVersionsForPackageOwnedByAuthenticatedUser: ApiHeroEnd
 > = {
   id: "packages/get-all-package-versions-for-package-owned-by-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -250,6 +259,7 @@ export const getPackageForUser: ApiHeroEndpoint<
 > = {
   id: "packages/get-package-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -276,6 +286,7 @@ export const deletePackageForUser: ApiHeroEndpoint<
 > = {
   id: "packages/delete-package-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -308,6 +319,7 @@ export const restorePackageForOrg: ApiHeroEndpoint<
 > = {
   id: "packages/restore-package-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -339,6 +351,7 @@ export const getAllPackageVersionsForPackageOwnedByOrg: ApiHeroEndpoint<
 > = {
   id: "packages/get-all-package-versions-for-package-owned-by-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -371,6 +384,7 @@ export const restorePackageForUser: ApiHeroEndpoint<
 > = {
   id: "packages/restore-package-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -396,6 +410,7 @@ export const getAllPackageVersionsForPackageOwnedByUser: ApiHeroEndpoint<
 > = {
   id: "packages/get-all-package-versions-for-package-owned-by-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -421,6 +436,7 @@ export const getPackageVersionForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "packages/get-package-version-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -446,6 +462,7 @@ export const deletePackageVersionForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "packages/delete-package-version-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -473,6 +490,7 @@ export const getPackageVersionForOrganization: ApiHeroEndpoint<
 > = {
   id: "packages/get-package-version-for-organization",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -501,6 +519,7 @@ export const deletePackageVersionForOrg: ApiHeroEndpoint<
 > = {
   id: "packages/delete-package-version-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -529,6 +548,7 @@ export const restorePackageVersionForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "packages/restore-package-version-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -556,6 +576,7 @@ export const getPackageVersionForUser: ApiHeroEndpoint<
 > = {
   id: "packages/get-package-version-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -584,6 +605,7 @@ export const deletePackageVersionForUser: ApiHeroEndpoint<
 > = {
   id: "packages/delete-package-version-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -616,6 +638,7 @@ export const restorePackageVersionForOrg: ApiHeroEndpoint<
 > = {
   id: "packages/restore-package-version-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -648,4 +671,5 @@ export const restorePackageVersionForUser: ApiHeroEndpoint<
 > = {
   id: "packages/restore-package-version-for-user",
   clientId: "github",
+  version: "1.1.5",
 };

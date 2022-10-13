@@ -27,6 +27,7 @@ export const listForCommitComment: ApiHeroEndpoint<
 > = {
   id: "reactions/list-for-commit-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -55,6 +56,7 @@ export const createForCommitComment: ApiHeroEndpoint<
 > = {
   id: "reactions/create-for-commit-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -84,6 +86,7 @@ export const listForIssue: ApiHeroEndpoint<
 > = {
   id: "reactions/list-for-issue",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -112,6 +115,7 @@ export const createForIssue: ApiHeroEndpoint<
 > = {
   id: "reactions/create-for-issue",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -141,6 +145,7 @@ export const listForRelease: ApiHeroEndpoint<
 > = {
   id: "reactions/list-for-release",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -169,6 +174,7 @@ export const createForRelease: ApiHeroEndpoint<
 > = {
   id: "reactions/create-for-release",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -199,6 +205,7 @@ export const listForTeamDiscussionLegacy: ApiHeroEndpoint<
 > = {
   id: "reactions/list-for-team-discussion-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -228,6 +235,7 @@ export const createForTeamDiscussionLegacy: ApiHeroEndpoint<
 > = {
   id: "reactions/create-for-team-discussion-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -257,6 +265,7 @@ export const listForPullRequestReviewComment: ApiHeroEndpoint<
 > = {
   id: "reactions/list-for-pull-request-review-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -285,6 +294,7 @@ export const createForPullRequestReviewComment: ApiHeroEndpoint<
 > = {
   id: "reactions/create-for-pull-request-review-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -314,6 +324,7 @@ export const listForIssueComment: ApiHeroEndpoint<
 > = {
   id: "reactions/list-for-issue-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -342,6 +353,7 @@ export const createForIssueComment: ApiHeroEndpoint<
 > = {
   id: "reactions/create-for-issue-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -363,6 +375,7 @@ export const deleteForCommitComment: ApiHeroEndpoint<
 > = {
   id: "reactions/delete-for-commit-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -384,6 +397,7 @@ export const deleteForIssue: ApiHeroEndpoint<
 > = {
   id: "reactions/delete-for-issue",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -405,6 +419,7 @@ export const deleteForRelease: ApiHeroEndpoint<
 > = {
   id: "reactions/delete-for-release",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -436,6 +451,7 @@ export const listForTeamDiscussionInOrg: ApiHeroEndpoint<
 > = {
   id: "reactions/list-for-team-discussion-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -466,6 +482,7 @@ export const createForTeamDiscussionInOrg: ApiHeroEndpoint<
 > = {
   id: "reactions/create-for-team-discussion-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -487,6 +504,7 @@ export const deleteForPullRequestComment: ApiHeroEndpoint<
 > = {
   id: "reactions/delete-for-pull-request-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -508,6 +526,7 @@ export const deleteForIssueComment: ApiHeroEndpoint<
 > = {
   id: "reactions/delete-for-issue-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -540,6 +559,7 @@ export const listForTeamDiscussionCommentLegacy: ApiHeroEndpoint<
 > = {
   id: "reactions/list-for-team-discussion-comment-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -571,6 +591,7 @@ export const createForTeamDiscussionCommentLegacy: ApiHeroEndpoint<
 > = {
   id: "reactions/create-for-team-discussion-comment-legacy",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -592,6 +613,7 @@ export const deleteForTeamDiscussion: ApiHeroEndpoint<
 > = {
   id: "reactions/delete-for-team-discussion",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -625,6 +647,7 @@ export const listForTeamDiscussionCommentInOrg: ApiHeroEndpoint<
 > = {
   id: "reactions/list-for-team-discussion-comment-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -657,6 +680,7 @@ export const createForTeamDiscussionCommentInOrg: ApiHeroEndpoint<
 > = {
   id: "reactions/create-for-team-discussion-comment-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -685,4 +709,5 @@ export const deleteForTeamDiscussionComment: ApiHeroEndpoint<
 > = {
   id: "reactions/delete-for-team-discussion-comment",
   clientId: "github",
+  version: "1.1.5",
 };

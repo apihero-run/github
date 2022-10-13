@@ -32,6 +32,7 @@ import {
 export const getFeeds: ApiHeroEndpoint<void, Feed> = {
   id: "activity/get-feeds",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -49,6 +50,7 @@ export const listPublicEvents: ApiHeroEndpoint<
 > = {
   id: "activity/list-public-events",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -71,6 +73,7 @@ export const listReposStarredByAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "activity/list-repos-starred-by-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -100,6 +103,7 @@ export const listNotificationsForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "activity/list-notifications-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -129,6 +133,7 @@ export const markNotificationsAsRead: ApiHeroEndpoint<
 > = {
   id: "activity/mark-notifications-as-read",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -146,6 +151,7 @@ export const listPublicOrgEvents: ApiHeroEndpoint<
 > = {
   id: "activity/list-public-org-events",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -164,6 +170,7 @@ export const listWatchedReposForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "activity/list-watched-repos-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -182,6 +189,7 @@ export const listEventsForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "activity/list-events-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -211,6 +219,7 @@ export const listReposStarredByUser: ApiHeroEndpoint<
 > = {
   id: "activity/list-repos-starred-by-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -229,6 +238,7 @@ export const listRepoEvents: ApiHeroEndpoint<
 > = {
   id: "activity/list-repo-events",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -245,6 +255,7 @@ export const checkRepoIsStarredByAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "activity/check-repo-is-starred-by-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -260,6 +271,7 @@ export const starRepoForAuthenticatedUser: ApiHeroEndpoint<{ owner: string; repo
   {
     id: "activity/star-repo-for-authenticated-user",
     clientId: "github",
+    version: "1.1.5",
   };
 
 /** 
@@ -276,6 +288,7 @@ export const unstarRepoForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "activity/unstar-repo-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -294,6 +307,7 @@ export const listPublicEventsForRepoNetwork: ApiHeroEndpoint<
 > = {
   id: "activity/list-public-events-for-repo-network",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -311,6 +325,7 @@ export const listPublicEventsForUser: ApiHeroEndpoint<
 > = {
   id: "activity/list-public-events-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -330,6 +345,7 @@ export const listReposWatchedByUser: ApiHeroEndpoint<
 > = {
   id: "activity/list-repos-watched-by-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -352,6 +368,7 @@ export const listStargazersForRepo: ApiHeroEndpoint<
 > = {
   id: "activity/list-stargazers-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -372,6 +389,7 @@ export const listWatchersForRepo: ApiHeroEndpoint<
 > = {
   id: "activity/list-watchers-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -390,6 +408,7 @@ export const listReceivedEventsForUser: ApiHeroEndpoint<
 > = {
   id: "activity/list-received-events-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -402,6 +421,7 @@ export const listReceivedEventsForUser: ApiHeroEndpoint<
 export const getThread: ApiHeroEndpoint<{ threadId: number }, Thread> = {
   id: "activity/get-thread",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -414,6 +434,7 @@ export const getThread: ApiHeroEndpoint<{ threadId: number }, Thread> = {
 export const markThreadAsRead: ApiHeroEndpoint<{ threadId: number }, any> = {
   id: "activity/mark-thread-as-read",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -430,6 +451,7 @@ export const getRepoSubscription: ApiHeroEndpoint<
 > = {
   id: "activity/get-repo-subscription",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -461,6 +483,7 @@ export const setRepoSubscription: ApiHeroEndpoint<
 > = {
   id: "activity/set-repo-subscription",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -475,6 +498,7 @@ export const setRepoSubscription: ApiHeroEndpoint<
 export const deleteRepoSubscription: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "activity/delete-repo-subscription",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -508,6 +532,7 @@ export const listRepoNotificationsForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "activity/list-repo-notifications-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -537,6 +562,7 @@ export const markRepoNotificationsAsRead: ApiHeroEndpoint<
 > = {
   id: "activity/mark-repo-notifications-as-read",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -556,6 +582,7 @@ export const listOrgEventsForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "activity/list-org-events-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -573,6 +600,7 @@ export const listReceivedPublicEventsForUser: ApiHeroEndpoint<
 > = {
   id: "activity/list-received-public-events-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -591,6 +619,7 @@ export const getThreadSubscriptionForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "activity/get-thread-subscription-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -619,6 +648,7 @@ export const setThreadSubscription: ApiHeroEndpoint<
 > = {
   id: "activity/set-thread-subscription",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -632,4 +662,5 @@ export const setThreadSubscription: ApiHeroEndpoint<
 export const deleteThreadSubscription: ApiHeroEndpoint<{ threadId: number }, void> = {
   id: "activity/delete-thread-subscription",
   clientId: "github",
+  version: "1.1.5",
 };

@@ -57,6 +57,7 @@ export const list: ApiHeroEndpoint<
 > = {
   id: "issues/list",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -95,6 +96,7 @@ export const listForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "issues/list-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -135,6 +137,7 @@ export const listForOrg: ApiHeroEndpoint<
 > = {
   id: "issues/list-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -183,6 +186,7 @@ export const listForRepo: ApiHeroEndpoint<
 > = {
   id: "issues/list-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -241,6 +245,7 @@ export const create: ApiHeroEndpoint<
 > = {
   id: "issues/create",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -260,6 +265,7 @@ export const listLabelsForRepo: ApiHeroEndpoint<
 > = {
   id: "issues/list-labels-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -296,6 +302,7 @@ export const createLabel: ApiHeroEndpoint<
 > = {
   id: "issues/create-label",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -316,6 +323,7 @@ export const listAssignees: ApiHeroEndpoint<
 > = {
   id: "issues/list-assignees",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -346,6 +354,7 @@ export const listMilestones: ApiHeroEndpoint<
 > = {
   id: "issues/list-milestones",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -387,6 +396,7 @@ export const createMilestone: ApiHeroEndpoint<
 > = {
   id: "issues/create-milestone",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -406,6 +416,7 @@ export const listEventsForRepo: ApiHeroEndpoint<
 > = {
   id: "issues/list-events-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -420,6 +431,7 @@ export const listEventsForRepo: ApiHeroEndpoint<
 export const getLabel: ApiHeroEndpoint<{ owner: string; repo: string; name: string }, Label> = {
   id: "issues/get-label",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -434,6 +446,7 @@ export const getLabel: ApiHeroEndpoint<{ owner: string; repo: string; name: stri
 export const deleteLabel: ApiHeroEndpoint<{ owner: string; repo: string; name: string }, void> = {
   id: "issues/delete-label",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -471,6 +484,7 @@ export const updateLabel: ApiHeroEndpoint<
 > = {
   id: "issues/update-label",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -502,6 +516,7 @@ export const listCommentsForRepo: ApiHeroEndpoint<
 > = {
   id: "issues/list-comments-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -524,6 +539,7 @@ export const checkUserCanBeAssigned: ApiHeroEndpoint<
 > = {
   id: "issues/check-user-can-be-assigned",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -552,6 +568,7 @@ export const getIssue: ApiHeroEndpoint<
 > = {
   id: "issues/get",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -614,6 +631,7 @@ export const update: ApiHeroEndpoint<
 > = {
   id: "issues/update",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -631,6 +649,7 @@ export const getEvent: ApiHeroEndpoint<
 > = {
   id: "issues/get-event",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -665,6 +684,7 @@ export const lock: ApiHeroEndpoint<
 > = {
   id: "issues/lock",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -680,6 +700,7 @@ export const lock: ApiHeroEndpoint<
 export const unlock: ApiHeroEndpoint<{ owner: string; repo: string; issueNumber: number }, void> = {
   id: "issues/unlock",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -697,6 +718,7 @@ export const getComment: ApiHeroEndpoint<
 > = {
   id: "issues/get-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -714,6 +736,7 @@ export const deleteComment: ApiHeroEndpoint<
 > = {
   id: "issues/delete-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -741,6 +764,7 @@ export const updateComment: ApiHeroEndpoint<
 > = {
   id: "issues/update-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -761,6 +785,7 @@ export const listEvents: ApiHeroEndpoint<
 > = {
   id: "issues/list-events",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -781,6 +806,7 @@ export const listLabelsOnIssue: ApiHeroEndpoint<
 > = {
   id: "issues/list-labels-on-issue",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -816,6 +842,7 @@ export const addLabels: ApiHeroEndpoint<
 > = {
   id: "issues/add-labels",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -852,6 +879,7 @@ export const setLabels: ApiHeroEndpoint<
 > = {
   id: "issues/set-labels",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -869,6 +897,7 @@ export const removeAllLabels: ApiHeroEndpoint<
 > = {
   id: "issues/remove-all-labels",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -886,6 +915,7 @@ export const getMilestone: ApiHeroEndpoint<
 > = {
   id: "issues/get-milestone",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -903,6 +933,7 @@ export const deleteMilestone: ApiHeroEndpoint<
 > = {
   id: "issues/delete-milestone",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -945,6 +976,7 @@ export const updateMilestone: ApiHeroEndpoint<
 > = {
   id: "issues/update-milestone",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -974,6 +1006,7 @@ export const listComments: ApiHeroEndpoint<
 > = {
   id: "issues/list-comments",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1003,6 +1036,7 @@ export const createComment: ApiHeroEndpoint<
 > = {
   id: "issues/create-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1023,6 +1057,7 @@ export const listEventsForTimeline: ApiHeroEndpoint<
 > = {
   id: "issues/list-events-for-timeline",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1051,6 +1086,7 @@ export const addAssignees: ApiHeroEndpoint<
 > = {
   id: "issues/add-assignees",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1079,6 +1115,7 @@ export const removeAssignees: ApiHeroEndpoint<
 > = {
   id: "issues/remove-assignees",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1098,6 +1135,7 @@ export const removeLabel: ApiHeroEndpoint<
 > = {
   id: "issues/remove-label",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1118,4 +1156,5 @@ export const listLabelsForMilestone: ApiHeroEndpoint<
 > = {
   id: "issues/list-labels-for-milestone",
   clientId: "github",
+  version: "1.1.5",
 };

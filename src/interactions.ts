@@ -11,6 +11,7 @@ export const getRestrictionsForAuthenticatedUser: ApiHeroEndpoint<void, Interact
   {
     id: "interactions/get-restrictions-for-authenticated-user",
     clientId: "github",
+    version: "1.1.5",
   };
 
 /** 
@@ -26,6 +27,7 @@ export const setRestrictionsForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "interactions/set-restrictions-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -38,6 +40,7 @@ export const setRestrictionsForAuthenticatedUser: ApiHeroEndpoint<
 export const removeRestrictionsForAuthenticatedUser: ApiHeroEndpoint<void, void> = {
   id: "interactions/remove-restrictions-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -51,6 +54,7 @@ export const removeRestrictionsForAuthenticatedUser: ApiHeroEndpoint<void, void>
 export const getRestrictionsForOrg: ApiHeroEndpoint<{ org: string }, InteractionLimitResponse> = {
   id: "interactions/get-restrictions-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -67,6 +71,7 @@ export const setRestrictionsForOrg: ApiHeroEndpoint<
 > = {
   id: "interactions/set-restrictions-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -80,6 +85,7 @@ export const setRestrictionsForOrg: ApiHeroEndpoint<
 export const removeRestrictionsForOrg: ApiHeroEndpoint<{ org: string }, void> = {
   id: "interactions/remove-restrictions-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -97,6 +103,7 @@ export const getRestrictionsForRepo: ApiHeroEndpoint<
 > = {
   id: "interactions/get-restrictions-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -114,6 +121,7 @@ export const setRestrictionsForRepo: ApiHeroEndpoint<
 > = {
   id: "interactions/set-restrictions-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -128,4 +136,5 @@ export const setRestrictionsForRepo: ApiHeroEndpoint<
 export const removeRestrictionsForRepo: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "interactions/remove-restrictions-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };

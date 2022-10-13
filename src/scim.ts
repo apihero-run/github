@@ -38,6 +38,7 @@ export const listProvisionedIdentities: ApiHeroEndpoint<
 > = {
   id: "scim/list-provisioned-identities",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -104,6 +105,7 @@ export const provisionAndInviteUser: ApiHeroEndpoint<
 > = {
   id: "scim/provision-and-invite-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -120,6 +122,7 @@ export const getProvisioningInformationForUser: ApiHeroEndpoint<
 > = {
   id: "scim/get-provisioning-information-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -192,6 +195,7 @@ export const setInformationForProvisionedUser: ApiHeroEndpoint<
 > = {
   id: "scim/set-information-for-provisioned-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -205,6 +209,7 @@ export const setInformationForProvisionedUser: ApiHeroEndpoint<
 export const deleteUserFromOrg: ApiHeroEndpoint<{ org: string; scimUserId: string }, void> = {
   id: "scim/delete-user-from-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -268,4 +273,5 @@ export const updateAttributeForUser: ApiHeroEndpoint<
 > = {
   id: "scim/update-attribute-for-user",
   clientId: "github",
+  version: "1.1.5",
 };

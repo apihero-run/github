@@ -44,6 +44,7 @@ export const list: ApiHeroEndpoint<
 > = {
   id: "pulls/list",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -109,6 +110,7 @@ export const create: ApiHeroEndpoint<
 > = {
   id: "pulls/create",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -140,6 +142,7 @@ export const listReviewCommentsForRepo: ApiHeroEndpoint<
 > = {
   id: "pulls/list-review-comments-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -172,6 +175,7 @@ export const getPull: ApiHeroEndpoint<
 > = {
   id: "pulls/get",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -222,6 +226,7 @@ export const update: ApiHeroEndpoint<
 > = {
   id: "pulls/update",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -243,6 +248,7 @@ export const listFiles: ApiHeroEndpoint<
 > = {
   id: "pulls/list-files",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -260,6 +266,7 @@ export const checkIfMerged: ApiHeroEndpoint<
 > = {
   id: "pulls/check-if-merged",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -303,6 +310,7 @@ export const merge: ApiHeroEndpoint<
 > = {
   id: "pulls/merge",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -321,6 +329,7 @@ export const getReviewComment: ApiHeroEndpoint<
 > = {
   id: "pulls/get-review-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -339,6 +348,7 @@ export const deleteReviewComment: ApiHeroEndpoint<
 > = {
   id: "pulls/delete-review-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -367,6 +377,7 @@ export const updateReviewComment: ApiHeroEndpoint<
 > = {
   id: "pulls/update-review-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -388,6 +399,7 @@ export const listCommits: ApiHeroEndpoint<
 > = {
   id: "pulls/list-commits",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -409,6 +421,7 @@ export const listReviews: ApiHeroEndpoint<
 > = {
   id: "pulls/list-reviews",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -501,6 +514,7 @@ export const createReview: ApiHeroEndpoint<
 > = {
   id: "pulls/create-review",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -534,6 +548,7 @@ export const listReviewComments: ApiHeroEndpoint<
 > = {
   id: "pulls/list-review-comments",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -614,6 +629,7 @@ export const createReviewComment: ApiHeroEndpoint<
 > = {
   id: "pulls/create-review-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -645,6 +661,7 @@ export const updateBranch: ApiHeroEndpoint<
 > = {
   id: "pulls/update-branch",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -666,6 +683,7 @@ export const listRequestedReviewers: ApiHeroEndpoint<
 > = {
   id: "pulls/list-requested-reviewers",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -699,6 +717,7 @@ export const requestReviewers: ApiHeroEndpoint<
 > = {
   id: "pulls/request-reviewers",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -731,6 +750,7 @@ export const removeRequestedReviewers: ApiHeroEndpoint<
 > = {
   id: "pulls/remove-requested-reviewers",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -749,6 +769,7 @@ export const getReview: ApiHeroEndpoint<
 > = {
   id: "pulls/get-review",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -779,6 +800,7 @@ export const updateReview: ApiHeroEndpoint<
 > = {
   id: "pulls/update-review",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -797,6 +819,7 @@ export const deletePendingReview: ApiHeroEndpoint<
 > = {
   id: "pulls/delete-pending-review",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -831,6 +854,7 @@ export const submitReview: ApiHeroEndpoint<
 > = {
   id: "pulls/submit-review",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -860,6 +884,7 @@ export const listCommentsForReview: ApiHeroEndpoint<
 > = {
   id: "pulls/list-comments-for-review",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -893,6 +918,7 @@ export const createReplyForReviewComment: ApiHeroEndpoint<
 > = {
   id: "pulls/create-reply-for-review-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -930,4 +956,5 @@ export const dismissReview: ApiHeroEndpoint<
 > = {
   id: "pulls/dismiss-review",
   clientId: "github",
+  version: "1.1.5",
 };

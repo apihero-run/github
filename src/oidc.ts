@@ -13,6 +13,7 @@ import { EmptyObject, OidcCustomSub, ApiHeroEndpoint } from "./@types";
 export const getOidcCustomSubTemplateForOrg: ApiHeroEndpoint<{ org: string }, OidcCustomSub> = {
   id: "oidc/get-oidc-custom-sub-template-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -31,4 +32,5 @@ export const updateOidcCustomSubTemplateForOrg: ApiHeroEndpoint<
 > = {
   id: "oidc/update-oidc-custom-sub-template-for-org",
   clientId: "github",
+  version: "1.1.5",
 };

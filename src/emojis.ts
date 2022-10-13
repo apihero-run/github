@@ -10,4 +10,5 @@ import { ApiHeroEndpoint } from "./@types";
 export const getEmojis: ApiHeroEndpoint<void, Record<string, string>> = {
   id: "emojis/get",
   clientId: "github",
+  version: "1.1.5",
 };

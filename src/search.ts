@@ -48,6 +48,7 @@ export const code: ApiHeroEndpoint<
 > = {
   id: "search/code",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -86,6 +87,7 @@ export const users: ApiHeroEndpoint<
 > = {
   id: "search/users",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -138,6 +140,7 @@ export const issuesAndPullRequests: ApiHeroEndpoint<
 > = {
   id: "search/issues-and-pull-requests",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -178,6 +181,7 @@ export const labels: ApiHeroEndpoint<
 > = {
   id: "search/labels",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -208,6 +212,7 @@ export const topics: ApiHeroEndpoint<
 > = {
   id: "search/topics",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -245,6 +250,7 @@ export const commits: ApiHeroEndpoint<
 > = {
   id: "search/commits",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -283,4 +289,5 @@ export const repos: ApiHeroEndpoint<
 > = {
   id: "search/repos",
   clientId: "github",
+  version: "1.1.5",
 };

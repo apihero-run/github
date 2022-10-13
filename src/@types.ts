@@ -2908,7 +2908,10 @@ export type ScimUser = {
   /**
    * associated groups
    */
-  groups?: Array<{}>;
+  groups?: Array<{
+    value?: string;
+    display?: string;
+  }>;
 
   /**
    * SCIM schema used.
@@ -11077,7 +11080,76 @@ export type RunnerGroupsOrg = {
  * Response of S4 Proxy endpoint that provides GHES statistics
  * @example @see https://apihero.run/integrations/github/examples/server-statistics
  */
-export type ServerStatistics = {};
+export type ServerStatistics = {
+  ghe_stats?: {
+    orgs?: {
+      total_orgs?: number;
+      total_teams?: number;
+      disabled_orgs?: number;
+      total_team_members?: number;
+    };
+    gists?: {
+      total_gists?: number;
+      public_gists?: number;
+      private_gists?: number;
+    };
+    hooks?: {
+      total_hooks?: number;
+      active_hooks?: number;
+      inactive_hooks?: number;
+    };
+    pages?: {
+      total_pages?: number;
+    };
+    pulls?: {
+      total_pulls?: number;
+      merged_pulls?: number;
+      mergeable_pulls?: number;
+      unmergeable_pulls?: number;
+    };
+    repos?: {
+      org_repos?: number;
+      fork_repos?: number;
+      root_repos?: number;
+      total_repos?: number;
+      total_wikis?: number;
+      total_pushes?: number;
+    };
+    users?: {
+      admin_users?: number;
+      total_users?: number;
+      suspended_users?: number;
+    };
+    issues?: {
+      open_issues?: number;
+      total_issues?: number;
+      closed_issues?: number;
+    };
+    comments?: {
+      total_gist_comments?: number;
+      total_issue_comments?: number;
+      total_commit_comments?: number;
+      total_pull_request_comments?: number;
+    };
+    milestones?: {
+      open_milestones?: number;
+      total_milestones?: number;
+      closed_milestones?: number;
+    };
+  };
+  host_name?: string;
+  server_id?: string;
+  ghes_version?: string;
+  dormant_users?: {
+    dormancy_threshold?: string;
+    total_dormant_users?: number;
+  };
+  github_connect?: {
+    features_enabled?: Array<string>;
+  };
+  schema_version?: string;
+  collection_date?: string;
+};
 
 /**
  * Simple Repository

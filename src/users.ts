@@ -22,6 +22,7 @@ import {
 export const getAuthenticated: ApiHeroEndpoint<void, PrivateUser | PublicUser> = {
   id: "users/get-authenticated",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -97,6 +98,7 @@ export const updateAuthenticated: ApiHeroEndpoint<
 > = {
   id: "users/update-authenticated",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -117,6 +119,7 @@ export const list: ApiHeroEndpoint<
 > = {
   id: "users/list",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -135,6 +138,7 @@ export const listPublicSshKeysForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "users/list-public-ssh-keys-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -165,6 +169,7 @@ export const createPublicSshKeyForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "users/create-public-ssh-key-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -177,6 +182,7 @@ export const createPublicSshKeyForAuthenticatedUser: ApiHeroEndpoint<
 export const listBlockedByAuthenticatedUser: ApiHeroEndpoint<void, Array<SimpleUser>> = {
   id: "users/list-blocked-by-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -195,6 +201,7 @@ export const listEmailsForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "users/list-emails-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -223,6 +230,7 @@ export const addEmailForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "users/add-email-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -251,6 +259,7 @@ export const deleteEmailForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "users/delete-email-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -269,6 +278,7 @@ export const listGpgKeysForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "users/list-gpg-keys-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -296,6 +306,7 @@ export const createGpgKeyForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "users/create-gpg-key-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -314,6 +325,7 @@ export const listFollowersForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "users/list-followers-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -332,6 +344,7 @@ export const listFollowedByAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "users/list-followed-by-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -351,6 +364,7 @@ export const listFollowedByAuthenticatedUser: ApiHeroEndpoint<
 export const getByUsername: ApiHeroEndpoint<{ username: string }, PrivateUser | PublicUser> = {
   id: "users/get-by-username",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -364,6 +378,7 @@ export const getByUsername: ApiHeroEndpoint<{ username: string }, PrivateUser | 
 export const getPublicSshKeyForAuthenticatedUser: ApiHeroEndpoint<{ keyId: number }, Key> = {
   id: "users/get-public-ssh-key-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -377,6 +392,7 @@ export const getPublicSshKeyForAuthenticatedUser: ApiHeroEndpoint<{ keyId: numbe
 export const deletePublicSshKeyForAuthenticatedUser: ApiHeroEndpoint<{ keyId: number }, void> = {
   id: "users/delete-public-ssh-key-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -395,6 +411,7 @@ export const listPublicEmailsForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "users/list-public-emails-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -417,6 +434,7 @@ export const setPrimaryEmailVisibilityForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "users/set-primary-email-visibility-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -436,6 +454,7 @@ export const listPublicKeysForUser: ApiHeroEndpoint<
 > = {
   id: "users/list-public-keys-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -448,6 +467,7 @@ export const listPublicKeysForUser: ApiHeroEndpoint<
 export const checkBlocked: ApiHeroEndpoint<{ username: string }, void> = {
   id: "users/check-blocked",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -460,6 +480,7 @@ export const checkBlocked: ApiHeroEndpoint<{ username: string }, void> = {
 export const block: ApiHeroEndpoint<{ username: string }, void> = {
   id: "users/block",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -472,6 +493,7 @@ export const block: ApiHeroEndpoint<{ username: string }, void> = {
 export const unblock: ApiHeroEndpoint<{ username: string }, void> = {
   id: "users/unblock",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -484,6 +506,7 @@ export const unblock: ApiHeroEndpoint<{ username: string }, void> = {
 export const checkPersonIsFollowedByAuthenticated: ApiHeroEndpoint<{ username: string }, void> = {
   id: "users/check-person-is-followed-by-authenticated",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -499,6 +522,7 @@ export const checkPersonIsFollowedByAuthenticated: ApiHeroEndpoint<{ username: s
 export const follow: ApiHeroEndpoint<{ username: string }, void> = {
   id: "users/follow",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -512,6 +536,7 @@ export const follow: ApiHeroEndpoint<{ username: string }, void> = {
 export const unfollow: ApiHeroEndpoint<{ username: string }, void> = {
   id: "users/unfollow",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -531,6 +556,7 @@ export const listGpgKeysForUser: ApiHeroEndpoint<
 > = {
   id: "users/list-gpg-keys-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -544,6 +570,7 @@ export const listGpgKeysForUser: ApiHeroEndpoint<
 export const getGpgKeyForAuthenticatedUser: ApiHeroEndpoint<{ gpgKeyId: number }, GpgKey> = {
   id: "users/get-gpg-key-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -557,6 +584,7 @@ export const getGpgKeyForAuthenticatedUser: ApiHeroEndpoint<{ gpgKeyId: number }
 export const deleteGpgKeyForAuthenticatedUser: ApiHeroEndpoint<{ gpgKeyId: number }, void> = {
   id: "users/delete-gpg-key-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -576,6 +604,7 @@ export const listFollowersForUser: ApiHeroEndpoint<
 > = {
   id: "users/list-followers-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -595,6 +624,7 @@ export const listFollowingForUser: ApiHeroEndpoint<
 > = {
   id: "users/list-following-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -624,6 +654,7 @@ export const getContextForUser: ApiHeroEndpoint<
 > = {
   id: "users/get-context-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -640,4 +671,5 @@ export const checkFollowingForUser: ApiHeroEndpoint<
 > = {
   id: "users/check-following-for-user",
   clientId: "github",
+  version: "1.1.5",
 };

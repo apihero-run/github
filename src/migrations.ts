@@ -23,6 +23,7 @@ export const listForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "migrations/list-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -113,6 +114,7 @@ export const startForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "migrations/start-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -133,6 +135,7 @@ export const listForOrg: ApiHeroEndpoint<
 > = {
   id: "migrations/list-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -212,6 +215,7 @@ export const startForOrg: ApiHeroEndpoint<
 > = {
   id: "migrations/start-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -259,6 +263,7 @@ export const startForOrg: ApiHeroEndpoint<
 export const getImportStatus: ApiHeroEndpoint<{ owner: string; repo: string }, Import> = {
   id: "migrations/get-import-status",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -306,6 +311,7 @@ export const startImport: ApiHeroEndpoint<
 > = {
   id: "migrations/start-import",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -320,6 +326,7 @@ export const startImport: ApiHeroEndpoint<
 export const cancelImport: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "migrations/cancel-import",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -372,6 +379,7 @@ export const updateImport: ApiHeroEndpoint<
 > = {
   id: "migrations/update-import",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -396,6 +404,7 @@ export const getStatusForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "migrations/get-status-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -422,6 +431,7 @@ export const setLfsPreference: ApiHeroEndpoint<
 > = {
   id: "migrations/set-lfs-preference",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -442,6 +452,7 @@ export const getCommitAuthors: ApiHeroEndpoint<
 > = {
   id: "migrations/get-commit-authors",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -467,6 +478,7 @@ export const getStatusForOrg: ApiHeroEndpoint<
 > = {
   id: "migrations/get-status-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -500,6 +512,7 @@ export const getStatusForOrg: ApiHeroEndpoint<
 export const getArchiveForAuthenticatedUser: ApiHeroEndpoint<{ migrationId: number }, void> = {
   id: "migrations/get-archive-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -513,6 +526,7 @@ export const getArchiveForAuthenticatedUser: ApiHeroEndpoint<{ migrationId: numb
 export const deleteArchiveForAuthenticatedUser: ApiHeroEndpoint<{ migrationId: number }, void> = {
   id: "migrations/delete-archive-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -530,6 +544,7 @@ export const getLargeFiles: ApiHeroEndpoint<
 > = {
   id: "migrations/get-large-files",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -549,6 +564,7 @@ export const listReposForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "migrations/list-repos-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -563,6 +579,7 @@ export const listReposForAuthenticatedUser: ApiHeroEndpoint<
 export const downloadArchiveForOrg: ApiHeroEndpoint<{ org: string; migrationId: number }, void> = {
   id: "migrations/download-archive-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -577,6 +594,7 @@ export const downloadArchiveForOrg: ApiHeroEndpoint<{ org: string; migrationId: 
 export const deleteArchiveForOrg: ApiHeroEndpoint<{ org: string; migrationId: number }, void> = {
   id: "migrations/delete-archive-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -610,6 +628,7 @@ export const mapCommitAuthor: ApiHeroEndpoint<
 > = {
   id: "migrations/map-commit-author",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -630,6 +649,7 @@ export const listReposForOrg: ApiHeroEndpoint<
 > = {
   id: "migrations/list-repos-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -647,6 +667,7 @@ export const unlockRepoForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "migrations/unlock-repo-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -665,4 +686,5 @@ export const unlockRepoForOrg: ApiHeroEndpoint<
 > = {
   id: "migrations/unlock-repo-for-org",
   clientId: "github",
+  version: "1.1.5",
 };

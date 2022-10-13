@@ -33,6 +33,7 @@ export const render: ApiHeroEndpoint<
 > = {
   id: "markdown/render",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -49,4 +50,5 @@ export const renderRaw: ApiHeroEndpoint<
 > = {
   id: "markdown/render-raw",
   clientId: "github",
+  version: "1.1.5",
 };

@@ -27,6 +27,7 @@ export const listOrgSecrets: ApiHeroEndpoint<
 > = {
   id: "dependabot/list-org-secrets",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -50,6 +51,7 @@ export const listRepoSecrets: ApiHeroEndpoint<
 > = {
   id: "dependabot/list-repo-secrets",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -63,6 +65,7 @@ export const listRepoSecrets: ApiHeroEndpoint<
 export const getOrgPublicKey: ApiHeroEndpoint<{ org: string }, DependabotPublicKey> = {
   id: "dependabot/get-org-public-key",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -80,6 +83,7 @@ export const getOrgSecret: ApiHeroEndpoint<
 > = {
   id: "dependabot/get-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -195,6 +199,7 @@ export const createOrUpdateOrgSecret: ApiHeroEndpoint<
 > = {
   id: "dependabot/create-or-update-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -209,6 +214,7 @@ export const createOrUpdateOrgSecret: ApiHeroEndpoint<
 export const deleteOrgSecret: ApiHeroEndpoint<{ org: string; secretName: string }, void> = {
   id: "dependabot/delete-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -226,6 +232,7 @@ export const getRepoPublicKey: ApiHeroEndpoint<
 > = {
   id: "dependabot/get-repo-public-key",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -244,6 +251,7 @@ export const getRepoSecret: ApiHeroEndpoint<
 > = {
   id: "dependabot/get-repo-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -351,6 +359,7 @@ export const createOrUpdateRepoSecret: ApiHeroEndpoint<
 > = {
   id: "dependabot/create-or-update-repo-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -369,6 +378,7 @@ export const deleteRepoSecret: ApiHeroEndpoint<
 > = {
   id: "dependabot/delete-repo-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -391,6 +401,7 @@ export const listSelectedReposForOrgSecret: ApiHeroEndpoint<
 > = {
   id: "dependabot/list-selected-repos-for-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -417,6 +428,7 @@ export const setSelectedReposForOrgSecret: ApiHeroEndpoint<
 > = {
   id: "dependabot/set-selected-repos-for-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -435,6 +447,7 @@ export const addSelectedRepoToOrgSecret: ApiHeroEndpoint<
 > = {
   id: "dependabot/add-selected-repo-to-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -453,4 +466,5 @@ export const removeSelectedRepoFromOrgSecret: ApiHeroEndpoint<
 > = {
   id: "dependabot/remove-selected-repo-from-org-secret",
   clientId: "github",
+  version: "1.1.5",
 };

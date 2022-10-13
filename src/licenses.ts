@@ -15,6 +15,7 @@ export const getAllCommonlyUsed: ApiHeroEndpoint<
 > = {
   id: "licenses/get-all-commonly-used",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -27,6 +28,7 @@ export const getAllCommonlyUsed: ApiHeroEndpoint<
 export const getLicense: ApiHeroEndpoint<{ license: string }, License> = {
   id: "licenses/get",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -43,4 +45,5 @@ export const getLicense: ApiHeroEndpoint<{ license: string }, License> = {
 export const getForRepo: ApiHeroEndpoint<{ owner: string; repo: string }, LicenseContent> = {
   id: "licenses/get-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };

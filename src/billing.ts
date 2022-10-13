@@ -21,6 +21,7 @@ import {
 export const getGithubActionsBillingOrg: ApiHeroEndpoint<{ org: string }, ActionsBillingUsage> = {
   id: "billing/get-github-actions-billing-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -38,6 +39,7 @@ export const getGithubActionsBillingOrg: ApiHeroEndpoint<{ org: string }, Action
 export const getGithubPackagesBillingOrg: ApiHeroEndpoint<{ org: string }, PackagesBillingUsage> = {
   id: "billing/get-github-packages-billing-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -58,6 +60,7 @@ export const getGithubActionsBillingUser: ApiHeroEndpoint<
 > = {
   id: "billing/get-github-actions-billing-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -75,6 +78,7 @@ export const getGithubActionsBillingUser: ApiHeroEndpoint<
 export const getSharedStorageBillingOrg: ApiHeroEndpoint<{ org: string }, CombinedBillingUsage> = {
   id: "billing/get-shared-storage-billing-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -95,6 +99,7 @@ export const getGithubPackagesBillingUser: ApiHeroEndpoint<
 > = {
   id: "billing/get-github-packages-billing-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -119,6 +124,7 @@ export const getGithubAdvancedSecurityBillingOrg: ApiHeroEndpoint<
 > = {
   id: "billing/get-github-advanced-security-billing-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -139,6 +145,7 @@ export const getSharedStorageBillingUser: ApiHeroEndpoint<
 > = {
   id: "billing/get-shared-storage-billing-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -159,6 +166,7 @@ export const getGithubActionsBillingGhe: ApiHeroEndpoint<
 > = {
   id: "billing/get-github-actions-billing-ghe",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -179,6 +187,7 @@ export const getGithubPackagesBillingGhe: ApiHeroEndpoint<
 > = {
   id: "billing/get-github-packages-billing-ghe",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -199,6 +208,7 @@ export const getSharedStorageBillingGhe: ApiHeroEndpoint<
 > = {
   id: "billing/get-shared-storage-billing-ghe",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -221,4 +231,5 @@ export const getGithubAdvancedSecurityBillingGhe: ApiHeroEndpoint<
 > = {
   id: "billing/get-github-advanced-security-billing-ghe",
   clientId: "github",
+  version: "1.1.5",
 };

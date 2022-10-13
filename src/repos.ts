@@ -109,6 +109,7 @@ export const listForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "repos/list-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -263,6 +264,7 @@ export const createForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "repos/create-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -284,6 +286,7 @@ export const listPublic: ApiHeroEndpoint<
 > = {
   id: "repos/list-public",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -313,6 +316,7 @@ export const listForOrg: ApiHeroEndpoint<
 > = {
   id: "repos/list-for-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -435,6 +439,7 @@ export const createInOrg: ApiHeroEndpoint<
 > = {
   id: "repos/create-in-org",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -449,6 +454,7 @@ export const createInOrg: ApiHeroEndpoint<
 export const getRepo: ApiHeroEndpoint<{ owner: string; repo: string }, FullRepository> = {
   id: "repos/get",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -466,6 +472,7 @@ export const getRepo: ApiHeroEndpoint<{ owner: string; repo: string }, FullRepos
 export const deleteRepo: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "repos/delete",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -618,6 +625,7 @@ export const update: ApiHeroEndpoint<
 > = {
   id: "repos/update",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -647,6 +655,7 @@ export const listForUser: ApiHeroEndpoint<
 > = {
   id: "repos/list-for-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -660,6 +669,7 @@ export const listForUser: ApiHeroEndpoint<
 export const enableLfsForRepo: ApiHeroEndpoint<{ owner: string; repo: string }, {}> = {
   id: "repos/enable-lfs-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -673,6 +683,7 @@ export const enableLfsForRepo: ApiHeroEndpoint<{ owner: string; repo: string }, 
 export const disableLfsForRepo: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "repos/disable-lfs-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -692,6 +703,7 @@ export const listDeployKeys: ApiHeroEndpoint<
 > = {
   id: "repos/list-deploy-keys",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -731,6 +743,7 @@ Deploy keys with write access can perform the same actions as an organization me
 > = {
   id: "repos/create-deploy-key",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -750,6 +763,7 @@ export const listTags: ApiHeroEndpoint<
 > = {
   id: "repos/list-tags",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -776,6 +790,7 @@ export const listForks: ApiHeroEndpoint<
 > = {
   id: "repos/list-forks",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -809,6 +824,7 @@ export const createFork: ApiHeroEndpoint<
 > = {
   id: "repos/create-fork",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -828,6 +844,7 @@ export const listWebhooks: ApiHeroEndpoint<
 > = {
   id: "repos/list-webhooks",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -890,6 +907,7 @@ export const createWebhook: ApiHeroEndpoint<
 > = {
   id: "repos/create-webhook",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -903,6 +921,7 @@ export const createWebhook: ApiHeroEndpoint<
 export const getPages: ApiHeroEndpoint<{ owner: string; repo: string }, Page> = {
   id: "repos/get-pages",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -944,6 +963,7 @@ export const createPagesSite: ApiHeroEndpoint<
 > = {
   id: "repos/create-pages-site",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1000,6 +1020,7 @@ export const updateInformationAboutPagesSite: ApiHeroEndpoint<
 > = {
   id: "repos/update-information-about-pages-site",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1013,6 +1034,7 @@ export const updateInformationAboutPagesSite: ApiHeroEndpoint<
 export const deletePagesSite: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "repos/delete-pages-site",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1032,6 +1054,7 @@ export const listTeams: ApiHeroEndpoint<
 > = {
   id: "repos/list-teams",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1067,6 +1090,7 @@ export const merge: ApiHeroEndpoint<
 > = {
   id: "repos/merge",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1087,6 +1111,7 @@ export const getReadme: ApiHeroEndpoint<
 > = {
   id: "repos/get-readme",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1105,6 +1130,7 @@ export const getAllTopics: ApiHeroEndpoint<
 > = {
   id: "repos/get-all-topics",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1130,6 +1156,7 @@ export const replaceAllTopics: ApiHeroEndpoint<
 > = {
   id: "repos/replace-all-topics",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1148,6 +1175,7 @@ export const listInvitationsForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "repos/list-invitations-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1210,6 +1238,7 @@ export const listCommits: ApiHeroEndpoint<
 > = {
   id: "repos/list-commits",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1230,6 +1259,7 @@ export const listBranches: ApiHeroEndpoint<
 > = {
   id: "repos/list-branches",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1252,6 +1282,7 @@ export const listCommitCommentsForRepo: ApiHeroEndpoint<
 > = {
   id: "repos/list-commit-comments-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1274,6 +1305,7 @@ export const listReleases: ApiHeroEndpoint<
 > = {
   id: "repos/list-releases",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1338,6 +1370,7 @@ export const createRelease: ApiHeroEndpoint<
 > = {
   id: "repos/create-release",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1369,6 +1402,7 @@ export const transfer: ApiHeroEndpoint<
 > = {
   id: "repos/transfer",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1389,6 +1423,7 @@ export const listAutolinks: ApiHeroEndpoint<
 > = {
   id: "repos/list-autolinks",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1421,6 +1456,7 @@ export const createAutolink: ApiHeroEndpoint<
 > = {
   id: "repos/create-autolink",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1435,6 +1471,7 @@ export const createAutolink: ApiHeroEndpoint<
 export const listLanguages: ApiHeroEndpoint<{ owner: string; repo: string }, Language> = {
   id: "repos/list-languages",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1475,6 +1512,7 @@ export const createDispatchEvent: ApiHeroEndpoint<
 > = {
   id: "repos/create-dispatch-event",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1508,6 +1546,7 @@ export const listDeployments: ApiHeroEndpoint<
 > = {
   id: "repos/list-deployments",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1617,6 +1656,7 @@ export const createDeployment: ApiHeroEndpoint<
 > = {
   id: "repos/create-deployment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1637,6 +1677,7 @@ export const listInvitations: ApiHeroEndpoint<
 > = {
   id: "repos/list-invitations",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1660,6 +1701,7 @@ export const listContributors: ApiHeroEndpoint<
 > = {
   id: "repos/list-contributors",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1690,6 +1732,7 @@ export const getAllEnvironments: ApiHeroEndpoint<
 > = {
   id: "repos/get-all-environments",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1709,6 +1752,7 @@ export const listPagesBuilds: ApiHeroEndpoint<
 > = {
   id: "repos/list-pages-builds",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1726,6 +1770,7 @@ export const requestPagesBuild: ApiHeroEndpoint<{ owner: string; repo: string },
   {
     id: "repos/request-pages-build",
     clientId: "github",
+    version: "1.1.5",
   };
 
 /** 
@@ -1747,6 +1792,7 @@ export const getPagesHealthCheck: ApiHeroEndpoint<
 > = {
   id: "repos/get-pages-health-check",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1768,6 +1814,7 @@ export const getReadmeInDirectory: ApiHeroEndpoint<
 > = {
   id: "repos/get-readme-in-directory",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1802,6 +1849,7 @@ export const listCollaborators: ApiHeroEndpoint<
 > = {
   id: "repos/list-collaborators",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1857,6 +1905,7 @@ export const getCommit: ApiHeroEndpoint<
 > = {
   id: "repos/get-commit",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1874,6 +1923,7 @@ export const getDeployKey: ApiHeroEndpoint<
 > = {
   id: "repos/get-deploy-key",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1892,6 +1942,7 @@ export const deleteDeployKey: ApiHeroEndpoint<
 > = {
   id: "repos/delete-deploy-key",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1913,6 +1964,7 @@ export const downloadTarballArchive: ApiHeroEndpoint<
 > = {
   id: "repos/download-tarball-archive",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1931,6 +1983,7 @@ export const getViews: ApiHeroEndpoint<
 > = {
   id: "repos/get-views",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1952,6 +2005,7 @@ export const downloadZipballArchive: ApiHeroEndpoint<
 > = {
   id: "repos/download-zipball-archive",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -1978,6 +2032,7 @@ export const mergeUpstream: ApiHeroEndpoint<
 > = {
   id: "repos/merge-upstream",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2026,6 +2081,7 @@ For example, if your continuous integration system is posting build status, you 
 > = {
   id: "repos/create-commit-status",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2044,6 +2100,7 @@ export const getClones: ApiHeroEndpoint<
 > = {
   id: "repos/get-clones",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2099,6 +2156,7 @@ export const getContent: ApiHeroEndpoint<
 > = {
   id: "repos/get-content",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2186,6 +2244,7 @@ export const createOrUpdateFileContents: ApiHeroEndpoint<
 > = {
   id: "repos/create-or-update-file-contents",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2260,6 +2319,7 @@ export const deleteFile: ApiHeroEndpoint<
 > = {
   id: "repos/delete-file",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2275,6 +2335,7 @@ export const deleteFile: ApiHeroEndpoint<
 export const getWebhook: ApiHeroEndpoint<{ owner: string; hookId: number; repo: string }, Hook> = {
   id: "repos/get-webhook",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2290,6 +2351,7 @@ export const deleteWebhook: ApiHeroEndpoint<{ owner: string; hookId: number; rep
   {
     id: "repos/delete-webhook",
     clientId: "github",
+    version: "1.1.5",
   };
 
 /** 
@@ -2357,6 +2419,7 @@ export const updateWebhook: ApiHeroEndpoint<
 > = {
   id: "repos/update-webhook",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2373,6 +2436,7 @@ export const updateWebhook: ApiHeroEndpoint<
 export const getLatestRelease: ApiHeroEndpoint<{ owner: string; repo: string }, Release> = {
   id: "repos/get-latest-release",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2392,6 +2456,7 @@ export const listTagProtection: ApiHeroEndpoint<
 > = {
   id: "repos/list-tag-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2419,6 +2484,7 @@ export const createTagProtection: ApiHeroEndpoint<
 > = {
   id: "repos/create-tag-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2462,6 +2528,7 @@ export const createPagesDeployment: ApiHeroEndpoint<
 > = {
   id: "repos/create-pages-deployment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2485,6 +2552,7 @@ export const getPunchCardStats: ApiHeroEndpoint<
 > = {
   id: "repos/get-punch-card-stats",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2502,6 +2570,7 @@ export const getBranch: ApiHeroEndpoint<
 > = {
   id: "repos/get-branch",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2524,6 +2593,7 @@ export const codeownersErrors: ApiHeroEndpoint<
 > = {
   id: "repos/codeowners-errors",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2552,6 +2622,7 @@ export const getCommunityProfileMetrics: ApiHeroEndpoint<
 > = {
   id: "repos/get-community-profile-metrics",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2611,6 +2682,7 @@ export const compareCommits: ApiHeroEndpoint<
 > = {
   id: "repos/compare-commits",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2634,6 +2706,7 @@ export const getContributorsStats: ApiHeroEndpoint<
 > = {
   id: "repos/get-contributors-stats",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2647,6 +2720,7 @@ export const getContributorsStats: ApiHeroEndpoint<
 export const getLatestPagesBuild: ApiHeroEndpoint<{ owner: string; repo: string }, PageBuild> = {
   id: "repos/get-latest-pages-build",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2665,6 +2739,7 @@ export const getReleaseByTag: ApiHeroEndpoint<
 > = {
   id: "repos/get-release-by-tag",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2684,6 +2759,7 @@ export const getParticipationStats: ApiHeroEndpoint<
 > = {
   id: "repos/get-participation-stats",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2711,6 +2787,7 @@ export const getCombinedStatusForRef: ApiHeroEndpoint<
 > = {
   id: "repos/get-combined-status-for-ref",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2728,6 +2805,7 @@ export const getCodeFrequencyStats: ApiHeroEndpoint<
 > = {
   id: "repos/get-code-frequency-stats",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2742,6 +2820,7 @@ export const getCodeFrequencyStats: ApiHeroEndpoint<
 export const checkVulnerabilityAlerts: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "repos/check-vulnerability-alerts",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2756,6 +2835,7 @@ export const checkVulnerabilityAlerts: ApiHeroEndpoint<{ owner: string; repo: st
 export const enableVulnerabilityAlerts: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "repos/enable-vulnerability-alerts",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2770,6 +2850,7 @@ export const enableVulnerabilityAlerts: ApiHeroEndpoint<{ owner: string; repo: s
 export const disableVulnerabilityAlerts: ApiHeroEndpoint<{ owner: string; repo: string }, void> = {
   id: "repos/disable-vulnerability-alerts",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2787,6 +2868,7 @@ export const getCommitComment: ApiHeroEndpoint<
 > = {
   id: "repos/get-commit-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2804,6 +2886,7 @@ export const deleteCommitComment: ApiHeroEndpoint<
 > = {
   id: "repos/delete-commit-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2831,6 +2914,7 @@ export const updateCommitComment: ApiHeroEndpoint<
 > = {
   id: "repos/update-commit-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2846,6 +2930,7 @@ export const updateCommitComment: ApiHeroEndpoint<
 export const pingWebhook: ApiHeroEndpoint<{ owner: string; hookId: number; repo: string }, void> = {
   id: "repos/ping-webhook",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2866,6 +2951,7 @@ export const testPushWebhook: ApiHeroEndpoint<
 > = {
   id: "repos/test-push-webhook",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2884,6 +2970,7 @@ export const getRelease: ApiHeroEndpoint<
 > = {
   id: "repos/get-release",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2902,6 +2989,7 @@ export const deleteRelease: ApiHeroEndpoint<
 > = {
   id: "repos/delete-release",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2960,6 +3048,7 @@ export const updateRelease: ApiHeroEndpoint<
 > = {
   id: "repos/update-release",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2977,6 +3066,7 @@ export const getCommitActivityStats: ApiHeroEndpoint<
 > = {
   id: "repos/get-commit-activity-stats",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -2994,6 +3084,7 @@ export const getTopPaths: ApiHeroEndpoint<
 > = {
   id: "repos/get-top-paths",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3017,6 +3108,7 @@ export const listCommitStatusesForRef: ApiHeroEndpoint<
 > = {
   id: "repos/list-commit-statuses-for-ref",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3037,6 +3129,7 @@ export const getWebhookConfigForRepo: ApiHeroEndpoint<
 > = {
   id: "repos/get-webhook-config-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3067,6 +3160,7 @@ export const updateWebhookConfigForRepo: ApiHeroEndpoint<
 > = {
   id: "repos/update-webhook-config-for-repo",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3082,6 +3176,7 @@ export const declineInvitationForAuthenticatedUser: ApiHeroEndpoint<
 > = {
   id: "repos/decline-invitation-for-authenticated-user",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3095,6 +3190,7 @@ export const acceptInvitationForAuthenticatedUser: ApiHeroEndpoint<{ invitationI
   {
     id: "repos/accept-invitation-for-authenticated-user",
     clientId: "github",
+    version: "1.1.5",
   };
 
 /** 
@@ -3115,6 +3211,7 @@ export const getAutolink: ApiHeroEndpoint<
 > = {
   id: "repos/get-autolink",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3135,6 +3232,7 @@ export const deleteAutolink: ApiHeroEndpoint<
 > = {
   id: "repos/delete-autolink",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3152,6 +3250,7 @@ export const getPagesBuild: ApiHeroEndpoint<
 > = {
   id: "repos/get-pages-build",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3193,6 +3292,7 @@ export const generateReleaseNotes: ApiHeroEndpoint<
 > = {
   id: "repos/generate-release-notes",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3208,6 +3308,7 @@ export const enableAutomatedSecurityFixes: ApiHeroEndpoint<{ owner: string; repo
   {
     id: "repos/enable-automated-security-fixes",
     clientId: "github",
+    version: "1.1.5",
   };
 
 /** 
@@ -3223,6 +3324,7 @@ export const disableAutomatedSecurityFixes: ApiHeroEndpoint<{ owner: string; rep
   {
     id: "repos/disable-automated-security-fixes",
     clientId: "github",
+    version: "1.1.5",
   };
 
 /** 
@@ -3265,6 +3367,7 @@ export const renameBranch: ApiHeroEndpoint<
 > = {
   id: "repos/rename-branch",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3289,6 +3392,7 @@ export const checkCollaborator: ApiHeroEndpoint<
 > = {
   id: "repos/check-collaborator",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3337,6 +3441,7 @@ export const addCollaborator: ApiHeroEndpoint<
 > = {
   id: "repos/add-collaborator",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3354,6 +3459,7 @@ export const removeCollaborator: ApiHeroEndpoint<
 > = {
   id: "repos/remove-collaborator",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3371,6 +3477,7 @@ export const getTopReferrers: ApiHeroEndpoint<
 > = {
   id: "repos/get-top-referrers",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3392,6 +3499,7 @@ export const listPullRequestsAssociatedWithCommit: ApiHeroEndpoint<
 > = {
   id: "repos/list-pull-requests-associated-with-commit",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3412,6 +3520,7 @@ export const listWebhookDeliveries: ApiHeroEndpoint<
 > = {
   id: "repos/list-webhook-deliveries",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3430,6 +3539,7 @@ export const getReleaseAsset: ApiHeroEndpoint<
 > = {
   id: "repos/get-release-asset",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3447,6 +3557,7 @@ export const deleteReleaseAsset: ApiHeroEndpoint<
 > = {
   id: "repos/delete-release-asset",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3487,6 +3598,7 @@ export const updateReleaseAsset: ApiHeroEndpoint<
 > = {
   id: "repos/update-release-asset",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3541,6 +3653,7 @@ export const createUsingTemplate: ApiHeroEndpoint<
 > = {
   id: "repos/create-using-template",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3558,6 +3671,7 @@ export const getDeployment: ApiHeroEndpoint<
 > = {
   id: "repos/get-deployment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3583,6 +3697,7 @@ export const deleteDeployment: ApiHeroEndpoint<
 > = {
   id: "repos/delete-deployment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3600,6 +3715,7 @@ export const deleteInvitation: ApiHeroEndpoint<
 > = {
   id: "repos/delete-invitation",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3627,6 +3743,7 @@ export const updateInvitation: ApiHeroEndpoint<
 > = {
   id: "repos/update-invitation",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3645,6 +3762,7 @@ export const getBranchProtection: ApiHeroEndpoint<
 > = {
   id: "repos/get-branch-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3816,6 +3934,7 @@ export const updateBranchProtection: ApiHeroEndpoint<
 > = {
   id: "repos/update-branch-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3834,6 +3953,7 @@ export const deleteBranchProtection: ApiHeroEndpoint<
 > = {
   id: "repos/delete-branch-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3854,6 +3974,7 @@ export const listReleaseAssets: ApiHeroEndpoint<
 > = {
   id: "repos/list-release-assets",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3891,6 +4012,7 @@ export const uploadReleaseAsset: ApiHeroEndpoint<
 > = {
   id: "repos/upload-release-asset",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3912,6 +4034,7 @@ export const listCommentsForCommit: ApiHeroEndpoint<
 > = {
   id: "repos/list-comments-for-commit",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3958,6 +4081,7 @@ export const createCommitComment: ApiHeroEndpoint<
 > = {
   id: "repos/create-commit-comment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -3976,6 +4100,7 @@ export const getEnvironment: ApiHeroEndpoint<
 > = {
   id: "repos/get-environment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4021,6 +4146,7 @@ export const createOrUpdateEnvironment: ApiHeroEndpoint<
 > = {
   id: "repos/create-or-update-environment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4039,6 +4165,7 @@ export const deleteAnEnvironment: ApiHeroEndpoint<
 > = {
   id: "repos/delete-an-environment",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4057,6 +4184,7 @@ export const getCollaboratorPermissionLevel: ApiHeroEndpoint<
 > = {
   id: "repos/get-collaborator-permission-level",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4076,6 +4204,7 @@ export const deleteTagProtection: ApiHeroEndpoint<
 > = {
   id: "repos/delete-tag-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4097,6 +4226,7 @@ export const listDeploymentStatuses: ApiHeroEndpoint<
 > = {
   id: "repos/list-deployment-statuses",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4158,6 +4288,7 @@ export const createDeploymentStatus: ApiHeroEndpoint<
 > = {
   id: "repos/create-deployment-status",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4178,6 +4309,7 @@ export const listBranchesForHeadCommit: ApiHeroEndpoint<
 > = {
   id: "repos/list-branches-for-head-commit",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4197,6 +4329,7 @@ export const getWebhookDelivery: ApiHeroEndpoint<
 > = {
   id: "repos/get-webhook-delivery",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4219,6 +4352,7 @@ export const getAccessRestrictions: ApiHeroEndpoint<
 > = {
   id: "repos/get-access-restrictions",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4239,6 +4373,7 @@ export const deleteAccessRestrictions: ApiHeroEndpoint<
 > = {
   id: "repos/delete-access-restrictions",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4257,6 +4392,7 @@ export const getAdminBranchProtection: ApiHeroEndpoint<
 > = {
   id: "repos/get-admin-branch-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4277,6 +4413,7 @@ export const setAdminBranchProtection: ApiHeroEndpoint<
 > = {
   id: "repos/set-admin-branch-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4297,6 +4434,7 @@ export const deleteAdminBranchProtection: ApiHeroEndpoint<
 > = {
   id: "repos/delete-admin-branch-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4317,6 +4455,7 @@ export const getAppsWithAccessToProtectedBranch: ApiHeroEndpoint<
 > = {
   id: "repos/get-apps-with-access-to-protected-branch",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4353,6 +4492,7 @@ export const addAppAccessRestrictions: ApiHeroEndpoint<
 > = {
   id: "repos/add-app-access-restrictions",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4389,6 +4529,7 @@ export const setAppAccessRestrictions: ApiHeroEndpoint<
 > = {
   id: "repos/set-app-access-restrictions",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4425,6 +4566,7 @@ export const removeAppAccessRestrictions: ApiHeroEndpoint<
 > = {
   id: "repos/remove-app-access-restrictions",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4445,6 +4587,7 @@ export const getTeamsWithAccessToProtectedBranch: ApiHeroEndpoint<
 > = {
   id: "repos/get-teams-with-access-to-protected-branch",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4481,6 +4624,7 @@ export const addTeamAccessRestrictions: ApiHeroEndpoint<
 > = {
   id: "repos/add-team-access-restrictions",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4517,6 +4661,7 @@ export const setTeamAccessRestrictions: ApiHeroEndpoint<
 > = {
   id: "repos/set-team-access-restrictions",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4553,6 +4698,7 @@ export const removeTeamAccessRestrictions: ApiHeroEndpoint<
 > = {
   id: "repos/remove-team-access-restrictions",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4573,6 +4719,7 @@ export const getUsersWithAccessToProtectedBranch: ApiHeroEndpoint<
 > = {
   id: "repos/get-users-with-access-to-protected-branch",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4609,6 +4756,7 @@ export const addUserAccessRestrictions: ApiHeroEndpoint<
 > = {
   id: "repos/add-user-access-restrictions",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4645,6 +4793,7 @@ export const setUserAccessRestrictions: ApiHeroEndpoint<
 > = {
   id: "repos/set-user-access-restrictions",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4681,6 +4830,7 @@ export const removeUserAccessRestrictions: ApiHeroEndpoint<
 > = {
   id: "repos/remove-user-access-restrictions",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4703,6 +4853,7 @@ export const getCommitSignatureProtection: ApiHeroEndpoint<
 > = {
   id: "repos/get-commit-signature-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4723,6 +4874,7 @@ export const createCommitSignatureProtection: ApiHeroEndpoint<
 > = {
   id: "repos/create-commit-signature-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4743,6 +4895,7 @@ export const deleteCommitSignatureProtection: ApiHeroEndpoint<
 > = {
   id: "repos/delete-commit-signature-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4762,6 +4915,7 @@ export const getDeploymentStatus: ApiHeroEndpoint<
 > = {
   id: "repos/get-deployment-status",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4781,6 +4935,7 @@ export const redeliverWebhookDelivery: ApiHeroEndpoint<
 > = {
   id: "repos/redeliver-webhook-delivery",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4799,6 +4954,7 @@ export const getStatusChecksProtection: ApiHeroEndpoint<
 > = {
   id: "repos/get-status-checks-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4817,6 +4973,7 @@ export const removeStatusCheckProtection: ApiHeroEndpoint<
 > = {
   id: "repos/remove-status-check-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4869,6 +5026,7 @@ export const updateStatusCheckProtection: ApiHeroEndpoint<
 > = {
   id: "repos/update-status-check-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4887,6 +5045,7 @@ export const getPullRequestReviewProtection: ApiHeroEndpoint<
 > = {
   id: "repos/get-pull-request-review-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4905,6 +5064,7 @@ export const deletePullRequestReviewProtection: ApiHeroEndpoint<
 > = {
   id: "repos/delete-pull-request-review-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -4987,6 +5147,7 @@ export const updatePullRequestReviewProtection: ApiHeroEndpoint<
 > = {
   id: "repos/update-pull-request-review-protection",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -5005,6 +5166,7 @@ export const getAllStatusCheckContexts: ApiHeroEndpoint<
 > = {
   id: "repos/get-all-status-check-contexts",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -5035,6 +5197,7 @@ export const addStatusCheckContexts: ApiHeroEndpoint<
 > = {
   id: "repos/add-status-check-contexts",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -5065,6 +5228,7 @@ export const setStatusCheckContexts: ApiHeroEndpoint<
 > = {
   id: "repos/set-status-check-contexts",
   clientId: "github",
+  version: "1.1.5",
 };
 
 /** 
@@ -5095,4 +5259,5 @@ export const removeStatusCheckContexts: ApiHeroEndpoint<
 > = {
   id: "repos/remove-status-check-contexts",
   clientId: "github",
+  version: "1.1.5",
 };
